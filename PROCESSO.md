@@ -60,15 +60,30 @@ com três práticas:
 
 Os encontros são semanais, então o número do encontro também conta as semanas.
 
-| Iteração | Encontros | Termina no marco |
-|---|---|---|
-| 1 | 3 a 5 | Encontro 5: requisitos |
-| 2 | 5 a 7 | |
-| 3 | 7 a 9 | Encontro 9: review parcial |
-| 4 | 9 a 11 | |
-| 5 | 11 a 13 | |
-| 6 | 13 a 15 | |
-| 7 | 15 a 16 | Encontro 16: review final |
+| Iteração | Encontros | Duração | Termina no marco |
+|---|---|---|---|
+| 1 | 3 a 5 | 2 semanas | Encontro 5: requisitos |
+| 2 | 5 a 7 | 2 semanas | |
+| 3 | 7 a 9 | 2 semanas | Encontro 9: review parcial |
+| 4 | 9 a 11 | 2 semanas | |
+| 5 | 11 a 12 | 1 semana | Encontro 12: qualidade |
+| 6 | 12 a 14 | 2 semanas | |
+| 7 | 14 a 16 | 2 semanas | Encontro 16: review final |
+
+Cabem uma iteração até o marco do encontro 5, três até o do 9, cinco até o do
+12 e sete até o do 16. Do encontro 3 ao 12 são nove semanas, que não fecham em
+iterações de duas; a iteração 5 tem uma semana só, para que o marco do
+encontro 12 caia no fim de uma iteração, e não no meio.
+
+## Quando o processo oposto seria o certo
+
+Um processo dirigido por plano, com requisitos fechados antes da construção,
+seria a decisão correta se o mural publicasse avisos oficiais com prazo e forma
+definidos em norma da universidade. Nesse caso o requisito viria pronto e
+estável, um aviso perdido poderia causar prejuízo a um aluno, e a
+previsibilidade valeria mais que a capacidade de mudar. Nada disso vale hoje:
+o mural complementa os canais existentes, e as regras ainda vão ser
+descobertas com os usuários.
 
 ## Papéis
 
