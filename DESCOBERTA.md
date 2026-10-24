@@ -92,7 +92,7 @@ linhas possam ser comparadas na priorização do capítulo 5.
 | N3 | Ler aviso aberto sem criar conta | Visitantes, alunos, centro acadêmico | E3, E4 | Confirmada |
 | N4 | Restringir aviso interno a quem é do curso | Secretaria, professores | E1, E2 | Confirmada |
 | N5 | Tirar do mural o aviso que deixou de valer | Secretaria, professores, alunos | E1, E2, E4, O1 | Confirmada |
-| N6 | Garantir que só quem publicou tire o próprio aviso | Professores | E2 | Confirmada |
+| N6 | Garantir que só quem publicou tire o próprio aviso | Professores | E2 | A verificar: uma fonte só, e depende da coordenação (C3, R6) |
 | N7 | Saber quem publicou cada aviso, e quando | Alunos, professores | E2, E5, O1 | Confirmada |
 | N8 | Receber um e-mail quando sair aviso novo | Alunos | E4 | A verificar |
 | N9 | Anexar um arquivo ao aviso | Secretaria | E1 | A verificar |
@@ -169,9 +169,9 @@ flowchart TB
 
 ## Produto mínimo viável
 
-**Fatia:** publicar um aviso, com a própria conta, escolher se ele é aberto ou
-interno, vê-lo no mural com autor e data, e arquivá-lo. A fatia atravessa a
-tela de publicação, as regras do aviso, o registro no banco e a lista do mural.
+**Fatia:** publicar um aviso com a própria conta e vê-lo no mural, com autor e
+data. A fatia atravessa a tela de publicação, a regra do aviso (texto curto,
+autor obrigatório), o registro no banco e a lista do mural.
 
 **Critérios:**
 
@@ -186,13 +186,32 @@ Os três critérios apontam para a mesma fatia, e não houve desempate.
 **Contagem:** do encontro 4 ao 9 são cinco semanas. Pelo `PROCESSO.md`, a
 iteração 1 fecha no encontro 5, com os requisitos; a iteração 2 (encontros 5 a
 7) produz o projeto e a arquitetura; e a iteração 3 (encontros 7 a 9) constrói
-a fatia.
+a fatia. Sobra uma iteração de código antes do encontro 9, e a fatia foi
+reduzida para caber nela: a primeira versão incluía aviso aberto e interno e o
+arquivamento, que saíram na revisão do #29.
 
 **O que fica de fora do MVP:**
 
-- **Até a review final:** nada além da fatia; o escopo desta versão cabe nela.
+- **Entra no MVP:** contas para publicar, publicar com autor e data, e ver o
+  mural em ordem de data (N1, N2, N7).
+- **Até a review final:** aviso aberto e interno (N3, N4) e arquivar, só pelo
+  autor (N5, N6).
 - **Registrado sem previsão:** anexo, e-mail de aviso novo, aviso por turma,
-  retirada automática e conta institucional.
+  retirada automática e conta institucional (N8 a N12).
+
+## Cenário pretendido: avisar uma troca de sala
+
+Limitado à fatia do MVP.
+
+1. O professor entra com a própria conta e publica o aviso de troca de sala.
+2. O sistema registra o autor e a data e põe o aviso no topo do mural.
+3. O aluno entra com a própria conta pelo celular e vê o aviso, com quem
+   publicou e quando.
+
+Comparado ao cenário atual, o repasse pela secretaria e pelo representante
+(passos 1 a 3) deixa de ser necessário, e o aviso passa a ter autor e data. O
+passo 6, a dúvida no balcão, só deve diminuir se a pergunta que a equipe evitou
+tiver a resposta esperada.
 
 ## Riscos iniciais
 
@@ -213,4 +232,4 @@ piora. Eva faz a pergunta à secretaria até o encontro 5.
 
 ## Histórico de revisão
 
-- 2026-10-24: versão inicial (#24).
+- 2026-10-24: versão inicial (#24), com N6 a verificar, o MVP reduzido e o cenário pretendido incluídos na revisão do #29.
