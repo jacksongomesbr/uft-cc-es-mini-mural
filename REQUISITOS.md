@@ -148,8 +148,9 @@ pelo representante.
   ela publica "A aula de Engenharia de Software de amanhã muda para a sala 12
   do bloco B.", então o aviso aparece no topo do mural, com o autor, a data e
   a hora da publicação.
-- **CA-03.2 Texto vazio.** Dado que Paula entrou, quando o campo do aviso está
-  vazio, então o botão Publicar fica desabilitado.
+- **CA-03.2 Texto vazio.** Dado que Paula entrou, quando ela publica um texto
+  vazio ou só com espaços e quebras de linha, então o sistema recusa, informa
+  que o aviso precisa de texto e não publica nada.
 - **CA-03.3 Acima do limite.** Dado que Paula entrou, quando ela publica um
   texto de 281 caracteres, então o sistema recusa, informa o limite de 280 e
   quantos caracteres passaram, e mantém o texto para ela cortar.
