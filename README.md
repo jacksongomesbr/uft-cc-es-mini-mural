@@ -20,8 +20,9 @@ funciona nos commits, nas issues e na revisão.
 
 ## Estado atual
 
-O projeto está nos capítulos de documentação. O código do sistema, um monólito
-em Django com PostgreSQL, começa no capítulo 7. O que cada versão entregou está
+O código começou no capítulo 7, com o esqueleto do projeto Django: a
+configuração, os módulos `contas` e `avisos`, o modelo de conta e uma página
+inicial. O mural e a publicação de avisos entram na iteração 3. O que cada versão entregou está
 no [CHANGELOG.md](CHANGELOG.md).
 
 Para ver o projeto como estava no fim de um capítulo, abra a tag da versão,
@@ -33,6 +34,57 @@ git switch --detach v0.5.0
 
 O [ROTEIRO.md](ROTEIRO.md) liga cada capítulo do livro ao artefato que ele
 produz e à tag que o encerra.
+
+## Como rodar em desenvolvimento
+
+O código é um projeto Django 5.2 com PostgreSQL, como decide o
+[ARQUITETURA.md](ARQUITETURA.md). Você precisa de Python 3.12 e de um
+PostgreSQL local em que seu usuário possa criar bancos.
+
+```bash
+python3.12 -m venv .venv
+```
+
+```bash
+source .venv/bin/activate
+```
+
+```bash
+pip install -r requirements.txt
+```
+
+```bash
+createdb mini_mural_es
+```
+
+```bash
+python manage.py migrate
+```
+
+```bash
+python manage.py test
+```
+
+```bash
+python manage.py runserver
+```
+
+O último comando sobe o servidor de desenvolvimento do framework em
+<http://127.0.0.1:8000/>. Ele serve para trabalhar e para a demonstração do
+encontro 9, e não é servidor de produção: a hospedagem e o servidor de produção
+são decididos no capítulo 14 (A-11).
+
+A configuração vem de variáveis de ambiente, e cada uma tem um valor de
+desenvolvimento (A-10):
+
+| Variável | Para quê | Valor de desenvolvimento |
+|---|---|---|
+| `MURAL_DB_NAME` | Nome do banco | `mini_mural_es` |
+| `MURAL_DB_USER`, `MURAL_DB_PASSWORD` | Usuário e senha do banco | O usuário do sistema, sem senha |
+| `MURAL_DB_HOST`, `MURAL_DB_PORT` | Onde está o banco | O soquete local |
+| `MURAL_DEBUG` | `1` mostra os erros na página | `1` |
+| `MURAL_HOSTS` | Endereços aceitos, separados por vírgula | `localhost,127.0.0.1` |
+| `MURAL_SECRET_KEY` | Chave secreta do framework | Uma chave de desenvolvimento, que não pode ir para a hospedagem |
 
 ## Documentos
 
