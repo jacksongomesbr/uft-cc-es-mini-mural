@@ -1,13 +1,14 @@
 # Mini Mural
 
 Mural de avisos do curso, em que a coordenação, os professores e o centro
-acadêmico publicam recados para os alunos. Este é o projeto exemplo do livro
+acadêmico publicam avisos para os alunos. Este é o projeto exemplo do livro
 de Engenharia de Software da UFT: ele é construído capítulo a capítulo, como
 faria uma equipe da disciplina, e cada capítulo termina com uma versão marcada
 por tag.
 
-A proposta inicial do problema está no [PROBLEMA.md](PROBLEMA.md), e a
-descoberta feita com os usuários, no [DESCOBERTA.md](DESCOBERTA.md).
+A proposta inicial do problema está no [PROBLEMA.md](PROBLEMA.md), a
+descoberta feita com os usuários, no [DESCOBERTA.md](DESCOBERTA.md), e o que o
+sistema vai fazer, no [REQUISITOS.md](REQUISITOS.md).
 
 ## Equipe
 
@@ -26,7 +27,7 @@ Para ver o projeto como estava no fim de um capítulo, abra a tag da versão,
 por exemplo:
 
 ```bash
-git switch --detach v0.1.0
+git switch --detach v0.4.0
 ```
 
 O [ROTEIRO.md](ROTEIRO.md) liga cada capítulo do livro ao artefato que ele
@@ -40,7 +41,9 @@ produz e à tag que o encerra.
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Convenções de ramos, commits, pull requests e revisão (capítulo 2) |
 | [PROCESSO.md](PROCESSO.md) | Processo escolhido, iterações, papéis e definição de pronto (capítulo 3) |
 | [DESCOBERTA.md](DESCOBERTA.md) | Partes interessadas, personas, necessidades, escopo, MVP e riscos (capítulo 4) |
-| [descoberta/](descoberta/) | Roteiro de entrevista e atas da elicitação, sem identificação (capítulo 4) |
+| [descoberta/](descoberta/) | Roteiro de entrevista e atas da elicitação, sem identificação (capítulos 4 e 5) |
+| [REQUISITOS.md](REQUISITOS.md) | Glossário, backlog ordenado, histórias com critérios de aceitação, caso de uso, requisitos não funcionais, regras, rastreabilidade e validação (capítulo 5) |
+| [validacao/](validacao/) | Protótipo do MVP e registro das sessões de validação (capítulo 5) |
 | [CHANGELOG.md](CHANGELOG.md) | O que mudou em cada versão |
 | [ROTEIRO.md](ROTEIRO.md) | Capítulos, artefatos e tags do semestre |
 

@@ -4,6 +4,28 @@ Todas as mudanças relevantes do projeto ficam registradas aqui. O formato
 segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/), e as
 versões seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
+## [0.4.0] - 2026-10-24
+
+Fim do capítulo 5: requisitos especificados e validados, primeiro marco.
+
+### Adicionado
+
+- Resposta da coordenação sobre quem publica e quem arquiva, e resposta à
+  pergunta evitada (`descoberta/D2-resposta-da-secretaria.md`, #34).
+- Documento de requisitos com glossário do domínio (#33), backlog ordenado com
+  estimativa dos obrigatórios (#35), critérios de aceitação e rastreabilidade
+  (#36), requisitos não funcionais, restrições e regras de negócio (#37) e o
+  caso de uso UC-01 (#38) (`REQUISITOS.md`).
+- Protótipo do MVP e registro da validação V1 (`validacao/`, #40).
+
+### Alterado
+
+- Descoberta atualizada com D2, R7, R8, N13 e N14, e com N6 confirmada
+  (`DESCOBERTA.md`, #34, #39, #40).
+- Achados da revisão com a lista de verificação incorporados (#39).
+- Definição de pronto com cinco pontos (`PROCESSO.md`, #41).
+- README com os documentos novos, e "aviso" como termo único (#42).
+
 ## [0.3.0] - 2026-10-24
 
 Fim do capítulo 4: descoberta do problema com os usuários.
@@ -57,6 +79,7 @@ Fim dos capítulos 1 e 2: problema proposto e repositório configurado.
 - Proteção do `main`: envio direto e reescrita de histórico bloqueados, com
   pull request obrigatório.
 
+[0.4.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/releases/tag/v0.1.0

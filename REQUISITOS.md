@@ -35,7 +35,7 @@ histórico.
 
 | Ordem | Item | Origem | MoSCoW | Risco técnico | Depende de |
 |---:|---|---|---|---|---|
-| 1 | HU-01 Criar conta | N1, N4, N7 | Obrigatório | Alto: contas de usuário em Django, que ninguém na equipe conhece (R3) | — |
+| 1 | HU-01 Criar conta | N1, N4, N7 | Obrigatório | Alto: contas de usuário em Django, que ninguém na equipe conhece (R3) | Nenhuma |
 | 2 | HU-02 Entrar e sair | N7 | Obrigatório | Alto: sessão e senha, pela mesma razão | HU-01 |
 | 3 | HU-03 Publicar aviso curto | N1, N7 | Obrigatório | Alto: a primeira gravação no banco (R3) | HU-02 |
 | 4 | HU-04 Ver o mural | N2, N7 | Obrigatório | Médio: legibilidade no celular | HU-03 |
@@ -47,7 +47,7 @@ histórico.
 | 10 | HU-09 Anexar arquivo ao aviso | N9 | Fora desta versão | Alto: armazenamento de arquivo | HU-03 |
 | 11 | HU-10 E-mail quando sair aviso novo | N8 | Fora desta versão | Médio: servidor de e-mail | HU-03 |
 | 12 | HU-11 Aviso para uma turma | N10 | Fora desta versão | Médio: cadastro de turmas | HU-05 |
-| 13 | HU-12 Entrar com a conta institucional | N11 | Fora desta versão | Alto: integração com sistema externo | — |
+| 13 | HU-12 Entrar com a conta institucional | N11 | Fora desta versão | Alto: integração com sistema externo | Nenhuma |
 | 14 | HU-14 Saber quem viu o aviso | N14 | Fora desta versão | Médio: registro de leitura por conta | HU-04 |
 
 Ana ordenou o backlog, como diz o `PROCESSO.md`, com os três passos do capítulo
@@ -117,8 +117,8 @@ internos.
   nome já está em uso e mantém o que ela preencheu, menos a senha.
 - **CA-01.3 Senha fraca.** Dado que a pessoa está criando uma conta, quando ela
   escolhe a senha "1234567", com 7 caracteres, ou "12345678", só com números,
-  então o sistema recusa e informa a regra: pelo menos 8 caracteres, e não só
-  números.
+  então o sistema recusa e informa a regra: pelo menos 8 caracteres, com algo
+  além de números.
 - **CA-01.4 A conta continua.** Dado que a pessoa criou a conta "livia.m" e
   saiu, quando ela entra no dia seguinte com o mesmo nome e a mesma senha,
   então o sistema a reconhece.
@@ -173,7 +173,8 @@ pelo representante.
   cortar.
 - **CA-03.4 No limite, com acento (alterado na V1).** Dado que Paula entrou,
   quando ela publica um texto de 500 caracteres, todos acentuados, então o
-  aviso é publicado. O limite conta caracteres, e não bytes.
+  aviso é publicado. O limite conta caracteres, e um caractere acentuado vale
+  um.
 - **CA-03.5 O aviso continua.** Dado que Paula publicou um aviso às 10h15,
   quando outra pessoa com conta abre o mural no dia seguinte, então o aviso
   continua lá, com o mesmo texto, autor, data e hora.
@@ -197,7 +198,7 @@ para saber o que vale agora sem perguntar no balcão.
   abre o mural, então o sistema informa que ainda não há avisos.
 - **CA-04.3 Hora local.** Dado que um aviso foi publicado às 14h02 no horário
   de Palmas (UTC-3), quando Lívia abre o mural em qualquer dia depois, então a
-  hora mostrada é 14h02, e não a hora de outro fuso.
+  hora mostrada é 14h02.
 
 O efeito que persiste em HU-04 é o de CA-03.5, visto do lado de quem lê. Ver o
 mural não muda nada no sistema, e por isso a história não tem critério próprio
@@ -430,13 +431,13 @@ e 12; até lá, cada critério é o caso de teste escrito em português.
 | E1, E2, E4, O1 | N5 | HU-07 | No planejamento da iteração | A escrever |
 | E2, D2 | N6 | HU-07, RN-02 | No planejamento da iteração | A escrever |
 | E2, E5, O1 | N7 | HU-02, HU-03, HU-04 | CA-02.1 a CA-02.4, CA-03.1, CA-04.1 | A escrever |
-| E4 | N8 | HU-10 | Fora desta versão | — |
-| E1 | N9 | HU-09 | Fora desta versão | — |
-| E2 | N10 | HU-11 | Fora desta versão | — |
-| E1, E4 | N11 | HU-12 | Fora desta versão | — |
-| E1, O1 | N12 | HU-08 | Fora desta versão | — |
+| E4 | N8 | HU-10 | Fora desta versão | Não se aplica |
+| E1 | N9 | HU-09 | Fora desta versão | Não se aplica |
+| E2 | N10 | HU-11 | Fora desta versão | Não se aplica |
+| E1, E4 | N11 | HU-12 | Fora desta versão | Não se aplica |
+| E1, O1 | N12 | HU-08 | Fora desta versão | Não se aplica |
 | O1, V1 | N13 | HU-13 | No planejamento da iteração | A escrever |
-| E1, E2, V1 | N14 | HU-14 | Fora desta versão | — |
+| E1, E2, V1 | N14 | HU-14 | Fora desta versão | Não se aplica |
 
 Para avaliar o impacto de uma mudança, leia a tabela a partir da linha da
 necessidade que mudou: as histórias e os critérios da mesma linha são o que
@@ -500,3 +501,4 @@ porque o protótipo de papel não mede o sistema real.
   sem promessa de consulta.
 - 2026-10-24: validação V1 (#40): limite do aviso de 280 para 500 caracteres,
   nome para exibição, HU-13 e HU-14 criadas.
+- 2026-10-24: linha de base do primeiro marco, na tag `v0.4.0` (#42).
