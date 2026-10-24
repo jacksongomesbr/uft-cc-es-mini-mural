@@ -52,3 +52,11 @@ class RestricoesDaContaTest(TestCase):
     def test_qualquer_conta_publica(self):
         # RN-01, até a revisão de C2
         self.assertTrue(self.paula.pode_publicar())
+
+    def test_conta_desativada_nao_entra_nem_publica(self):
+        # A-04 e R9: desativar pelo terminal, sem apagar a conta
+        self.paula.desativar()
+        self.paula.refresh_from_db()
+        self.assertFalse(self.paula.check_password("senha-de-teste-1"))
+        self.assertFalse(self.paula.pode_publicar())
+        self.assertTrue(Conta.objects.filter(nome_usuario="paula.sec").exists())

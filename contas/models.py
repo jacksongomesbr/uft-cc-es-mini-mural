@@ -64,10 +64,20 @@ class Conta(AbstractBaseUser):
         self.nome_exibicao = normalizar_nome(self.nome_exibicao)
         super().save(*args, **kwargs)
 
+    def desativar(self):
+        """Desativa a conta sem apagá-la, para manter a autoria dos avisos (DP-05).
+
+        Sem painel administrativo (A-04), um integrante faz isso pelo terminal,
+        no caso de R9. A senha passa a não conferir com nada, e as sessões
+        abertas deixam de valer, porque o framework as liga ao valor da senha.
+        """
+        self.set_unusable_password()
+        self.save(update_fields=["password"])
+
     def pode_publicar(self):
         """RN-01: qualquer pessoa com conta publica, até a revisão de C2 (D2).
 
         A regra fica aqui, e só aqui (DP-08, RNF-07). Se a coordenação restringir
         quem publica, é este método que muda, com uma coluna nova na conta.
         """
-        return self.is_active
+        return self.has_usable_password()
