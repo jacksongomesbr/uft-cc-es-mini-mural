@@ -29,7 +29,7 @@ avisado [E1, O1].
 | Visitantes e calouros | São afetados | Ler avisos abertos sem criar conta | Baixo | Carla, por meio do centro acadêmico; ninguém entrevistado ainda |
 | Equipe de tecnologia do câmpus | Opera e mantém | Sistema que não gere chamado nem peça integração | Alto, sobre restrição técnica | Davi, por e-mail ao setor, até o encontro 7 |
 
-Duas linhas ainda não têm conversa: a coordenação e os visitantes. A equipe de
+A coordenação e os visitantes ainda não foram ouvidos. A equipe de
 tecnologia só precisa ser ouvida antes da implantação, no capítulo 14.
 
 ## Personas
@@ -181,7 +181,7 @@ autor obrigatório), o registro no banco e a lista do mural.
 - **Demonstrabilidade:** a secretaria ou um professor publica um aviso de
   verdade na demonstração do encontro 9.
 
-Os três critérios apontam para a mesma fatia, e não houve desempate.
+Os três critérios apontam para a mesma fatia, o que dispensou o desempate.
 
 **Contagem:** do encontro 4 ao 9 são cinco semanas. Pelo `PROCESSO.md`, a
 iteração 1 fecha no encontro 5, com os requisitos; a iteração 2 (encontros 5 a
