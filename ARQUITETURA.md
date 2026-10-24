@@ -60,7 +60,20 @@ hospedagem.
 
 ## Contrato das rotas
 
-Preenchido na issue #71.
+Rotas em [`contrato/operacoes.md`](contrato/operacoes.md). Cada passo do UC-01
+pede uma rota:
+
+| Rota | Para quê | Origem |
+|---|---|---|
+| `GET /entrar/`, `POST /entrar/`, `POST /sair/` | Entrar e sair | HU-02 |
+| `GET /cadastro/`, `POST /cadastro/` | Criar conta | HU-01 |
+| `GET /` | O mural | HU-04, UC-01 passo 1 |
+| `GET /avisos/novo/` | A página de publicar | UC-01 passo 2 |
+| `POST /avisos/` | Registrar o aviso | HU-03, UC-01 passos 3 e 4 |
+
+As rotas de HU-05 a HU-07 estão em esboço no mesmo arquivo. O caminho nomeia o
+recurso com um substantivo do glossário, e o método diz a intenção: `POST
+/avisos/` cria um aviso na coleção de avisos.
 
 ## Verificações
 
@@ -88,6 +101,7 @@ pede o `PROCESSO.md`, foi tomada em par, por Davi e Bruno.
 | A-08 | O autor vem da sessão, e o instante vem do banco; nenhum dos dois é campo de formulário. Descartado: campo escondido com o autor | Campo de formulário pode ser alterado por quem envia, e o autor visível é a defesa de N7 e de R9. DP-10 já tirou o instante da tela | Publicar exige sessão válida em toda requisição | Aceita |
 | A-09 | Migrações do framework desde o esqueleto. Descartado: esquema escrito à mão, fora do framework | O modelo de conta precisa de migração antes de tudo (A-04), e cada mudança de esquema fica no Git, com o código que a pede | Toda mudança de modelo vem com a migração no mesmo pull request. O `ROTEIRO.md` punha migrações no capítulo 14; lá fica a aplicação delas na implantação | Aceita |
 | A-10 | Configuração lida de variáveis de ambiente, com valores de desenvolvimento quando a variável falta | A mesma aplicação roda no notebook de cada integrante e, depois, na hospedagem | A chave secreta de desenvolvimento fica no código e não pode ir para a hospedagem; o tratamento de segredos é do capítulo 13 | Aceita para desenvolvimento |
+| A-12 | Contrato das rotas em `contrato/operacoes.md`; no lugar dos exemplos JSON, cada resposta diz a página, a mensagem exata e os campos mantidos. Descartados: exemplos JSON, porque não há API (A-01), e combinar rotas só no código | Quem faz a página e quem faz a regra precisam combinar campos, códigos e mensagens antes de escrever, e os testes do capítulo 12 precisam de onde tirar o esperado | Mudar rota, campo ou mensagem passa por pull request que altera o contrato | Aceita |
 | A-11 | Hospedagem e servidor de produção | Dependem das opções que R4 levanta | O servidor de desenvolvimento do framework só serve para trabalhar e para a demonstração do encontro 9 | Proposta, a decidir no capítulo 14 |
 
 ## Pontos em aberto
@@ -100,3 +114,4 @@ pede o `PROCESSO.md`, foi tomada em par, por Davi e Bruno.
 
 - 2026-10-24: esqueleto, participantes, responsabilidades e diagramas (#69).
 - 2026-10-24: decisões A-01 a A-11 (#70).
+- 2026-10-24: contrato das rotas e A-12 (#71).
