@@ -18,7 +18,7 @@ histórico.
 | Autor | A conta que publicou o aviso. O mural mostra o nome para exibição dessa conta, seguido do nome de usuário | N7, E2, E5, V1, R9 |
 | Aviso | Mensagem de texto publicada no mural, com autor, data e hora de publicação | N1, E1, E2 |
 | Aviso aberto | Aviso que qualquer pessoa lê, com conta ou sem conta | N3, C1 |
-| Aviso arquivado | Aviso que saiu do mural e continua guardado, com a data e a hora em que foi arquivado. Só o autor o consulta (CA-07.4) | N5, O1, E4 |
+| Aviso arquivado | Aviso que saiu do mural e continua guardado, com a data e a hora em que foi arquivado. Só o autor o consulta (CA-07.4, CA-07.5) | N5, O1, E4 |
 | Aviso curto | Aviso de até 500 caracteres, contados depois de tirar os espaços das pontas. O valor é da equipe; era 280 e mudou na V1, quando o aviso de um evento precisou de 341 | N1, V1 |
 | Aviso interno | Aviso que só quem entrou com uma conta lê. É o tipo padrão ao publicar. Ter conta não comprova ser do curso: o cadastro é aberto (RE-01), e conferir o vínculo dependeria da conta institucional (HU-12) | N4, C1, R8 |
 | Aviso publicado | Aviso que está no mural. Todo aviso nasce publicado | N1 |
@@ -261,10 +261,12 @@ para que o aluno não confunda o aviso velho com o que vale.
 - **CA-07.3 Arquivar de novo.** Dado que o autor arquivou um aviso às 10h,
   quando ele pede para arquivá-lo outra vez às 11h, então nada muda, e a data
   registrada continua 10h.
-- **CA-07.4 Quem vê o arquivado.** Dado que "paula.sec" arquivou um aviso,
-  quando outra pessoa com conta pede o endereço desse aviso, então o sistema
-  responde como se ele não existisse; quando "paula.sec" pede o mesmo
-  endereço, então vê o aviso, com a data do arquivamento.
+- **CA-07.4 Arquivado para outra pessoa.** Dado que "paula.sec" arquivou um
+  aviso, quando outra pessoa com conta pede o endereço desse aviso, então o
+  sistema responde como se ele não existisse.
+- **CA-07.5 Arquivado para o autor.** Dado que "paula.sec" arquivou um aviso,
+  quando ela pede o endereço desse aviso, então vê o aviso, com a data e a
+  hora do arquivamento.
 
 O arquivamento não se desfaz nesta versão: quem arquivou por engano publica o
 aviso de novo. Nenhuma fonte pediu para desfazer, e mostrar o arquivado a
@@ -467,7 +469,7 @@ e 12; até lá, cada critério é o caso de teste escrito em português.
 | E4, E5, O1 | N2 | HU-04 | CA-04.1 a CA-04.3 | A escrever |
 | E3, E4 | N3 | HU-06 | No planejamento da iteração | A escrever |
 | E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.6; HU-05 no planejamento | A escrever |
-| E1, E2, E4, O1 | N5 | HU-07 | CA-07.1, CA-07.3, CA-07.4 | A escrever |
+| E1, E2, E4, O1 | N5 | HU-07 | CA-07.1, CA-07.3 a CA-07.5 | A escrever |
 | E2, D2 | N6 | HU-07, RN-02 | CA-07.2 | A escrever |
 | E2, E5, O1 | N7 | HU-01, HU-02, HU-03, HU-04 | CA-01.6, CA-02.1 a CA-02.4, CA-03.1, CA-04.1 | A escrever |
 | E4 | N8 | HU-10 | Fora desta versão | Não se aplica |
@@ -555,5 +557,5 @@ porque o protótipo de papel não mede o sistema real.
   transição de publicado para arquivado não tinha critério, o estado arquivado
   não dizia se tinha saída, e uma transição de publicado para publicado, a
   correção do texto, estava em E2 sem ter virado necessidade. Impacto: CA-07.1 a
-  CA-07.4 acrescentados, glossário "aviso arquivado" alterado, N15 e HU-15
+  CA-07.5 acrescentados, glossário "aviso arquivado" alterado, N15 e HU-15
   registradas, fora desta versão; estimativas dos obrigatórios mantidas.

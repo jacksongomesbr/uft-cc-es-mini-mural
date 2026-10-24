@@ -157,7 +157,7 @@ mudança depois da linha de base (#57):
 
 1. A transição de publicado para arquivado não tinha critério, porque os
    critérios de HU-07 estavam previstos para o capítulo 8. Ganhou CA-07.1 a
-   CA-07.4.
+   CA-07.5.
 2. O estado arquivado não dizia se tinha saída, nem quem o vê. A equipe decidiu
    que ele é final e que só o autor o vê, e as duas decisões vão à demonstração
    do encontro 9.
