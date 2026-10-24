@@ -46,7 +46,7 @@ Todo o trabalho, porém, sai de uma única conta do GitHub. Por isso:
 
 | Capítulo | Assunto | O que a equipe entrega | Tag |
 |---|---|---|---|
-| 1 | Introdução | `PROBLEMA.md`: equipe formada e problema em uma página | — |
+| 1 | Introdução | `PROBLEMA.md`: equipe formada e problema em uma página | (sem tag) |
 | 2 | Gerência de configuração | `README.md`, `CONTRIBUTING.md`, `.gitignore`, `CHANGELOG.md`, proteção do `main`, um pull request por integrante | `v0.1.0` |
 | 3 | Processos de desenvolvimento | `PROCESSO.md` | `v0.2.0` |
 | 4 | Descoberta e requisitos | `DESCOBERTA.md` | `v0.3.0` |
