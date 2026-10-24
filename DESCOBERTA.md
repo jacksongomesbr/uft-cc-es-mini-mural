@@ -157,6 +157,8 @@ flowchart TB
 - Mural em ordem de data, legível no celular (N2).
 - Aviso aberto, lido sem conta, e aviso interno, só com conta (N3, N4, C1).
 - Arquivar o aviso, só pelo autor, com o arquivado fora do mural (N5, N6, C3).
+- Data de validade mostrada no aviso, se houver folga depois dos itens
+  importantes (N13, desejável).
 
 ### Fora de escopo nesta versão
 
@@ -172,6 +174,8 @@ flowchart TB
   necessidade está a verificar (N12).
 - Aplicativo instalável. Motivo: o uso observado, pelo celular entre uma aula e
   outra, é atendido por uma página web legível no celular (E4, E5).
+- Saber quem viu o aviso. Motivo: exige registrar o que cada conta leu, um dado
+  pessoal que RE-02, no `REQUISITOS.md`, manda evitar sem necessidade (N14).
 
 ## Produto mínimo viável
 
@@ -201,9 +205,10 @@ arquivamento, que saíram na revisão do #29.
 - **Entra no MVP:** contas para publicar, publicar com autor e data, e ver o
   mural em ordem de data (N1, N2, N7).
 - **Até a review final:** aviso aberto e interno (N3, N4) e arquivar, só pelo
-  autor (N5, N6).
+  autor (N5, N6); data de validade, se houver folga (N13).
 - **Registrado sem previsão:** anexo, e-mail de aviso novo, aviso por turma,
-  retirada automática e conta institucional (N8 a N12).
+  retirada automática, conta institucional e saber quem viu o aviso (N8 a N12,
+  N14).
 
 ## Cenário pretendido: avisar uma troca de sala
 
@@ -231,6 +236,7 @@ tiver a resposta esperada.
 | R6 | A coordenação não decide quem publica e quem arquiva até o encontro 5 (C2, C3) | Média | Alto | Mitigar | Encerrado em 2026-10-24: a coordenação respondeu por meio da secretaria (D2), e C2 volta à pauta depois do encontro 9; Eva |
 | R7 | Os comunicados oficiais continuam no e-mail, e o aluno passa a conferir dois lugares (D2) | Média | Médio | Aceitar | Contingência: na demonstração do encontro 9, perguntar à secretaria se o aviso do mural pode apontar para o e-mail oficial; Eva |
 | R8 | Uma pessoa de fora do curso cria uma conta e lê aviso interno, porque o cadastro é aberto e a conta é do próprio Mini Mural (N4, R2) | Baixa | Médio | Aceitar | Contingência: o aviso que não pode sair do curso continua no e-mail institucional, e a questão volta à coordenação depois do encontro 9; Ana |
+| R9 | Uma conta escolhe um nome para exibição que imita outra pessoa, como "Secretaria do curso", e publica com ele (RN-01, RE-01) | Média | Alto | Mitigar | O sistema recusa nome para exibição repetido e mostra o nome de usuário junto (CA-01.6, CA-04.1). Resta o nome parecido, e por isso a questão vai à revisão de C2, depois do encontro 9, com opções para a coordenação: restringir quem publica ou marcar as contas de servidores e professores; Eva |
 
 ## A pergunta que a equipe evitou
 
@@ -251,3 +257,4 @@ está em R7.
 - 2026-10-24: resposta da coordenação (D2, #34). C2 e C3 atualizados, N6 confirmada, N9 com a nova situação, R6 encerrado, R7 e a resposta à pergunta evitada incluídos.
 - 2026-10-24: R8 incluído pela revisão do `REQUISITOS.md` (#39): N4 pede "quem é do curso", e o cadastro aberto entrega "quem tem conta".
 - 2026-10-24: N13 e N14 incluídas pela validação V1 (#40). N14 estava em E1 e E2 como informação difícil de obter, e a descoberta não a tinha registrado.
+- 2026-10-24: R9 e o escopo de N13 e N14 (#53), na primeira mudança depois da linha de base `v0.4.0`. R9 veio da análise de impacto do nome para exibição; as seções de escopo e do MVP passam a citar N13 e N14, que já estavam nas necessidades e no backlog.
