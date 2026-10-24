@@ -32,8 +32,8 @@ A descrição usa letras minúsculas sem acento e hífens, como em
 - Corpo explicando o porquê, quando a mudança não for óbvia.
 - Referência à issue: `Closes #<numero>` no commit que conclui a issue, e
   `Refs #<numero>` nos demais.
-- Um commit, uma mudança. Ajuste pedido na revisão entra em commit novo, e não
-  reescrevendo o que já foi enviado.
+- Um commit, uma mudança. Ajuste pedido na revisão entra em commit novo; o que
+  já foi enviado não é reescrito.
 
 ## Pull requests
 
@@ -56,7 +56,8 @@ request, mas não exige aprovação formal, que uma conta só não consegue dar.
 
 ## Divergência técnica
 
-- A discussão fica registrada no pull request, e não no grupo de mensagens.
+- A discussão fica registrada no pull request. Decisão tomada no grupo de
+  mensagens se perde.
 - Sem acordo em dois turnos de comentário, decide quem prioriza o backlog, e a
   decisão é registrada no próprio pull request. Até o `PROCESSO.md` definir os
   papéis, decide a Ana.
