@@ -128,10 +128,12 @@ internos.
 - **CA-01.5 Nome para exibição obrigatório (acrescentado na V1).** Dado que a
   pessoa está criando uma conta, quando ela deixa o nome para exibição vazio,
   então o sistema recusa e informa que o nome aparece como autor dos avisos.
-- **CA-01.6 Nome para exibição em uso (acrescentado no #53).** Dado que já
-  existe uma conta com o nome para exibição "Secretaria do curso", quando outra
-  pessoa tenta criar uma conta com "secretaria do curso", então o sistema
-  recusa e informa que esse nome já está em uso.
+- **CA-01.6 Nome para exibição em uso (acrescentado no #53, alterado no #63).**
+  Dado que já existe uma conta com o nome para exibição "Secretaria do curso",
+  quando outra pessoa tenta criar uma conta com "secretaria  do curso ", com
+  espaço repetido e espaço no fim, então o sistema recusa e informa que esse
+  nome já está em uso. A comparação tira os espaços das pontas, junta os
+  repetidos e não diferencia maiúsculas.
 
 ### HU-02 Entrar e sair
 
@@ -520,3 +522,6 @@ porque o protótipo de papel não mede o sistema real.
   Impacto pela rastreabilidade, linhas de N1, N4 e N7: CA-01.6 acrescentado,
   CA-04.1 e glossário alterados, estimativas mantidas. O risco que sobra está
   em R9.
+- 2026-10-24: CA-01.6 passa a comparar o nome sem os espaços das pontas e sem
+  espaços repetidos (#63). Motivo: a revisão do modelo de dados mostrou que um
+  espaço a mais repetia o problema do #53. Impacto: só o CA-01.6.

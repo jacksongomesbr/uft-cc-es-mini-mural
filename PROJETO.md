@@ -90,7 +90,9 @@ Fonte: [`diagrams/dados.mmd`](diagrams/dados.mmd).
 
 - **Identidade.** Toda tabela tem chave artificial gerada pelo sistema. O nome
   de usuário e o nome para exibição continuam únicos, como restrição de
-  unicidade que não diferencia maiúsculas (CA-01.2, CA-01.6).
+  unicidade que não diferencia maiúsculas (CA-01.2, CA-01.6). O nome para
+  exibição é gravado sem os espaços das pontas e sem espaços repetidos, para a
+  comparação valer.
 - **Apagamento.** O aviso não é apagado: arquivar é o apagamento dele, e o
   aviso arquivado continua na tabela, com a situação e a data do arquivamento
   (DP-04). Nenhuma história apaga conta; a chave estrangeira recusa apagar uma
