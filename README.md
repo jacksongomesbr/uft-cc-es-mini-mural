@@ -38,6 +38,7 @@ produz e à tag que o encerra.
 |---|---|
 | [PROBLEMA.md](PROBLEMA.md) | Problema, usuário pretendido e verificação do tema (capítulo 1) |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Convenções de ramos, commits, pull requests e revisão (capítulo 2) |
+| [PROCESSO.md](PROCESSO.md) | Processo escolhido, iterações, papéis e definição de pronto (capítulo 3) |
 | [CHANGELOG.md](CHANGELOG.md) | O que mudou em cada versão |
 | [ROTEIRO.md](ROTEIRO.md) | Capítulos, artefatos e tags do semestre |
 
