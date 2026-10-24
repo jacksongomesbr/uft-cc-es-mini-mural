@@ -79,6 +79,8 @@ Os nomes são fictícios, e cada persona reúne mais de uma fonte.
   conduziram Eva e Bruno ([ata](descoberta/O1-balcao-e-mural.md))
 - D1: os 14 avisos fixados no mural de papel do bloco, levantados na O1,
   2026-10-23
+- D2: resposta da secretaria, com a posição da coordenação sobre C2 e C3,
+  2026-10-24, registrou Eva ([registro](descoberta/D2-resposta-da-secretaria.md))
 
 ## Necessidades levantadas
 
@@ -92,10 +94,10 @@ linhas possam ser comparadas na priorização do capítulo 5.
 | N3 | Ler aviso aberto sem criar conta | Visitantes, alunos, centro acadêmico | E3, E4 | Confirmada |
 | N4 | Restringir aviso interno a quem é do curso | Secretaria, professores | E1, E2 | Confirmada |
 | N5 | Tirar do mural o aviso que deixou de valer | Secretaria, professores, alunos | E1, E2, E4, O1 | Confirmada |
-| N6 | Garantir que só quem publicou tire o próprio aviso | Professores | E2 | A verificar: uma fonte só, e depende da coordenação (C3, R6) |
+| N6 | Garantir que só quem publicou tire o próprio aviso | Professores, coordenação | E2, D2 | Confirmada: a coordenação decidiu C3 (D2) |
 | N7 | Saber quem publicou cada aviso, e quando | Alunos, professores | E2, E5, O1 | Confirmada |
 | N8 | Receber um e-mail quando sair aviso novo | Alunos | E4 | A verificar |
-| N9 | Anexar um arquivo ao aviso | Secretaria | E1 | A verificar |
+| N9 | Anexar um arquivo ao aviso | Secretaria | E1 | A verificar: o comunicado com anexo continua no e-mail (D2) |
 | N10 | Restringir um aviso a uma turma | Professores | E2 | A verificar |
 | N11 | Entrar com a conta institucional da universidade | Secretaria | E1 | Bloqueada: depende de terceiro, ver R2 |
 | N12 | Retirar do mural o aviso vencido sem depender de quem publicou | Secretaria | E1, O1 | A verificar |
@@ -114,8 +116,8 @@ depende de alguém ter tempo, e a equipe não pode contar com essa tarefa manual
 | Conflito | Entre quem | Critério aplicado | Decisão |
 |---|---|---|---|
 | C1. Ler sem conta contra restringir aos alunos do curso | Centro acadêmico e alunos (E3, E4) contra secretaria e professores (E1, E2) | Número de fontes: as duas necessidades (N3 e N4) têm duas fontes cada, e uma não exclui a outra | Dois tipos de aviso. O aberto é lido sem conta; o interno, só com conta. Quem publica escolhe, e o padrão é o interno, o mais restritivo |
-| C2. Quem publica: só servidores e professores, ou qualquer pessoa com conta | Professor (E2) contra centro acadêmico (E3) | Poder de decisão de quem pediu: cabe à coordenação, que ainda não foi ouvida. Critério frágil, a revisitar | Provisória: qualquer pessoa com conta publica, e o autor aparece em todo aviso (N7). Eva leva a questão à coordenação até o encontro 5 (R6) |
-| C3. Quem retira o aviso: só o autor, ou também a secretaria | Professor (E2) contra secretaria (E1, O1) | Poder de decisão: professores e secretaria têm o mesmo peso, e a coordenação decide. Critério frágil, a revisitar | Provisória: só o autor arquiva, porque retirar o aviso de outra pessoa é o erro que E2 descreveu. A limpeza sem o autor fica registrada como N12 (R6) |
+| C2. Quem publica: só servidores e professores, ou qualquer pessoa com conta | Professor (E2) contra centro acadêmico (E3) | Poder de decisão de quem pediu: a coordenação respondeu (D2), com prazo | Qualquer pessoa com conta publica, e o autor aparece em todo aviso (N7). Vale até a demonstração do encontro 9, e a coordenação revê depois (D2) |
+| C3. Quem retira o aviso: só o autor, ou também a secretaria | Professor (E2) contra secretaria (E1, O1) | Poder de decisão: professores e secretaria têm o mesmo peso, e a coordenação decidiu (D2) | Só o autor arquiva. Quando o aviso de outra pessoa vence, a secretaria pede ao autor que o arquive (D2). A limpeza sem o autor continua registrada como N12 |
 
 ## Cenário atual: avisar uma troca de sala
 
@@ -222,7 +224,8 @@ tiver a resposta esperada.
 | R3 | Ninguém na equipe conhece Django, contas de usuário e banco | Média | Alto | Mitigar | A fatia do MVP atravessa os três na iteração 3, com a primeira decisão em par, como diz o `PROCESSO.md`; Davi |
 | R4 | Não há hospedagem sem custo para a implantação | Média | Médio | Mitigar | Levantar opções até o encontro 12, antes do capítulo 14; Carla |
 | R5 | A publicação aberta repete a poluição dos grupos de mensagem (C2) | Média | Médio | Aceitar | Contingência: autor visível em todo aviso, e C2 revisto depois da primeira demonstração; Ana |
-| R6 | A coordenação não decide quem publica e quem arquiva até o encontro 5 (C2, C3) | Média | Alto | Mitigar | Levar C2 e C3 à coordenação por meio da secretaria, com as decisões provisórias por escrito; Eva |
+| R6 | A coordenação não decide quem publica e quem arquiva até o encontro 5 (C2, C3) | Média | Alto | Mitigar | Encerrado em 2026-10-24: a coordenação respondeu por meio da secretaria (D2), e C2 volta à pauta depois do encontro 9; Eva |
+| R7 | Os comunicados oficiais continuam no e-mail, e o aluno passa a conferir dois lugares (D2) | Média | Médio | Aceitar | Contingência: na demonstração do encontro 9, perguntar à secretaria se o aviso do mural pode apontar para o e-mail oficial; Eva |
 
 ## A pergunta que a equipe evitou
 
@@ -230,6 +233,14 @@ A secretaria vai publicar no mural no lugar do e-mail, ou o mural vira um
 quarto canal? Se for um quarto canal, a dispersão que o problema descreve
 piora. Eva faz a pergunta à secretaria até o encontro 5.
 
+**Resposta (D2):** a secretaria continua mandando por e-mail os comunicados
+oficiais, com edital ou prazo da coordenação, e passa a publicar no mural os
+avisos do dia a dia. O mural substitui o e-mail nesses avisos, e o aluno
+continua precisando do e-mail para os oficiais. O passo 6 do cenário atual, a
+dúvida no balcão, deve diminuir nos avisos do dia a dia; o risco que sobra
+está em R7.
+
 ## Histórico de revisão
 
 - 2026-10-24: versão inicial (#24), com N6 a verificar, o MVP reduzido e o cenário pretendido incluídos na revisão do #29.
+- 2026-10-24: resposta da coordenação (D2, #34). C2 e C3 atualizados, N6 confirmada, N9 com a nova situação, R6 encerrado, R7 e a resposta à pergunta evitada incluídos.
