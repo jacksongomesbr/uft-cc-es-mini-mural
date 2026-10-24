@@ -4,6 +4,12 @@ Proposta da equipe para o projeto da disciplina, escrita no encontro 1. As
 afirmações sobre o curso vêm da experiência dos integrantes como alunos e
 serão conferidas com os usuários na descoberta (capítulo 4).
 
+> **Atualização do encontro 4:** a descoberta foi feita e está no
+> [DESCOBERTA.md](DESCOBERTA.md), que passa a ser a referência do problema.
+> Este arquivo fica como registro da proposta inicial. As regras listadas na
+> verificação do tema foram conferidas lá: as de aviso aberto e interno e de
+> arquivamento só pelo autor ainda dependem de decisão da coordenação (C2, C3).
+
 ## Equipe
 
 Ana, Bruno, Carla, Davi e Eva. A equipe é simulada, como explica o
