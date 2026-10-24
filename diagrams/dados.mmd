@@ -1,0 +1,17 @@
+erDiagram
+  CONTA ||--o{ AVISO : publica
+  CONTA {
+    int id PK
+    string nome_usuario UK
+    string nome_exibicao UK
+    string senha_derivada
+  }
+  AVISO {
+    int id PK
+    int autor_id FK
+    string texto
+    string tipo
+    string situacao
+    timestamp publicado_em
+    timestamp arquivado_em
+  }
