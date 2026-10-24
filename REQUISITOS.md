@@ -232,11 +232,119 @@ Preenchido na issue #38.
 
 ## Requisitos não funcionais
 
-Preenchidos na issue #37.
+A equipe percorreu as nove características de qualidade da ISO/IEC 25010. Valor
+sem fonte está marcado como valor da equipe e é conferido na validação indicada.
+
+| Característica | Exigência nesta versão |
+|---|---|
+| Adequação funcional | Coberta pelas histórias e pelos critérios de aceitação |
+| Eficiência de desempenho | RNF-01 |
+| Compatibilidade | Sem exigência: o Mini Mural não troca dados com outro sistema, e o e-mail e a conta institucional estão fora desta versão (HU-10, HU-12) |
+| Capacidade de interação | RNF-02 |
+| Confiabilidade | RNF-03 |
+| Segurança | RNF-04, RNF-05, RNF-06 |
+| Manutenibilidade | RNF-07 |
+| Flexibilidade | RNF-08 |
+| Segurança física e de operação | Sem exigência: o mural não controla equipamento nem decide sobre pessoas, e uma falha atrasa um aviso, como acontece hoje |
+
+### RNF-01 Tempo de apresentação do mural
+
+- **Grandeza:** tempo entre pedir o mural e vê-lo completo no navegador.
+- **Condição:** 200 avisos publicados, um semestre na estimativa da equipe, e
+  celular em rede móvel, que é o uso descrito em E4 e E5.
+- **Aceitável:** até 3 segundos.
+- **Pretendido:** até 1 segundo.
+- **Como verificar:** base de teste com 200 avisos, ferramentas do navegador
+  com a rede limitada ao perfil "Fast 4G", três execuções; vale o maior valor.
+- **Valor:** da equipe, conferido na review parcial.
+
+### RNF-02 Publicar sem ajuda
+
+- **Grandeza:** tempo que uma pessoa que nunca usou o Mini Mural leva para
+  publicar um aviso, contado a partir do mural, com a conta já aberta.
+- **Condição:** pessoa do perfil da persona Paula ou professor, sem explicação
+  da tela.
+- **Aceitável:** até 2 minutos, sem pedir ajuda.
+- **Como verificar:** cronometragem por quem observa, na sessão de validação
+  com o protótipo e, depois, na demonstração do encontro 9.
+- **Valor:** da equipe.
+
+### RNF-03 Recarregar a página não publica de novo
+
+- **Grandeza:** avisos gravados para cada publicação confirmada.
+- **Condição:** a pessoa recarrega a página logo depois de publicar. Nenhuma
+  fonte descreveu esse gesto; a equipe o considera porque todo navegador o
+  oferece.
+- **Aceitável:** exatamente um aviso.
+- **Como verificar:** publicar, recarregar a página três vezes e contar no banco
+  os avisos com aquele texto.
+
+### RNF-04 Senha guardada de forma irrecuperável
+
+- **Grandeza:** senhas que podem ser lidas no banco.
+- **Condição:** qualquer conta criada pelo sistema.
+- **Aceitável:** nenhuma. O banco guarda só um valor derivado da senha, do qual
+  a senha não pode ser recuperada.
+- **Como verificar:** criar uma conta com senha conhecida e procurar essa senha
+  na tabela de contas.
+
+### RNF-05 Texto do aviso mostrado como texto
+
+- **Grandeza:** marcação do aviso interpretada pelo navegador.
+- **Condição:** aviso que contém marcação, como `<script>alert(1)</script>`.
+- **Aceitável:** nenhuma. O mural mostra os caracteres como foram escritos.
+- **Como verificar:** publicar o aviso e conferir a tela e o console do
+  navegador.
+
+### RNF-06 Aviso interno fora do alcance de quem não entrou
+
+- **Grandeza:** respostas a pedidos sem conta que contêm o texto de um aviso
+  interno.
+- **Condição:** pedido sem sessão ao mural e ao endereço direto de um aviso
+  interno. Vale a partir de HU-05.
+- **Aceitável:** nenhuma.
+- **Como verificar:** pedido com `curl`, sem cookie de sessão, e busca do texto
+  do aviso na resposta.
+
+### RNF-07 Regras de acesso em um lugar só
+
+- **Grandeza:** lugares do código que decidem quem publica (RN-01), quem lê o
+  aviso interno e quem arquiva (RN-02).
+- **Condição:** mudança em qualquer uma dessas regras. RN-01 vale até a
+  demonstração do encontro 9, e a coordenação vai revê-la (D2).
+- **Aceitável:** cada regra decidida em um lugar só, com teste automatizado.
+- **Como verificar:** revisão de código com a lista do capítulo 10 e a suíte
+  automatizada do capítulo 12.
+
+### RNF-08 Legível no celular
+
+- **Grandeza:** rolagem horizontal e tamanho do texto do aviso.
+- **Condição:** tela de 360 pixels de largura, nas telas do mural, de publicar,
+  de entrar e de criar conta. A leitura pelo celular vem de E4, E5 e O1.
+- **Aceitável:** nenhuma rolagem horizontal, e texto do aviso com pelo menos
+  16 pixels.
+- **Como verificar:** modo de dispositivo das ferramentas do navegador, em
+  360 por 640 pixels.
+- **Valor:** da equipe; 360 pixels é a largura dos celulares de entrada.
 
 ## Restrições e regras de negócio
 
-Preenchidas na issue #37.
+As restrições e as regras de negócio vêm de fora da equipe, e só quem as
+definiu pode mudá-las.
+
+- **RE-01** O Mini Mural deve usar contas próprias, criadas nele mesmo. A conta
+  institucional fica fora desta versão. [Origem: R2, N11]
+- **RE-02** O cadastro deve pedir só o necessário para entrar e publicar: nome
+  de usuário e senha. [Origem: LGPD, Lei n.º 13.709, de 2018, art. 6.º, III,
+  princípio da necessidade]
+- **RE-03** O sistema deve estar em uso na demonstração do encontro 9 e
+  completo na review final do encontro 16. [Origem: plano da disciplina;
+  `PROCESSO.md`]
+- **RN-01** Qualquer pessoa com conta pode publicar aviso, e todo aviso mostra
+  o autor. [Origem: D2, posição da coordenação sobre C2, válida até a
+  demonstração do encontro 9]
+- **RN-02** Só o autor pode arquivar o próprio aviso. [Origem: D2, decisão da
+  coordenação sobre C3]
 
 ## Rastreabilidade
 
@@ -245,12 +353,12 @@ e 12; até lá, cada critério é o caso de teste escrito em português.
 
 | Fonte | Necessidade | História | Critérios | Teste |
 |---|---|---|---|---|
-| E1, E2, E3 | N1 | HU-01, HU-03 | CA-01.1 a CA-01.4, CA-03.1 a CA-03.5 | A escrever |
+| E1, E2, E3 | N1 | HU-01, HU-03, RN-01 | CA-01.1 a CA-01.4, CA-03.1 a CA-03.5 | A escrever |
 | E4, E5, O1 | N2 | HU-04 | CA-04.1 a CA-04.3 | A escrever |
 | E3, E4 | N3 | HU-06 | No planejamento da iteração | A escrever |
 | E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.4; HU-05 no planejamento | A escrever |
 | E1, E2, E4, O1 | N5 | HU-07 | No planejamento da iteração | A escrever |
-| E2, D2 | N6 | HU-07 | No planejamento da iteração | A escrever |
+| E2, D2 | N6 | HU-07, RN-02 | No planejamento da iteração | A escrever |
 | E2, E5, O1 | N7 | HU-02, HU-03, HU-04 | CA-02.1 a CA-02.4, CA-03.1, CA-04.1 | A escrever |
 | E4 | N8 | HU-10 | Fora desta versão | — |
 | E1 | N9 | HU-09 | Fora desta versão | — |
@@ -294,3 +402,4 @@ Preenchidas na issue #40.
 - 2026-10-24: esqueleto e glossário (#33).
 - 2026-10-24: backlog ordenado e histórias de usuário (#35).
 - 2026-10-24: critérios de aceitação das histórias obrigatórias e rastreabilidade (#36).
+- 2026-10-24: requisitos não funcionais, restrições e regras de negócio (#37).
