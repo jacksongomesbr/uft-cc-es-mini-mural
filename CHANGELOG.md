@@ -4,6 +4,27 @@ Todas as mudanças relevantes do projeto ficam registradas aqui. O formato
 segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/), e as
 versões seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
+## [0.3.0] - 2026-10-24
+
+Fim do capítulo 4: descoberta do problema com os usuários.
+
+### Adicionado
+
+- Roteiro de entrevista, com a abertura que pede autorização para gravar e o
+  cuidado com dados de quem é entrevistado (`descoberta/roteiro-entrevista.md`,
+  #22).
+- Atas sem identificação de cinco entrevistas e uma observação, simuladas
+  como a equipe (`descoberta/`, #23).
+- Descoberta do problema: partes interessadas, personas, fontes, necessidades,
+  conflitos com critério, cenários atual e pretendido, escopo, MVP e riscos
+  (`DESCOBERTA.md`, #24).
+
+### Alterado
+
+- O `PROBLEMA.md` fica como registro da proposta inicial e aponta para o
+  `DESCOBERTA.md`, que passa a ser a referência do problema; o `README.md`
+  aponta para os dois (#25).
+
 ## [0.2.0] - 2026-10-24
 
 Fim do capítulo 3: processo de desenvolvimento escolhido e registrado.
@@ -36,5 +57,6 @@ Fim dos capítulos 1 e 2: problema proposto e repositório configurado.
 - Proteção do `main`: envio direto e reescrita de histórico bloqueados, com
   pull request obrigatório.
 
+[0.3.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/releases/tag/v0.1.0
