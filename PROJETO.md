@@ -74,7 +74,64 @@ um valor de atributo, e a decisão está em DP-02.
 
 ## Modelo de dados
 
-Preenchido na issue #56.
+Fonte: [`diagrams/dados.mmd`](diagrams/dados.mmd).
+
+### Passagem do domínio para os dados
+
+| No modelo de domínio | No modelo de dados | Decisão |
+|---|---|---|
+| Classe Conta | Tabela `CONTA`, com chave `id` | Chave artificial (DP-03) |
+| Classe Aviso | Tabela `AVISO`, com chave `id` | Chave artificial (DP-03) |
+| Conta publica aviso, um para muitos | `autor_id` em `AVISO`, chave estrangeira obrigatória | Apagar uma conta com avisos é recusado (DP-05) |
+| Atributo senha | Coluna `senha_derivada` | O banco guarda o valor derivado da senha, e nunca a senha (RNF-04) |
+| Atributos `tipo` e `situacao` | Colunas de valor restrito | As listas, aberto e interno, publicado e arquivado, só mudam junto com o código, e por isso não viram tabela |
+
+### Decisões que a passagem obrigou
+
+- **Identidade.** Toda tabela tem chave artificial gerada pelo sistema. O nome
+  de usuário e o nome para exibição continuam únicos, como restrição de
+  unicidade que não diferencia maiúsculas (CA-01.2, CA-01.6).
+- **Apagamento.** O aviso não é apagado: arquivar é o apagamento dele, e o
+  aviso arquivado continua na tabela, com a situação e a data do arquivamento
+  (DP-04). Nenhuma história apaga conta; a chave estrangeira recusa apagar uma
+  conta que tem avisos, para não levar a autoria junto (DP-05).
+- **Tempo.** `publicado_em` e `arquivado_em` guardam o instante com fuso, e a
+  tela mostra no horário de Palmas, UTC-3 (CA-04.3). O instante vem do sistema,
+  e não de quem publica (CA-03.1). Dois avisos no mesmo instante saem do mais
+  novo `id` para o mais antigo, o que fixa a ordem do CA-04.1 (DP-06).
+- **Arquivo.** Não se aplica nesta versão: nenhum requisito guarda arquivo, e
+  anexar arquivo (HU-09) está fora. Se HU-09 subir, a escolha entre guardar no
+  banco ou fora dele volta para este documento.
+- **Tamanho e obrigatoriedade.** `texto` aceita até 500 caracteres, contados
+  como caracteres (CA-03.3, CA-03.4), e o banco recusa o que passar, além da
+  regra do aviso. `nome_exibicao` é obrigatório (CA-01.5). `arquivado_em` fica
+  vazio enquanto o aviso está publicado e é preenchido junto com a situação
+  arquivado; uma coisa sem a outra é recusada.
+- **Normalização.** As duas tabelas estão na terceira forma normal. O nome do
+  autor sai da junção com `CONTA` e não é copiado para o aviso. Nenhum índice
+  além dos que as chaves e as unicidades criam, até o RNF-01 ser medido (DP-07).
+
+### O dado que cada critério exige
+
+| Critério | Dado | Onde |
+|---|---|---|
+| CA-01.1 | Nome de usuário, nome para exibição e valor derivado da senha | `CONTA` |
+| CA-01.2, CA-01.6 | Unicidade sem diferenciar maiúsculas | `nome_usuario`, `nome_exibicao` |
+| CA-01.3 | Nenhum: a regra da senha é conferida antes de gravar | Não se aplica |
+| CA-01.4, CA-03.5 | Persistência das duas tabelas | `CONTA`, `AVISO` |
+| CA-01.5 | Obrigatoriedade | `nome_exibicao` |
+| CA-02.1 a CA-02.4 | Nenhum dado do domínio: a sessão é assunto do capítulo 7 | Não se aplica |
+| CA-03.1 | Texto, autor e instante | `texto`, `autor_id`, `publicado_em` |
+| CA-03.2 | Nenhum: a recusa não grava nada | Não se aplica |
+| CA-03.3, CA-03.4 | Limite de 500 caracteres | `texto` |
+| CA-04.1 | Ordem, desempate e os dois nomes do autor | `publicado_em`, `id`, junção com `CONTA` |
+| CA-04.2 | Nenhum | Não se aplica |
+| CA-04.3 | Instante com fuso | `publicado_em` |
+
+A conferência inversa: toda coluna tem origem. `id` vem de DP-03; `nome_usuario`,
+`nome_exibicao` e `senha_derivada`, de CA-01.1 e RNF-04; `autor_id`, de CA-03.1
+e N7; `texto` e `publicado_em`, de CA-03.1; `tipo`, de HU-05 e C1; `situacao` e
+`arquivado_em`, de HU-07 e do glossário.
 
 ## Comportamento
 
@@ -93,6 +150,11 @@ confundir com os documentos D1 e D2 do `DESCOBERTA.md`.
 |---|---|---|---|
 | DP-01 | O modelo cobre HU-01 a HU-07 | São as histórias obrigatórias e importantes, previstas até a review final. Só com o MVP, o aviso teria uma situação só, e o diagrama de estados não mostraria nada | Tipo e data de arquivamento entram no modelo antes do código que os usa, que vem depois da review parcial |
 | DP-02 | Aberto e interno como valor do atributo `tipo`, sem subclasse | Os dois tipos têm os mesmos atributos e operações; muda só quem lê | A regra de leitura precisa conferir o tipo do aviso |
+| DP-03 | Chave artificial em todas as tabelas, com os nomes da conta como restrição de unicidade | O nome de usuário identifica a pessoa, e usá-lo como chave amarraria o banco a uma escolha que a pessoa fez ao criar a conta | Uma coluna a mais por tabela |
+| DP-04 | Arquivar é o apagamento do aviso; nenhum aviso sai da tabela | O glossário diz que o arquivado continua guardado (N5) | Toda consulta do mural precisa filtrar a situação |
+| DP-05 | Conta com avisos não pode ser apagada | Nenhuma história apaga conta, e apagar levaria junto a autoria que N7 exige | A conta de quem sai do curso fica até haver regra para isso |
+| DP-06 | Instantes guardados com fuso e mostrados no horário de Palmas, com desempate pelo `id` | CA-04.3 pede a hora local, e CA-04.1 pede uma ordem fixa | A conversão de fuso acontece em toda tela que mostra hora |
+| DP-07 | Nenhum índice além das chaves e unicidades até o RNF-01 ser medido | 200 avisos é pouco, e índice sem medição é suposição | Se o RNF-01 falhar, o primeiro reparo é um índice em `situacao` e `publicado_em` |
 
 ## Protótipo
 
@@ -105,3 +167,4 @@ Preenchida na issue #60.
 ## Histórico de revisão
 
 - 2026-10-24: esqueleto e modelo de domínio (#55).
+- 2026-10-24: modelo de dados e decisões de armazenamento (#56).
