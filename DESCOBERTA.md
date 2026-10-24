@@ -226,6 +226,7 @@ tiver a resposta esperada.
 | R5 | A publicação aberta repete a poluição dos grupos de mensagem (C2) | Média | Médio | Aceitar | Contingência: autor visível em todo aviso, e C2 revisto depois da primeira demonstração; Ana |
 | R6 | A coordenação não decide quem publica e quem arquiva até o encontro 5 (C2, C3) | Média | Alto | Mitigar | Encerrado em 2026-10-24: a coordenação respondeu por meio da secretaria (D2), e C2 volta à pauta depois do encontro 9; Eva |
 | R7 | Os comunicados oficiais continuam no e-mail, e o aluno passa a conferir dois lugares (D2) | Média | Médio | Aceitar | Contingência: na demonstração do encontro 9, perguntar à secretaria se o aviso do mural pode apontar para o e-mail oficial; Eva |
+| R8 | Uma pessoa de fora do curso cria uma conta e lê aviso interno, porque o cadastro é aberto e a conta é do próprio Mini Mural (N4, R2) | Baixa | Médio | Aceitar | Contingência: o aviso que não pode sair do curso continua no e-mail institucional, e a questão volta à coordenação depois do encontro 9; Ana |
 
 ## A pergunta que a equipe evitou
 
@@ -244,3 +245,4 @@ está em R7.
 
 - 2026-10-24: versão inicial (#24), com N6 a verificar, o MVP reduzido e o cenário pretendido incluídos na revisão do #29.
 - 2026-10-24: resposta da coordenação (D2, #34). C2 e C3 atualizados, N6 confirmada, N9 com a nova situação, R6 encerrado, R7 e a resposta à pergunta evitada incluídos.
+- 2026-10-24: R8 incluído pela revisão do `REQUISITOS.md` (#39): N4 pede "quem é do curso", e o cadastro aberto entrega "quem tem conta".
