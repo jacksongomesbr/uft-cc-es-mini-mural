@@ -272,8 +272,9 @@ sem fonte está marcado como valor da equipe e é conferido na validação indic
 ### RNF-03 Recarregar a página não publica de novo
 
 - **Grandeza:** avisos gravados para cada publicação confirmada.
-- **Condição:** a pessoa recarrega a página logo depois de publicar, como
-  acontece no celular quando a rede oscila.
+- **Condição:** a pessoa recarrega a página logo depois de publicar. Nenhuma
+  fonte descreveu esse gesto; a equipe o considera porque todo navegador o
+  oferece.
 - **Aceitável:** exatamente um aviso.
 - **Como verificar:** publicar, recarregar a página três vezes e contar no banco
   os avisos com aquele texto.
