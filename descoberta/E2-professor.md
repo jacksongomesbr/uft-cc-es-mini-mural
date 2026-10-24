@@ -20,14 +20,14 @@
    data errada. Aviso antigo que continua circulando depois que deixou de valer.
 5. **Informação difícil de obter.** Quem da turma ainda não viu o aviso.
 6. **Quem mais depende.** Os alunos e, nas provas, a coordenação.
-7. **O que mais perguntar.** Se vai dar para avisar só uma turma, e não o curso
-   inteiro.
+7. **O que mais perguntar.** Se vai dar para avisar só uma turma, em vez do
+   curso inteiro.
 
 ## Achados
 
 - Quer publicar ele mesmo, sem depender de aprovação.
-- Quer tirar o próprio aviso quando ele perder a validade, e não quer que outra
-  pessoa apague ou altere o que ele publicou.
+- Quer tirar o próprio aviso quando ele perder a validade, e quer que só ele
+  possa apagar ou alterar o que publicou.
 - Quer que o aviso mostre quem publicou, para o aluno saber que veio dele.
 - Prefere que só professores e servidores publiquem; "aluno publicando vira
   grupo de mensagem de novo".

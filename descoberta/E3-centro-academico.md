@@ -26,7 +26,7 @@
 ## Achados
 
 - Quer que aviso aberto seja lido sem criar conta.
-- Quer que qualquer aluno com conta possa publicar, e não só servidores e
+- Quer que qualquer aluno com conta possa publicar, além de servidores e
   professores. Isso contradiz o que E2 disse.
 - Os grupos de mensagem são vistos como poluídos.
 
