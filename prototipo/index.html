@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mini Mural: protótipo navegável</title>
+<style>
+  /* Aparência de rascunho de propósito: sem cor, sem marca, fonte de máquina. */
+  body { font-family: ui-monospace, Menlo, Consolas, monospace; background: #fff;
+         color: #222; margin: 0; padding: 16px; }
+  section { display: none; max-width: 360px; margin: 0 auto; border: 2px dashed #888;
+            padding: 12px; }
+  section:target, #inicio:not(:has(~ section:target)) { display: block; }
+  h1, h2 { font-size: 1rem; margin: 0 0 8px; }
+  .barra { display: flex; justify-content: space-between; border-bottom: 1px solid #888;
+           padding-bottom: 6px; margin-bottom: 10px; }
+  .caixa { border: 1px solid #888; padding: 6px; margin: 6px 0; min-height: 1.2em; }
+  .texto { min-height: 5em; }
+  .aviso { border-top: 1px solid #ccc; padding: 8px 0; }
+  .autor { color: #666; font-size: .85rem; }
+  .recusa { border: 2px solid #222; padding: 6px; margin: 8px 0; }
+  .nota { color: #666; font-size: .8rem; margin-top: 12px; border-top: 1px dotted #aaa;
+          padding-top: 6px; }
+  a { color: #222; }
+  .botao { display: inline-block; border: 1px solid #222; padding: 4px 10px;
+           text-decoration: none; margin: 6px 6px 0 0; }
+</style>
+</head>
+<body>
+
+<section id="inicio">
+  <h1>Protótipo do Mini Mural</h1>
+  <p>Fluxo principal do UC-01, publicar aviso, com as recusas previstas. Cada
+  tela tem os elementos que a pessoa pode tocar; tocar leva à tela seguinte.</p>
+  <p><a class="botao" href="#entrar">começar pela tela de entrar</a></p>
+  <p>Telas de recusa, para percorrer direto:</p>
+  <ul>
+    <li><a href="#cadastro-nome-em-uso">nome para exibição em uso (CA-01.6)</a></li>
+    <li><a href="#publicar-vazio">texto vazio (UC-01, 4a)</a></li>
+    <li><a href="#publicar-acima">texto acima do limite (UC-01, 4b)</a></li>
+    <li><a href="#entrar-de-novo">conta fechada em outra aba (UC-01, 4c)</a></li>
+    <li><a href="#publicar-falhou">aviso não publicado (UC-01, 4e)</a></li>
+  </ul>
+</section>
+
+<section id="entrar">
+  <h2>Mini Mural</h2>
+  <p>Nome de usuário</p><div class="caixa">paula.sec</div>
+  <p>Senha</p><div class="caixa">************</div>
+  <a class="botao" href="#mural">entrar</a>
+  <a class="botao" href="#cadastro">criar conta</a>
+  <p class="nota">HU-02. Senha errada recusa sem dizer se o erro está no nome ou na senha (CA-02.2).</p>
+</section>
+
+<section id="cadastro">
+  <h2>Criar conta</h2>
+  <p>Nome de usuário</p><div class="caixa">paula.sec</div>
+  <p>Nome para exibição, que aparece como autor dos avisos</p>
+  <div class="caixa">Secretaria do curso</div>
+  <p>Senha, com pelo menos 8 caracteres e algo além de números</p>
+  <div class="caixa">************</div>
+  <a class="botao" href="#mural">criar conta</a>
+  <a class="botao" href="#cadastro-nome-em-uso">criar conta (nome já usado)</a>
+  <a class="botao" href="#entrar">voltar</a>
+  <p class="nota">HU-01, CA-01.1. Quem cria a conta já entra com ela.</p>
+</section>
+
+<section id="cadastro-nome-em-uso">
+  <h2>Criar conta</h2>
+  <div class="recusa">O nome para exibição "secretaria do curso" já está em uso. Escolha outro.</div>
+  <p>Nome de usuário</p><div class="caixa">secretaria</div>
+  <p>Nome para exibição, que aparece como autor dos avisos</p>
+  <div class="caixa">secretaria do curso</div>
+  <p>Senha</p><div class="caixa"></div>
+  <a class="botao" href="#mural">criar conta</a>
+  <a class="botao" href="#entrar">voltar</a>
+  <p class="nota">CA-01.6 e CA-01.2. O formulário mantém o que a pessoa preencheu, menos a senha.</p>
+</section>
+
+<section id="mural">
+  <div class="barra"><span>Mini Mural</span><span>Secretaria do curso <a href="#entrar">sair</a></span></div>
+  <a class="botao" href="#publicar">publicar aviso</a>
+  <div class="aviso">Prova de Cálculo II adiada para 05/11.
+    <div class="autor">Prof. de Cálculo (prof.calculo), 23/10/2026, 18h40</div></div>
+  <div class="aviso">Inscrições abertas para a monitoria.
+    <div class="autor">Centro acadêmico (ca.computacao), 22/10/2026, 09h12</div></div>
+  <p class="nota">UC-01, passo 1. HU-04: mais recentes primeiro, com nome para exibição, nome de usuário, data e hora (CA-04.1).</p>
+</section>
+
+<section id="publicar">
+  <h2>Publicar aviso</h2>
+  <div class="caixa texto">A aula de Engenharia de Software de amanhã muda para a sala 12 do bloco B.</div>
+  <p class="autor">74 de 500 caracteres</p>
+  <a class="botao" href="#mural-publicado">publicar</a>
+  <a class="botao" href="#publicar-vazio">publicar (sem texto)</a>
+  <a class="botao" href="#publicar-acima">publicar (texto longo)</a>
+  <a class="botao" href="#entrar-de-novo">publicar (conta fechada em outra aba)</a>
+  <a class="botao" href="#publicar-falhou">publicar (falha ao gravar)</a>
+  <a class="botao" href="#mural">voltar</a>
+  <p class="nota">UC-01, passos 2 e 3. Os botões entre parênteses mostram as recusas; no sistema, há um botão só.</p>
+</section>
+
+<section id="publicar-vazio">
+  <h2>Publicar aviso</h2>
+  <div class="recusa">O aviso precisa de texto. Nada foi publicado.</div>
+  <div class="caixa texto"></div>
+  <p class="autor">0 de 500 caracteres</p>
+  <a class="botao" href="#publicar">publicar</a>
+  <a class="botao" href="#mural">voltar</a>
+  <p class="nota">UC-01, 4a; CA-03.2. Vale também para texto só com espaços.</p>
+</section>
+
+<section id="publicar-acima">
+  <h2>Publicar aviso</h2>
+  <div class="recusa">O aviso tem 512 caracteres, e o limite é 500. Corte 12 caracteres e publique de novo.</div>
+  <div class="caixa texto">Palestra da semana acadêmica na quinta, às 19h, no auditório do bloco A, sobre carreira em computação. As inscrições são pelo formulário do centro acadêmico até quarta... (o texto que a pessoa escreveu continua aqui)</div>
+  <p class="autor">512 de 500 caracteres</p>
+  <a class="botao" href="#publicar">publicar</a>
+  <a class="botao" href="#mural">voltar</a>
+  <p class="nota">UC-01, 4b; CA-03.3. O texto fica no campo para a pessoa cortar.</p>
+</section>
+
+<section id="entrar-de-novo">
+  <h2>Mini Mural</h2>
+  <div class="recusa">Sua conta foi fechada. Entre de novo; o aviso não foi publicado.</div>
+  <p>Nome de usuário</p><div class="caixa">paula.sec</div>
+  <p>Senha</p><div class="caixa"></div>
+  <a class="botao" href="#mural">entrar</a>
+  <p class="nota">UC-01, 4c; CA-02.4.</p>
+</section>
+
+<section id="publicar-falhou">
+  <h2>Publicar aviso</h2>
+  <div class="recusa">O aviso não foi publicado, porque o sistema não conseguiu gravar. O texto continua no campo; tente de novo em instantes.</div>
+  <div class="caixa texto">A aula de Engenharia de Software de amanhã muda para a sala 12 do bloco B.</div>
+  <a class="botao" href="#mural-publicado">publicar</a>
+  <a class="botao" href="#mural">voltar</a>
+  <p class="nota">UC-01, 4e. A alternativa ainda não tem critério; o texto da mensagem é proposta da equipe.</p>
+</section>
+
+<section id="mural-publicado">
+  <div class="barra"><span>Mini Mural</span><span>Secretaria do curso <a href="#entrar">sair</a></span></div>
+  <a class="botao" href="#publicar">publicar aviso</a>
+  <div class="aviso">A aula de Engenharia de Software de amanhã muda para a sala 12 do bloco B.
+    <div class="autor">Secretaria do curso (paula.sec), 24/10/2026, 10h15</div></div>
+  <div class="aviso">Prova de Cálculo II adiada para 05/11.
+    <div class="autor">Prof. de Cálculo (prof.calculo), 23/10/2026, 18h40</div></div>
+  <p class="nota">UC-01, passo 4; CA-03.1. Recarregar esta página não publica de novo (RNF-03). <a href="#inicio">voltar ao início</a></p>
+</section>
+
+</body>
+</html>

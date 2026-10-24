@@ -268,7 +268,43 @@ confundir com os documentos D1 e D2 do `DESCOBERTA.md`.
 
 ## Protótipo
 
-Preenchido na issue #59.
+Protótipo navegável do fluxo principal em [`prototipo/`](prototipo/), com as
+recusas previstas. O [`prototipo/README.md`](prototipo/README.md) diz por onde
+começar.
+
+### Sequência de telas
+
+Cada passo do UC-01 em que a pessoa decide ou fornece alguma coisa tem tela; o
+passo em que só o sistema trabalha vira mensagem quando o fluxo alternativo
+acontece.
+
+| Passo do UC-01 | Tela ou mensagem | Critério |
+|---|---|---|
+| Pré-condição: entrar | Entrar; criar conta | HU-01, HU-02, CA-01.1 |
+| 1. Abrir o mural e escolher publicar | Mural | CA-04.1 |
+| 2 e 3. Escrever e confirmar | Publicar aviso, com o contador de caracteres | CA-03.3 |
+| 4. Registrar e mostrar | Mural com o aviso no topo | CA-03.1 |
+| 1a. Não entrou | Entrar | CA-02.3 |
+| 4a. Texto vazio | Publicar aviso, com a recusa | CA-03.2 |
+| 4b. Acima do limite | Publicar aviso, com a recusa e o texto mantido | CA-03.3 |
+| 4c. Conta fechada em outra aba | Entrar, com a recusa | CA-02.4 |
+| 4d. Recarregar a página | Nenhuma: nada acontece (RNF-03) | RNF-03 |
+| 4e. Falha ao gravar | Publicar aviso, com a mensagem e o texto mantido | Sem critério ainda |
+
+Fora do fluxo principal, a recusa do nome para exibição em uso (CA-01.6) também
+tem tela, porque é a defesa que o #53 acrescentou contra R9.
+
+### Forma
+
+O capítulo 6 recomenda um arquivo de apresentação com ligações entre slides. A
+equipe usou uma página HTML estática, com uma tela por seção e ligações entre
+elas, porque ela abre em qualquer navegador sem ferramenta paga, é texto e pode
+ser revisada em pull request como os diagramas. A aparência é de rascunho de
+propósito: sem cor nem marca, para o comentário ficar no fluxo.
+
+O protótipo cobre a fatia do MVP. As telas de HU-05 a HU-07, tipo do aviso e
+arquivamento, entram no planejamento da iteração em que essas histórias
+entrarem.
 
 ## Conferência cruzada
 
@@ -280,3 +316,4 @@ Preenchida na issue #60.
 - 2026-10-24: modelo de dados e decisões de armazenamento (#56).
 - 2026-10-24: diagrama de estados do aviso (#57).
 - 2026-10-24: sequência, atividade, responsabilidades e teste de Parnas (#58).
+- 2026-10-24: protótipo navegável do fluxo principal (#59).
