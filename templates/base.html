@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  {# RNF-08: a página se ajusta à largura do celular. #}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}Mini Mural{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/mural.css' %}">
+</head>
+<body>
+  <header class="topo">
+    <a href="/" class="marca">Mini Mural</a>
+  </header>
+  <main>
+    {% block conteudo %}{% endblock %}
+  </main>
+</body>
+</html>
