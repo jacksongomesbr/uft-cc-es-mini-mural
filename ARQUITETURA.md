@@ -77,11 +77,50 @@ recurso com um substantivo do glossário, e o método diz a intenção: `POST
 
 ## Verificações
 
-Preenchidas na issue #72.
+O navegador ajuda, o servidor decide, e o banco recusa o que nunca pode
+acontecer, venha de onde vier a gravação.
+
+| Verificação | No navegador | No servidor | No banco |
+|---|---|---|---|
+| Texto vazio | Campo obrigatório, como ajuda | Decide, depois de tirar os espaços das pontas; 422 (CA-03.2) | Não participa |
+| Limite de 500 caracteres | Contador e limite do campo, como ajuda; a contagem do navegador pode diferir na quebra de linha | Decide: conta caracteres depois de juntar as quebras de linha; 422 (CA-03.3, CA-03.4) | Restrição de tamanho em caracteres, a segunda barreira (DP-09) |
+| Nome de usuário em uso | Não participa | Decide, sem diferenciar maiúsculas; 422 (CA-01.2) | Unicidade por expressão (DP-03) |
+| Nome para exibição em uso | Não participa | Normaliza os espaços e decide, sem diferenciar maiúsculas; 422 (CA-01.6) | Unicidade por expressão sobre o nome já normalizado |
+| Senha fraca | Não participa | Validadores de senha do framework; 422 (CA-01.3) | Não participa |
+| Autor do aviso | Não participa | Vem da sessão, nunca do formulário (A-08) | Chave estrangeira obrigatória |
+| Instante da publicação | Não participa | Não aceita instante vindo do formulário | Valor padrão do banco no momento da gravação (DP-10) |
+| Quem pode publicar | Não participa | Regra da conta (RN-01, DP-08) | Não participa |
+| Quem pode arquivar | Mostra o botão só ao autor, como ajuda | Decide; 403 (CA-07.2, RN-02) | Não participa |
+| Quem vê aviso interno ou arquivado | Não participa | Decide em toda rota que mostra aviso; 302 ou 404 (RNF-06, CA-07.4) | Não participa |
+| Apagar conta com avisos | Não participa | Nenhuma rota apaga conta | A chave estrangeira recusa (DP-05) |
+| Formulário forjado por outro site | Envia a marca de proteção recebida com a página | O framework confere a marca; 403 | Não participa |
+
+A linha do autor é a defesa do sistema contra R9 do lado de dentro: mesmo quem
+altera o formulário no navegador não consegue publicar em nome de outra conta.
 
 ## Qualidades e custos
 
-Preenchidas na issue #72.
+| Qualidade | Requisito | Decisão que o sustenta | Custo aceito |
+|---|---|---|---|
+| Eficiência de desempenho | RNF-01: mural com 200 avisos em até 3 segundos | Uma consulta com junção traz os avisos e os nomes dos autores; índice só depois de medir (DP-07) | A consulta precisa ser escrita pensando na junção; a medição fica para antes do encontro 9 |
+| Capacidade de interação | RNF-02: publicar sem ajuda em até 2 minutos | Uma ação por página, mensagens de recusa que dizem o que fazer (contrato) e o contador de caracteres | O contador usa um script pequeno; a página funciona sem ele, e o servidor continua decidindo |
+| Confiabilidade | RNF-03: recarregar não publica de novo | Redirecionamento 303 depois de gravar (A-06) | A confirmação precisa estar na página de destino |
+| Segurança | RNF-04: senha irrecuperável | O guardador de senhas do framework, com derivação de chave lenta de propósito | Entrar leva uma fração de segundo a mais, por desenho |
+| Segurança | RNF-05: texto do aviso mostrado como texto | Escape automático dos modelos de página; nenhum texto de aviso é marcado como seguro | A quebra de linha do aviso usa um filtro que escapa o texto antes de quebrar |
+| Segurança | RNF-06: aviso interno fora do alcance de quem não entrou | A regra de quem vê fica no aviso e é chamada por toda rota que mostra aviso | Toda consulta de aviso passa pela regra, inclusive as que parecem inofensivas |
+| Manutenibilidade | RNF-07: cada regra de acesso em um lugar | Regras como métodos de conta e aviso (A-03, A-05, DP-08) | O domínio depende do ORM |
+| Flexibilidade | RNF-08: legível em 360 pixels | Uma folha de estilo própria, de uma coluna, sem biblioteca de estilos | O estilo é escrito à mão |
+
+Compatibilidade e segurança física e de operação seguem sem exigência, como no
+`REQUISITOS.md`.
+
+### O custo escondido do mural
+
+O mural mostra, em cada aviso, os dois nomes do autor. Escrito do jeito mais
+direto, o código pede os avisos e depois, para cada aviso, a conta do autor:
+com 200 avisos, são 201 idas ao banco por página. A consulta com junção faz uma
+ida só e dá o mesmo trabalho de escrever, e por isso entra desde a primeira
+versão, sem esperar a medição do RNF-01. O que espera a medição é o índice.
 
 ## Decisões
 
@@ -115,3 +154,4 @@ pede o `PROCESSO.md`, foi tomada em par, por Davi e Bruno.
 - 2026-10-24: esqueleto, participantes, responsabilidades e diagramas (#69).
 - 2026-10-24: decisões A-01 a A-11 (#70).
 - 2026-10-24: contrato das rotas e A-12 (#71).
+- 2026-10-24: verificações, qualidades e custos (#72).
