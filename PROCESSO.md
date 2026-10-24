@@ -73,7 +73,7 @@ Os encontros são semanais, então o número do encontro também conta as semana
 Cabem uma iteração até o marco do encontro 5, três até o do 9, cinco até o do
 12 e sete até o do 16. Do encontro 3 ao 12 são nove semanas, que não fecham em
 iterações de duas; a iteração 5 tem uma semana só, para que o marco do
-encontro 12 caia no fim de uma iteração, e não no meio.
+encontro 12 coincida com o fim de uma iteração.
 
 ## Quando o processo oposto seria o certo
 
