@@ -228,7 +228,44 @@ para que o aluno não confunda o aviso velho com o que vale.
 
 ## Caso de uso
 
-Preenchido na issue #38.
+O caso de uso cobre o fluxo principal do sistema, publicar aviso, que é onde as
+exceções se concentram. As histórias dizem quem quer o quê; o caso de uso diz o
+que acontece quando o caminho normal não acontece.
+
+### UC-01 Publicar aviso
+
+- **Ator principal:** pessoa com conta: servidor da secretaria, professor ou
+  aluno do centro acadêmico (RN-01).
+- **Pré-condição:** a pessoa entrou com a conta (HU-02).
+- **Garantia de sucesso:** o aviso fica registrado, com o texto, o autor, a
+  data e a hora, e aparece no topo do mural.
+
+**Fluxo principal**
+
+1. A pessoa abre o mural e escolhe publicar um aviso.
+2. O sistema apresenta o campo do aviso, com o limite de caracteres. A partir de
+   HU-05, apresenta também a escolha entre aberto e interno, com interno
+   marcado.
+3. A pessoa escreve o aviso e confirma.
+4. O sistema confere o texto, registra o aviso com autor, data e hora e
+   apresenta o mural com o aviso no topo. [CA-03.1]
+
+**Fluxos alternativos**
+
+- **1a. A pessoa não entrou:** o sistema a leva à tela de entrar e, depois que
+  ela entra, de volta ao mural. [CA-02.3]
+- **4a. Texto vazio ou só com espaços:** o sistema recusa, informa que o aviso
+  precisa de texto e não registra nada. [CA-03.2]
+- **4b. Texto acima do limite:** o sistema recusa, informa o limite e quantos
+  caracteres passaram, e mantém o texto para a pessoa cortar. [CA-03.3]
+- **4c. A pessoa saiu da conta em outra aba entre os passos 1 e 3:** o sistema
+  não registra o aviso e pede que ela entre de novo. [CA-02.4]
+- **4d. A pessoa recarrega a página depois do passo 4:** o sistema não registra
+  o aviso outra vez. [RNF-03]
+- **4e. O banco não responde no passo 4:** o sistema informa que o aviso não foi
+  publicado e nada fica registrado pela metade. Esta alternativa apareceu ao
+  percorrer o fluxo e ainda não tem critério; ela entra nos casos de teste do
+  capítulo 11.
 
 ## Requisitos não funcionais
 
@@ -403,3 +440,4 @@ Preenchidas na issue #40.
 - 2026-10-24: backlog ordenado e histórias de usuário (#35).
 - 2026-10-24: critérios de aceitação das histórias obrigatórias e rastreabilidade (#36).
 - 2026-10-24: requisitos não funcionais, restrições e regras de negócio (#37).
+- 2026-10-24: caso de uso UC-01, publicar aviso (#38).
