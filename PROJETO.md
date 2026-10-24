@@ -188,9 +188,9 @@ decisões ficam visíveis no desenho:
 
 - o aviso confere o texto antes do registro, e por isso a recusa não grava nada
   (CA-03.2);
-- o instante da publicação vem do registro, e não da tela (DP-10);
-- o mural mostrado depois da publicação sai do que foi registrado, e não do que
-  a tela já tinha.
+- o registro atribui o instante da publicação (DP-10);
+- o mural mostrado depois da publicação sai do que foi registrado, e por isso
+  mostra o que ficou gravado.
 
 Como a tela evita publicar de novo quando a pessoa recarrega a página (RNF-03)
 depende de como a tela conversa com o servidor, e é decisão do capítulo 7.
@@ -267,7 +267,7 @@ confundir com os documentos D1 e D2 do `DESCOBERTA.md`.
 | DP-07 | Nenhum índice além das chaves e unicidades até o RNF-01 ser medido | 200 avisos é pouco, e índice sem medição é suposição | Se o RNF-01 falhar, o primeiro reparo é um índice em `situacao` e `publicado_em` |
 | DP-08 | As regras de publicar, ler e arquivar ficam na conta e no aviso, e nenhuma na tela | RNF-07 pede cada regra em um lugar só, e RN-01 tem prazo (D2) | A tela pergunta ao aviso e à conta em vez de conferir sozinha |
 | DP-09 | O limite de 500 caracteres fica no aviso e é repetido como restrição do banco | A restrição é a segunda barreira contra gravação que não passe pela tela | Mudar o limite toca dois lugares, no mesmo pull request |
-| DP-10 | O instante da publicação vem do registro, e não da tela | CA-03.1 pede a hora da publicação, e o relógio do aparelho de quem publica não é confiável | A tela mostra a hora que o registro devolveu |
+| DP-10 | O registro atribui o instante da publicação | CA-03.1 pede a hora da publicação, e o relógio do aparelho de quem publica não é confiável | A tela mostra a hora que o registro devolveu |
 
 ## Protótipo
 
