@@ -58,20 +58,14 @@ request, mas não exige aprovação formal, que uma conta só não consegue dar.
 
 - A discussão fica registrada no pull request. Decisão tomada no grupo de
   mensagens se perde.
-- Sem acordo em dois turnos de comentário, decide quem prioriza o backlog, e a
-  decisão é registrada no próprio pull request. Até o `PROCESSO.md` definir os
-  papéis, decide a Ana.
+- Sem acordo em dois turnos de comentário, decide quem prioriza o backlog,
+  conforme os papéis do [PROCESSO.md](PROCESSO.md), e a decisão é registrada no
+  próprio pull request.
 
 ## Definição de pronto
 
-Um item está pronto quando:
-
-- o trabalho está integrado ao `main`;
-- foi revisado por outra pessoa, com o comentário de aprovação registrado;
-- atende ao critério de "pronto quando" da issue.
-
-A lista cresce ao longo do semestre: teste automatizado e verificação de
-estilo entram no capítulo 12.
+A definição de pronto fica no [PROCESSO.md](PROCESSO.md), em uma fonte só.
+Antes de pedir revisão, confira o pull request contra ela.
 
 ## Versões
 
