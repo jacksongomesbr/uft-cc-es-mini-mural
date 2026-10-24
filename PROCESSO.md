@@ -101,10 +101,23 @@ descobertas com os usuários.
 
 Um item está pronto quando:
 
-- o critério de aceitação foi atendido;
-- foi revisado por outra pessoa, com o comentário de aprovação registrado, e
-  integrado ao `main`;
-- a issue está fechada e vinculada ao pull request.
+1. Todos os critérios de aceitação foram verificados por alguém que não
+   escreveu o código do item.
+2. O código está integrado ao `main` por pull request revisado, com o
+   comentário de aprovação registrado.
+3. A funcionalidade está acessível no ambiente que a equipe usa para
+   demonstrar, que o `ARQUITETURA.md` define no capítulo 7.
+4. Os requisitos não funcionais que se aplicam ao item foram conferidos, como
+   diz o "Como verificar" de cada um no `REQUISITOS.md`.
+5. A issue fechada referencia a história, e a história tem a origem registrada
+   no `REQUISITOS.md`.
+
+Para documento, como os deste repositório até o capítulo 6, valem os pontos 2
+e 5: pull request revisado e issue fechada, ligada ao item de origem.
+
+O critério de aceitação vale para um item e diz como ele se comporta; esta
+definição vale para todos e diz o padrão de trabalho da equipe. Item que atende
+a quatro dos cinco pontos na véspera da review continua não pronto.
 
 A lista cresce nos capítulos 11 e 12, com teste automatizado e verificação na
 integração contínua.
@@ -112,3 +125,4 @@ integração contínua.
 ## Histórico de revisão do processo
 
 - 2026-10-24: versão inicial (#13).
+- 2026-10-24: definição de pronto com os cinco pontos do capítulo 5 (#41).
