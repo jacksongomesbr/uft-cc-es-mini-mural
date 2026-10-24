@@ -1,0 +1,15 @@
+flowchart LR
+  subgraph Navegador["Navegador da pessoa"]
+    H["Páginas HTML<br/>formulários e CSS"]
+  end
+  subgraph App["Aplicação Django, um processo"]
+    direction TB
+    B["Borda<br/>rotas, formulários<br/>e modelos de página"]
+    D["Domínio<br/>Conta e Aviso,<br/>com as regras"]
+    P["Persistência<br/>ORM do framework"]
+    B --> D
+    D --> P
+  end
+  DB[("PostgreSQL")]
+  Navegador <-->|"requisição e página HTML"| App
+  App <-->|"consultas e gravações"| DB
