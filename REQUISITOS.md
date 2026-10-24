@@ -94,6 +94,22 @@ para publicar avisos com o meu nome e ler os avisos internos.
 
 [Origem: N1, N4, N7; RE-01]
 
+**Critérios de aceitação**
+
+- **CA-01.1 Conta criada.** Dado que não existe conta com o nome de usuário
+  "livia.m", quando a pessoa cria a conta com esse nome e uma senha de 12
+  caracteres, então o sistema cria a conta e a pessoa já fica dentro dela.
+- **CA-01.2 Nome em uso.** Dado que já existe a conta "livia.m", quando outra
+  pessoa tenta criar a conta "Livia.M", então o sistema recusa, informa que o
+  nome já está em uso e mantém o que ela preencheu, menos a senha.
+- **CA-01.3 Senha fraca.** Dado que a pessoa está criando uma conta, quando ela
+  escolhe a senha "1234567", com 7 caracteres, ou "12345678", só com números,
+  então o sistema recusa e informa a regra: pelo menos 8 caracteres, e não só
+  números.
+- **CA-01.4 A conta continua.** Dado que a pessoa criou a conta "livia.m" e
+  saiu, quando ela entra no dia seguinte com o mesmo nome e a mesma senha,
+  então o sistema a reconhece.
+
 ### HU-02 Entrar e sair
 
 Como pessoa com conta,
@@ -101,6 +117,21 @@ quero entrar com o meu nome de usuário e a minha senha, e sair quando terminar,
 para que só eu publique com o meu nome.
 
 [Origem: N7, E2]
+
+**Critérios de aceitação**
+
+- **CA-02.1 Entrar.** Dado que existe a conta "paula.sec", quando ela entra com
+  o nome e a senha certos, então o sistema a leva ao mural e mostra quem
+  entrou.
+- **CA-02.2 Senha errada.** Dado que existe a conta "paula.sec", quando alguém
+  tenta entrar com a senha errada, então o sistema recusa e informa que nome ou
+  senha não conferem, sem dizer qual dos dois.
+- **CA-02.3 Mural sem conta.** Dado que a pessoa não entrou, quando ela abre o
+  endereço do mural, então o sistema a leva à tela de entrar e, depois que ela
+  entra, de volta ao mural.
+- **CA-02.4 Depois de sair.** Dado que a pessoa entrou e depois saiu, quando ela
+  tenta publicar pela mesma aba do navegador, então o sistema pede que ela
+  entre de novo, e nada é publicado.
 
 ### HU-03 Publicar aviso curto
 
@@ -111,6 +142,25 @@ pelo representante.
 
 [Origem: N1 e N7, confirmadas em E1, E2 e E3; cenário atual, passos 1 a 3]
 
+**Critérios de aceitação**
+
+- **CA-03.1 Publicar.** Dado que Paula entrou com a conta "paula.sec", quando
+  ela publica "A aula de Engenharia de Software de amanhã muda para a sala 12
+  do bloco B.", então o aviso aparece no topo do mural, com o autor, a data e
+  a hora da publicação.
+- **CA-03.2 Texto vazio.** Dado que Paula entrou, quando ela publica um texto
+  vazio ou só com espaços e quebras de linha, então o sistema recusa, informa
+  que o aviso precisa de texto e não publica nada.
+- **CA-03.3 Acima do limite.** Dado que Paula entrou, quando ela publica um
+  texto de 281 caracteres, então o sistema recusa, informa o limite de 280 e
+  quantos caracteres passaram, e mantém o texto para ela cortar.
+- **CA-03.4 No limite, com acento.** Dado que Paula entrou, quando ela publica
+  um texto de 280 caracteres, todos acentuados, então o aviso é publicado. O
+  limite conta caracteres, e não bytes.
+- **CA-03.5 O aviso continua.** Dado que Paula publicou um aviso às 10h15,
+  quando outra pessoa com conta abre o mural no dia seguinte, então o aviso
+  continua lá, com o mesmo texto, autor, data e hora.
+
 ### HU-04 Ver o mural
 
 Como aluna (persona Lívia),
@@ -119,6 +169,20 @@ autor, data e hora,
 para saber o que vale agora sem perguntar no balcão.
 
 [Origem: N2 e N7, confirmadas em E4, E5 e O1]
+
+**Critérios de aceitação**
+
+- **CA-04.1 Ordem do mural.** Dado que há três avisos publicados às 8h, às 9h
+  e às 10h do mesmo dia, quando Lívia abre o mural, então os três aparecem na
+  ordem 10h, 9h, 8h, cada um com autor, data e hora.
+- **CA-04.2 Mural vazio.** Dado que nenhum aviso foi publicado, quando Lívia
+  abre o mural, então o sistema informa que ainda não há avisos.
+- **CA-04.3 Hora local.** Dado que um aviso foi publicado às 14h02 no horário
+  de Palmas (UTC-3), quando Lívia abre o mural em qualquer dia depois, então a
+  hora mostrada é 14h02, e não a hora de outro fuso.
+
+Os critérios das histórias importantes, HU-05 a HU-07, são escritos no
+planejamento da iteração em que elas entram, no capítulo 8.
 
 ### HU-05 Marcar o aviso como aberto ou interno
 
@@ -176,7 +240,27 @@ Preenchidas na issue #37.
 
 ## Rastreabilidade
 
-Preenchida na issue #36.
+A cadeia vai da fonte ao teste. A coluna de teste é preenchida nos capítulos 11
+e 12; até lá, cada critério é o caso de teste escrito em português.
+
+| Fonte | Necessidade | História | Critérios | Teste |
+|---|---|---|---|---|
+| E1, E2, E3 | N1 | HU-01, HU-03 | CA-01.1 a CA-01.4, CA-03.1 a CA-03.5 | A escrever |
+| E4, E5, O1 | N2 | HU-04 | CA-04.1 a CA-04.3 | A escrever |
+| E3, E4 | N3 | HU-06 | No planejamento da iteração | A escrever |
+| E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.4; HU-05 no planejamento | A escrever |
+| E1, E2, E4, O1 | N5 | HU-07 | No planejamento da iteração | A escrever |
+| E2, D2 | N6 | HU-07 | No planejamento da iteração | A escrever |
+| E2, E5, O1 | N7 | HU-02, HU-03, HU-04 | CA-02.1 a CA-02.4, CA-03.1, CA-04.1 | A escrever |
+| E4 | N8 | HU-10 | Fora desta versão | — |
+| E1 | N9 | HU-09 | Fora desta versão | — |
+| E2 | N10 | HU-11 | Fora desta versão | — |
+| E1, E4 | N11 | HU-12 | Fora desta versão | — |
+| E1, O1 | N12 | HU-08 | Fora desta versão | — |
+
+Para avaliar o impacto de uma mudança, leia a tabela a partir da linha da
+necessidade que mudou: as histórias e os critérios da mesma linha são o que
+precisa ser revisto.
 
 ## Lista de verificação da revisão
 
@@ -209,3 +293,4 @@ Preenchidas na issue #40.
 
 - 2026-10-24: esqueleto e glossário (#33).
 - 2026-10-24: backlog ordenado e histórias de usuário (#35).
+- 2026-10-24: critérios de aceitação das histórias obrigatórias e rastreabilidade (#36).
