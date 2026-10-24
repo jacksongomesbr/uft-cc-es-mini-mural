@@ -18,9 +18,9 @@ histórico.
 | Autor | A conta que publicou o aviso. O mural mostra o nome de usuário dessa conta | N7, E2, E5 |
 | Aviso | Mensagem de texto publicada no mural, com autor, data e hora de publicação | N1, E1, E2 |
 | Aviso aberto | Aviso que qualquer pessoa lê, com conta ou sem conta | N3, C1 |
-| Aviso arquivado | Aviso que saiu do mural e continua guardado, com a data e a hora em que foi arquivado, para quem precisar saber o que já foi avisado | N5, E1 |
+| Aviso arquivado | Aviso que saiu do mural e continua guardado, com a data e a hora em que foi arquivado. Quem pode consultá-lo é decidido nos critérios de HU-07 | N5 |
 | Aviso curto | Aviso de até 280 caracteres, contados depois de tirar os espaços das pontas. O valor é da equipe, sem fonte, e vai à validação V1 | N1 |
-| Aviso interno | Aviso que só quem entrou com uma conta lê. É o tipo padrão ao publicar | N4, C1 |
+| Aviso interno | Aviso que só quem entrou com uma conta lê. É o tipo padrão ao publicar. Ter conta não comprova ser do curso: o cadastro é aberto (RE-01), e conferir o vínculo dependeria da conta institucional (HU-12) | N4, C1, R8 |
 | Aviso publicado | Aviso que está no mural. Todo aviso nasce publicado | N1 |
 | Aviso vencido | Aviso cujo assunto já passou, como evento realizado ou prazo encerrado, e que continua no mural | O1, D1 |
 | Avisos que valem agora | Nesta versão, os avisos publicados. O sistema não conhece a data em que o assunto de um aviso passa, e quem tira o aviso vencido do mural é o autor | N2, E4, D2 |
@@ -238,8 +238,8 @@ que acontece quando o caminho normal não acontece.
 
 ### UC-01 Publicar aviso
 
-- **Ator principal:** pessoa com conta: servidor da secretaria, professor ou
-  aluno do centro acadêmico (RN-01).
+- **Ator principal:** pessoa com conta (RN-01). Nas fontes, quem publica é a
+  secretaria, o professor e o centro acadêmico.
 - **Pré-condição:** a pessoa entrou com a conta (HU-02).
 - **Garantia de sucesso:** o aviso fica registrado, com o texto, o autor, a
   data e a hora, e aparece no topo do mural.
