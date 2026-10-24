@@ -6,8 +6,8 @@ de Engenharia de Software da UFT: ele é construído capítulo a capítulo, como
 faria uma equipe da disciplina, e cada capítulo termina com uma versão marcada
 por tag.
 
-O problema que o projeto resolve, o usuário pretendido e a verificação do tema
-contra os critérios da disciplina estão no [PROBLEMA.md](PROBLEMA.md).
+A proposta inicial do problema está no [PROBLEMA.md](PROBLEMA.md), e a
+descoberta feita com os usuários, no [DESCOBERTA.md](DESCOBERTA.md).
 
 ## Equipe
 
@@ -39,6 +39,8 @@ produz e à tag que o encerra.
 | [PROBLEMA.md](PROBLEMA.md) | Problema, usuário pretendido e verificação do tema (capítulo 1) |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Convenções de ramos, commits, pull requests e revisão (capítulo 2) |
 | [PROCESSO.md](PROCESSO.md) | Processo escolhido, iterações, papéis e definição de pronto (capítulo 3) |
+| [DESCOBERTA.md](DESCOBERTA.md) | Partes interessadas, personas, necessidades, escopo, MVP e riscos (capítulo 4) |
+| [descoberta/](descoberta/) | Roteiro de entrevista e atas da elicitação, sem identificação (capítulo 4) |
 | [CHANGELOG.md](CHANGELOG.md) | O que mudou em cada versão |
 | [ROTEIRO.md](ROTEIRO.md) | Capítulos, artefatos e tags do semestre |
 
