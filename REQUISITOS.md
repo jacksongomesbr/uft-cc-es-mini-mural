@@ -18,7 +18,7 @@ histórico.
 | Autor | A conta que publicou o aviso. O mural mostra o nome para exibição dessa conta, seguido do nome de usuário | N7, E2, E5, V1, R9 |
 | Aviso | Mensagem de texto publicada no mural, com autor, data e hora de publicação | N1, E1, E2 |
 | Aviso aberto | Aviso que qualquer pessoa lê, com conta ou sem conta | N3, C1 |
-| Aviso arquivado | Aviso que saiu do mural e continua guardado, com a data e a hora em que foi arquivado. Quem pode consultá-lo é decidido nos critérios de HU-07 | N5 |
+| Aviso arquivado | Aviso que saiu do mural e continua guardado, com a data e a hora em que foi arquivado. Só o autor o consulta (CA-07.4, CA-07.5) | N5, O1, E4 |
 | Aviso curto | Aviso de até 500 caracteres, contados depois de tirar os espaços das pontas. O valor é da equipe; era 280 e mudou na V1, quando o aviso de um evento precisou de 341 | N1, V1 |
 | Aviso interno | Aviso que só quem entrou com uma conta lê. É o tipo padrão ao publicar. Ter conta não comprova ser do curso: o cadastro é aberto (RE-01), e conferir o vínculo dependeria da conta institucional (HU-12) | N4, C1, R8 |
 | Aviso publicado | Aviso que está no mural. Todo aviso nasce publicado | N1 |
@@ -49,6 +49,7 @@ histórico.
 | 12 | HU-11 Aviso para uma turma | N10 | Fora desta versão | Médio: cadastro de turmas | HU-05 |
 | 13 | HU-12 Entrar com a conta institucional | N11 | Fora desta versão | Alto: integração com sistema externo | Nenhuma |
 | 14 | HU-14 Saber quem viu o aviso | N14 | Fora desta versão | Médio: registro de leitura por conta | HU-04 |
+| 15 | HU-15 Corrigir o próprio aviso depois de publicado | N15 | Fora desta versão | Baixo | HU-03 |
 
 Ana ordenou o backlog, como diz o `PROCESSO.md`, com os três passos do capítulo
 5: classificação em MoSCoW, ordem por risco técnico dentro de cada grupo e
@@ -74,6 +75,8 @@ ajuste por dependência.
   - HU-14: exige registrar o que cada conta leu, o que muda o modelo de dados e
     trata um dado pessoal que RE-02 manda evitar sem necessidade. Volta na
     review parcial, com a coordenação.
+  - HU-15: uma fonte só (E2); enquanto não houver correção, quem errou
+    arquiva o aviso e publica outro.
 
 ### Esforço até a review parcial
 
@@ -218,8 +221,9 @@ O efeito que persiste em HU-04 é o de CA-03.5, visto do lado de quem lê. Ver o
 mural não muda nada no sistema, e por isso a história não tem critério próprio
 desse tipo.
 
-Os critérios das histórias importantes, HU-05 a HU-07, são escritos no
-planejamento da iteração em que elas entram, no capítulo 8.
+Os critérios de HU-05 e HU-06 são escritos no planejamento da iteração em que
+elas entram, no capítulo 8. HU-07 ganhou critérios antes, no #57, porque o
+diagrama de estados do `PROJETO.md` exige um critério para cada transição.
 
 ### HU-05 Marcar o aviso como aberto ou interno
 
@@ -245,6 +249,29 @@ quero arquivar o aviso que publiquei quando ele deixar de valer,
 para que o aluno não confunda o aviso velho com o que vale.
 
 [Origem: N5 e N6, E2, O1; RN-02]
+
+**Critérios de aceitação (acrescentados no #57)**
+
+- **CA-07.1 Arquivar o próprio aviso.** Dado que "prof.calculo" publicou um
+  aviso, quando ele o arquiva, então o aviso sai do mural, e o sistema registra
+  a data e a hora do arquivamento.
+- **CA-07.2 Aviso de outra pessoa.** Dado que "paula.sec" publicou um aviso,
+  quando "prof.calculo" tenta arquivá-lo, então o sistema recusa, informa que
+  só o autor arquiva, e o aviso continua no mural.
+- **CA-07.3 Arquivar de novo.** Dado que o autor arquivou um aviso às 10h,
+  quando ele pede para arquivá-lo outra vez às 11h, então nada muda, e a data
+  registrada continua 10h.
+- **CA-07.4 Arquivado para outra pessoa.** Dado que "paula.sec" arquivou um
+  aviso, quando outra pessoa com conta pede o endereço desse aviso, então o
+  sistema responde como se ele não existisse.
+- **CA-07.5 Arquivado para o autor.** Dado que "paula.sec" arquivou um aviso,
+  quando ela pede o endereço desse aviso, então vê o aviso, com a data e a
+  hora do arquivamento.
+
+O arquivamento não se desfaz nesta versão: quem arquivou por engano publica o
+aviso de novo. Nenhuma fonte pediu para desfazer, e mostrar o arquivado a
+outras pessoas traria de volta o aviso velho que O1 e E4 descrevem. As duas
+decisões são da equipe e vão à demonstração do encontro 9.
 
 ### HU-13 Informar até quando o aviso vale
 
@@ -442,8 +469,8 @@ e 12; até lá, cada critério é o caso de teste escrito em português.
 | E4, E5, O1 | N2 | HU-04 | CA-04.1 a CA-04.3 | A escrever |
 | E3, E4 | N3 | HU-06 | No planejamento da iteração | A escrever |
 | E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.6; HU-05 no planejamento | A escrever |
-| E1, E2, E4, O1 | N5 | HU-07 | No planejamento da iteração | A escrever |
-| E2, D2 | N6 | HU-07, RN-02 | No planejamento da iteração | A escrever |
+| E1, E2, E4, O1 | N5 | HU-07 | CA-07.1, CA-07.3 a CA-07.5 | A escrever |
+| E2, D2 | N6 | HU-07, RN-02 | CA-07.2 | A escrever |
 | E2, E5, O1 | N7 | HU-01, HU-02, HU-03, HU-04 | CA-01.6, CA-02.1 a CA-02.4, CA-03.1, CA-04.1 | A escrever |
 | E4 | N8 | HU-10 | Fora desta versão | Não se aplica |
 | E1 | N9 | HU-09 | Fora desta versão | Não se aplica |
@@ -452,6 +479,7 @@ e 12; até lá, cada critério é o caso de teste escrito em português.
 | E1, O1 | N12 | HU-08 | Fora desta versão | Não se aplica |
 | O1, V1 | N13 | HU-13 | No planejamento da iteração | A escrever |
 | E1, E2, V1 | N14 | HU-14 | Fora desta versão | Não se aplica |
+| E2 | N15 | HU-15 | Fora desta versão | Não se aplica |
 
 Para avaliar o impacto de uma mudança, leia a tabela a partir da linha da
 necessidade que mudou: as histórias e os critérios da mesma linha são o que
@@ -525,3 +553,9 @@ porque o protótipo de papel não mede o sistema real.
 - 2026-10-24: CA-01.6 passa a comparar o nome sem os espaços das pontas e sem
   espaços repetidos (#63). Motivo: a revisão do modelo de dados mostrou que um
   espaço a mais repetia o problema do #53. Impacto: só o CA-01.6.
+- 2026-10-24: lacunas do diagrama de estados do aviso (#57). Motivo: a
+  transição de publicado para arquivado não tinha critério, o estado arquivado
+  não dizia se tinha saída, e uma transição de publicado para publicado, a
+  correção do texto, estava em E2 sem ter virado necessidade. Impacto: CA-07.1 a
+  CA-07.5 acrescentados, glossário "aviso arquivado" alterado, N15 e HU-15
+  registradas, fora desta versão; estimativas dos obrigatórios mantidas.

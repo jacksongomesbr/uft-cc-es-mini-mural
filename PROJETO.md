@@ -137,7 +137,41 @@ e N7; `texto` e `publicado_em`, de CA-03.1; `tipo`, de HU-05 e C1; `situacao` e
 
 ## Comportamento
 
-Diagrama de estados preenchido na issue #57; sequência, na issue #58.
+### Estados do aviso
+
+Fonte: [`diagrams/estados-aviso.mmd`](diagrams/estados-aviso.mmd).
+
+O aviso é o objeto central do domínio: muda de situação ao longo do tempo e
+aparece em mais critérios do que a conta. Ele tem dois estados, publicado e
+arquivado, e cada transição aponta para um critério:
+
+| Transição | Critério | Regra |
+|---|---|---|
+| Início para publicado | CA-03.1 | RN-01 |
+| Publicado para arquivado | CA-07.1, com a recusa em CA-07.2 | RN-02 |
+| Arquivado para o fim | CA-07.3 | Arquivado é final nesta versão |
+
+Os dois estados são alcançáveis, e o arquivado é final declarado. O desenho
+levantou três lacunas do `REQUISITOS.md`, e as três entraram lá pelo fluxo de
+mudança depois da linha de base (#57):
+
+1. A transição de publicado para arquivado não tinha critério, porque os
+   critérios de HU-07 estavam previstos para o capítulo 8. Ganhou CA-07.1 a
+   CA-07.5.
+2. O estado arquivado não dizia se tinha saída, nem quem o vê. A equipe decidiu
+   que ele é final e que só o autor o vê, e as duas decisões vão à demonstração
+   do encontro 9.
+3. A pergunta "o aviso publicado muda?" encontrou em E2 um pedido para alterar
+   o próprio aviso, que não tinha virado necessidade. Virou N15 e HU-15, fora
+   desta versão, e por isso o diagrama não tem transição de publicado para
+   publicado.
+
+A data de validade (HU-13) não cria estado: nesta versão ela só é mostrada, e o
+aviso continua publicado depois dela.
+
+### Sequência do fluxo principal
+
+Preenchida na issue #58.
 
 ## Distribuição de responsabilidades
 
@@ -170,3 +204,4 @@ Preenchida na issue #60.
 
 - 2026-10-24: esqueleto e modelo de domínio (#55).
 - 2026-10-24: modelo de dados e decisões de armazenamento (#56).
+- 2026-10-24: diagrama de estados do aviso (#57).
