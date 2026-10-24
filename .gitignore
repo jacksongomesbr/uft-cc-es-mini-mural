@@ -1,0 +1,21 @@
+# Artefatos gerados: podem ser produzidos de novo a partir do código
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+/staticfiles/
+/media/
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Configuração local e segredos: ficam na máquina de cada pessoa
+# O .env.example, sem valores reais, entra no repositório quando existir.
+.env
+*.local
+
+# Arquivos do sistema operacional e do editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
