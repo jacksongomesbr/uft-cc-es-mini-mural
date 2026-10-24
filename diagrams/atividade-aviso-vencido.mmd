@@ -1,0 +1,5 @@
+flowchart TD
+  A["Secretaria<br/>percebe um aviso vencido<br/>de outra pessoa"] --> B["Secretaria<br/>pede ao autor, fora do sistema,<br/>que arquive o aviso"]
+  B --> C{"Autor<br/>decide"}
+  C -- "arquiva" --> D["Sistema<br/>tira o aviso do mural<br/>e registra a data"]
+  C -- "não arquiva" --> E["Aviso continua<br/>no mural"]

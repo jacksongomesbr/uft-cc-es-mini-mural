@@ -7,8 +7,14 @@ conversam é decisão do capítulo 7, no `ARQUITETURA.md`; por isso este documen
 não usa nome de framework, de tabela gerada nem de biblioteca.
 
 As fontes dos diagramas ficam em `diagrams/`, em texto Mermaid, uma fonte por
-diagrama. Quem altera o código que um diagrama descreve altera o diagrama no
-mesmo pull request.
+diagrama, e o GitHub desenha cada uma na página do arquivo. Quem altera o
+código que um diagrama descreve altera o diagrama no mesmo pull request.
+
+O que a equipe mantém até o fim do semestre: o modelo de domínio, o modelo de
+dados e, enquanto a situação do aviso for regra de negócio, o diagrama de
+estados. A sequência, a atividade e a ficha de responsabilidades resolvem uma
+dúvida cada e podem ser apagadas depois que o código existir; a decisão que
+cada uma sustentou fica na tabela de decisões.
 
 ## Modelo de domínio
 
@@ -171,11 +177,76 @@ aviso continua publicado depois dela.
 
 ### Sequência do fluxo principal
 
-Preenchida na issue #58.
+Fonte: [`diagrams/sequencia-publicar.mmd`](diagrams/sequencia-publicar.mmd).
+
+O desenho cobre o fluxo principal do UC-01 e as alternativas 4a e 4b. Os nomes
+dos participantes são provisórios; o capítulo 7 decide onde cada um roda. Três
+decisões ficam visíveis no desenho:
+
+- o aviso confere o texto antes do registro, e por isso a recusa não grava nada
+  (CA-03.2);
+- o instante da publicação vem do registro, e não da tela (DP-10);
+- o mural mostrado depois da publicação sai do que foi registrado, e não do que
+  a tela já tinha.
+
+Como a tela evita publicar de novo quando a pessoa recarrega a página (RNF-03)
+depende de como a tela conversa com o servidor, e é decisão do capítulo 7.
+
+### Aviso vencido de outra pessoa
+
+Fonte: [`diagrams/atividade-aviso-vencido.mmd`](diagrams/atividade-aviso-vencido.mmd).
+
+O fluxo atravessa duas pessoas, e a decisão fica fora do sistema. A secretaria
+não arquiva o aviso de outra pessoa (RN-02, D2): ela pede ao autor, por fora, e
+o sistema só registra o que o autor fizer. Se o autor não arquivar, o aviso
+continua no mural, e é esse o caso que N12 e HU-08 guardam para depois.
 
 ## Distribuição de responsabilidades
 
-Preenchida na issue #58.
+A pergunta que distribui é "quem já tem a informação para cumprir isto?". A
+regra do aviso fica no aviso, porque é ele que conhece o texto, o tipo, a
+situação e o autor.
+
+| Parte | Sabe | Faz |
+|---|---|---|
+| Conta | Nome de usuário, nome para exibição, valor derivado da senha | Confere a senha; compara nomes sem espaços a mais e sem diferenciar maiúsculas (CA-01.2, CA-01.6); diz se pode publicar (RN-01) |
+| Aviso | Texto, tipo, situação, autor, instantes | Confere o texto (CA-03.2 a CA-03.4); diz se pode ser visto por uma pessoa (RNF-06, CA-07.4, CA-07.5); diz se pode ser arquivado por uma conta e se arquiva (RN-02, CA-07.1 a CA-07.3) |
+| Mural | Nada próprio: é uma consulta | Lista os avisos publicados que uma pessoa pode ver, do mais recente para o mais antigo, com o desempate de DP-06 (CA-04.1) |
+| Registro de avisos | Onde os avisos ficam guardados | Grava e recupera avisos e atribui o instante da publicação (DP-10) |
+| Tela de publicação | Nada do domínio | Recebe o texto, mostra a recusa com o texto mantido e mostra o mural; não decide regra nenhuma (DP-08) |
+
+A ficha do aviso, na sessão de responsabilidades, com o cenário da troca de
+sala publicada e arquivada no dia seguinte:
+
+```text
++-------------------------------------------------------------+
+| Aviso                                                       |
++----------------------------------+--------------------------+
+| Responsabilidades                | Colaboradores            |
+| - conhecer texto, tipo, situacao |                          |
+| - conferir o texto               |                          |
+| - dizer se pode ser visto        | Conta (quem pede)        |
+| - dizer se pode ser arquivado    | Conta (quem pede)        |
+| - arquivar, com o instante       | Registro de avisos       |
++----------------------------------+--------------------------+
+```
+
+As responsabilidades couberam na ficha, e nenhuma ficou sem dono.
+
+### Teste de Parnas
+
+O teste conta quantos lugares a mudança mais provável obriga a alterar.
+
+- **Quem publica.** É a mudança que D2 já anuncia: a coordenação revê C2 depois
+  do encontro 9, e R9 leva a ela a opção de restringir a publicação a
+  servidores e professores. A mudança toca a regra "pode publicar", em um lugar
+  só, na conta (DP-08), e uma coluna nova na conta, com o papel. Ela também
+  exige um jeito de marcar esse papel, que não existe e depende de quem a
+  coordenação indicar, porque a secretaria não quer administrar contas (E1).
+- **Limite do texto.** Já mudou uma vez, de 280 para 500, na V1. A mudança toca
+  a constante do aviso e a restrição do banco: dois lugares, aceitos em DP-09,
+  e alterados no mesmo pull request. A tela mostra o limite lendo o valor do
+  aviso.
 
 ## Decisões de projeto
 
@@ -191,6 +262,9 @@ confundir com os documentos D1 e D2 do `DESCOBERTA.md`.
 | DP-05 | Conta com avisos não pode ser apagada | Nenhuma história apaga conta, e apagar levaria junto a autoria que N7 exige | A conta de quem sai do curso fica até haver regra para isso |
 | DP-06 | Instantes guardados com fuso e mostrados no horário de Palmas, com desempate pelo `id` | CA-04.3 pede a hora local, e CA-04.1 pede uma ordem fixa | A conversão de fuso acontece em toda tela que mostra hora |
 | DP-07 | Nenhum índice além das chaves e unicidades até o RNF-01 ser medido | 200 avisos é pouco, e índice sem medição é suposição | Se o RNF-01 falhar, o primeiro reparo é um índice em `situacao` e `publicado_em` |
+| DP-08 | As regras de publicar, ler e arquivar ficam na conta e no aviso, e nenhuma na tela | RNF-07 pede cada regra em um lugar só, e RN-01 tem prazo (D2) | A tela pergunta ao aviso e à conta em vez de conferir sozinha |
+| DP-09 | O limite de 500 caracteres fica no aviso e é repetido como restrição do banco | A restrição é a segunda barreira contra gravação que não passe pela tela | Mudar o limite toca dois lugares, no mesmo pull request |
+| DP-10 | O instante da publicação vem do registro, e não da tela | CA-03.1 pede a hora da publicação, e o relógio do aparelho de quem publica não é confiável | A tela mostra a hora que o registro devolveu |
 
 ## Protótipo
 
@@ -205,3 +279,4 @@ Preenchida na issue #60.
 - 2026-10-24: esqueleto e modelo de domínio (#55).
 - 2026-10-24: modelo de dados e decisões de armazenamento (#56).
 - 2026-10-24: diagrama de estados do aviso (#57).
+- 2026-10-24: sequência, atividade, responsabilidades e teste de Parnas (#58).
