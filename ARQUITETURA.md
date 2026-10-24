@@ -75,6 +75,18 @@ As rotas de HU-05 a HU-07 estão em esboço no mesmo arquivo. O caminho nomeia o
 recurso com um substantivo do glossário, e o método diz a intenção: `POST
 /avisos/` cria um aviso na coleção de avisos.
 
+### Conferência do contrato
+
+Em 2026-10-24, Ana e Eva, que não escreveram o contrato, o leram como quem vai
+escrever as páginas, com a pergunta "o que a página faz em cada resposta?". O
+registro completo está na #74.
+
+| Achado | Mudança no contrato |
+|---|---|
+| A alternativa 4c respondia só "302 para `/entrar/`", e a página de entrar não tinha como mostrar a mensagem do protótipo nem para onde voltar | O redirecionamento leva `next` e `motivo`, e a página de entrar mostra a mensagem quando recebe o motivo |
+| O cadastro não dizia se mostra uma mensagem ou várias | Cada campo recusado mostra a sua, e mais de uma pode aparecer |
+| O protótipo desenha "sair" como ligação, e o contrato só aceita `POST` | O contrato diz que sair é botão de formulário |
+
 ## Verificações
 
 O navegador ajuda, o servidor decide, e o banco recusa o que nunca pode
@@ -155,3 +167,4 @@ pede o `PROCESSO.md`, foi tomada em par, por Davi e Bruno.
 - 2026-10-24: decisões A-01 a A-11 (#70).
 - 2026-10-24: contrato das rotas e A-12 (#71).
 - 2026-10-24: verificações, qualidades e custos (#72).
+- 2026-10-24: conferência do contrato em duplas trocadas (#74).
