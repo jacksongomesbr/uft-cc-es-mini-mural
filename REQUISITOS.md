@@ -15,7 +15,7 @@ histórico.
 | Termo | Definição | Fonte |
 |---|---|---|
 | Arquivar | Tirar o aviso do mural sem apagá-lo. As fontes dizem também "tirar do mural" e "retirar"; o projeto usa só "arquivar" | N5, E1, E2 |
-| Autor | A conta que publicou o aviso. O mural mostra o nome para exibição dessa conta | N7, E2, E5, V1 |
+| Autor | A conta que publicou o aviso. O mural mostra o nome para exibição dessa conta, seguido do nome de usuário | N7, E2, E5, V1, R9 |
 | Aviso | Mensagem de texto publicada no mural, com autor, data e hora de publicação | N1, E1, E2 |
 | Aviso aberto | Aviso que qualquer pessoa lê, com conta ou sem conta | N3, C1 |
 | Aviso arquivado | Aviso que saiu do mural e continua guardado, com a data e a hora em que foi arquivado. Quem pode consultá-lo é decidido nos critérios de HU-07 | N5 |
@@ -28,7 +28,7 @@ histórico.
 | Conta | Nome de usuário, nome para exibição e senha criados no próprio Mini Mural. Não é a conta institucional da universidade | N11, R2 |
 | Data de validade | Data, informada por quem publica, até a qual o assunto do aviso vale. Nesta versão, ela só é mostrada; o aviso continua no mural depois dela (HU-13) | N13, O1, V1 |
 | Mural | A lista dos avisos publicados, os mais recentes primeiro | N2, D1 |
-| Nome para exibição | Nome que a pessoa escolhe ao criar a conta e que o mural mostra como autor, como "Secretaria do curso" | N7, V1 |
+| Nome para exibição | Nome que a pessoa escolhe ao criar a conta e que o mural mostra como autor, como "Secretaria do curso". Não repete o de outra conta, sem diferenciar maiúsculas | N7, V1, R9 |
 | Visitante | Pessoa que lê o mural sem entrar com uma conta | N3 |
 
 ## Backlog ordenado
@@ -93,7 +93,10 @@ parcial há uma iteração de código, a 3 (encontros 7 a 9): 5 pessoas, 5 horas
 As 22 horas que sobram absorvem o aprendizado de Django (R3) e o que a equipe
 não previu. Os importantes ficam para as iterações 4 a 6, depois da review
 parcial, e o desejável HU-13 vem depois deles. As mudanças da V1 em HU-01 e
-HU-04 cabem nas estimativas: são um campo a mais no cadastro e no mural.
+HU-04 cabem nas estimativas: são um campo a mais no cadastro e no mural. A
+mudança do #53 acrescenta um critério a HU-01 e o nome de usuário ao mural, e
+também cabe: as estimativas continuam as mesmas, e os obrigatórios ficam em
+56%.
 
 ## Histórias de usuário e critérios de aceitação
 
@@ -125,6 +128,10 @@ internos.
 - **CA-01.5 Nome para exibição obrigatório (acrescentado na V1).** Dado que a
   pessoa está criando uma conta, quando ela deixa o nome para exibição vazio,
   então o sistema recusa e informa que o nome aparece como autor dos avisos.
+- **CA-01.6 Nome para exibição em uso (acrescentado no #53).** Dado que já
+  existe uma conta com o nome para exibição "Secretaria do curso", quando outra
+  pessoa tenta criar uma conta com "secretaria do curso", então o sistema
+  recusa e informa que esse nome já está em uso.
 
 ### HU-02 Entrar e sair
 
@@ -190,15 +197,20 @@ para saber o que vale agora sem perguntar no balcão.
 
 **Critérios de aceitação**
 
-- **CA-04.1 Ordem do mural (alterado na V1).** Dado que há três avisos publicados às 8h, às 9h
+- **CA-04.1 Ordem do mural (alterado na V1 e no #53).** Dado que há três avisos publicados às 8h, às 9h
   e às 10h do mesmo dia, quando Lívia abre o mural, então os três aparecem na
-  ordem 10h, 9h, 8h, cada um com o nome para exibição do autor, a data e a
-  hora.
+  ordem 10h, 9h, 8h, cada um com o nome para exibição e o nome de usuário do
+  autor, a data e a hora.
 - **CA-04.2 Mural vazio.** Dado que nenhum aviso foi publicado, quando Lívia
   abre o mural, então o sistema informa que ainda não há avisos.
 - **CA-04.3 Hora local.** Dado que um aviso foi publicado às 14h02 no horário
   de Palmas (UTC-3), quando Lívia abre o mural em qualquer dia depois, então a
   hora mostrada é 14h02.
+
+Mostrar o nome de usuário no mural expõe a quem lê um dado a mais da conta. A
+equipe aceita a exposição porque o nome é escolhido pela própria pessoa ao
+criar a conta, já está entre os dados que RE-02 considera necessários, e é o
+que distingue duas contas com nomes para exibição parecidos (R9).
 
 O efeito que persiste em HU-04 é o de CA-03.5, visto do lado de quem lê. Ver o
 mural não muda nada no sistema, e por isso a história não tem critério próprio
@@ -424,13 +436,13 @@ e 12; até lá, cada critério é o caso de teste escrito em português.
 
 | Fonte | Necessidade | História | Critérios | Teste |
 |---|---|---|---|---|
-| E1, E2, E3 | N1 | HU-01, HU-03, RN-01 | CA-01.1 a CA-01.5, CA-03.1 a CA-03.5 | A escrever |
+| E1, E2, E3 | N1 | HU-01, HU-03, RN-01 | CA-01.1 a CA-01.6, CA-03.1 a CA-03.5 | A escrever |
 | E4, E5, O1 | N2 | HU-04 | CA-04.1 a CA-04.3 | A escrever |
 | E3, E4 | N3 | HU-06 | No planejamento da iteração | A escrever |
-| E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.5; HU-05 no planejamento | A escrever |
+| E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.6; HU-05 no planejamento | A escrever |
 | E1, E2, E4, O1 | N5 | HU-07 | No planejamento da iteração | A escrever |
 | E2, D2 | N6 | HU-07, RN-02 | No planejamento da iteração | A escrever |
-| E2, E5, O1 | N7 | HU-02, HU-03, HU-04 | CA-02.1 a CA-02.4, CA-03.1, CA-04.1 | A escrever |
+| E2, E5, O1 | N7 | HU-01, HU-02, HU-03, HU-04 | CA-01.6, CA-02.1 a CA-02.4, CA-03.1, CA-04.1 | A escrever |
 | E4 | N8 | HU-10 | Fora desta versão | Não se aplica |
 | E1 | N9 | HU-09 | Fora desta versão | Não se aplica |
 | E2 | N10 | HU-11 | Fora desta versão | Não se aplica |
@@ -502,3 +514,9 @@ porque o protótipo de papel não mede o sistema real.
 - 2026-10-24: validação V1 (#40): limite do aviso de 280 para 500 caracteres,
   nome para exibição, HU-13 e HU-14 criadas.
 - 2026-10-24: linha de base do primeiro marco, na tag `v0.4.0` (#42).
+- 2026-10-24: primeira mudança depois da linha de base (#53). Motivo: o nome
+  para exibição livre, vindo da V1, deixava uma conta publicar com o nome de
+  outra pessoa, e o autor visível era a condição da coordenação para C2 (D2).
+  Impacto pela rastreabilidade, linhas de N1, N4 e N7: CA-01.6 acrescentado,
+  CA-04.1 e glossário alterados, estimativas mantidas. O risco que sobra está
+  em R9.
