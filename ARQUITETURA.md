@@ -72,12 +72,31 @@ Preenchidas na issue #72.
 
 ## Decisões
 
-Preenchidas na issue #70.
+Os identificadores usam o prefixo `A`, de arquitetura; as decisões de projeto do
+`PROJETO.md` usam `DP`. A-01 foi a primeira decisão técnica do projeto e, como
+pede o `PROCESSO.md`, foi tomada em par, por Davi e Bruno.
+
+| Id | Decisão | Motivo | Consequência aceita | Situação |
+|---|---|---|---|---|
+| A-01 | Uma aplicação só, que monta as páginas no servidor. Descartados: frontend separado, no navegador, falando com o backend por uma API, que é a forma que o capítulo 7 recomenda; e serviços separados | Ninguém na equipe conhece framework web, contas e banco juntos (R3), e há uma iteração de código antes do encontro 9 (`DESCOBERTA.md`). RNF-08 se atende com página HTML legível no celular, e nenhuma necessidade pede outro cliente além do navegador: o aplicativo instalável está fora de escopo | Tela e regra ficam no mesmo código e na mesma implantação. Sem contrato de API, tela e servidor não avançam em paralelo por respostas de exemplo. Se um aplicativo vier, a API é escrita depois, sobre o mesmo domínio | Aceita, em par: Davi e Bruno |
+| A-02 | Django 5.2 LTS, Python 3.12 e PostgreSQL. Descartado: um microframework, com bibliotecas avulsas para contas, formulários e migrações | O framework traz contas com senha guardada de forma irrecuperável (RNF-04), formulários protegidos contra envio forjado, escape automático nas páginas (RNF-05) e migrações. A versão tem suporte até abril de 2028, depois da review final. O PostgreSQL tem transação e unicidade por expressão, que DP-03 pede | A equipe precisa aprender as decisões do framework antes de escrever regra (R3). Trocar de framework depois é reescrever a borda e a persistência | Aceita |
+| A-03 | As regras ficam nas classes de modelo do framework, que juntam domínio e persistência. Descartado: classes de domínio separadas do ORM, com um repositório entre elas | O domínio tem duas classes, e uma camada a mais não resolve problema que a equipe tenha hoje (`PROJETO.md`, padrão antes do problema) | O domínio depende do ORM. A regra é testada com objeto não gravado, sem banco | Aceita |
+| A-04 | A conta é um modelo de usuário próprio, só com os campos do `PROJETO.md`, criado já no esqueleto. Descartado: o modelo de usuário padrão do framework | O padrão traz e-mail, nome, sobrenome, data de cadastro, último acesso e marcas de equipe, que RE-02 manda não pedir. O framework exige o modelo de usuário definido antes da primeira migração | Sem o painel administrativo do framework nesta versão, porque ele depende das marcas de equipe. A conta só nasce pelo cadastro (HU-01) ou pelo terminal, e desativar uma conta que se passou por outra pessoa (R9) também só se faz pelo terminal, por um integrante | Aceita |
+| A-05 | Dois módulos, `contas` e `avisos`; `avisos` depende de `contas`, nunca o contrário. Descartado: um módulo só | A regra de quem publica (RN-01), a que mais deve mudar (R9, D2), fica na conta e muda sem tocar o aviso | O mural, que mostra o autor, junta as duas tabelas pela chave estrangeira | Aceita |
+| A-06 | Depois de gravar, a resposta redireciona com 303 para uma página lida com GET. Descartado: responder a página direto ao envio do formulário | RNF-03: recarregar a página não publica de novo | A confirmação precisa estar na página de destino; no mural, o aviso no topo é a confirmação | Aceita |
+| A-07 | Formulário recusado responde 422, com a mesma página, a mensagem e o que foi preenchido, menos a senha. Descartado: responder 200 com a mensagem | O código de status diz ao navegador e aos testes que o pedido foi recusado. CA-01.2 e CA-03.3 pedem o preenchimento mantido | Os testes conferem o código, além do texto | Aceita |
+| A-08 | O autor vem da sessão, e o instante vem do banco; nenhum dos dois é campo de formulário. Descartado: campo escondido com o autor | Campo de formulário pode ser alterado por quem envia, e o autor visível é a defesa de N7 e de R9. DP-10 já tirou o instante da tela | Publicar exige sessão válida em toda requisição | Aceita |
+| A-09 | Migrações do framework desde o esqueleto. Descartado: esquema escrito à mão, fora do framework | O modelo de conta precisa de migração antes de tudo (A-04), e cada mudança de esquema fica no Git, com o código que a pede | Toda mudança de modelo vem com a migração no mesmo pull request. O `ROTEIRO.md` punha migrações no capítulo 14; lá fica a aplicação delas na implantação | Aceita |
+| A-10 | Configuração lida de variáveis de ambiente, com valores de desenvolvimento quando a variável falta | A mesma aplicação roda no notebook de cada integrante e, depois, na hospedagem | A chave secreta de desenvolvimento fica no código e não pode ir para a hospedagem; o tratamento de segredos é do capítulo 13 | Aceita para desenvolvimento |
+| A-11 | Hospedagem e servidor de produção | Dependem das opções que R4 levanta | O servidor de desenvolvimento do framework só serve para trabalhar e para a demonstração do encontro 9 | Proposta, a decidir no capítulo 14 |
 
 ## Pontos em aberto
 
-- Hospedagem e servidor de produção: capítulo 14, com as opções de R4.
+- Hospedagem e servidor de produção: capítulo 14, com as opções de R4 (A-11).
+- Segredos fora do código, a começar pela chave secreta: capítulo 13 (A-10).
+- Respostas de falta de identificação e de permissão, além das já descritas: capítulo 13.
 
 ## Histórico de revisão
 
 - 2026-10-24: esqueleto, participantes, responsabilidades e diagramas (#69).
+- 2026-10-24: decisões A-01 a A-11 (#70).
