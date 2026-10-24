@@ -15,18 +15,20 @@ histórico.
 | Termo | Definição | Fonte |
 |---|---|---|
 | Arquivar | Tirar o aviso do mural sem apagá-lo. As fontes dizem também "tirar do mural" e "retirar"; o projeto usa só "arquivar" | N5, E1, E2 |
-| Autor | A conta que publicou o aviso. O mural mostra o nome de usuário dessa conta | N7, E2, E5 |
+| Autor | A conta que publicou o aviso. O mural mostra o nome para exibição dessa conta | N7, E2, E5, V1 |
 | Aviso | Mensagem de texto publicada no mural, com autor, data e hora de publicação | N1, E1, E2 |
 | Aviso aberto | Aviso que qualquer pessoa lê, com conta ou sem conta | N3, C1 |
 | Aviso arquivado | Aviso que saiu do mural e continua guardado, com a data e a hora em que foi arquivado. Quem pode consultá-lo é decidido nos critérios de HU-07 | N5 |
-| Aviso curto | Aviso de até 280 caracteres, contados depois de tirar os espaços das pontas. O valor é da equipe, sem fonte, e vai à validação V1 | N1 |
+| Aviso curto | Aviso de até 500 caracteres, contados depois de tirar os espaços das pontas. O valor é da equipe; era 280 e mudou na V1, quando o aviso de um evento precisou de 341 | N1, V1 |
 | Aviso interno | Aviso que só quem entrou com uma conta lê. É o tipo padrão ao publicar. Ter conta não comprova ser do curso: o cadastro é aberto (RE-01), e conferir o vínculo dependeria da conta institucional (HU-12) | N4, C1, R8 |
 | Aviso publicado | Aviso que está no mural. Todo aviso nasce publicado | N1 |
 | Aviso vencido | Aviso cujo assunto já passou, como evento realizado ou prazo encerrado, e que continua no mural | O1, D1 |
 | Avisos que valem agora | Nesta versão, os avisos publicados. O sistema não conhece a data em que o assunto de um aviso passa, e quem tira o aviso vencido do mural é o autor | N2, E4, D2 |
 | Comunicado oficial | Aviso com edital anexo ou com prazo da coordenação. Continua no e-mail institucional, fora do mural | D2 |
-| Conta | Nome de usuário e senha criados no próprio Mini Mural. Não é a conta institucional da universidade | N11, R2 |
+| Conta | Nome de usuário, nome para exibição e senha criados no próprio Mini Mural. Não é a conta institucional da universidade | N11, R2 |
+| Data de validade | Data, informada por quem publica, até a qual o assunto do aviso vale. Nesta versão, ela só é mostrada; o aviso continua no mural depois dela (HU-13) | N13, O1, V1 |
 | Mural | A lista dos avisos publicados, os mais recentes primeiro | N2, D1 |
+| Nome para exibição | Nome que a pessoa escolhe ao criar a conta e que o mural mostra como autor, como "Secretaria do curso" | N7, V1 |
 | Visitante | Pessoa que lê o mural sem entrar com uma conta | N3 |
 
 ## Backlog ordenado
@@ -40,11 +42,13 @@ histórico.
 | 5 | HU-05 Marcar o aviso como aberto ou interno | N4 | Importante | Médio: a regra de acesso é conferida em toda leitura | HU-03 |
 | 6 | HU-06 Ler aviso aberto sem conta | N3 | Importante | Baixo | HU-05 |
 | 7 | HU-07 Arquivar o próprio aviso | N5, N6 | Importante | Médio: a regra de quem arquiva é conferida no servidor | HU-03 |
-| 8 | HU-08 Arquivar o aviso vencido de outra pessoa | N12 | Fora desta versão | Baixo | HU-07 |
-| 9 | HU-09 Anexar arquivo ao aviso | N9 | Fora desta versão | Alto: armazenamento de arquivo | HU-03 |
-| 10 | HU-10 E-mail quando sair aviso novo | N8 | Fora desta versão | Médio: servidor de e-mail | HU-03 |
-| 11 | HU-11 Aviso para uma turma | N10 | Fora desta versão | Médio: cadastro de turmas | HU-05 |
-| 12 | HU-12 Entrar com a conta institucional | N11 | Fora desta versão | Alto: integração com sistema externo | — |
+| 8 | HU-13 Informar até quando o aviso vale | N13 | Desejável | Baixo | HU-03 |
+| 9 | HU-08 Arquivar o aviso vencido de outra pessoa | N12 | Fora desta versão | Baixo | HU-07 |
+| 10 | HU-09 Anexar arquivo ao aviso | N9 | Fora desta versão | Alto: armazenamento de arquivo | HU-03 |
+| 11 | HU-10 E-mail quando sair aviso novo | N8 | Fora desta versão | Médio: servidor de e-mail | HU-03 |
+| 12 | HU-11 Aviso para uma turma | N10 | Fora desta versão | Médio: cadastro de turmas | HU-05 |
+| 13 | HU-12 Entrar com a conta institucional | N11 | Fora desta versão | Alto: integração com sistema externo | — |
+| 14 | HU-14 Saber quem viu o aviso | N14 | Fora desta versão | Médio: registro de leitura por conta | HU-04 |
 
 Ana ordenou o backlog, como diz o `PROCESSO.md`, com os três passos do capítulo
 5: classificação em MoSCoW, ordem por risco técnico dentro de cada grupo e
@@ -58,12 +62,18 @@ ajuste por dependência.
   final (N3 a N6). HU-05 vem antes de HU-06 por dependência, porque sem o tipo
   aberto não há aviso para o visitante ler. As duas resolvem C1 juntas. HU-07
   não depende delas e pode trocar de lugar com o par; a review parcial decide.
+- **Desejável:** HU-13 entrou pela validação V1. Fica depois dos importantes
+  porque mostrar a data não tira o aviso vencido do mural; ela só ajuda o aluno
+  a reconhecê-lo.
 - **Fora desta versão:** cada item continua registrado, com o motivo.
   - HU-08: a coordenação decidiu que só o autor arquiva (D2).
   - HU-09: uma fonte só, e o comunicado com anexo continua no e-mail (D2).
   - HU-10: uma fonte só, e depende de servidor de e-mail.
   - HU-11: uma fonte só, e exigiria cadastrar as turmas.
   - HU-12: depende de autorização de terceiro (R2).
+  - HU-14: exige registrar o que cada conta leu, o que muda o modelo de dados e
+    trata um dado pessoal que RE-02 manda evitar sem necessidade. Volta na
+    review parcial, com a coordenação.
 
 ### Esforço até a review parcial
 
@@ -82,23 +92,26 @@ parcial há uma iteração de código, a 3 (encontros 7 a 9): 5 pessoas, 5 horas
 
 As 22 horas que sobram absorvem o aprendizado de Django (R3) e o que a equipe
 não previu. Os importantes ficam para as iterações 4 a 6, depois da review
-parcial.
+parcial, e o desejável HU-13 vem depois deles. As mudanças da V1 em HU-01 e
+HU-04 cabem nas estimativas: são um campo a mais no cadastro e no mural.
 
 ## Histórias de usuário e critérios de aceitação
 
 ### HU-01 Criar conta
 
 Como pessoa do curso, seja aluno, professor ou servidor,
-quero criar uma conta no próprio Mini Mural,
-para publicar avisos com o meu nome e ler os avisos internos.
+quero criar uma conta no próprio Mini Mural, com um nome para exibição,
+para publicar avisos com um nome que os alunos reconheçam e ler os avisos
+internos.
 
 [Origem: N1, N4, N7; RE-01]
 
 **Critérios de aceitação**
 
-- **CA-01.1 Conta criada.** Dado que não existe conta com o nome de usuário
-  "livia.m", quando a pessoa cria a conta com esse nome e uma senha de 12
-  caracteres, então o sistema cria a conta e a pessoa já entra com ela.
+- **CA-01.1 Conta criada (alterado na V1).** Dado que não existe conta com o
+  nome de usuário "livia.m", quando a pessoa cria a conta com esse nome, o nome
+  para exibição "Lívia Martins" e uma senha de 12 caracteres, então o sistema
+  cria a conta e a pessoa já entra com ela.
 - **CA-01.2 Nome em uso.** Dado que já existe a conta "livia.m", quando outra
   pessoa tenta criar a conta "Livia.M", então o sistema recusa, informa que o
   nome já está em uso e mantém o que ela preencheu, menos a senha.
@@ -109,6 +122,9 @@ para publicar avisos com o meu nome e ler os avisos internos.
 - **CA-01.4 A conta continua.** Dado que a pessoa criou a conta "livia.m" e
   saiu, quando ela entra no dia seguinte com o mesmo nome e a mesma senha,
   então o sistema a reconhece.
+- **CA-01.5 Nome para exibição obrigatório (acrescentado na V1).** Dado que a
+  pessoa está criando uma conta, quando ela deixa o nome para exibição vazio,
+  então o sistema recusa e informa que o nome aparece como autor dos avisos.
 
 ### HU-02 Entrar e sair
 
@@ -151,12 +167,13 @@ pelo representante.
 - **CA-03.2 Texto vazio.** Dado que Paula entrou, quando ela publica um texto
   vazio ou só com espaços e quebras de linha, então o sistema recusa, informa
   que o aviso precisa de texto e não publica nada.
-- **CA-03.3 Acima do limite.** Dado que Paula entrou, quando ela publica um
-  texto de 281 caracteres, então o sistema recusa, informa o limite de 280 e
-  quantos caracteres passaram, e mantém o texto para ela cortar.
-- **CA-03.4 No limite, com acento.** Dado que Paula entrou, quando ela publica
-  um texto de 280 caracteres, todos acentuados, então o aviso é publicado. O
-  limite conta caracteres, e não bytes.
+- **CA-03.3 Acima do limite (alterado na V1).** Dado que Paula entrou, quando
+  ela publica um texto de 501 caracteres, então o sistema recusa, informa o
+  limite de 500 e quantos caracteres passaram, e mantém o texto para ela
+  cortar.
+- **CA-03.4 No limite, com acento (alterado na V1).** Dado que Paula entrou,
+  quando ela publica um texto de 500 caracteres, todos acentuados, então o
+  aviso é publicado. O limite conta caracteres, e não bytes.
 - **CA-03.5 O aviso continua.** Dado que Paula publicou um aviso às 10h15,
   quando outra pessoa com conta abre o mural no dia seguinte, então o aviso
   continua lá, com o mesmo texto, autor, data e hora.
@@ -172,9 +189,10 @@ para saber o que vale agora sem perguntar no balcão.
 
 **Critérios de aceitação**
 
-- **CA-04.1 Ordem do mural.** Dado que há três avisos publicados às 8h, às 9h
+- **CA-04.1 Ordem do mural (alterado na V1).** Dado que há três avisos publicados às 8h, às 9h
   e às 10h do mesmo dia, quando Lívia abre o mural, então os três aparecem na
-  ordem 10h, 9h, 8h, cada um com autor, data e hora.
+  ordem 10h, 9h, 8h, cada um com o nome para exibição do autor, a data e a
+  hora.
 - **CA-04.2 Mural vazio.** Dado que nenhum aviso foi publicado, quando Lívia
   abre o mural, então o sistema informa que ainda não há avisos.
 - **CA-04.3 Hora local.** Dado que um aviso foi publicado às 14h02 no horário
@@ -213,6 +231,14 @@ para que o aluno não confunda o aviso velho com o que vale.
 
 [Origem: N5 e N6, E2, O1; RN-02]
 
+### HU-13 Informar até quando o aviso vale
+
+Como servidora da secretaria (persona Paula),
+quero informar, ao publicar, a data até a qual o aviso vale,
+para que o aluno reconheça o aviso vencido sem perguntar no balcão.
+
+[Origem: N13, O1, V1]
+
 ### Fora desta versão
 
 - **HU-08 Arquivar o aviso vencido de outra pessoa.** Como servidora da
@@ -229,6 +255,9 @@ para que o aluno não confunda o aviso velho com o que vale.
   [Origem: N10, E2]
 - **HU-12 Entrar com a conta institucional.** Como aluno, quero entrar com a
   conta institucional, para não criar mais uma conta. [Origem: N11, E1, E4]
+- **HU-14 Saber quem viu o aviso.** Como professor, quero saber quantas
+  pessoas da turma viram o meu aviso, para avisar de outro jeito quem não viu.
+  [Origem: N14, E1, E2, V1]
 
 ## Caso de uso
 
@@ -376,7 +405,7 @@ definiu pode mudá-las.
 - **RE-01** O Mini Mural deve usar contas próprias, criadas nele mesmo. A conta
   institucional fica fora desta versão. [Origem: R2, N11]
 - **RE-02** O cadastro deve pedir só o necessário para entrar e publicar: nome
-  de usuário e senha. [Origem: LGPD, Lei n.º 13.709, de 2018, art. 6.º, III,
+  de usuário, nome para exibição e senha. [Origem: LGPD, Lei n.º 13.709, de 2018, art. 6.º, III,
   princípio da necessidade]
 - **RE-03** O sistema deve estar em uso na demonstração do encontro 9 e
   completo na review final do encontro 16. [Origem: plano da disciplina;
@@ -394,10 +423,10 @@ e 12; até lá, cada critério é o caso de teste escrito em português.
 
 | Fonte | Necessidade | História | Critérios | Teste |
 |---|---|---|---|---|
-| E1, E2, E3 | N1 | HU-01, HU-03, RN-01 | CA-01.1 a CA-01.4, CA-03.1 a CA-03.5 | A escrever |
+| E1, E2, E3 | N1 | HU-01, HU-03, RN-01 | CA-01.1 a CA-01.5, CA-03.1 a CA-03.5 | A escrever |
 | E4, E5, O1 | N2 | HU-04 | CA-04.1 a CA-04.3 | A escrever |
 | E3, E4 | N3 | HU-06 | No planejamento da iteração | A escrever |
-| E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.4; HU-05 no planejamento | A escrever |
+| E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.5; HU-05 no planejamento | A escrever |
 | E1, E2, E4, O1 | N5 | HU-07 | No planejamento da iteração | A escrever |
 | E2, D2 | N6 | HU-07, RN-02 | No planejamento da iteração | A escrever |
 | E2, E5, O1 | N7 | HU-02, HU-03, HU-04 | CA-02.1 a CA-02.4, CA-03.1, CA-04.1 | A escrever |
@@ -406,6 +435,8 @@ e 12; até lá, cada critério é o caso de teste escrito em português.
 | E2 | N10 | HU-11 | Fora desta versão | — |
 | E1, E4 | N11 | HU-12 | Fora desta versão | — |
 | E1, O1 | N12 | HU-08 | Fora desta versão | — |
+| O1, V1 | N13 | HU-13 | No planejamento da iteração | A escrever |
+| E1, E2, V1 | N14 | HU-14 | Fora desta versão | — |
 
 Para avaliar o impacto de uma mudança, leia a tabela a partir da linha da
 necessidade que mudou: as histórias e os critérios da mesma linha são o que
@@ -439,7 +470,23 @@ Para o conjunto:
 
 ## Validações realizadas
 
-Preenchidas na issue #40.
+### V1, 2026-10-24, com servidora da secretaria (perfil da persona Paula)
+
+Sessão com o [protótipo](validacao/prototipo-mvp.md) do fluxo do MVP,
+conduzida por Eva e anotada por Bruno. Registro completo em
+[`validacao/V1-secretaria.md`](validacao/V1-secretaria.md).
+
+| Achado | Efeito | Item alterado |
+|---|---|---|
+| O aviso da palestra, com local, horário e inscrição, teve 341 caracteres | O limite de 280 não cabe no aviso de evento, que é aviso do dia a dia (D2) | Glossário, "aviso curto", e CA-03.3 e CA-03.4, de 280 para 500 |
+| Procurou onde dizer que o aviso valia "até quinta" | A data de validade faltava, e o mural de papel já mostrava o custo disso (O1) | N13 no `DESCOBERTA.md`; HU-13 criada, desejável; glossário, "data de validade" |
+| Disse que o aluno não reconhece "paula.sec" como a secretaria | O autor precisa de um nome que o aluno reconheça | HU-01, CA-01.1, CA-01.5 acrescentado, CA-04.1, RE-02 e glossário, "autor" e "nome para exibição" |
+| Perguntou como saberia se os alunos viram o aviso | E1 e E2 já tinham relatado essa dificuldade, e ela não tinha virado necessidade | N14 no `DESCOBERTA.md`; HU-14 criada, fora desta versão |
+
+A sessão teve uma pessoa só, do lado de quem publica. O lado de quem lê, HU-04,
+é validado com aluno na demonstração do encontro 9. A primeira tarefa levou
+cerca de 1 minuto e 10 segundos, sem ajuda: dentro do RNF-02, como indício,
+porque o protótipo de papel não mede o sistema real.
 
 ## Histórico de revisão
 
@@ -451,3 +498,5 @@ Preenchidas na issue #40.
 - 2026-10-24: achados da revisão com a lista de verificação (#39): HU-05 e o
   glossário alinhados a RE-01, ator do UC-01 alinhado a RN-01, aviso arquivado
   sem promessa de consulta.
+- 2026-10-24: validação V1 (#40): limite do aviso de 280 para 500 caracteres,
+  nome para exibição, HU-13 e HU-14 criadas.

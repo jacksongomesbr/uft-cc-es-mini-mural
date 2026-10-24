@@ -81,6 +81,8 @@ Os nomes são fictícios, e cada persona reúne mais de uma fonte.
   2026-10-23
 - D2: resposta da secretaria, com a posição da coordenação sobre C2 e C3,
   2026-10-24, registrou Eva ([registro](descoberta/D2-resposta-da-secretaria.md))
+- V1: sessão de validação com protótipo, servidora da secretaria, 2026-10-24,
+  35 min, conduziu Eva ([registro](validacao/V1-secretaria.md))
 
 ## Necessidades levantadas
 
@@ -101,6 +103,8 @@ linhas possam ser comparadas na priorização do capítulo 5.
 | N10 | Restringir um aviso a uma turma | Professores | E2 | A verificar |
 | N11 | Entrar com a conta institucional da universidade | Secretaria | E1 | Bloqueada: depende de terceiro, ver R2 |
 | N12 | Retirar do mural o aviso vencido sem depender de quem publicou | Secretaria | E1, O1 | A verificar |
+| N13 | Informar até quando o aviso vale | Secretaria, alunos | O1, V1 | Confirmada |
+| N14 | Saber se o aviso chegou a quem precisava | Secretaria, professores | E1, E2, V1 | Confirmada: estava nas entrevistas e só virou necessidade na V1 |
 
 N5 junta dois usos da mesma informação: a secretaria quer o mural sem papel
 vencido, e o professor quer retirar o próprio aviso quando ele deixa de valer.
@@ -246,3 +250,4 @@ está em R7.
 - 2026-10-24: versão inicial (#24), com N6 a verificar, o MVP reduzido e o cenário pretendido incluídos na revisão do #29.
 - 2026-10-24: resposta da coordenação (D2, #34). C2 e C3 atualizados, N6 confirmada, N9 com a nova situação, R6 encerrado, R7 e a resposta à pergunta evitada incluídos.
 - 2026-10-24: R8 incluído pela revisão do `REQUISITOS.md` (#39): N4 pede "quem é do curso", e o cadastro aberto entrega "quem tem conta".
+- 2026-10-24: N13 e N14 incluídas pela validação V1 (#40). N14 estava em E1 e E2 como informação difícil de obter, e a descoberta não a tinha registrado.
