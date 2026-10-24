@@ -32,8 +32,9 @@ só fazem sentido para quem é do curso, como uma troca de sala.
 
 A conversa com os usuários é viável porque eles estão no mesmo bloco da
 equipe. A secretaria atende no horário de expediente, e Eva fica responsável
-por marcar a primeira entrevista. Professores e representantes do centro
-acadêmico são procurados ao fim das aulas, e colegas de turma, nos intervalos.
+por marcar a primeira entrevista. Davi procura os professores ao fim das aulas,
+Carla conversa com os representantes do centro acadêmico, e Ana e Bruno ouvem
+os colegas de turma nos intervalos.
 
 ## Por que o software existe
 
