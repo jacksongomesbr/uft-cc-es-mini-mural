@@ -135,6 +135,9 @@ Fonte: [`diagrams/dados.mmd`](diagrams/dados.mmd).
 | CA-04.1 | Ordem, desempate e os dois nomes do autor | `publicado_em`, `id`, junção com `CONTA` |
 | CA-04.2 | Nenhum | Não se aplica |
 | CA-04.3 | Instante com fuso | `publicado_em` |
+| CA-07.1, CA-07.3 | Situação e instante do arquivamento, que não muda depois de gravado | `situacao`, `arquivado_em` |
+| CA-07.2 | Autor, para recusar quem não é | `autor_id` |
+| CA-07.4, CA-07.5 | Situação e autor, para decidir quem vê | `situacao`, `autor_id`, `arquivado_em` |
 
 A conferência inversa: toda coluna tem origem. `id` vem de DP-03; `nome_usuario`,
 `nome_exibicao` e `senha_derivada`, de CA-01.1 e RNF-04; `autor_id`, de CA-03.1
@@ -287,7 +290,7 @@ acontece.
 | 1a. Não entrou | Entrar | CA-02.3 |
 | 4a. Texto vazio | Publicar aviso, com a recusa | CA-03.2 |
 | 4b. Acima do limite | Publicar aviso, com a recusa e o texto mantido | CA-03.3 |
-| 4c. Conta fechada em outra aba | Entrar, com a recusa | CA-02.4 |
+| 4c. Saiu da conta em outra aba | Entrar, com a recusa | CA-02.4 |
 | 4d. Recarregar a página | Nenhuma: nada acontece (RNF-03) | RNF-03 |
 | 4e. Falha ao gravar | Publicar aviso, com a mensagem e o texto mantido | Sem critério ainda |
 
@@ -308,7 +311,18 @@ entrarem.
 
 ## Conferência cruzada
 
-Preenchida na issue #60.
+Em 2026-10-24, Davi, que desenhou o modelo, leu o protótipo, e Carla, que
+montou o protótipo, leu o modelo, com as seis perguntas da tabela de
+conferência do capítulo 6. O registro completo está na #60.
+
+| Achado | Correção |
+|---|---|
+| CA-07.1 a CA-07.5 entraram depois do modelo de dados e não tinham linha em "O dado que cada critério exige" | Três linhas acrescentadas; o dado já existia |
+| O protótipo dizia "conta fechada", que pelo glossário sugere conta apagada | A recusa 4c e a primeira tela passam a dizer "saiu da conta em outra aba", como o UC-01 |
+
+Ficaram como estão, com motivo: `tipo` e `arquivado_em` sem tela no protótipo,
+porque HU-05 e HU-07 estão fora da fatia do MVP, e a alternativa 4d sem tela,
+porque nela nada acontece.
 
 ## Histórico de revisão
 
@@ -317,3 +331,4 @@ Preenchida na issue #60.
 - 2026-10-24: diagrama de estados do aviso (#57).
 - 2026-10-24: sequência, atividade, responsabilidades e teste de Parnas (#58).
 - 2026-10-24: protótipo navegável do fluxo principal (#59).
+- 2026-10-24: conferência cruzada e correções (#60).
