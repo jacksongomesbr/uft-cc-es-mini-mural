@@ -4,6 +4,30 @@ Todas as mudanças relevantes do projeto ficam registradas aqui. O formato
 segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/), e as
 versões seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.0] - 2026-10-24
+
+Fim do capítulo 6: modelagem e projeto.
+
+### Adicionado
+
+- Documento de projeto com modelo de domínio (#55), modelo de dados e
+  decisões de armazenamento (#56), estados do aviso (#57), sequência do UC-01,
+  atividade do aviso vencido, responsabilidades e teste de Parnas (#58), e o
+  registro da conferência cruzada (#60) (`PROJETO.md`).
+- Fontes dos diagramas em Mermaid (`diagrams/`, #55 a #58).
+- Protótipo navegável do fluxo principal, com as recusas (`prototipo/`, #59).
+
+### Alterado
+
+- Primeira mudança de requisito depois da linha de base: nome para exibição
+  repetido é recusado, o mural mostra o nome de usuário junto, e o risco que
+  sobra entrou como R9 (`REQUISITOS.md`, `DESCOBERTA.md`, #53). A comparação
+  do nome passou a ignorar espaços a mais (#56).
+- Critérios de aceitação de HU-07, arquivado como estado final visto só pelo
+  autor, e N15 com HU-15, levantados pelo diagrama de estados (#57).
+- Escopo do `DESCOBERTA.md` com N13 e N14 (#53).
+- README com os documentos novos (#61).
+
 ## [0.4.0] - 2026-10-24
 
 Fim do capítulo 5: requisitos especificados e validados, primeiro marco.
@@ -79,6 +103,7 @@ Fim dos capítulos 1 e 2: problema proposto e repositório configurado.
 - Proteção do `main`: envio direto e reescrita de histórico bloqueados, com
   pull request obrigatório.
 
+[0.5.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.1.0...v0.2.0

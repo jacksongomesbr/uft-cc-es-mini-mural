@@ -8,7 +8,8 @@ por tag.
 
 A proposta inicial do problema está no [PROBLEMA.md](PROBLEMA.md), a
 descoberta feita com os usuários, no [DESCOBERTA.md](DESCOBERTA.md), e o que o
-sistema vai fazer, no [REQUISITOS.md](REQUISITOS.md).
+sistema vai fazer, no [REQUISITOS.md](REQUISITOS.md). De que o sistema é feito
+está no [PROJETO.md](PROJETO.md).
 
 ## Equipe
 
@@ -27,7 +28,7 @@ Para ver o projeto como estava no fim de um capítulo, abra a tag da versão,
 por exemplo:
 
 ```bash
-git switch --detach v0.4.0
+git switch --detach v0.5.0
 ```
 
 O [ROTEIRO.md](ROTEIRO.md) liga cada capítulo do livro ao artefato que ele
@@ -44,6 +45,9 @@ produz e à tag que o encerra.
 | [descoberta/](descoberta/) | Roteiro de entrevista e atas da elicitação, sem identificação (capítulos 4 e 5) |
 | [REQUISITOS.md](REQUISITOS.md) | Glossário, backlog ordenado, histórias com critérios de aceitação, caso de uso, requisitos não funcionais, regras, rastreabilidade e validação (capítulo 5) |
 | [validacao/](validacao/) | Protótipo do MVP e registro das sessões de validação (capítulo 5) |
+| [PROJETO.md](PROJETO.md) | Modelo de domínio, modelo de dados, estados, responsabilidades, decisões de projeto e conferência cruzada (capítulo 6) |
+| [diagrams/](diagrams/) | Fontes Mermaid dos diagramas do `PROJETO.md`, desenhadas pelo GitHub na página de cada arquivo (capítulo 6) |
+| [prototipo/](prototipo/) | Protótipo navegável do fluxo principal, com as recusas (capítulo 6) |
 | [CHANGELOG.md](CHANGELOG.md) | O que mudou em cada versão |
 | [ROTEIRO.md](ROTEIRO.md) | Capítulos, artefatos e tags do semestre |
 
