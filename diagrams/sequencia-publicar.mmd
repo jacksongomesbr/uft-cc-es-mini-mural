@@ -1,0 +1,16 @@
+sequenceDiagram
+  actor P as Pessoa com conta
+  participant T as Tela de publicação
+  participant A as Aviso
+  participant R as Registro de avisos
+  P->>T: escreve o texto e confirma
+  T->>A: confere o texto
+  alt texto com 1 a 500 caracteres
+    A-->>T: texto aceito
+    T->>R: registra o aviso com o autor
+    R-->>T: aviso registrado, com o instante
+    T-->>P: mural com o aviso no topo
+  else texto vazio ou acima de 500 caracteres
+    A-->>T: recusa, com o motivo
+    T-->>P: recusa, com o texto mantido
+  end
