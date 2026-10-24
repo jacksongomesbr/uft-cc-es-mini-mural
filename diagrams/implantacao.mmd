@@ -1,0 +1,10 @@
+flowchart LR
+  subgraph M1["Celular ou computador de quem usa"]
+    N["Navegador"]
+  end
+  subgraph M2["Servidor da aplicação"]
+    A["Aplicação Django<br/>um processo"]
+    DB[("PostgreSQL")]
+  end
+  N <-->|"requisição e página HTML"| A
+  A <-->|"consultas e gravações"| DB
