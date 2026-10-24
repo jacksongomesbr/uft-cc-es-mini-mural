@@ -29,8 +29,11 @@ arquivo. Os nomes de campo são do glossário, e nenhum é nome de coluna.
 
 - **Origem:** HU-02, CA-02.3
 - **Entrada:** `next`, opcional, com o caminho para onde voltar. Só caminho
-  deste site é aceito; qualquer outro vira `/`.
-- **Sucesso:** 200, página de entrar. Quem já entrou recebe 303 para `/`.
+  deste site é aceito; qualquer outro vira `/`. `motivo=aviso-nao-publicado`,
+  opcional, vem do redirecionamento de `POST /avisos/` sem conta.
+- **Sucesso:** 200, página de entrar. Com `motivo=aviso-nao-publicado`, a página
+  mostra "Você saiu da conta em outra aba. Entre de novo; o aviso não foi
+  publicado." Quem já entrou recebe 303 para `/`.
 
 ### POST /entrar/
 
@@ -46,6 +49,8 @@ arquivo. Os nomes de campo são do glossário, e nenhum é nome de coluna.
 
 - **Origem:** HU-02, CA-02.4
 - **Regras no servidor:** apaga a sessão no servidor.
+- **Na página:** sair é um botão de formulário, com a marca de proteção, e não
+  uma ligação; o protótipo desenha uma ligação porque é rascunho.
 - **Sucesso:** 303 para `/entrar/`.
 - **GET /sair/:** 405. Sair só por formulário, para que uma ligação ou o
   carregamento antecipado de uma página não tire a pessoa da conta.
@@ -67,7 +72,8 @@ arquivo. Os nomes de campo são do glossário, e nenhum é nome de coluna.
     os repetidos, sem diferenciar maiúsculas (CA-01.6).
 - **Sucesso:** 303 para `/`, com a sessão já aberta (CA-01.1).
 - **Falhas:** 422, página de criar conta, com o que foi preenchido menos a
-  senha, e uma destas mensagens junto do campo:
+  senha. Cada campo recusado mostra a sua mensagem, junto dele, e mais de uma
+  pode aparecer ao mesmo tempo:
   - "Esse nome de usuário já está em uso."
   - "A senha precisa de pelo menos 8 caracteres, com algo além de números."
   - "Escolha um nome para exibição; ele aparece como autor dos avisos."
@@ -105,7 +111,10 @@ arquivo. Os nomes de campo são do glossário, e nenhum é nome de coluna.
   - o instante vem do banco (DP-10).
 - **Sucesso:** 303 para `/`, com o aviso no topo do mural (A-06).
 - **Falhas:**
-  - **Sem conta:** 302 para `/entrar/`, e nada é gravado (UC-01, 4c; CA-02.4).
+  - **Sem conta:** 302 para
+    `/entrar/?next=/avisos/novo/&motivo=aviso-nao-publicado`, e nada é
+    gravado. O texto se perde, porque a sessão que o levaria já não existe, e
+    a mensagem diz isso (UC-01, 4c; CA-02.4).
   - **Texto vazio ou só com espaços:** 422, página de publicar com "O aviso
     precisa de texto. Nada foi publicado." (UC-01, 4a; CA-03.2).
   - **Acima do limite:** 422, página de publicar com "O aviso tem N caracteres,
