@@ -1,0 +1,15 @@
+classDiagram
+  direction LR
+  class Conta {
+    nomeUsuario
+    nomeExibicao
+    senha
+  }
+  class Aviso {
+    texto
+    tipo
+    situacao
+    publicadoEm
+    arquivadoEm
+  }
+  Conta "1" --> "0..*" Aviso : publica
