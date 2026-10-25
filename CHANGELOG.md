@@ -4,6 +4,33 @@ Todas as mudanças relevantes do projeto ficam registradas aqui. O formato
 segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/), e as
 versões seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
+## [0.8.0] - 2026-10-24
+
+Fim do capítulo 9: review parcial, com a demonstração do código da `v0.7.0`.
+
+### Adicionado
+
+- Preparação da review: roteiro com o critério de cada passo, o que é
+  declarado, papéis, decisões a defender, plano da falha e ensaio
+  (`ITERACOES.md`, #98).
+- Script que restaura o banco da demonstração e recusa banco que não termine
+  em `_demo`, e o texto preparado do passo 5 (`scripts/`, #98).
+- Registro da review, simulado: observações, autoavaliação com os cinco status
+  (`ITERACOES.md`, #99).
+- HU-16, defeito do endereço vazio depois de uma recusa, com CA-16.1, e CA-03.6
+  para HU-03.2 (`REQUISITOS.md`, #100).
+- Resultado e retrospectiva da iteração 3, com a primeira velocidade, 14 pontos
+  (`ITERACOES.md`, #101).
+
+### Alterado
+
+- Artefatos corrigidos para descrever o que roda: índices que o framework cria
+  (DP-07), onde mora a regra do texto, o campo sem limite e a alternativa 4e
+  ainda não implementada (#97).
+- HU-15 passa de fora desta versão a desejável, e N15 fica confirmada; HU-05 e
+  HU-06 sobem ao topo dos importantes (#100).
+- `PROCESSO.md` com as mudanças da retrospectiva da iteração 3 (#101).
+
 ## [0.7.0] - 2026-10-24
 
 Fim do capítulo 8: planejamento da iteração 3 e o produto mínimo viável em
@@ -153,6 +180,7 @@ Fim dos capítulos 1 e 2: problema proposto e repositório configurado.
 - Proteção do `main`: envio direto e reescrita de histórico bloqueados, com
   pull request obrigatório.
 
+[0.8.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.4.0...v0.5.0

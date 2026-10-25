@@ -26,7 +26,7 @@ tarefa com a servidora da secretaria.
 
 | Elemento | O que é | Como declarar |
 |---|---|---|
-| Contas | Do próprio Mini Mural, e não a conta institucional (RE-01, HU-12) | Antes do passo 1, em uma frase |
+| Contas | Do próprio Mini Mural; a conta institucional fica fora (RE-01, HU-12) | Antes do passo 1, em uma frase |
 | Dados | Três contas e dois avisos fictícios; a conta da secretaria é criada na hora, com o nome para exibição "Secretaria do curso", sem nome de pessoa | Na abertura do passo 1 |
 | Ambiente | Local, no notebook, sem hospedagem (A-11, R4) | No bloco de limites |
 | Fora desta demonstração | Aviso aberto e interno (HU-05, HU-06), arquivar (HU-07), banco sem resposta (HU-03.2) e data de validade (HU-13), no backlog | No bloco de limites, com o item |
