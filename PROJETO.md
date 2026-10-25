@@ -213,7 +213,7 @@ situação e o autor.
 | Parte | Sabe | Faz |
 |---|---|---|
 | Conta | Nome de usuário, nome para exibição, valor derivado da senha | Confere a senha; compara nomes sem espaços a mais e sem diferenciar maiúsculas (CA-01.2, CA-01.6); diz se pode publicar (RN-01) |
-| Aviso | Texto, tipo, situação, autor, instantes | Confere o texto (CA-03.2 a CA-03.4); diz se pode ser visto por uma pessoa (RNF-06, CA-07.4, CA-07.5); diz se pode ser arquivado por uma conta e se arquiva (RN-02, CA-07.1 a CA-07.3) |
+| Aviso | Texto, tipo, situação, autor, instantes | Confere o texto (CA-03.2 a CA-03.4), pela função `preparar_texto` do módulo do aviso; diz se pode ser visto por uma pessoa (RNF-06, CA-07.4, CA-07.5); diz se pode ser arquivado por uma conta e se arquiva (RN-02, CA-07.1 a CA-07.3) |
 | Mural | Nada próprio: é uma consulta | Lista os avisos publicados que uma pessoa pode ver, do mais recente para o mais antigo, com o desempate de DP-06 (CA-04.1) |
 | Registro de avisos | Onde os avisos ficam guardados | Grava e recupera avisos e atribui o instante da publicação (DP-10) |
 | Tela de publicação | Nada do domínio | Recebe o texto, mostra a recusa com o texto mantido e mostra o mural; não decide regra nenhuma (DP-08) |
@@ -264,7 +264,7 @@ confundir com os documentos D1 e D2 do `DESCOBERTA.md`.
 | DP-04 | Arquivar é o apagamento do aviso; nenhum aviso sai da tabela | O glossário diz que o arquivado continua guardado (N5) | Toda consulta do mural precisa filtrar a situação |
 | DP-05 | Conta com avisos não pode ser apagada | Nenhuma história apaga conta, e apagar levaria junto a autoria que N7 exige | A conta de quem sai do curso fica até haver regra para isso |
 | DP-06 | Instantes guardados com fuso e mostrados no horário de Palmas, com desempate pelo `id` | CA-04.3 pede a hora local, e CA-04.1 pede uma ordem fixa | A conversão de fuso acontece em toda tela que mostra hora |
-| DP-07 | Nenhum índice além das chaves e unicidades até o RNF-01 ser medido | 200 avisos é pouco, e índice sem medição é suposição | Se o RNF-01 falhar, o primeiro reparo é um índice em `situacao` e `publicado_em` |
+| DP-07 | Nenhum índice escolhido pela equipe além das chaves e unicidades até o RNF-01 ser medido. O framework cria, por conta própria, um índice na chave estrangeira do autor e um índice de busca por prefixo no nome de usuário único, e os dois ficam | 200 avisos é pouco, e índice sem medição é suposição. O RNF-01 foi medido em 350 ms (`ITERACOES.md`) | Se o RNF-01 falhar com a hospedagem, o primeiro reparo é um índice em `situacao` e `publicado_em` |
 | DP-08 | As regras de publicar, ler e arquivar ficam na conta e no aviso, e nenhuma na tela | RNF-07 pede cada regra em um lugar só, e RN-01 tem prazo (D2) | A tela pergunta ao aviso e à conta em vez de conferir sozinha |
 | DP-09 | O limite de 500 caracteres fica no aviso e é repetido como restrição do banco | A restrição é a segunda barreira contra gravação que não passe pela tela | Mudar o limite toca dois lugares, no mesmo pull request |
 | DP-10 | O registro atribui o instante da publicação | CA-03.1 pede a hora da publicação, e o relógio do aparelho de quem publica não é confiável | A tela mostra a hora que o registro devolveu |
@@ -332,3 +332,4 @@ porque nela nada acontece.
 - 2026-10-24: sequência, atividade, responsabilidades e teste de Parnas (#58).
 - 2026-10-24: protótipo navegável do fluxo principal (#59).
 - 2026-10-24: conferência cruzada e correções (#60).
+- 2026-10-24: conferência contra o código antes da review parcial (#97): índices que o framework cria (DP-07) e onde mora a regra do texto.
