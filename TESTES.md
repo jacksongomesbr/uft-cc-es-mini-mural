@@ -101,14 +101,14 @@ caso representa.
 
 ### HU-05 Marcar o aviso como aberto ou interno
 
-Escritos antes do código (#130).
+Escritos antes do código; testes na #130.
 
 | ID | Critério | Classe ou limite | Preparo | Passos | Esperado | Nível | Teste |
 |---|---|---|---|---|---|---|---|
-| TC-05.1 | CA-05.1 | Sem tipo | Paula entrou | Publicar sem o campo tipo | Aviso interno | Integração | A escrever |
-| TC-05.2 | CA-05.2 | Aberto | Paula entrou | Publicar com tipo aberto | Aviso aberto | Integração | A escrever |
-| TC-05.3 | CA-05.3 | Tipo fora da lista | Paula entrou | Publicar com tipo "publico" | 422, mensagem do contrato, nada publicado | Integração | A escrever |
-| TC-05.4 | CA-05.4 | Um aberto e um interno | Dois avisos | Pessoa com conta abre o mural | Cada aviso mostra o tipo | Integração | A escrever |
+| TC-05.1 | CA-05.1 | Sem tipo | Paula entrou | Publicar sem o campo tipo | Aviso interno | Integração | `test_tc_05_1_sem_tipo_e_interno` |
+| TC-05.2 | CA-05.2 | Aberto | Paula entrou | Publicar com tipo aberto | Aviso aberto | Integração | `test_tc_05_2_aberto` |
+| TC-05.3 | CA-05.3 | Tipo fora da lista | Paula entrou | Publicar com tipo "publico" | 422, mensagem do contrato, nada publicado | Integração | `test_tc_05_3_tipo_fora_da_lista` |
+| TC-05.4 | CA-05.4 | Um aberto e um interno | Dois avisos | Pessoa com conta abre o mural | Cada aviso mostra o tipo | Integração | `test_tc_05_4_tipo_no_mural` |
 
 ### HU-06 Ler aviso aberto sem conta
 

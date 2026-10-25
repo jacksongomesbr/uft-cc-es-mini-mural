@@ -6,6 +6,7 @@
 {% block conteudo %}
 <h1>Publicar aviso</h1>
 {% for erro in form.texto.errors %}<p class="recusa">{{ erro }}</p>{% endfor %}
+{% for erro in form.tipo.errors %}<p class="recusa">{{ erro }}</p>{% endfor %}
 <form method="post" action="{% url 'criar' %}">
   {% csrf_token %}
   <div class="campo{% if form.texto.errors %} campo-com-erro{% endif %}">
@@ -13,6 +14,10 @@
     {{ form.texto }}
     <p class="dica" id="contador" aria-live="polite">Até {{ limite }} caracteres.</p>
   </div>
+  <fieldset class="campo tipo-do-aviso">
+    <legend>{{ form.tipo.label }}</legend>
+    {{ form.tipo }}
+  </fieldset>
   <button type="submit">Publicar</button>
   <a href="{% url 'mural' %}">Voltar ao mural</a>
 </form>
