@@ -122,6 +122,43 @@ a quatro dos cinco pontos na véspera da review continua não pronto.
 A lista cresce nos capítulos 11 e 12, com teste automatizado e verificação na
 integração contínua.
 
+## Qualidade da revisão
+
+### Aderência e eficácia
+
+A regra de revisão é a da definição de pronto: todo pull request revisado por
+outra pessoa, com a lista de verificação do `CONTRIBUTING.md` a partir da #119.
+
+| Pergunta | O que examina | Evidência | Resultado em 2026-10-25 |
+|---|---|---|---|
+| Aderência | Todo pull request foi revisado por outra pessoa, com comentário assinado? | Comentários de revisão dos pull requests integrados | Sim, nos 60 integrados até a #123 |
+| Aderência | Os pull requests de código trazem a lista do autor marcada? | Descrição dos pull requests desde a #119 | 3 de 3 de código (#121 a #123). Pull request só de documento segue a estrutura do modelo, e a lista do autor fica opcional, porque metade dela fala de código |
+| Eficácia | A revisão impede que o defeito chegue ao `main`? | Defeitos achados depois da integração, com o pull request de origem | Não sempre: 2 defeitos escaparam, o de `GET /avisos/` (origem #94) e o de `GET /sair/` (origem #92) |
+
+A aderência foi total, e dois defeitos passaram mesmo assim, o que mostra a
+diferença entre as duas perguntas. Os dois eram do mesmo tipo, o endereço que
+fica na barra depois de um envio, e a revisão não olhava para isso. A pergunta
+entrou na lista (#119), e o segundo defeito foi achado por ela, na revisão da
+#122.
+
+### Objetivo, perguntas e métricas
+
+| Objetivo | Pergunta | Métrica | Como obter |
+|---|---|---|---|
+| Achar na revisão o que importa, antes da integração | A revisão está achando alguma coisa? | Comentários que bloqueiam, por pull request | Contagem da coluna "Tipo" nos comentários de revisão |
+| | O que escapa? | Defeitos achados depois da integração | Issues de defeito, que passam a citar o pull request de origem, achado no histórico do arquivo |
+
+**Primeiros números.** Desde a #119, 3 comentários que bloqueiam em 5 pull
+requests (#119, #120 e #122), e 2 defeitos que escaparam no histórico inteiro.
+
+**O que os números não permitem concluir.** Cinco pull requests não mostram
+variação. O número de bloqueios depende de quem classifica: um revisor mais
+rigoroso marca mais. Os defeitos que escaparam são os que alguém procurou, e o
+de `GET /avisos/` só apareceu porque a conferência do capítulo 9 foi feita. O
+tempo entre abrir e integrar fica fora da tabela, porque mede a simulação, como
+a retrospectiva da iteração 3 registrou. Os números servem para melhorar a
+revisão, e não para avaliar quem revisa.
+
 ## Histórico de revisão do processo
 
 - 2026-10-24: versão inicial (#13).
@@ -135,3 +172,7 @@ integração contínua.
   formulário ganha teste do GET no mesmo endereço, e a conferência contra o
   código entra no plano de toda iteração que termina em demonstração. Os dados
   estão no `ITERACOES.md`.
+- 2026-10-25: qualidade da revisão (#117): aderência e eficácia, objetivo,
+  perguntas e métricas, e a regra de que toda issue de defeito cita o pull
+  request de origem. A lista de verificação e os tipos de comentário estão no
+  `CONTRIBUTING.md` desde a #119.
