@@ -198,3 +198,28 @@ class PublicarTest(TestCase):
         self.client.logout()
         resposta = self.client.get("/avisos/novo/")
         self.assertEqual(resposta["Location"], "/entrar/?next=/avisos/novo/")
+
+
+class CarregarDemonstracaoTest(TestCase):
+    """#88: o comando da demonstração não duplica contas e completa o mural."""
+
+    def carregar(self, *argumentos):
+        from io import StringIO
+
+        from django.core.management import call_command
+
+        call_command("carregar_demonstracao", "--senha", "senha-de-teste-1", *argumentos, stdout=StringIO())
+
+    def test_rodar_de_novo_nao_duplica(self):
+        self.carregar()
+        self.carregar()
+        self.assertEqual(Conta.objects.count(), 3)
+        self.assertEqual(Aviso.objects.count(), 2)
+
+    def test_completa_o_mural_ate_a_quantidade_pedida(self):
+        self.carregar("--avisos", "200")
+        self.assertEqual(Aviso.objects.publicados().count(), 200)
+
+    def test_senha_vem_do_argumento(self):
+        self.carregar()
+        self.assertTrue(Conta.objects.get(nome_usuario="aluno.demo").check_password("senha-de-teste-1"))

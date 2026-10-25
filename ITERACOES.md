@@ -101,6 +101,32 @@ etiqueta faz o mesmo papel com o que já existe:
 Com o limite de dois itens em revisão, quem termina o próprio item revisa o de
 alguém antes de abrir o seu.
 
+### Preparação da demonstração
+
+Registro da #88, feita com tudo integrado ao `main`.
+
+- **Dados.** `python manage.py carregar_demonstracao --senha VALOR` cria três
+  contas de demonstração e dois avisos, sem dado de pessoa real. A senha vem do
+  argumento, e não do código. Com `--avisos 200`, o mural fica na condição do
+  RNF-01.
+- **Roteiro.** Duas tarefas, situadas como na validação V1, sem explicar a
+  tela. A servidora da secretaria: "Avise a turma de que a aula de amanhã mudou
+  de sala", começando pela página de criar conta. Um integrante, com a conta
+  `aluno.demo` no celular: "Veja se há aviso novo". A equipe observa e anota o
+  que a pessoa procurou, como na V1.
+- **R1.** A secretaria confirmou que uma servidora vai ao encontro 9 (registro
+  simulado, como o D2).
+- **RNF-01.** Medido no notebook da demonstração, com 200 avisos, no navegador
+  com a rede limitada ao perfil "Fast 4G" e a tela de 360 por 640: 350, 345 e
+  348 milissegundos até o fim da carga, 53 kB transferidos. Vale o maior, 350
+  milissegundos, dentro do aceitável (3 segundos) e do pretendido (1 segundo).
+  O servidor estava na mesma máquina; com hospedagem, a medição se repete
+  (capítulo 14).
+- **RNF-08.** Criar conta, entrar, mural e publicar conferidos em 360 por 640,
+  sem rolagem horizontal e com texto de 16 pixels.
+- **Ensaio.** O roteiro foi percorrido uma vez: criar conta, publicar, sair,
+  entrar com `aluno.demo` e ver o aviso no topo. Nenhum ajuste no código.
+
 ## Iterações 1 e 2 (encontros 3 a 7)
 
 A iteração 1 produziu o `PROCESSO.md`, o `DESCOBERTA.md` e o `REQUISITOS.md`
