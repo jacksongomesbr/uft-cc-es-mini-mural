@@ -4,6 +4,27 @@ Todas as mudanças relevantes do projeto ficam registradas aqui. O formato
 segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/), e as
 versões seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
+## [0.6.0] - 2026-10-24
+
+Fim do capítulo 7: arquitetura e esqueleto do projeto Django.
+
+### Adicionado
+
+- Documento de arquitetura com responsabilidades, participantes, visão geral e
+  implantação (#69), decisões A-01 a A-12 (#70, #71), verificações, qualidades
+  e custos (#72) e a conferência do contrato (#74) (`ARQUITETURA.md`).
+- Contrato das rotas do fluxo principal (`contrato/operacoes.md`, #71, #74).
+- Esqueleto do projeto Django: configuração lida do ambiente, módulos `contas`
+  e `avisos`, modelo de conta com os campos do `PROJETO.md`, página inicial,
+  modelo base de página e 13 testes (#73).
+- Instruções de desenvolvimento no README (#73).
+
+### Alterado
+
+- O `ROTEIRO.md` aponta para a decisão A-01 e passa a dizer, no capítulo 14,
+  aplicação das migrações na implantação, porque as migrações começaram no
+  esqueleto (A-09) (#75).
+
 ## [0.5.0] - 2026-10-24
 
 Fim do capítulo 6: modelagem e projeto.
@@ -103,6 +124,7 @@ Fim dos capítulos 1 e 2: problema proposto e repositório configurado.
 - Proteção do `main`: envio direto e reescrita de histórico bloqueados, com
   pull request obrigatório.
 
+[0.6.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.2.0...v0.3.0

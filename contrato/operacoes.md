@@ -49,8 +49,8 @@ arquivo. Os nomes de campo são do glossário, e nenhum é nome de coluna.
 
 - **Origem:** HU-02, CA-02.4
 - **Regras no servidor:** apaga a sessão no servidor.
-- **Na página:** sair é um botão de formulário, com a marca de proteção, e não
-  uma ligação; o protótipo desenha uma ligação porque é rascunho.
+- **Na página:** sair é um botão de formulário, com a marca de proteção. O
+  protótipo desenha uma ligação porque é rascunho.
 - **Sucesso:** 303 para `/entrar/`.
 - **GET /sair/:** 405. Sair só por formulário, para que uma ligação ou o
   carregamento antecipado de uma página não tire a pessoa da conta.
