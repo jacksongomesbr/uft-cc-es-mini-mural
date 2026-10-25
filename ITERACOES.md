@@ -42,6 +42,65 @@ abertas (#109, #111) não têm gatilho nesta iteração.
 O levantamento das opções de hospedagem (#144) era a ação de R4 com prazo no
 encontro 12 e entrou fora dos pontos, como o registro de um risco.
 
+### Resultado
+
+**Concluído:** 7 de 7 pontos, todos pela definição de pronto: a dívida das
+dependências (#153), o formatador e o verificador de estilo (#154), a
+verificação no GitHub Actions com a proteção do `main` (#155), a cobertura
+(#156) e HU-18 (#157). A meta foi cumprida: todo pull request desde a #155
+passou pela verificação, o GitHub recusou integrar a #156 enquanto ela estava
+desatualizada, e quem arquiva confirma antes.
+
+A previsão era de 6 a 7 pontos, e a iteração concluiu 7. As velocidades
+observadas são 14 e 12 em duas semanas e 7 em uma. A conta por proporção
+acertou nesta iteração, e a duração diferente fica anotada ao lado do número.
+A folga, HU-03.2, não entrou, porque o plano ocupou a semana; ela continua a
+primeira importante do backlog.
+
+### Retrospectiva da iteração 5
+
+**Evidências**
+
+| Evidência | Valor | Fonte |
+|---|---|---|
+| Pontos planejados e concluídos | 7 e 7 | Plano e issues fechadas |
+| Pull requests da iteração | #151 a #157, mais os dois de documentação do fim da iteração (#149, #150) | `gh pr list --state merged` |
+| Comentários de revisão de #151 a #157 | 20: 15 elogiam, 2 sugerem, 3 perguntam, nenhum bloqueia | Coluna "Tipo" dos comentários |
+| Achados do verificador de estilo na adoção | 2 linhas longas e 1 B904, a recusa da senha sem a causa original | #154 |
+| Integrações recusadas pela proteção do `main` | 1, a #156, até ser atualizada | #156 |
+| Regras do contrato sem teste achadas pela cobertura | 2, com a cobertura já em 99% | #156 |
+| Histórias com os testes antes do código | 1 de 1, HU-18, com o vermelho e o verde no histórico de verificações | #157 |
+| Testes | De 87 para 93 | `python manage.py test` |
+| Tempo do mural com 202 avisos (RNF-01) | 352 ms; era 354 ms | Relatório da build `1c57be3`, no `TESTES.md` |
+
+**Leitura.** Nenhum comentário de revisão da iteração bloqueou. Fora da #154,
+que adotou o formatador, nenhum comentário tratou de formatação, que a ferramenta
+passou a decidir. Uma iteração não mostra se a
+ferramenta tirou esses comentários ou se eles não teriam aparecido, e a equipe
+compara com a próxima. A conferência de 360 pixels da página nova de HU-18
+foi feita depois da integração, no relatório da build (#149). A página
+passou, mas a ordem estava invertida: a evidência veio depois de a página estar
+no `main`.
+
+As duas decisões da retrospectiva da iteração 4 foram cumpridas: os casos de
+HU-18 entraram no `TESTES.md` antes do código, e o plano da iteração 5 disse a
+faixa e o item da folga.
+
+**Decisões**
+
+| Mudança | Dono | Como conferir | Quando conferir |
+|---|---|---|---|
+| Quem abre um pull request que muda uma página roda o TC-RNF-08 nela antes de pedir revisão, e o TC-RNF-01 quando a página é o mural, com os números na descrição | Ana | A descrição de cada pull request da iteração 6 que muda página traz a medição | Retrospectiva da iteração 6 |
+| A história nova segue o ciclo do desenvolvimento guiado por testes, com o primeiro commit só de testes | Eva | O histórico de verificações de cada pull request de história mostra o vermelho e depois o verde | Retrospectiva da iteração 6 |
+
+**Riscos revisados**
+
+- **R4** teve a ação cumprida no prazo (#151): as hospedagens gratuitas
+  levantadas adormecem sem uso, e a primeira página depois disso leva perto de
+  um minuto, contra o RNF-01. A escolha vai ao planejamento da iteração 6.
+- **R8** e **R9** continuam como estavam, com as perguntas para a revisão de C2
+  e o TC-01.6c bloqueado.
+
 ## Iteração 4 (encontros 9 a 11)
 
 **Meta:** no encontro 11, um visitante lê pelo celular, sem conta, um aviso
