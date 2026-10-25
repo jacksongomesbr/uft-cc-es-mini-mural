@@ -126,3 +126,8 @@ integração contínua.
 
 - 2026-10-24: versão inicial (#13).
 - 2026-10-24: definição de pronto com os cinco pontos do capítulo 5 (#41).
+- 2026-10-24: quadro por etiquetas, com limite de 2 itens em andamento e 2 em
+  revisão; estimativa em pontos, com HU-02 como referência; programação em par
+  em HU-03.1; e a regra de que quem implementa uma história em um módulo não é
+  quem o criou. Os dados que levaram a cada decisão estão no `ITERACOES.md`, e
+  todas voltam na retrospectiva da iteração 3 (#83).
