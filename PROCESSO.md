@@ -131,3 +131,7 @@ integração contínua.
   em HU-03.1; e a regra de que quem implementa uma história em um módulo não é
   quem o criou. Os dados que levaram a cada decisão estão no `ITERACOES.md`, e
   todas voltam na retrospectiva da iteração 3 (#83).
+- 2026-10-24: retrospectiva da iteração 3 (#101): toda rota que recebe
+  formulário ganha teste do GET no mesmo endereço, e a conferência contra o
+  código entra no plano de toda iteração que termina em demonstração. Os dados
+  estão no `ITERACOES.md`.

@@ -257,6 +257,64 @@ autores, e `avisos/` também. Os quatro pull requests de história (#91 a #94)
 têm o comentário com a lista dos critérios verificados por quem não escreveu o
 código.
 
+### Resultado
+
+**Concluído:** 14 de 14 pontos, todos pela definição de pronto: HU-01, HU-02,
+HU-03.1, HU-04 e a preparação da demonstração. É a primeira velocidade da
+equipe, e ela vale com as condições desta iteração: cinco pessoas em tempo
+integral, estimativa feita pela própria equipe e histórico simulado. Uma
+observação não mostra variação; a equipe só fala em faixa depois de três
+iterações de código.
+
+**Observação de quem usou:** a servidora da secretaria criou a conta e publicou
+o aviso sem pedir ajuda, em 1 minuto e 35 segundos, e perguntou como corrigir
+um erro de digitação. A pergunta virou a segunda fonte de N15, e HU-15 passou a
+desejável (#100).
+
+### Retrospectiva da iteração 3
+
+**Evidências**
+
+| Evidência | Valor | Fonte |
+|---|---|---|
+| Pontos planejados e concluídos | 14 e 14 | Quadro e estimativas |
+| Pull requests da iteração | 9: #90 a #96, #103 e #104 | `gh pr list --state merged` |
+| Pull requests com pedido de mudança | 1, #91: gravação simultânea no cadastro | Comentários de revisão |
+| Issues reabertas pela definição de pronto | 1, #86: o RNF-01 ainda não tinha sido medido | Histórico da issue |
+| Pull requests de história com a lista de critérios | 4 de 4 | Comentários de revisão de #91 a #94 |
+| Testes | De 13 para 54 | `python manage.py test` |
+| Autores de `contas/` e de `avisos/` | 4 e 4 | `git shortlog -sn HEAD -- contas avisos` |
+| Achados antes da review | 5 na conferência (#97) e 1 no ensaio (#98) | Issue #97 e `ITERACOES.md` |
+| Integrações por dia | 8 em 2026-10-24 | `git log --first-parent`, contado por data |
+
+**Leitura.** As duas decisões da retrospectiva anterior foram cumpridas. A
+autoria se espalhou pelos módulos, e cada história chegou ao `main` com os
+critérios verificados por outra pessoa. A definição de pronto fez diferença uma
+vez, ao reabrir a #86, e é o que ela existe para fazer.
+
+O defeito de `GET /avisos/` passou pelos 54 testes e por quatro revisões, e só a
+conferência contra o código o achou. Os testes cobrem o que cada rota faz com o
+método que ela espera, e nenhum cobre o endereço que fica na barra depois de
+uma recusa. O número de integrações por dia continua sem leitura, pela
+compressão da simulação.
+
+**Decisões**
+
+| Mudança | Dono | Como conferir | Quando conferir |
+|---|---|---|---|
+| Toda rota que recebe formulário ganha um teste do GET no mesmo endereço, porque é o endereço que fica na barra depois de uma recusa | Carla | A suíte tem o teste para `/cadastro/`, `/entrar/` e `/avisos/` | Retrospectiva da iteração 4 |
+| A conferência contra o código entra no plano de toda iteração que termina em demonstração, como tarefa com dono | Davi | O `ITERACOES.md` da iteração 7 registra a conferência antes da review final | Retrospectiva da iteração 7 |
+
+**Riscos revisados**
+
+- **R1** não aconteceu: a servidora veio à review.
+- **R3** diminuiu: a equipe entregou contas, banco e páginas na primeira
+  iteração de código, com quatro autores por módulo.
+- **R4** continua: a demonstração rodou no notebook, e as opções de hospedagem
+  têm prazo no encontro 12, com Carla.
+- **R9** não teve ocorrência; a defesa da HU-01 foi mostrada no passo 2.
+- **R7** e **R8** seguem aceitos, sem ocorrência.
+
 ## Iterações 1 e 2 (encontros 3 a 7)
 
 A iteração 1 produziu o `PROCESSO.md`, o `DESCOBERTA.md` e o `REQUISITOS.md`
