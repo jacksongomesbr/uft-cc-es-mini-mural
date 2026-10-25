@@ -67,7 +67,7 @@ caso representa.
 |---|---|---|---|---|---|---|---|
 | TC-02.1 | CA-02.1 | Nome e senha certos | Conta "paula.sec" | Entrar | 303 para o mural, nome no topo | Integração | `test_ca_02_1_entrar_leva_ao_mural_e_mostra_quem_entrou` |
 | TC-02.2 | CA-02.2 | Senha errada | Conta "paula.sec" | Entrar com senha errada | 422, mensagem sem dizer qual errou | Integração | `test_ca_02_2_senha_errada` |
-| TC-02.3 | CA-02.3 | Página que exige conta | Sem sessão | Abrir `/avisos/novo/`, entrar | Vai a entrar e volta à página de publicar | Integração | Reescrito com HU-06 (#131) |
+| TC-02.3 | CA-02.3 | Página que exige conta | Sem sessão | Abrir `/avisos/novo/`, entrar | Vai a entrar e volta à página de publicar | Integração | Ida: `test_pagina_de_publicar_sem_conta`; volta: a escrever com HU-06 (#131), que também tira o teste antigo do mural |
 | TC-02.4 | CA-02.4 | Depois de sair | Entrou e saiu | Publicar pela mesma aba | 302 para entrar, nada publicado | Integração | `test_ca_02_4_depois_de_sair_nada_e_publicado` |
 
 ### HU-03.1 Publicar aviso curto
