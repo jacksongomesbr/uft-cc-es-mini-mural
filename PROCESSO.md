@@ -157,7 +157,7 @@ rigoroso marca mais. Os defeitos que escaparam são os que alguém procurou, e o
 de `GET /avisos/` só apareceu porque a conferência do capítulo 9 foi feita. O
 tempo entre abrir e integrar fica fora da tabela, porque mede a simulação, como
 a retrospectiva da iteração 3 registrou. Os números servem para melhorar a
-revisão, e não para avaliar quem revisa.
+revisão; avaliar quem revisa fica fora do uso deles.
 
 ## Histórico de revisão do processo
 
