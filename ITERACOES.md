@@ -31,8 +31,8 @@ novo do aviso.
 | 6 | HU-07 Arquivar o próprio aviso | 3 | Carla e Bruno |
 | | Total | 12 | |
 
-HU-16 vem primeiro porque é a obrigatória que sobrou da review. HU-03.2 serve a
-meta de nenhum jeito e fica no backlog; HU-05 e HU-06 vêm antes de HU-07 pela
+HU-16 vem primeiro porque é a obrigatória que sobrou da review. HU-03.2 não
+serve à meta e fica no backlog; HU-05 e HU-06 vêm antes de HU-07 pela
 ordem que a review parcial reforçou.
 
 ### Reserva técnica
