@@ -24,6 +24,7 @@ histórico.
 | Aviso publicado | Aviso que está no mural. Todo aviso nasce publicado | N1 |
 | Aviso vencido | Aviso cujo assunto já passou, como evento realizado ou prazo encerrado, e que continua no mural | O1, D1 |
 | Avisos que valem agora | Nesta versão, os avisos publicados. O sistema não conhece a data em que o assunto de um aviso passa, e quem tira o aviso vencido do mural é o autor | N2, E4, D2 |
+| Caractere | Cada ponto de código do texto, como o banco e o contador contam. Um emoji composto aparece como um símbolo e pode valer mais de um caractere. Decisão da equipe, pela inspeção (#126) | CA-03.3, #126 |
 | Comunicado oficial | Aviso com edital anexo ou com prazo da coordenação. Continua no e-mail institucional, fora do mural | D2 |
 | Conta | Nome de usuário, nome para exibição e senha criados no próprio Mini Mural. Não é a conta institucional da universidade | N11, R2 |
 | Data de validade | Data, informada por quem publica, até a qual o assunto do aviso vale. Nesta versão, ela só é mostrada; o aviso continua no mural depois dela (HU-13) | N13, O1, V1 |
@@ -151,6 +152,11 @@ internos.
   nome já está em uso. A comparação tira os espaços das pontas, junta os
   repetidos e não diferencia maiúsculas.
 
+**Pergunta em aberto (#126, achado 4).** Nomes que diferem só por acento, como
+"Secretária do curso" e "Secretaria do curso", contam como o mesmo nome? A
+regra é da coordenação e vai à revisão de C2, com R9. Até a resposta, o caso de
+teste do nome com acento fica bloqueado no `TESTES.md`.
+
 ### HU-02 Entrar e sair
 
 Como pessoa com conta,
@@ -167,9 +173,11 @@ para que só eu publique com o meu nome.
 - **CA-02.2 Senha errada.** Dado que existe a conta "paula.sec", quando alguém
   tenta entrar com a senha errada, então o sistema recusa e informa que nome ou
   senha não conferem, sem dizer qual dos dois.
-- **CA-02.3 Mural sem conta.** Dado que a pessoa não entrou, quando ela abre o
-  endereço do mural, então o sistema a leva à tela de entrar e, depois que ela
-  entra, de volta ao mural.
+- **CA-02.3 Página que exige conta (alterado no #127).** Dado que a pessoa não
+  entrou, quando ela abre o endereço da página de publicar, então o sistema a
+  leva à tela de entrar e, depois que ela entra, de volta à página de publicar.
+  O mural deixou de exigir conta com HU-06, e por isso o critério passou a usar
+  a página de publicar.
 - **CA-02.4 Depois de sair.** Dado que a pessoa entrou e depois saiu, quando ela
   tenta publicar pela mesma aba do navegador, então o sistema pede que ela
   entre de novo, e nada é publicado.
@@ -244,9 +252,9 @@ O efeito que persiste em HU-04 é o de CA-03.5, visto do lado de quem lê. Ver o
 mural não muda nada no sistema, e por isso a história não tem critério próprio
 desse tipo.
 
-Os critérios de HU-05 e HU-06 são escritos no planejamento da iteração em que
-elas entram, no capítulo 8. HU-07 ganhou critérios antes, no #57, porque o
-diagrama de estados do `PROJETO.md` exige um critério para cada transição.
+HU-07 ganhou critérios no #57, porque o diagrama de estados do `PROJETO.md`
+exige um critério para cada transição. HU-05 e HU-06 ganharam os seus na
+inspeção da iteração 4 (#126, achado 1), antes do código.
 
 ### HU-05 Marcar o aviso como aberto ou interno
 
@@ -257,6 +265,19 @@ para que o aviso interno só seja lido por quem entrou com uma conta.
 
 [Origem: N4, E1, E2; C1]
 
+**Critérios de aceitação (acrescentados no #127)**
+
+- **CA-05.1 Interno por padrão.** Dado que Paula entrou, quando ela publica um
+  aviso sem escolher o tipo, então o aviso é interno.
+- **CA-05.2 Aberto.** Dado que Paula entrou, quando ela publica um aviso
+  marcando "aberto", então o aviso é aberto.
+- **CA-05.3 Tipo inválido.** Dado que Paula entrou, quando o formulário chega
+  com um tipo que não é aberto nem interno, então o sistema recusa, informa que
+  é preciso escolher entre aberto e interno e não publica nada.
+- **CA-05.4 O tipo aparece no mural.** Dado que há um aviso aberto e um interno
+  publicados, quando uma pessoa com conta abre o mural, então cada aviso mostra
+  se é aberto ou interno.
+
 ### HU-06 Ler aviso aberto sem conta
 
 Como visitante, ou aluno que não quer criar conta,
@@ -264,6 +285,20 @@ quero ler os avisos abertos sem entrar,
 para saber dos eventos do centro acadêmico sem criar mais uma conta.
 
 [Origem: N3, E3, E4; C1]
+
+**Critérios de aceitação (acrescentados no #127)**
+
+- **CA-06.1 Visitante vê os abertos.** Dado que há um aviso aberto e um interno
+  publicados, quando um visitante abre o mural, então vê só o aberto, com o
+  autor, a data e a hora.
+- **CA-06.2 Nenhum aberto.** Dado que só há avisos internos publicados, quando
+  um visitante abre o mural, então vê "Ainda não há avisos abertos." e o
+  caminho para entrar.
+- **CA-06.3 Interno pelo endereço.** Dado um aviso interno publicado, quando um
+  visitante pede o endereço desse aviso, então o sistema o leva à página de
+  entrar, e o texto do aviso não aparece na resposta (RNF-06).
+- **CA-06.4 Aberto pelo endereço.** Dado um aviso aberto publicado, quando um
+  visitante pede o endereço desse aviso, então vê o aviso.
 
 ### HU-07 Arquivar o próprio aviso
 
@@ -278,9 +313,11 @@ para que o aluno não confunda o aviso velho com o que vale.
 - **CA-07.1 Arquivar o próprio aviso.** Dado que "prof.calculo" publicou um
   aviso, quando ele o arquiva, então o aviso sai do mural, e o sistema registra
   a data e a hora do arquivamento.
-- **CA-07.2 Aviso de outra pessoa.** Dado que "paula.sec" publicou um aviso,
-  quando "prof.calculo" tenta arquivá-lo, então o sistema recusa, informa que
-  só o autor arquiva, e o aviso continua no mural.
+- **CA-07.2 Aviso de outra pessoa (alterado no #127).** Dado que "paula.sec"
+  publicou um aviso, ainda no mural, quando "prof.calculo" tenta arquivá-lo,
+  então o sistema recusa, informa que só o autor arquiva, e o aviso continua no
+  mural. Se o aviso de outra pessoa já está arquivado, vale o CA-07.4: a
+  resposta é a de aviso inexistente, para não revelar que ele existe.
 - **CA-07.3 Arquivar de novo.** Dado que o autor arquivou um aviso às 10h,
   quando ele pede para arquivá-lo outra vez às 11h, então nada muda, e a data
   registrada continua 10h.
@@ -515,8 +552,8 @@ e 12; até lá, cada critério é o caso de teste escrito em português.
 |---|---|---|---|---|
 | E1, E2, E3, RP | N1 | HU-01, HU-03.1, HU-03.2, HU-16, RN-01 | CA-01.1 a CA-01.6, CA-03.1 a CA-03.6, CA-16.1 | A escrever |
 | E4, E5, O1 | N2 | HU-04 | CA-04.1 a CA-04.3 | A escrever |
-| E3, E4 | N3 | HU-06 | No planejamento da iteração | A escrever |
-| E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.6; HU-05 no planejamento | A escrever |
+| E3, E4 | N3 | HU-06 | CA-06.1 a CA-06.4 | A escrever |
+| E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.6, CA-05.1 a CA-05.4 | A escrever |
 | E1, E2, E4, O1 | N5 | HU-07 | CA-07.1, CA-07.3 a CA-07.5 | A escrever |
 | E2, D2 | N6 | HU-07, RN-02 | CA-07.2 | A escrever |
 | E2, E5, O1 | N7 | HU-01, HU-02, HU-03, HU-04 | CA-01.6, CA-02.1 a CA-02.4, CA-03.1, CA-04.1 | A escrever |
@@ -616,3 +653,8 @@ porque o protótipo de papel não mede o sistema real.
   dá critério a HU-03.2; HU-15 passa de fora desta versão a desejável, com 3
   pontos; HU-05 e HU-06 no topo dos importantes. Obrigatórios: 14 de 29
   pontos, 48%.
+- 2026-10-25: achados da inspeção (#126, #127). Motivo: a inspeção de requisitos
+  da iteração 4. Impacto: CA-05.1 a CA-05.4 e CA-06.1 a CA-06.4 acrescentados;
+  CA-02.3 passa a usar a página de publicar; CA-07.2 diz que, com o aviso já
+  arquivado, vale o CA-07.4; "caractere" entra no glossário; a pergunta do nome
+  com acento fica em aberto, com a coordenação.
