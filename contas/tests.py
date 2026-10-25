@@ -188,3 +188,28 @@ class EntrarESairTest(TestCase):
     def test_motivo_mostra_a_mensagem_do_aviso_nao_publicado(self):
         resposta = self.client.get("/entrar/?next=/avisos/novo/&motivo=aviso-nao-publicado")
         self.assertContains(resposta, "Você saiu da conta em outra aba. Entre de novo; o aviso não foi publicado.")
+
+
+class EnderecoDepoisDoEnvioTest(TestCase):
+    """Retrospectiva da iteração 3: o endereço que fica na barra depois de um
+    envio recusado abre a página, e não uma página vazia."""
+
+    def test_cadastro_recusado_e_aberto_de_novo(self):
+        self.assertEqual(self.client.post("/cadastro/", {"nome_usuario": ""}).status_code, 422)
+        self.assertContains(self.client.get("/cadastro/"), "Criar conta")
+
+    def test_entrar_recusado_e_aberto_de_novo(self):
+        resposta = self.client.post("/entrar/", {"nome_usuario": "ninguem", "senha": "errada-123"})
+        self.assertEqual(resposta.status_code, 422)
+        self.assertContains(self.client.get("/entrar/"), "Entrar")
+
+    def test_sair_recusado_e_aberto_de_novo(self):
+        # POST sem a marca de proteção é recusado com 403, e a barra fica em /sair/.
+        conta = Conta.objects.create_user("paula.sec", "Secretaria do curso", "senha-de-teste-1")
+        from django.test import Client
+
+        cliente = Client(enforce_csrf_checks=True)
+        cliente.force_login(conta)
+        self.assertEqual(cliente.post("/sair/").status_code, 403)
+        resposta = cliente.get("/sair/")
+        self.assertContains(resposta, "Para sair da conta, use o botão abaixo.", status_code=405)
