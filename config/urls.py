@@ -2,5 +2,6 @@
 from django.urls import include, path
 
 urlpatterns = [
+    path("", include("contas.urls")),
     path("", include("avisos.urls")),
 ]

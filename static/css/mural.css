@@ -26,3 +26,13 @@ main {
   margin: 0 auto;
   padding: 16px;
 }
+
+/* Formulários: um campo por linha, ocupando a largura da coluna. */
+.campo { margin-bottom: 12px; }
+.campo label { display: block; margin-bottom: 4px; }
+.campo input, .campo textarea { width: 100%; font: inherit; padding: 8px; }
+.campo-com-erro input, .campo-com-erro textarea { border: 2px solid #b00020; }
+.erro, .recusa { color: #b00020; }
+.recusa { border: 2px solid #b00020; padding: 8px; }
+.dica { color: #555; font-size: .9rem; }
+button { font: inherit; padding: 8px 16px; }

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Criar conta | Mini Mural{% endblock %}
+
+{% block conteudo %}
+<h1>Criar conta</h1>
+<form method="post" action="{% url 'cadastro' %}">
+  {% csrf_token %}
+  {% include 'contas/_campo.html' with campo=form.nome_usuario %}
+  {% include 'contas/_campo.html' with campo=form.nome_exibicao %}
+  {% include 'contas/_campo.html' with campo=form.senha %}
+  <p class="dica">A senha precisa de pelo menos 8 caracteres, com algo além de números.</p>
+  <button type="submit">Criar conta</button>
+</form>
+{% endblock %}
