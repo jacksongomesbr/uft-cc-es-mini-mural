@@ -101,7 +101,7 @@ arquivo. Os nomes de campo são do glossário, e nenhum é nome de coluna.
 
 ### GET /avisos/
 
-- **Origem:** HU-16, CA-16.1 (ainda não implementado)
+- **Origem:** HU-16, CA-16.1
 - **Sucesso:** 303 para `/avisos/novo/`. É o endereço que fica na barra depois
   de uma recusa de `POST /avisos/`, e abri-lo de novo leva à página de
   publicar.

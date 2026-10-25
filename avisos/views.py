@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_http_methods
 
 from config.respostas import redirecionar
 
@@ -31,9 +31,14 @@ def novo(request):
     return pagina_de_publicar(request)
 
 
-@require_POST
+@require_http_methods(["GET", "POST"])
 def criar(request):
     """HU-03.1: registra o aviso (UC-01, passos 3 e 4)."""
+    if request.method == "GET":
+        # HU-16: depois de uma recusa, a barra mostra /avisos/. Abrir esse
+        # endereço de novo leva à página de publicar (CA-16.1).
+        return redirecionar(reverse("novo"))
+
     conta = request.user
     if not conta.is_authenticated or not conta.pode_publicar():
         # UC-01, 4c: a sessão acabou, por exemplo porque a pessoa saiu em outra
