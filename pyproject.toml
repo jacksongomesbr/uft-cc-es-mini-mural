@@ -11,3 +11,14 @@ extend-exclude = ["*/migrations/*"]
 # E e W: estilo da PEP 8. F: nomes e importações sem uso. I: ordem das
 # importações. B: construções que costumam esconder defeito. DJ: regras do Django.
 select = ["E", "W", "F", "I", "B", "DJ"]
+
+[tool.coverage.run]
+# Cobertura de linhas e de ramos do código da aplicação. O número é mapa do que
+# nenhum teste executa, e não meta (TESTES.md).
+branch = true
+source = ["contas", "avisos", "config"]
+omit = ["*/migrations/*", "*/tests.py", "config/asgi.py", "config/wsgi.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
