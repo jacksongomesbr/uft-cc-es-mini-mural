@@ -179,3 +179,6 @@ revisão; avaliar quem revisa fica fora do uso deles.
 - 2026-10-25: todo pull request que acrescenta critério de aceitação roda de
   novo a parte do conjunto da lista de verificação dos requisitos (#126,
   melhoria do processo da inspeção).
+- 2026-10-25: retrospectiva da iteração 4 (#133): os casos de teste de uma
+  história ficam no `TESTES.md` antes do código dela, como em HU-05 a HU-07, e o
+  planejamento usa a faixa das velocidades observadas.

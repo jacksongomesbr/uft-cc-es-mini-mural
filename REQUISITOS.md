@@ -45,14 +45,16 @@ histórico.
 | 7 | HU-06 Ler aviso aberto sem conta | N3 | Importante | Baixo | HU-05 | 2 |
 | 8 | HU-07 Arquivar o próprio aviso | N5, N6 | Importante | Médio: a regra de quem arquiva é conferida no servidor | HU-03.1 | 3 |
 | 9 | HU-03.2 Recusar a publicação quando o banco não responde | N1 (UC-01, 4e) | Importante | Médio: tratar a falha do banco sem perder o texto | HU-03.1 | 2 |
-| 10 | HU-13 Informar até quando o aviso vale | N13 | Desejável | Baixo | HU-03.1 | 2 |
-| 11 | HU-15 Corrigir o próprio aviso depois de publicado | N15 | Desejável | Médio: muda o estado publicado e pede histórico da correção | HU-03.1 | 3 |
-| 12 | HU-08 Arquivar o aviso vencido de outra pessoa | N12 | Fora desta versão | Baixo | HU-07 | Não estimado |
-| 13 | HU-09 Anexar arquivo ao aviso | N9 | Fora desta versão | Alto: armazenamento de arquivo | HU-03.1 | Não estimado |
-| 14 | HU-10 E-mail quando sair aviso novo | N8 | Fora desta versão | Médio: servidor de e-mail | HU-03.1 | Não estimado |
-| 15 | HU-11 Aviso para uma turma | N10 | Fora desta versão | Médio: cadastro de turmas | HU-05 | Não estimado |
-| 16 | HU-12 Entrar com a conta institucional | N11 | Fora desta versão | Alto: integração com sistema externo | Nenhuma | Não estimado |
-| 17 | HU-14 Saber quem viu o aviso | N14 | Fora desta versão | Médio: registro de leitura por conta | HU-04 | Não estimado |
+| 10 | HU-18 Confirmar antes de arquivar | N5 (teste de utilidade) | Importante | Baixo | HU-07 | A estimar |
+| 11 | HU-13 Informar até quando o aviso vale | N13 | Desejável | Baixo | HU-03.1 | 2 |
+| 12 | HU-15 Corrigir o próprio aviso depois de publicado | N15 | Desejável | Médio: muda o estado publicado e pede histórico da correção | HU-03.1 | 3 |
+| 13 | HU-17 Ver os próprios avisos arquivados | N5 (teste de utilidade) | Desejável | Baixo | HU-07 | A estimar |
+| 14 | HU-08 Arquivar o aviso vencido de outra pessoa | N12 | Fora desta versão | Baixo | HU-07 | Não estimado |
+| 15 | HU-09 Anexar arquivo ao aviso | N9 | Fora desta versão | Alto: armazenamento de arquivo | HU-03.1 | Não estimado |
+| 16 | HU-10 E-mail quando sair aviso novo | N8 | Fora desta versão | Médio: servidor de e-mail | HU-03.1 | Não estimado |
+| 17 | HU-11 Aviso para uma turma | N10 | Fora desta versão | Médio: cadastro de turmas | HU-05 | Não estimado |
+| 18 | HU-12 Entrar com a conta institucional | N11 | Fora desta versão | Alto: integração com sistema externo | Nenhuma | Não estimado |
+| 19 | HU-14 Saber quem viu o aviso | N14 | Fora desta versão | Médio: registro de leitura por conta | HU-04 | Não estimado |
 
 Ana ordenou o backlog, como diz o `PROCESSO.md`, com os três passos do capítulo
 5: classificação em MoSCoW, ordem por risco técnico dentro de cada grupo e
@@ -366,6 +368,25 @@ para não cair em uma página vazia ao recarregar ou voltar a ele.
   limite e a barra de endereço mostra `/avisos/`, quando ela abre esse endereço
   de novo, então vê a página de publicar.
 
+### HU-17 Ver os próprios avisos arquivados
+
+Como professor,
+quero ver a lista dos avisos que arquivei,
+para consultar o que já avisei sem guardar o endereço de cada aviso.
+
+[Origem: N5; teste de utilidade da iteração 4 (`TESTES.md`) e revisão da #140]
+
+### HU-18 Confirmar antes de arquivar
+
+Como servidora da secretaria,
+quero confirmar antes de o aviso sair do mural,
+para não arquivar por engano um aviso que ainda vale, já que o arquivamento não
+se desfaz (CA-07.3).
+
+[Origem: N5; teste de utilidade da iteração 4 (`TESTES.md`)]
+
+Os critérios das duas são escritos no planejamento da iteração em que entrarem.
+
 ### Fora desta versão
 
 - **HU-08 Arquivar o aviso vencido de outra pessoa.** Como servidora da
@@ -545,18 +566,18 @@ definiu pode mudá-las.
 
 ## Rastreabilidade
 
-A cadeia vai da fonte ao teste. A coluna de teste é preenchida nos capítulos 11
-e 12; até lá, cada critério é o caso de teste escrito em português.
+A cadeia vai da fonte ao teste. A coluna de teste aponta os casos do
+`TESTES.md`, e cada caso aponta o teste automatizado que o executa.
 
 | Fonte | Necessidade | História | Critérios | Teste |
 |---|---|---|---|---|
-| E1, E2, E3, RP | N1 | HU-01, HU-03.1, HU-03.2, HU-16, RN-01 | CA-01.1 a CA-01.6, CA-03.1 a CA-03.6, CA-16.1 | A escrever |
-| E4, E5, O1 | N2 | HU-04 | CA-04.1 a CA-04.3 | A escrever |
-| E3, E4 | N3 | HU-06 | CA-06.1 a CA-06.4 | A escrever |
-| E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.6, CA-05.1 a CA-05.4 | A escrever |
-| E1, E2, E4, O1 | N5 | HU-07 | CA-07.1, CA-07.3 a CA-07.5 | A escrever |
-| E2, D2 | N6 | HU-07, RN-02 | CA-07.2 | A escrever |
-| E2, E5, O1 | N7 | HU-01, HU-02, HU-03, HU-04 | CA-01.6, CA-02.1 a CA-02.4, CA-03.1, CA-04.1 | A escrever |
+| E1, E2, E3, RP | N1 | HU-01, HU-03.1, HU-03.2, HU-16, RN-01 | CA-01.1 a CA-01.6, CA-03.1 a CA-03.6, CA-16.1 | TC-01.1 a TC-01.6c, TC-03.1 a TC-03.5, TC-16.1 (`TESTES.md`) |
+| E4, E5, O1 | N2 | HU-04 | CA-04.1 a CA-04.3 | TC-04.1a a TC-04.3, TC-RNF-01 (`TESTES.md`) |
+| E3, E4 | N3 | HU-06 | CA-06.1 a CA-06.4 | TC-06.1 a TC-06.5 (`TESTES.md`) |
+| E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.6, CA-05.1 a CA-05.4 | TC-01.x, TC-05.1 a TC-05.4 (`TESTES.md`) |
+| E1, E2, E4, O1, teste de utilidade | N5 | HU-07, HU-17, HU-18 | CA-07.1, CA-07.3 a CA-07.5 | TC-07.1, TC-07.3 a TC-07.7 (`TESTES.md`) |
+| E2, D2 | N6 | HU-07, RN-02 | CA-07.2 | TC-07.2a, TC-07.2b (`TESTES.md`) |
+| E2, E5, O1 | N7 | HU-01, HU-02, HU-03, HU-04 | CA-01.6, CA-02.1 a CA-02.4, CA-03.1, CA-04.1 | TC-02.1 a TC-02.4, TC-03.1, TC-04.1a (`TESTES.md`) |
 | E4 | N8 | HU-10 | Fora desta versão | Não se aplica |
 | E1 | N9 | HU-09 | Fora desta versão | Não se aplica |
 | E2 | N10 | HU-11 | Fora desta versão | Não se aplica |
@@ -658,3 +679,5 @@ porque o protótipo de papel não mede o sistema real.
   CA-02.3 passa a usar a página de publicar; CA-07.2 diz que, com o aviso já
   arquivado, vale o CA-07.4; "caractere" entra no glossário; a pergunta do nome
   com acento fica em aberto, com a coordenação.
+- 2026-10-25: HU-17 e HU-18 criadas pelo teste de utilidade da iteração 4
+  (#133), sem estimativa até o planejamento.

@@ -161,9 +161,50 @@ responde 404 para quem não é o autor, e o caso segue o contrato.
 
 ## Relatório
 
-O resultado de cada execução, com a build, fica nesta seção (#133).
+### Execução de 2026-10-25, build `18ea9f7` (merge da #140)
+
+| Planejados | Executados | Aprovados | Falharam | Bloqueados | Não executados |
+|---:|---:|---:|---:|---:|---:|
+| 52 | 51 | 51 | 0 | 1 | 0 |
+
+- **Integração e unidade:** `python manage.py test`, `Ran 87 tests ... OK`. Os
+  casos automatizados apontam o teste na coluna "Teste".
+- **Sistema:** RNF-08 conferido em 360 por 640 no mural, na página de publicar,
+  na página do aviso e na do arquivado; RNF-06 com `curl` sem sessão, sem o
+  texto do interno; RNF-01 medido de novo, porque o mural ganhou o tipo, a
+  ligação e o botão: 350, 347 e 354 ms com 202 avisos e a rede limitada a
+  "Fast 4G", 83 kB transferidos (eram 53 kB na #95). Vale o maior, 354 ms.
+- **Bloqueado:** TC-01.6c, pela pergunta do nome com acento.
+- **Defeitos abertos:** nenhum.
+
+**Recomendação:** a build cumpre o critério de saída da iteração 4. O caso
+bloqueado fica listado, e a falta de evidência dele é declarada.
+
+## Teste de utilidade
+
+> Registro simulado, como a V1 e a review parcial (ver `ROTEIRO.md`).
+
+Em 2026-10-25, um aluno do 4º período de outra equipe da disciplina, que não
+conhecia o Mini Mural, usou a build `18ea9f7` no celular. Eva conduziu e Bruno
+anotou, sem ajudar. As tarefas foram escritas como objetivo:
+
+1. "Veja se há algum evento aberto nesta semana", sem conta.
+2. "Crie uma conta e avise que a monitoria mudou para terça, só para quem tem
+   conta."
+3. "O aviso da monitoria deixou de valer. Faça ele sair do mural."
+
+| Observação | Classificação | Destino |
+|---|---|---|
+| Achou o evento aberto sem conta, em cerca de 20 segundos | Sem achado | Nenhum |
+| Escolheu "Interno" e perguntou se "quem entrou com uma conta" inclui gente de fora do curso | Risco já registrado (R8) | Registro de ocorrência em R8, no `ITERACOES.md` |
+| Na tarefa 3, tocou em "Arquivar" e disse que esperava ser perguntado antes, porque o aviso sumiu na hora | Necessidade nova: o arquivamento não se desfaz (CA-07.3) | HU-18, importante, no `REQUISITOS.md` |
+| Depois de arquivar, procurou onde ver o aviso arquivado e não achou | Necessidade nova, a mesma pergunta da revisão da #140 | HU-17, desejável, no `REQUISITOS.md` |
+
+Uma pessoa não substitui um estudo de usabilidade, e a sessão não mostra a
+ausência de outros problemas.
 
 ## Histórico de revisão
 
 - 2026-10-25: primeira versão, com a estratégia, as omissões e os casos do
   fluxo principal e de HU-05 a HU-07 (#128).
+- 2026-10-25: relatório da build `18ea9f7` e teste de utilidade (#133).

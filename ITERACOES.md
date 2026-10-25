@@ -56,6 +56,62 @@ cada issue.
 O teste do GET das rotas (#115) é a decisão da retrospectiva da iteração 3 e
 entra como item próprio, com 1 ponto, fora da reserva.
 
+### Resultado
+
+**Concluído:** 12 de 12 pontos, todos pela definição de pronto: HU-16 (#121),
+os testes do GET (#122), a dívida da publicação (#123), HU-05 (#138), HU-06
+(#139) e HU-07 (#140). A meta foi cumprida: um visitante lê o aviso aberto sem
+conta, e o autor arquiva o próprio aviso.
+
+As velocidades observadas são 14 e 12. As duas iterações tiveram a mesma equipe,
+em tempo integral, e a de 12 tinha 12 planejados: a folga de 2 pontos não foi
+usada para puxar item, e por isso a observação não diz se 14 caberiam. Duas
+observações ainda não são faixa confiável.
+
+**Observação de quem usou:** no teste de utilidade (`TESTES.md`), o aluno de
+outra equipe achou o aviso aberto sem conta, arquivou o próprio aviso e
+procurou, em seguida, uma confirmação e a lista dos arquivados. As duas viraram
+HU-18 e HU-17.
+
+### Retrospectiva da iteração 4
+
+**Evidências**
+
+| Evidência | Valor | Fonte |
+|---|---|---|
+| Pontos planejados e concluídos | 12 e 12 | Quadro e estimativas |
+| Pull requests da iteração | 13: #119 a #125 e #135 a #140 | `gh pr list --state merged` |
+| Comentários que bloqueiam | 4: #119, #120, #122 e #136 | Coluna "Tipo" dos comentários de revisão |
+| Defeitos achados depois da integração | 1, o `GET /sair/` vazio (origem #92), achado na revisão da #122 pela pergunta nova da lista | `PROCESSO.md`, qualidade da revisão |
+| Achados da inspeção de requisitos | 5, dos quais 4 major, antes do código | #126 |
+| Histórias com os casos escritos antes do código | 3 de 3: HU-05, HU-06 e HU-07 | Histórico do `TESTES.md` |
+| Pedidos de mudança de comportamento nas revisões de HU-05 a HU-07 | 0 | Comentários de revisão de #138 a #140 |
+| Testes | De 58 para 87 | `python manage.py test` |
+
+**Leitura.** As três histórias com os casos escritos antes do código passaram
+pela revisão sem pedido de mudança de comportamento. A inspeção já tinha tirado
+as contradições do texto, e o código seguiu casos com resultado esperado
+fechado. Três histórias não provam a relação, e a equipe a mantém como prática
+para ver se se repete. A folga do plano não foi usada, e a pergunta da revisão
+da #120 fica respondida assim.
+
+**Decisões**
+
+| Mudança | Dono | Como conferir | Quando conferir |
+|---|---|---|---|
+| Os casos de uma história ficam no `TESTES.md` antes do código dela | Ana | O histórico do `TESTES.md` mostra os casos antes do pull request da história | Retrospectiva da iteração 5 |
+| O planejamento usa a faixa das velocidades observadas, hoje de 12 a 14, e puxa item da faixa de cima se o plano terminar antes | Ana | O plano da iteração 5 diz a faixa e o item da folga | Planejamento da iteração 5 |
+
+**Riscos revisados**
+
+- **R8** ocorreu como pergunta no teste de utilidade: o aluno quis saber se
+  "quem entrou com uma conta" inclui gente de fora do curso. Continua aceito, e
+  vai à revisão de C2 com a coordenação.
+- **R9** continua com a pergunta do nome com acento em aberto, e o TC-01.6c
+  bloqueado.
+- **R4** vence no encontro 12: Carla traz as opções de hospedagem no
+  planejamento da iteração 5.
+
 ## Review parcial (encontro 9)
 
 ### Preparação
