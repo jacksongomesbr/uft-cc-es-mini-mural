@@ -20,16 +20,17 @@ funciona nos commits, nas issues e na revisão.
 
 ## Estado atual
 
-O código começou no capítulo 7, com o esqueleto do projeto Django: a
-configuração, os módulos `contas` e `avisos`, o modelo de conta e uma página
-inicial. O mural e a publicação de avisos entram na iteração 3. O que cada versão entregou está
+O produto mínimo viável funciona: criar conta, entrar e sair, publicar um
+aviso curto e ver o mural, com o nome de quem publicou, a data e a hora. É o
+resultado da iteração 3, registrada no [ITERACOES.md](ITERACOES.md), e é o que
+a review parcial do encontro 9 demonstra. O que cada versão entregou está
 no [CHANGELOG.md](CHANGELOG.md).
 
 Para ver o projeto como estava no fim de um capítulo, abra a tag da versão,
 por exemplo:
 
 ```bash
-git switch --detach v0.6.0
+git switch --detach v0.7.0
 ```
 
 O [ROTEIRO.md](ROTEIRO.md) liga cada capítulo do livro ao artefato que ele
@@ -69,7 +70,15 @@ python manage.py test
 python manage.py runserver
 ```
 
-O último comando sobe o servidor de desenvolvimento do framework em
+Para ter contas e avisos de demonstração, sem dado de pessoa real:
+
+```bash
+python manage.py carregar_demonstracao --senha UMA-SENHA-DE-TESTE
+```
+
+Com `--avisos 200`, o mural fica com 200 avisos, a condição do RNF-01.
+
+O comando `runserver` sobe o servidor de desenvolvimento do framework em
 <http://127.0.0.1:8000/>. Ele serve para trabalhar e para a demonstração do
 encontro 9. A hospedagem e o servidor de produção são decididos no capítulo 14
 (A-11).
@@ -102,6 +111,7 @@ desenvolvimento (A-10):
 | [prototipo/](prototipo/) | Protótipo navegável do fluxo principal, com as recusas (capítulo 6) |
 | [ARQUITETURA.md](ARQUITETURA.md) | Responsabilidades, onde cada parte roda, verificações, qualidades e decisões de arquitetura (capítulo 7) |
 | [contrato/](contrato/) | Contrato das rotas: método, caminho, campos, códigos de status e mensagens (capítulo 7) |
+| [ITERACOES.md](ITERACOES.md) | Plano de cada iteração, estimativa, quadro, retrospectiva e preparação da demonstração (capítulo 8) |
 | [CHANGELOG.md](CHANGELOG.md) | O que mudou em cada versão |
 | [ROTEIRO.md](ROTEIRO.md) | Capítulos, artefatos e tags do semestre |
 

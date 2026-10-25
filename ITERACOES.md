@@ -107,7 +107,7 @@ Registro da #88, feita com tudo integrado ao `main`.
 
 - **Dados.** `python manage.py carregar_demonstracao --senha VALOR` cria três
   contas de demonstração e dois avisos, sem dado de pessoa real. A senha vem do
-  argumento, e não do código. Com `--avisos 200`, o mural fica na condição do
+  argumento; o código não guarda senha. Com `--avisos 200`, o mural fica na condição do
   RNF-01.
 - **Roteiro.** Duas tarefas, situadas como na validação V1, sem explicar a
   tela. A servidora da secretaria: "Avise a turma de que a aula de amanhã mudou
@@ -126,6 +126,20 @@ Registro da #88, feita com tudo integrado ao `main`.
   sem rolagem horizontal e com texto de 16 pixels.
 - **Ensaio.** O roteiro foi percorrido uma vez: criar conta, publicar, sair,
   entrar com `aluno.demo` e ver o aviso no topo. Nenhum ajuste no código.
+
+### Situação na véspera do encontro 9
+
+Integrado ao `main`: HU-01 (#91), HU-02 (#92), HU-04 (#93), HU-03.1 (#94) e a
+preparação da demonstração (#95), 14 dos 14 pontos planejados. HU-04 só fechou
+depois da medição do RNF-01, porque o ponto 4 da definição de pronto pede os
+requisitos não funcionais conferidos. A velocidade da iteração é registrada no
+fim dela, depois da demonstração e com a observação de quem usou, no capítulo
+9.
+
+As duas decisões da retrospectiva já podem ser conferidas. `contas/` tem quatro
+autores, e `avisos/` também. Os quatro pull requests de história (#91 a #94)
+têm o comentário com a lista dos critérios verificados por quem não escreveu o
+código.
 
 ## Iterações 1 e 2 (encontros 3 a 7)
 
@@ -161,8 +175,9 @@ Os outros números dizem mais. A revisão comum pediu mudança em 6 de 36 pull
 requests das duas iterações, e a contagem pela palavra "pedido" pode ter
 perdido algum escrito de outro jeito, como a redução do MVP no #29. As quatro
 revisões com roteiro encontraram 14 achados, e cada uma encontrou pelo menos
-dois. A diferença sugere que o roteiro, e não só a segunda pessoa, é o que faz
-a revisão encontrar defeito; com quatro sessões, é indício, e não medida.
+dois. A diferença sugere que o roteiro pesa mais do que a simples presença de
+uma segunda pessoa. Com quatro sessões, isso é indício, ainda sem valor de
+medida.
 
 O código tem um autor só, e a iteração 3 é a primeira em que todos escrevem
 código. Se só uma pessoa conhecer `contas/`, a review parcial depende dela.

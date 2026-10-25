@@ -4,6 +4,35 @@ Todas as mudanças relevantes do projeto ficam registradas aqui. O formato
 segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/), e as
 versões seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
+## [0.7.0] - 2026-10-24
+
+Fim do capítulo 8: planejamento da iteração 3 e o produto mínimo viável em
+funcionamento.
+
+### Adicionado
+
+- Registro das iterações, com o plano da iteração 3, a rodada de estimativa,
+  o quadro e a retrospectiva das iterações 1 e 2 (`ITERACOES.md`, #83).
+- Criar conta (HU-01, #84), entrar e sair (HU-02, #85), ver o mural (HU-04,
+  #86) e publicar aviso curto (HU-03.1, #87), com um teste por critério de
+  aceitação: 54 testes no total.
+- Modelo do aviso e a migração, com as restrições do `PROJETO.md` (#86).
+- Comando `carregar_demonstracao` e a preparação da demonstração do encontro
+  9, com a medição do RNF-01 (#88).
+
+### Alterado
+
+- Backlog com pontos, e HU-03 fatiada em HU-03.1 e HU-03.2 (`REQUISITOS.md`,
+  #83).
+- `PROCESSO.md` com o quadro, os limites de trabalho em andamento e as
+  práticas adotadas (#83).
+- Contrato: "Corte 1 caractere", no singular (#87).
+
+### Corrigido
+
+- O cadastro mostra a mensagem do CA-01.2, em vez de erro 500, quando o banco
+  recusa um nome gravado ao mesmo tempo por outra pessoa (#84).
+
 ## [0.6.0] - 2026-10-24
 
 Fim do capítulo 7: arquitetura e esqueleto do projeto Django.
@@ -124,6 +153,7 @@ Fim dos capítulos 1 e 2: problema proposto e repositório configurado.
 - Proteção do `main`: envio direto e reescrita de histórico bloqueados, com
   pull request obrigatório.
 
+[0.7.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.3.0...v0.4.0
