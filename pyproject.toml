@@ -1,0 +1,13 @@
+# Configuração das ferramentas de verificação. A discussão de estilo termina
+# aqui: quem revisa não comenta o que estas regras já decidem.
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+# As migrações são geradas pelo framework e não se editam à mão.
+extend-exclude = ["*/migrations/*"]
+
+[tool.ruff.lint]
+# E e W: estilo da PEP 8. F: nomes e importações sem uso. I: ordem das
+# importações. B: construções que costumam esconder defeito. DJ: regras do Django.
+select = ["E", "W", "F", "I", "B", "DJ"]

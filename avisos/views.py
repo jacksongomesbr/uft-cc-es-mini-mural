@@ -1,4 +1,5 @@
 """Páginas de avisos. O contrato de cada rota está em contrato/operacoes.md."""
+
 from urllib.parse import urlencode
 
 from django.contrib.auth.decorators import login_required
@@ -56,7 +57,9 @@ def arquivar(request, id):
         return nao_encontrado(request)
     if not aviso.pode_ser_arquivado_por(request.user):
         mensagem = "Só quem publicou o aviso pode arquivá-lo."
-        return render(request, "avisos/proibido.html", {"mensagem": mensagem, "aviso": aviso}, status=403)
+        return render(
+            request, "avisos/proibido.html", {"mensagem": mensagem, "aviso": aviso}, status=403
+        )
     aviso.arquivar()
     return redirecionar(reverse("mural"))
 
@@ -98,5 +101,7 @@ def criar(request):
 
     # A-08: o autor vem da sessão; o formulário não tem campo de autor, e um
     # campo forjado é ignorado. O instante vem do banco (DP-10).
-    Aviso.objects.create(autor=conta, texto=form.cleaned_data["texto"], tipo=form.cleaned_data["tipo"])
+    Aviso.objects.create(
+        autor=conta, texto=form.cleaned_data["texto"], tipo=form.cleaned_data["tipo"]
+    )
     return redirecionar(reverse("mural"))

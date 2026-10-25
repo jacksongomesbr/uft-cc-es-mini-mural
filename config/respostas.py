@@ -1,4 +1,5 @@
 """Respostas usadas pelos dois módulos."""
+
 from django.http import HttpResponseRedirect
 
 

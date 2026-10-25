@@ -1,4 +1,5 @@
 """Páginas de contas. O contrato de cada rota está em contrato/operacoes.md."""
+
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.shortcuts import render

@@ -1,4 +1,5 @@
 """Formulários de avisos. As mensagens são as do contrato/operacoes.md."""
+
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -13,7 +14,12 @@ class AvisoForm(forms.Form):
         label="Texto do aviso",
         required=False,
         widget=forms.Textarea(
-            attrs={"rows": 6, "required": True, "data-limite": LIMITE_DO_TEXTO, "data-contador": "contador"}
+            attrs={
+                "rows": 6,
+                "required": True,
+                "data-limite": LIMITE_DO_TEXTO,
+                "data-contador": "contador",
+            }
         ),
     )
 

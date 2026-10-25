@@ -1,4 +1,5 @@
 """Testes do esqueleto da conta: os campos que existem e as restrições do banco."""
+
 from unittest import mock
 
 from django.contrib.auth import get_user_model
@@ -30,7 +31,9 @@ class RestricoesDaContaTest(TestCase):
     """O banco recusa o que nunca pode acontecer, venha de onde vier a gravação."""
 
     def setUp(self):
-        self.paula = Conta.objects.create_user("paula.sec", "Secretaria do curso", "senha-de-teste-1")
+        self.paula = Conta.objects.create_user(
+            "paula.sec", "Secretaria do curso", "senha-de-teste-1"
+        )
 
     def test_senha_guardada_como_valor_derivado(self):
         # RNF-04: o banco não guarda a senha.
@@ -68,7 +71,9 @@ class RestricoesDaContaTest(TestCase):
 class CadastroTest(TestCase):
     """HU-01: um teste por critério de aceitação."""
 
-    def cadastrar(self, nome_usuario="livia.m", nome_exibicao="Lívia Martins", senha="senha-com-12"):
+    def cadastrar(
+        self, nome_usuario="livia.m", nome_exibicao="Lívia Martins", senha="senha-com-12"
+    ):
         return self.client.post(
             "/cadastro/",
             {"nome_usuario": nome_usuario, "nome_exibicao": nome_exibicao, "senha": senha},
@@ -84,7 +89,9 @@ class CadastroTest(TestCase):
     def test_ca_01_2_nome_de_usuario_em_uso(self):
         self.cadastrar()
         self.client.logout()
-        resposta = self.cadastrar(nome_usuario="Livia.M", nome_exibicao="Outra Lívia", senha="outra-senha-1")
+        resposta = self.cadastrar(
+            nome_usuario="Livia.M", nome_exibicao="Outra Lívia", senha="outra-senha-1"
+        )
         self.assertEqual(resposta.status_code, 422)
         self.assertContains(resposta, "Esse nome de usuário já está em uso.", status_code=422)
         # Mantém o que foi preenchido, menos a senha.
@@ -188,7 +195,9 @@ class EntrarESairTest(TestCase):
 
     def test_motivo_mostra_a_mensagem_do_aviso_nao_publicado(self):
         resposta = self.client.get("/entrar/?next=/avisos/novo/&motivo=aviso-nao-publicado")
-        self.assertContains(resposta, "Você saiu da conta em outra aba. Entre de novo; o aviso não foi publicado.")
+        self.assertContains(
+            resposta, "Você saiu da conta em outra aba. Entre de novo; o aviso não foi publicado."
+        )
 
 
 class EnderecoDepoisDoEnvioTest(TestCase):

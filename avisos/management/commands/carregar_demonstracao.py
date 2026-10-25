@@ -10,6 +10,7 @@ contas.
 A segunda forma acrescenta avisos até o mural ter a quantidade pedida, que é
 a condição do RNF-01.
 """
+
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
@@ -51,7 +52,10 @@ class Command(BaseCommand):
         faltam = avisos - Aviso.objects.publicados().count()
         autores = list(contas.values())
         Aviso.objects.bulk_create(
-            Aviso(autor=autores[i % len(autores)], texto=f"Aviso de carga número {i + 1}, para medir o mural.")
+            Aviso(
+                autor=autores[i % len(autores)],
+                texto=f"Aviso de carga número {i + 1}, para medir o mural.",
+            )
             for i in range(max(faltam, 0))
         )
 

@@ -1,4 +1,5 @@
 """Testes do aviso e do mural (HU-04): um teste por critério, mais o RNF-01 e o RNF-05."""
+
 from datetime import datetime, timedelta, timezone
 
 from django.conf import settings
@@ -19,7 +20,9 @@ def instante(hora, minuto=0):
 
 class MuralTest(TestCase):
     def setUp(self):
-        self.paula = Conta.objects.create_user("paula.sec", "Secretaria do curso", "senha-de-teste-1")
+        self.paula = Conta.objects.create_user(
+            "paula.sec", "Secretaria do curso", "senha-de-teste-1"
+        )
         self.livia = Conta.objects.create_user("livia.m", "Lívia Martins", "senha-de-teste-2")
         self.client.force_login(self.livia)
 
@@ -51,7 +54,10 @@ class MuralTest(TestCase):
 
     def test_arquivado_fora_do_mural(self):
         Aviso.objects.create(
-            autor=self.paula, texto="Aviso que saiu", situacao=Aviso.ARQUIVADO, arquivado_em=tz.now()
+            autor=self.paula,
+            texto="Aviso que saiu",
+            situacao=Aviso.ARQUIVADO,
+            arquivado_em=tz.now(),
         )
         self.assertNotContains(self.client.get("/"), "Aviso que saiu")
 
@@ -77,7 +83,9 @@ class RestricoesDoAvisoTest(TestCase):
     """O banco recusa o que nunca pode acontecer (PROJETO.md, DP-04, DP-05, DP-09, DP-10)."""
 
     def setUp(self):
-        self.paula = Conta.objects.create_user("paula.sec", "Secretaria do curso", "senha-de-teste-1")
+        self.paula = Conta.objects.create_user(
+            "paula.sec", "Secretaria do curso", "senha-de-teste-1"
+        )
 
     def test_instante_vem_do_banco(self):
         aviso = Aviso.objects.create(autor=self.paula, texto="Sem instante informado")
@@ -121,7 +129,9 @@ class PublicarTest(TestCase):
     """HU-03.1: um teste por critério, mais CA-02.4, RNF-03 e A-08."""
 
     def setUp(self):
-        self.paula = Conta.objects.create_user("paula.sec", "Secretaria do curso", "senha-de-teste-1")
+        self.paula = Conta.objects.create_user(
+            "paula.sec", "Secretaria do curso", "senha-de-teste-1"
+        )
         self.livia = Conta.objects.create_user("livia.m", "Lívia Martins", "senha-de-teste-2")
         self.client.force_login(self.paula)
 
@@ -145,7 +155,9 @@ class PublicarTest(TestCase):
         for texto in ("", "  \r\n  "):
             with self.subTest(texto=texto):
                 resposta = self.publicar(texto)
-                self.assertContains(resposta, "O aviso precisa de texto. Nada foi publicado.", status_code=422)
+                self.assertContains(
+                    resposta, "O aviso precisa de texto. Nada foi publicado.", status_code=422
+                )
         self.assertFalse(Aviso.objects.exists())
 
     def test_ca_03_3_acima_do_limite(self):
@@ -216,7 +228,9 @@ class CarregarDemonstracaoTest(TestCase):
 
         from django.core.management import call_command
 
-        call_command("carregar_demonstracao", "--senha", "senha-de-teste-1", *argumentos, stdout=StringIO())
+        call_command(
+            "carregar_demonstracao", "--senha", "senha-de-teste-1", *argumentos, stdout=StringIO()
+        )
 
     def test_rodar_de_novo_nao_duplica(self):
         self.carregar()
@@ -230,7 +244,9 @@ class CarregarDemonstracaoTest(TestCase):
 
     def test_senha_vem_do_argumento(self):
         self.carregar()
-        self.assertTrue(Conta.objects.get(nome_usuario="aluno.demo").check_password("senha-de-teste-1"))
+        self.assertTrue(
+            Conta.objects.get(nome_usuario="aluno.demo").check_password("senha-de-teste-1")
+        )
 
 
 class RegraDoTextoTest(SimpleTestCase):
@@ -239,7 +255,9 @@ class RegraDoTextoTest(SimpleTestCase):
     def test_tc_03_2_vazio_e_so_espacos(self):
         for texto in ("", "   ", " \r\n \n "):
             with self.subTest(texto=texto):
-                self.assertEqual(preparar_texto(texto)[1], "O aviso precisa de texto. Nada foi publicado.")
+                self.assertEqual(
+                    preparar_texto(texto)[1], "O aviso precisa de texto. Nada foi publicado."
+                )
 
     def test_tc_03_3b_500_com_espacos_nas_pontas(self):
         texto, erro = preparar_texto("  " + "a" * 500 + "  ")
@@ -258,7 +276,7 @@ class RegraDoTextoTest(SimpleTestCase):
         self.assertEqual(len(texto), 500)
 
     def test_tc_03_4c_emoji_composto_conta_pontos_de_codigo(self):
-        familia = "\U0001F468‍\U0001F469‍\U0001F467"  # aparece como um símbolo
+        familia = "\U0001f468‍\U0001f469‍\U0001f467"  # aparece como um símbolo
         self.assertEqual(len(familia), 5)
         self.assertIsNone(preparar_texto(familia + "a" * 495)[1])
         self.assertIsNotNone(preparar_texto(familia + "a" * 496)[1])
@@ -268,7 +286,9 @@ class TipoDoAvisoTest(TestCase):
     """HU-05: TC-05.1 a TC-05.4 do TESTES.md."""
 
     def setUp(self):
-        self.paula = Conta.objects.create_user("paula.sec", "Secretaria do curso", "senha-de-teste-1")
+        self.paula = Conta.objects.create_user(
+            "paula.sec", "Secretaria do curso", "senha-de-teste-1"
+        )
         self.client.force_login(self.paula)
 
     def test_tc_05_1_sem_tipo_e_interno(self):
@@ -302,8 +322,12 @@ class AvisoAbertoSemContaTest(TestCase):
 
     def setUp(self):
         self.ca = Conta.objects.create_user("ca.computacao", "Centro acadêmico", "senha-de-teste-1")
-        self.aberto = Aviso.objects.create(autor=self.ca, texto="Palestra aberta na quinta", tipo=Aviso.ABERTO)
-        self.interno = Aviso.objects.create(autor=self.ca, texto="Troca de sala interna", tipo=Aviso.INTERNO)
+        self.aberto = Aviso.objects.create(
+            autor=self.ca, texto="Palestra aberta na quinta", tipo=Aviso.ABERTO
+        )
+        self.interno = Aviso.objects.create(
+            autor=self.ca, texto="Troca de sala interna", tipo=Aviso.INTERNO
+        )
 
     def test_tc_06_1_visitante_ve_so_os_abertos(self):
         resposta = self.client.get("/")
@@ -325,13 +349,19 @@ class AvisoAbertoSemContaTest(TestCase):
         self.assertNotIn(b"Troca de sala interna", resposta.content)
 
     def test_tc_06_4_aberto_pelo_endereco(self):
-        self.assertContains(self.client.get(f"/avisos/{self.aberto.pk}/"), "Palestra aberta na quinta")
+        self.assertContains(
+            self.client.get(f"/avisos/{self.aberto.pk}/"), "Palestra aberta na quinta"
+        )
 
     def test_aviso_que_nao_existe(self):
-        self.assertContains(self.client.get("/avisos/999999/"), "Aviso não encontrado", status_code=404)
+        self.assertContains(
+            self.client.get("/avisos/999999/"), "Aviso não encontrado", status_code=404
+        )
 
     def test_com_conta_ve_aberto_e_interno(self):
-        self.client.force_login(Conta.objects.create_user("livia.m", "Lívia Martins", "senha-de-teste-2"))
+        self.client.force_login(
+            Conta.objects.create_user("livia.m", "Lívia Martins", "senha-de-teste-2")
+        )
         resposta = self.client.get("/")
         self.assertContains(resposta, "Palestra aberta na quinta")
         self.assertContains(resposta, "Troca de sala interna")
@@ -377,12 +407,18 @@ class MuralConcordaComQuemVeTest(TestCase):
         for tipo in (Aviso.ABERTO, Aviso.INTERNO):
             Aviso.objects.create(autor=autor, texto=f"{tipo} publicado", tipo=tipo)
             Aviso.objects.create(
-                autor=autor, texto=f"{tipo} arquivado", tipo=tipo, situacao=Aviso.ARQUIVADO, arquivado_em=tz.now()
+                autor=autor,
+                texto=f"{tipo} arquivado",
+                tipo=tipo,
+                situacao=Aviso.ARQUIVADO,
+                arquivado_em=tz.now(),
             )
         for conta in (AnonymousUser(), outra, autor):
             no_mural = set(Aviso.objects.do_mural(conta))
             visiveis_e_publicados = {
-                aviso for aviso in Aviso.objects.all() if aviso.pode_ser_visto_por(conta) and aviso.situacao == Aviso.PUBLICADO
+                aviso
+                for aviso in Aviso.objects.all()
+                if aviso.pode_ser_visto_por(conta) and aviso.situacao == Aviso.PUBLICADO
             }
             with self.subTest(conta=str(conta)):
                 self.assertEqual(no_mural, visiveis_e_publicados)
@@ -392,13 +428,23 @@ class ArquivarTest(TestCase):
     """HU-07: TC-07.1 a TC-07.7 do TESTES.md."""
 
     def setUp(self):
-        self.paula = Conta.objects.create_user("paula.sec", "Secretaria do curso", "senha-de-teste-1")
-        self.prof = Conta.objects.create_user("prof.calculo", "Prof. de Cálculo", "senha-de-teste-2")
-        self.do_prof = Aviso.objects.create(autor=self.prof, texto="Prova adiada", tipo=Aviso.ABERTO)
-        self.da_paula = Aviso.objects.create(autor=self.paula, texto="Troca de sala", tipo=Aviso.ABERTO)
+        self.paula = Conta.objects.create_user(
+            "paula.sec", "Secretaria do curso", "senha-de-teste-1"
+        )
+        self.prof = Conta.objects.create_user(
+            "prof.calculo", "Prof. de Cálculo", "senha-de-teste-2"
+        )
+        self.do_prof = Aviso.objects.create(
+            autor=self.prof, texto="Prova adiada", tipo=Aviso.ABERTO
+        )
+        self.da_paula = Aviso.objects.create(
+            autor=self.paula, texto="Troca de sala", tipo=Aviso.ABERTO
+        )
 
     def arquivado_as(self, aviso, hora):
-        Aviso.objects.filter(pk=aviso.pk).update(situacao=Aviso.ARQUIVADO, arquivado_em=instante(hora))
+        Aviso.objects.filter(pk=aviso.pk).update(
+            situacao=Aviso.ARQUIVADO, arquivado_em=instante(hora)
+        )
         aviso.refresh_from_db()
         return aviso
 
@@ -434,7 +480,9 @@ class ArquivarTest(TestCase):
     def test_tc_07_4_outra_conta_pede_o_arquivado(self):
         self.arquivado_as(self.da_paula, 10)
         self.client.force_login(self.prof)
-        self.assertContains(self.client.get(f"/avisos/{self.da_paula.pk}/"), "Aviso não encontrado", status_code=404)
+        self.assertContains(
+            self.client.get(f"/avisos/{self.da_paula.pk}/"), "Aviso não encontrado", status_code=404
+        )
 
     def test_tc_07_5_autor_pede_o_arquivado(self):
         self.arquivado_as(self.da_paula, 10)
@@ -450,7 +498,9 @@ class ArquivarTest(TestCase):
 
     def test_tc_07_7_endereco_depois_da_recusa(self):
         resposta = self.client.get(f"/avisos/{self.da_paula.pk}/arquivar/")
-        self.assertEqual((resposta.status_code, resposta["Location"]), (303, f"/avisos/{self.da_paula.pk}/"))
+        self.assertEqual(
+            (resposta.status_code, resposta["Location"]), (303, f"/avisos/{self.da_paula.pk}/")
+        )
 
     def test_botao_so_para_o_autor(self):
         self.client.force_login(self.paula)
