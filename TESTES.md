@@ -29,7 +29,7 @@ nenhum defeito major aberto, e cada caso bloqueado listado com a pergunta que o
 desbloqueia.
 
 **Resultado de um caso.** Aprovado, falhou, bloqueado ou não executado. Caso
-bloqueado é falta de evidência, e não aprovação.
+bloqueado é falta de evidência, e nunca conta como aprovado.
 
 ## O que não se testa
 
@@ -135,10 +135,10 @@ Escritos antes do código; testes na #132.
 | TC-07.3 | CA-07.3 | Arquivar de novo | Arquivado às 10h | O autor arquiva às 11h | 303, a data continua 10h | Integração | `test_tc_07_3_arquivar_de_novo` |
 | TC-07.4 | CA-07.4 | Outra conta pede o arquivado | Aviso arquivado de "paula.sec" | Outra conta pede o endereço | 404 | Integração | `test_tc_07_4_outra_conta_pede_o_arquivado` |
 | TC-07.5 | CA-07.5 | Autor pede o arquivado | Aviso arquivado de "paula.sec" | Ela pede o endereço | 200, com a data e a hora do arquivamento | Integração | `test_tc_07_5_autor_pede_o_arquivado` |
-| TC-07.6 | CA-07.4 | Visitante pede o arquivado | Aviso arquivado e aberto | Visitante pede o endereço | 404, e não a página de entrar | Integração | `test_tc_07_6_visitante_pede_o_arquivado` |
+| TC-07.6 | CA-07.4 | Visitante pede o arquivado | Aviso arquivado e aberto | Visitante pede o endereço | 404, como aviso inexistente | Integração | `test_tc_07_6_visitante_pede_o_arquivado` |
 | TC-07.7 | Lista de verificação | Endereço depois da recusa | Recusa do TC-07.2a | Abrir `/avisos/{id}/arquivar/` com GET | 303 para o aviso | Integração | `test_tc_07_7_endereco_depois_da_recusa` |
 
-O TC-07.6 saiu da partição, e não de um critério escrito: o CA-07.4 fala de
+O TC-07.6 saiu da partição, sem critério escrito que o pedisse: o CA-07.4 fala de
 "outra pessoa com conta", e o visitante é outra pessoa sem conta. O contrato
 responde 404 para quem não é o autor, e o caso segue o contrato.
 

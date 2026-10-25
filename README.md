@@ -20,21 +20,17 @@ funciona nos commits, nas issues e na revisão.
 
 ## Estado atual
 
-O produto mínimo viável funciona: criar conta, entrar e sair, publicar um
-aviso curto e ver o mural, com o nome de quem publicou, a data e a hora. Ele
-foi demonstrado na review parcial do encontro 9, a partir do código da tag
-`v0.7.0`. As observações, a autoavaliação e os itens que a review gerou estão
-no [ITERACOES.md](ITERACOES.md) e no [REQUISITOS.md](REQUISITOS.md). A
-iteração 4 está em andamento, com a revisão feita pela lista de verificação do
-[CONTRIBUTING.md](CONTRIBUTING.md) e a dívida técnica registrada nas issues
-com a etiqueta `tipo:divida`. O que cada versão entregou está
-no [CHANGELOG.md](CHANGELOG.md).
+O Mini Mural tem as histórias obrigatórias e as importantes da iteração 4:
+criar conta, entrar e sair, publicar aviso aberto ou interno, ver o mural,
+ler aviso aberto sem conta e arquivar o próprio aviso. A estratégia de teste e
+os casos estão no [TESTES.md](TESTES.md), e o plano e as retrospectivas, no
+[ITERACOES.md](ITERACOES.md).
 
 Para ver o projeto como estava no fim de um capítulo, abra a tag da versão,
 por exemplo:
 
 ```bash
-git switch --detach v0.9.0
+git switch --detach v0.10.0
 ```
 
 O [ROTEIRO.md](ROTEIRO.md) liga cada capítulo do livro ao artefato que ele
@@ -124,6 +120,7 @@ desenvolvimento (A-10):
 | [prototipo/](prototipo/) | Protótipo navegável do fluxo principal, com as recusas (capítulo 6) |
 | [ARQUITETURA.md](ARQUITETURA.md) | Responsabilidades, onde cada parte roda, verificações, qualidades e decisões de arquitetura (capítulo 7) |
 | [contrato/](contrato/) | Contrato das rotas: método, caminho, campos, códigos de status e mensagens (capítulo 7) |
+| [TESTES.md](TESTES.md) | Estratégia de teste, omissões deliberadas, casos derivados dos critérios, relatório e teste de utilidade (capítulo 11) |
 | [ITERACOES.md](ITERACOES.md) | Plano de cada iteração, estimativa, quadro, retrospectiva, preparação da demonstração (capítulo 8) e registro da review parcial (capítulo 9) |
 | [scripts/](scripts/) | Restauração do banco da demonstração e o texto preparado do roteiro (capítulo 9) |
 | [CHANGELOG.md](CHANGELOG.md) | O que mudou em cada versão |

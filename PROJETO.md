@@ -269,7 +269,7 @@ confundir com os documentos D1 e D2 do `DESCOBERTA.md`.
 | DP-09 | O limite de 500 caracteres fica no aviso e é repetido como restrição do banco | A restrição é a segunda barreira contra gravação que não passe pela tela | Mudar o limite toca dois lugares, no mesmo pull request |
 | DP-10 | O registro atribui o instante da publicação | CA-03.1 pede a hora da publicação, e o relógio do aparelho de quem publica não é confiável | A tela mostra a hora que o registro devolveu |
 | DP-11 | O contador da página de publicar repete, no navegador, a contagem de caracteres do servidor | RNF-02: quem publica vê a contagem antes de enviar. Capacidade de interação ganhou da manutenibilidade | Mudar a regra de contagem toca dois lugares, `preparar_texto` e `static/js/contador.js`, no mesmo pull request; o servidor continua decidindo |
-| DP-12 | A regra de quem vê existe como método do aviso (`pode_ser_visto_por`) e como consulta do mural (`do_mural`) | O mural precisa filtrar no banco, e não aviso por aviso, por causa do RNF-01; o detalhe precisa decidir um aviso só | A regra está escrita duas vezes, e um teste confere que as duas concordam para visitante, outra conta e autor; mudar a regra muda as duas no mesmo pull request |
+| DP-12 | A regra de quem vê existe como método do aviso (`pode_ser_visto_por`) e como consulta do mural (`do_mural`) | O mural precisa filtrar no banco, de uma vez, por causa do RNF-01; o detalhe precisa decidir um aviso só | A regra está escrita duas vezes, e um teste confere que as duas concordam para visitante, outra conta e autor; mudar a regra muda as duas no mesmo pull request |
 
 ## Qualidade do código
 
