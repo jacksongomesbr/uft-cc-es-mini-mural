@@ -4,6 +4,39 @@ Todas as mudanças relevantes do projeto ficam registradas aqui. O formato
 segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/), e as
 versões seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
+## [0.11.0] - 2026-10-25
+
+Fim do capítulo 12: testes automatizados e integração contínua, e fim da
+iteração 5.
+
+### Adicionado
+
+- Opções de hospedagem levantadas para R4, com o conflito entre as
+  hospedagens gratuitas e o RNF-01 (`ARQUITETURA.md`, #151).
+- Plano da iteração 5, de uma semana (#152).
+- `requirements-dev.txt`, com as ferramentas de verificação (#153).
+- Ruff como formatador e verificador de estilo, com as regras no
+  `pyproject.toml` e o que a ferramenta decide no `CONTRIBUTING.md` (#154).
+- Verificação automática no GitHub Actions a cada pull request e a cada envio
+  ao `main`, com PostgreSQL 18 de serviço (`.github/workflows/verificacao.yml`,
+  #155).
+- Cobertura de linhas e desvios, e os testes das duas regras do contrato que o
+  mapa mostrou sem teste (#156).
+- HU-18: confirmar antes de arquivar, pelo ciclo do desenvolvimento guiado por
+  testes (#157).
+- Execução automatizada e casos fora da automação no `TESTES.md`, relatório da
+  build `1c57be3` e fim da iteração 5 com 7 de 7 pontos (#158).
+
+### Alterado
+
+- Dependências da aplicação com a versão fixa, que paga a dívida #110 (#153).
+- Código formatado pelo Ruff; a recusa da senha guarda a causa original (#154).
+- Proteção do `main`: a integração exige a verificação `testes` verde e o ramo
+  atualizado com o `main` (#155).
+- O "Arquivar" do mural e da página do aviso leva à página de confirmação, e o
+  contrato do GET de arquivar acompanha (#157).
+- Critério de saída do `TESTES.md` com a verificação verde no `main` (#158).
+
 ## [0.10.0] - 2026-10-25
 
 Fim do capítulo 11: verificação e validação, e fim da iteração 4.
@@ -239,6 +272,7 @@ Fim dos capítulos 1 e 2: problema proposto e repositório configurado.
 - Proteção do `main`: envio direto e reescrita de histórico bloqueados, com
   pull request obrigatório.
 
+[0.11.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.10.0...v0.11.0
 [0.10.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.7.0...v0.8.0
