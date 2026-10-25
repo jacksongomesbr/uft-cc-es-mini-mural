@@ -4,7 +4,7 @@ from django.db import IntegrityError
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
-from django.views.decorators.http import require_http_methods, require_POST
+from django.views.decorators.http import require_http_methods
 
 from config.respostas import redirecionar
 
@@ -87,8 +87,15 @@ def entrar(request):
     )
 
 
-@require_POST
+@require_http_methods(["GET", "POST"])
 def sair(request):
-    """CA-02.4: apaga a sessão no servidor. Por GET, 405."""
+    """CA-02.4: apaga a sessão no servidor.
+
+    Por GET, 405: uma ligação não tira a pessoa da conta. A resposta tem página,
+    com o botão de sair, porque o endereço pode ficar na barra depois de um
+    envio recusado.
+    """
+    if request.method == "GET":
+        return render(request, "contas/sair.html", status=405)
     logout(request)
     return redirecionar(reverse("entrar"))

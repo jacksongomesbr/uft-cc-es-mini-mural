@@ -202,3 +202,14 @@ class EnderecoDepoisDoEnvioTest(TestCase):
         resposta = self.client.post("/entrar/", {"nome_usuario": "ninguem", "senha": "errada-123"})
         self.assertEqual(resposta.status_code, 422)
         self.assertContains(self.client.get("/entrar/"), "Entrar")
+
+    def test_sair_recusado_e_aberto_de_novo(self):
+        # POST sem a marca de proteção é recusado com 403, e a barra fica em /sair/.
+        conta = Conta.objects.create_user("paula.sec", "Secretaria do curso", "senha-de-teste-1")
+        from django.test import Client
+
+        cliente = Client(enforce_csrf_checks=True)
+        cliente.force_login(conta)
+        self.assertEqual(cliente.post("/sair/").status_code, 403)
+        resposta = cliente.get("/sair/")
+        self.assertContains(resposta, "Para sair da conta, use o botão abaixo.", status_code=405)
