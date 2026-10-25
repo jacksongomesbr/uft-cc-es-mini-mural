@@ -268,6 +268,23 @@ confundir com os documentos D1 e D2 do `DESCOBERTA.md`.
 | DP-08 | As regras de publicar, ler e arquivar ficam na conta e no aviso, e nenhuma na tela | RNF-07 pede cada regra em um lugar só, e RN-01 tem prazo (D2) | A tela pergunta ao aviso e à conta em vez de conferir sozinha |
 | DP-09 | O limite de 500 caracteres fica no aviso e é repetido como restrição do banco | A restrição é a segunda barreira contra gravação que não passe pela tela | Mudar o limite toca dois lugares, no mesmo pull request |
 | DP-10 | O registro atribui o instante da publicação | CA-03.1 pede a hora da publicação, e o relógio do aparelho de quem publica não é confiável | A tela mostra a hora que o registro devolveu |
+| DP-11 | O contador da página de publicar repete, no navegador, a contagem de caracteres do servidor | RNF-02: quem publica vê a contagem antes de enviar. Capacidade de interação ganhou da manutenibilidade | Mudar a regra de contagem toca dois lugares, `preparar_texto` e `static/js/contador.js`, no mesmo pull request; o servidor continua decidindo |
+
+## Qualidade do código
+
+O módulo `avisos`, lido pelas cinco perguntas da manutenibilidade da ISO/IEC
+25010, em 2026-10-25:
+
+| Subcaracterística | Pergunta | Resposta |
+|---|---|---|
+| Modularidade | Uma mudança em uma parte obriga a alterar outra que não deveria? | Não para a regra do texto; mudar o limite toca o aviso, a restrição do banco (DP-09) e o contador (DP-11), três lugares registrados |
+| Reusabilidade | O código se repete entre publicar e, depois, corrigir (HU-15)? | Ainda não há correção; o formulário da #123 é o ponto que a correção vai usar |
+| Analisabilidade | Dá para descobrir por que uma regra existe? | Sim: cada regra cita o critério ou a decisão no comentário, e o commit cita a issue |
+| Modificabilidade | Mudar quem publica toca um lugar só? | Sim: `pode_publicar`, na conta (DP-08) |
+| Testabilidade | A regra do texto se testa sem servidor? | Em parte: `preparar_texto` é uma função pura, e os testes atuais a exercitam pelas rotas |
+
+A resposta mais fraca é a da testabilidade: não há teste da regra do texto
+sozinha, e o capítulo 11 decide a estratégia de testes.
 
 ## Protótipo
 
@@ -333,3 +350,4 @@ porque nela nada acontece.
 - 2026-10-24: protótipo navegável do fluxo principal (#59).
 - 2026-10-24: conferência cruzada e correções (#60).
 - 2026-10-24: conferência contra o código antes da review parcial (#97): índices que o framework cria (DP-07) e onde mora a regra do texto.
+- 2026-10-25: DP-11 e a leitura do módulo `avisos` pela manutenibilidade (#117).
