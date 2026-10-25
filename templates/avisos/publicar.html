@@ -5,14 +5,12 @@
 
 {% block conteudo %}
 <h1>Publicar aviso</h1>
-{% if erro %}<p class="recusa">{{ erro }}</p>{% endif %}
+{% for erro in form.texto.errors %}<p class="recusa">{{ erro }}</p>{% endfor %}
 <form method="post" action="{% url 'criar' %}">
   {% csrf_token %}
-  <div class="campo{% if erro %} campo-com-erro{% endif %}">
-    <label for="texto">Texto do aviso</label>
-    {# Sem limite no campo: quem passa do limite recebe a recusa com a contagem (CA-03.3). #}
-    <textarea id="texto" name="texto" rows="6" required
-              data-limite="{{ limite }}" data-contador="contador">{{ texto }}</textarea>
+  <div class="campo{% if form.texto.errors %} campo-com-erro{% endif %}">
+    <label for="{{ form.texto.id_for_label }}">{{ form.texto.label }}</label>
+    {{ form.texto }}
     <p class="dica" id="contador" aria-live="polite">Até {{ limite }} caracteres.</p>
   </div>
   <button type="submit">Publicar</button>

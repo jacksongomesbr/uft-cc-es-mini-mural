@@ -9,7 +9,8 @@ from django.views.decorators.http import require_http_methods
 
 from config.respostas import redirecionar
 
-from .models import LIMITE_DO_TEXTO, Aviso, preparar_texto
+from .forms import AvisoForm
+from .models import LIMITE_DO_TEXTO, Aviso
 
 
 # CA-02.3: sem conta, o framework leva à página de entrar com o caminho de volta.
@@ -20,8 +21,8 @@ def mural(request):
     return render(request, "avisos/mural.html", {"avisos": Aviso.objects.publicados()})
 
 
-def pagina_de_publicar(request, texto="", erro=None, status=200):
-    contexto = {"texto": texto, "erro": erro, "limite": LIMITE_DO_TEXTO}
+def pagina_de_publicar(request, form=None, status=200):
+    contexto = {"form": form or AvisoForm(), "limite": LIMITE_DO_TEXTO}
     return render(request, "avisos/publicar.html", contexto, status=status)
 
 
@@ -50,12 +51,12 @@ def criar(request):
         parametros = urlencode({"next": reverse("novo"), "motivo": "aviso-nao-publicado"})
         return HttpResponseRedirect(f"{reverse('entrar')}?{parametros}")
 
-    texto, erro = preparar_texto(request.POST.get("texto", ""))
-    if erro:
+    form = AvisoForm(request.POST)
+    if not form.is_valid():
         # A-07: 422, com o texto mantido para a pessoa corrigir.
-        return pagina_de_publicar(request, texto, erro, status=422)
+        return pagina_de_publicar(request, form, status=422)
 
-    # A-08: o autor vem da sessão; qualquer campo de autor no formulário é
-    # ignorado. O instante vem do banco (DP-10).
-    Aviso.objects.create(autor=conta, texto=texto)
+    # A-08: o autor vem da sessão; o formulário não tem campo de autor, e um
+    # campo forjado é ignorado. O instante vem do banco (DP-10).
+    Aviso.objects.create(autor=conta, texto=form.cleaned_data["texto"])
     return redirecionar(reverse("mural"))
