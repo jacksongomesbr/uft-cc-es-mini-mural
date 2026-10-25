@@ -140,3 +140,51 @@ class CadastroTest(TestCase):
             resposta = self.cadastrar()
         self.assertContains(resposta, "Esse nome de usuário já está em uso.", status_code=422)
         self.assertEqual(Conta.objects.filter(nome_usuario__iexact="livia.m").count(), 1)
+
+
+class EntrarESairTest(TestCase):
+    """HU-02: um teste por critério de aceitação."""
+
+    def setUp(self):
+        Conta.objects.create_user("paula.sec", "Secretaria do curso", "senha-de-teste-1")
+
+    def entrar(self, senha="senha-de-teste-1", **extra):
+        return self.client.post("/entrar/", {"nome_usuario": "paula.sec", "senha": senha, **extra})
+
+    def test_ca_02_1_entrar_leva_ao_mural_e_mostra_quem_entrou(self):
+        resposta = self.entrar()
+        self.assertEqual(resposta.status_code, 303)
+        self.assertEqual(resposta["Location"], "/")
+        self.assertContains(self.client.get("/"), "Secretaria do curso")
+
+    def test_ca_02_2_senha_errada(self):
+        resposta = self.entrar(senha="errada-123")
+        self.assertContains(resposta, "Nome de usuário ou senha não conferem.", status_code=422)
+        self.assertContains(resposta, 'value="paula.sec"', status_code=422)
+        self.assertNotIn("_auth_user_id", self.client.session)
+
+    def test_ca_02_3_mural_sem_conta_vai_para_entrar_e_volta(self):
+        resposta = self.client.get("/")
+        self.assertEqual(resposta.status_code, 302)
+        self.assertEqual(resposta["Location"], "/entrar/?next=/")
+        resposta = self.entrar(next="/")
+        self.assertEqual(resposta["Location"], "/")
+
+    def test_ca_02_4_depois_de_sair_a_sessao_acabou(self):
+        self.entrar()
+        resposta = self.client.post("/sair/")
+        self.assertEqual(resposta.status_code, 303)
+        self.assertEqual(resposta["Location"], "/entrar/")
+        self.assertEqual(self.client.get("/").status_code, 302)
+
+    def test_sair_por_get_responde_405(self):
+        self.entrar()
+        self.assertEqual(self.client.get("/sair/").status_code, 405)
+
+    def test_endereco_de_outro_site_vira_o_mural(self):
+        resposta = self.entrar(next="https://exemplo.invalid/")
+        self.assertEqual(resposta["Location"], "/")
+
+    def test_motivo_mostra_a_mensagem_do_aviso_nao_publicado(self):
+        resposta = self.client.get("/entrar/?next=/avisos/novo/&motivo=aviso-nao-publicado")
+        self.assertContains(resposta, "Você saiu da conta em outra aba. Entre de novo; o aviso não foi publicado.")

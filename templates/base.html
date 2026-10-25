@@ -11,6 +11,16 @@
 <body>
   <header class="topo">
     <a href="/" class="marca">Mini Mural</a>
+    {% if user.is_authenticated %}
+    <span class="quem">
+      {{ user.nome_exibicao }}
+      {# Sair só por formulário: uma ligação poderia ser seguida sem a pessoa querer. #}
+      <form method="post" action="{% url 'sair' %}" class="sair">
+        {% csrf_token %}
+        <button type="submit">Sair</button>
+      </form>
+    </span>
+    {% endif %}
   </header>
   <main>
     {% block conteudo %}{% endblock %}
