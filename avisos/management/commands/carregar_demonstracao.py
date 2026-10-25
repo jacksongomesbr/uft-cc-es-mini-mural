@@ -1,7 +1,8 @@
 """Carrega as contas e os avisos da demonstração do encontro 9 (#88).
 
 Nenhum dado é de pessoa real. A senha das contas de demonstração vem do
-argumento --senha, e não do código. Rodar de novo não duplica as contas.
+argumento --senha; o código não guarda senha. Rodar de novo não duplica as
+contas.
 
     python manage.py carregar_demonstracao --senha VALOR
     python manage.py carregar_demonstracao --senha VALOR --avisos 200
