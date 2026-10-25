@@ -234,7 +234,7 @@ tiver a resposta esperada.
 | R1 | A secretaria fica indisponível na semana de matrícula | Alta | Alto | Mitigar | Marcar já as validações dos encontros 5, 9 e 12; Eva |
 | R2 | O uso da conta institucional não é autorizado | Alta | Médio | Evitar | Contas próprias, e a integração fica fora do escopo; Ana |
 | R3 | Ninguém na equipe conhece Django, contas de usuário e banco | Média | Alto | Mitigar | A fatia do MVP atravessa os três na iteração 3, com a primeira decisão em par, como diz o `PROCESSO.md`; Davi |
-| R4 | Não há hospedagem sem custo para a implantação | Média | Médio | Mitigar | Levantar opções até o encontro 12, antes do capítulo 14; Carla |
+| R4 | Não há hospedagem sem custo para a implantação | Média | Médio | Mitigar | Opções levantadas em 2026-10-25, no `ARQUITETURA.md` (#144): duas viáveis sem custo, as duas dormem quando ociosas. Decisão no capítulo 14; Carla |
 | R5 | A publicação aberta repete a poluição dos grupos de mensagem (C2) | Média | Médio | Aceitar | Contingência: autor visível em todo aviso, e C2 revisto depois da primeira demonstração; Ana |
 | R6 | A coordenação não decide quem publica e quem arquiva até o encontro 5 (C2, C3) | Média | Alto | Mitigar | Encerrado em 2026-10-24: a coordenação respondeu por meio da secretaria (D2), e C2 volta à pauta depois do encontro 9; Eva |
 | R7 | Os comunicados oficiais continuam no e-mail, e o aluno passa a conferir dois lugares (D2) | Média | Médio | Aceitar | Contingência: na demonstração do encontro 9, perguntar à secretaria se o aviso do mural pode apontar para o e-mail oficial; Eva |
@@ -263,3 +263,4 @@ está em R7.
 - 2026-10-24: R9 e o escopo de N13 e N14 (#53), na primeira mudança depois da linha de base `v0.4.0`. R9 veio da análise de impacto do nome para exibição; as seções de escopo e do MVP passam a citar N13 e N14, que já estavam nas necessidades e no backlog.
 - 2026-10-24: N15 incluída (#57). E2 pediu que só o autor pudesse "apagar ou alterar" o que publicou; apagar virou arquivar, e alterar não tinha virado necessidade até o diagrama de estados perguntar se o aviso publicado muda.
 - 2026-10-24: RP nas fontes e N15 confirmada (#100), pela pergunta da servidora na review parcial.
+- 2026-10-25: R4 com as opções de hospedagem levantadas (#144).
