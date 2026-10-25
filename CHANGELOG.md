@@ -4,6 +4,34 @@ Todas as mudanças relevantes do projeto ficam registradas aqui. O formato
 segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/), e as
 versões seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
+## [0.10.0] - 2026-10-25
+
+Fim do capítulo 11: verificação e validação, e fim da iteração 4.
+
+### Adicionado
+
+- Inspeção de requisitos com os cinco papéis e cinco achados, quatro major
+  (#126).
+- Estratégia de teste, omissões deliberadas e 52 casos derivados dos critérios,
+  com partição e valor limite (`TESTES.md`, #128).
+- A-13: o que os testes funcionais não provam (`ARQUITETURA.md`, #128).
+- Testes de unidade das regras do texto e da senha, sem banco (#129).
+- HU-05: aviso aberto ou interno (#130).
+- HU-06: aviso aberto lido sem conta, e a página de cada aviso (#131).
+- HU-07: arquivar o próprio aviso (#132).
+- Relatório de teste da build `18ea9f7`, teste de utilidade, HU-17 e HU-18, e
+  o fim da iteração 4 com 12 de 12 pontos (#133).
+
+### Alterado
+
+- Critérios de HU-05 e HU-06 escritos antes do código; CA-02.3 e CA-07.2
+  corrigidos; "caractere" no glossário; pergunta do nome com acento em aberto
+  (`REQUISITOS.md`, #127).
+- Rotas de HU-05 a HU-07 completas no contrato (#127).
+- DP-12: a regra de quem vê em duas formas, com teste de concordância
+  (`PROJETO.md`, #131).
+- Rastreabilidade ligada aos casos do `TESTES.md` (#133).
+
 ## [0.9.0] - 2026-10-25
 
 Fim do capítulo 10: qualidade de processo e produto.
@@ -211,6 +239,7 @@ Fim dos capítulos 1 e 2: problema proposto e repositório configurado.
 - Proteção do `main`: envio direto e reescrita de histórico bloqueados, com
   pull request obrigatório.
 
+[0.10.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.6.0...v0.7.0
