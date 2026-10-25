@@ -4,6 +4,44 @@ Este documento diz o que a equipe planejou em cada iteração, o que concluiu e 
 que aprendeu. O `PROCESSO.md` diz como a equipe trabalha; aqui ficam os números
 de cada ciclo e de onde cada um saiu. A iteração mais recente vem primeiro.
 
+## Iteração 5 (encontros 11 a 12)
+
+A única iteração de uma semana do semestre, e a que fecha o terceiro marco, a
+qualidade verificada.
+
+**Meta:** no encontro 12, todo pull request passa pela verificação automática
+no GitHub, o `main` só recebe o que passou, e quem arquiva um aviso confirma
+antes.
+
+### Capacidade
+
+As velocidades observadas são 14 e 12, em iterações de duas semanas. Esta tem
+uma semana, e a previsão é a metade da faixa, de 6 a 7 pontos, com as cinco
+pessoas em tempo integral. A conta por proporção é uma suposição da equipe,
+como no capítulo 8, e a duração diferente tira parte da comparação.
+
+### Plano
+
+| Ordem | Item | Pontos | Responsável |
+|---:|---|---:|---|
+| 1 | Dívida: dependências com versão fixa (#110), na reserva técnica | 1 | Eva |
+| 2 | Formatador e verificador de estilo (#145) | 1 | Bruno |
+| 3 | Verificação no GitHub Actions, exigida pela proteção do `main` (#146) | 2 | Davi |
+| 4 | Cobertura e os testes que o mapa mostrar (#147) | 1 | Carla |
+| 5 | HU-18 Confirmar antes de arquivar, por desenvolvimento guiado por testes (#148) | 2 | Eva |
+| | Total | 7 | |
+
+**Folga:** se o plano terminar antes, entra HU-03.2, recusar a publicação
+quando o banco não responde, com 2 pontos, a primeira importante que sobrou.
+
+**Reserva técnica:** a dívida #110 é a escolhida, porque o gatilho dela é a
+integração contínua desta iteração: a máquina da verificação instala do zero a
+cada execução, e precisa instalar sempre o mesmo. As outras duas dívidas
+abertas (#109, #111) não têm gatilho nesta iteração.
+
+O levantamento das opções de hospedagem (#144) era a ação de R4 com prazo no
+encontro 12 e entrou fora dos pontos, como o registro de um risco.
+
 ## Iteração 4 (encontros 9 a 11)
 
 **Meta:** no encontro 11, um visitante lê pelo celular, sem conta, um aviso
