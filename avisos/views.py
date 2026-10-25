@@ -33,7 +33,11 @@ def novo(request):
 
 @require_http_methods(["GET", "POST"])
 def criar(request):
-    """HU-03.1: registra o aviso (UC-01, passos 3 e 4)."""
+    """HU-03.1 no POST: registra o aviso (UC-01, passos 3 e 4).
+
+    HU-16 no GET: o endereço que fica na barra depois de uma recusa leva de
+    volta à página de publicar.
+    """
     if request.method == "GET":
         # HU-16: depois de uma recusa, a barra mostra /avisos/. Abrir esse
         # endereço de novo leva à página de publicar (CA-16.1).
