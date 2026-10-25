@@ -132,7 +132,7 @@ outra pessoa, com a lista de verificação do `CONTRIBUTING.md` a partir da #119
 | Pergunta | O que examina | Evidência | Resultado em 2026-10-25 |
 |---|---|---|---|
 | Aderência | Todo pull request foi revisado por outra pessoa, com comentário assinado? | Comentários de revisão dos pull requests integrados | Sim, nos 60 integrados até a #123 |
-| Aderência | Os pull requests de código trazem a lista do autor marcada? | Descrição dos pull requests desde a #119 | 3 de 3 de código (#121 a #123) |
+| Aderência | Os pull requests de código trazem a lista do autor marcada? | Descrição dos pull requests desde a #119 | 3 de 3 de código (#121 a #123). Pull request só de documento segue a estrutura do modelo, e a lista do autor fica opcional, porque metade dela fala de código |
 | Eficácia | A revisão impede que o defeito chegue ao `main`? | Defeitos achados depois da integração, com o pull request de origem | Não sempre: 2 defeitos escaparam, o de `GET /avisos/` (origem #94) e o de `GET /sair/` (origem #92) |
 
 A aderência foi total, e dois defeitos passaram mesmo assim, o que mostra a
