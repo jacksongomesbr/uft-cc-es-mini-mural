@@ -41,6 +41,26 @@ def detalhe(request, id):
     return render(request, "avisos/detalhe.html", {"aviso": aviso})
 
 
+@require_http_methods(["GET", "POST"])
+def arquivar(request, id):
+    """HU-07: o autor arquiva o próprio aviso (CA-07.1 a CA-07.4, RN-02)."""
+    if request.method == "GET":
+        # O endereço fica na barra depois de uma recusa; abri-lo leva ao aviso.
+        return redirecionar(reverse("detalhe", args=[id]))
+    if not request.user.is_authenticated:
+        return redirect_to_login(reverse("detalhe", args=[id]))
+
+    aviso = Aviso.objects.filter(pk=id).first()
+    # Arquivado de outra pessoa: a mesma resposta de aviso inexistente (CA-07.4).
+    if aviso is None or not aviso.pode_ser_visto_por(request.user):
+        return nao_encontrado(request)
+    if not aviso.pode_ser_arquivado_por(request.user):
+        mensagem = "Só quem publicou o aviso pode arquivá-lo."
+        return render(request, "avisos/proibido.html", {"mensagem": mensagem, "aviso": aviso}, status=403)
+    aviso.arquivar()
+    return redirecionar(reverse("mural"))
+
+
 def pagina_de_publicar(request, form=None, status=200):
     contexto = {"form": form or AvisoForm(), "limite": LIMITE_DO_TEXTO}
     return render(request, "avisos/publicar.html", contexto, status=status)

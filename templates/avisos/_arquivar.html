@@ -1,0 +1,7 @@
+{% load avisos %}
+{% if aviso.situacao == "publicado" and aviso|pode_ser_arquivado_por:user %}
+<form method="post" action="{% url 'arquivar' aviso.pk %}" class="arquivar">
+  {% csrf_token %}
+  <button type="submit">Arquivar</button>
+</form>
+{% endif %}

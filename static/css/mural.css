@@ -55,3 +55,8 @@ button { font: inherit; padding: 8px 16px; }
 .tipo-do-aviso label { display: flex; gap: 8px; align-items: baseline; margin: 4px 0; }
 .tipo-do-aviso input { width: auto; }
 .tipo { font-weight: bold; }
+
+/* Arquivar: o botão abaixo do aviso, e o aviso arquivado marcado. */
+.arquivar { margin: 6px 0 0; }
+.arquivar button { padding: 4px 10px; }
+.arquivado { color: #555; font-style: italic; }

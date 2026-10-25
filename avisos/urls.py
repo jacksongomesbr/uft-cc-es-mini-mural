@@ -7,4 +7,5 @@ urlpatterns = [
     path("avisos/novo/", views.novo, name="novo"),
     path("avisos/", views.criar, name="criar"),
     path("avisos/<int:id>/", views.detalhe, name="detalhe"),
+    path("avisos/<int:id>/arquivar/", views.arquivar, name="arquivar"),
 ]

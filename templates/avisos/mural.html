@@ -14,6 +14,7 @@
   {# O escape automático vale também aqui: linebreaksbr escapa antes de quebrar (RNF-05). #}
   <p class="texto">{{ aviso.texto|linebreaksbr }}</p>
   {% include 'avisos/_autor.html' %}
+  {% include 'avisos/_arquivar.html' %}
 </article>
 {% empty %}
 {% if user.is_authenticated %}
