@@ -213,3 +213,16 @@ class EnderecoDepoisDoEnvioTest(TestCase):
         self.assertEqual(cliente.post("/sair/").status_code, 403)
         resposta = cliente.get("/sair/")
         self.assertContains(resposta, "Para sair da conta, use o botão abaixo.", status_code=405)
+
+
+class RegraDaSenhaTest(SimpleTestCase):
+    """CA-01.3 (TESTES.md, TC-01.3), sem banco: só as regras de AUTH_PASSWORD_VALIDATORS."""
+
+    def test_tc_01_3_limites(self):
+        from django.contrib.auth.password_validation import validate_password
+        from django.core.exceptions import ValidationError
+
+        for senha in ("1234567", "12345678"):
+            with self.subTest(senha=senha), self.assertRaises(ValidationError):
+                validate_password(senha)
+        self.assertIsNone(validate_password("abcd1234"))  # TC-01.3c: 8, com letra

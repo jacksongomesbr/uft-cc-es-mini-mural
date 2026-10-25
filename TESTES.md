@@ -54,7 +54,7 @@ caso representa.
 | TC-01.2 | CA-01.2 | Nome em uso, com maiúsculas | Conta "livia.m" | Criar "Livia.M" | 422, mensagem do contrato, nome para exibição mantido, senha não | Integração | `test_ca_01_2_nome_de_usuario_em_uso` |
 | TC-01.3a | CA-01.3 | Limite: 7 caracteres | Nenhum | Senha "1234567" | 422, regra da senha | Integração | `test_ca_01_3_senha_fraca` |
 | TC-01.3b | CA-01.3 | Só números, 8 caracteres | Nenhum | Senha "12345678" | 422, regra da senha | Integração | `test_ca_01_3_senha_fraca` |
-| TC-01.3c | CA-01.3 | Limite: 8 caracteres, com letra | Nenhum | Senha "abcd1234" | Aceita | Unidade | #129 |
+| TC-01.3c | CA-01.3 | Limite: 8 caracteres, com letra | Nenhum | Senha "abcd1234" | Aceita | Unidade | `test_tc_01_3_limites` |
 | TC-01.4 | CA-01.4 | A conta continua | Conta criada e saída | Entrar com o mesmo nome e senha | Reconhecida | Integração | `test_ca_01_4_a_conta_continua` |
 | TC-01.5 | CA-01.5 | Só espaços | Nenhum | Nome para exibição "   " | 422, mensagem do contrato | Integração | `test_ca_01_5_nome_para_exibicao_obrigatorio` |
 | TC-01.6a | CA-01.6 | Maiúsculas e espaços a mais | "Secretaria do curso" existe | Criar com "secretaria  do curso " | 422, nome em uso | Integração | `test_ca_01_6_nome_para_exibicao_em_uso` |
@@ -78,10 +78,10 @@ caso representa.
 | TC-03.2a | CA-03.2 | Vazio | Paula entrou | Publicar "" | 422, nada publicado | Integração | `test_ca_03_2_texto_vazio_ou_so_com_espacos` |
 | TC-03.2b | CA-03.2 | Só espaços e quebras | Paula entrou | Publicar "  \r\n  " | 422, nada publicado | Integração | `test_ca_03_2_texto_vazio_ou_so_com_espacos` |
 | TC-03.3a | CA-03.3 | Limite: 501 | Paula entrou | Publicar 501 caracteres | 422, "Corte 1 caractere", texto mantido | Integração | `test_ca_03_3_acima_do_limite` |
-| TC-03.3b | CA-03.3 | 500 com espaços nas pontas | Nenhum | Preparar "  " + 500 caracteres + "  " | Aceito: as pontas não contam | Unidade | #129 |
+| TC-03.3b | CA-03.3 | 500 com espaços nas pontas | Nenhum | Preparar "  " + 500 caracteres + "  " | Aceito: as pontas não contam | Unidade | `test_tc_03_3b_500_com_espacos_nas_pontas` |
 | TC-03.4a | CA-03.4 | Limite: 500 acentuados | Paula entrou | Publicar 500 "á" | 303, 500 caracteres gravados | Integração | `test_ca_03_4_no_limite_com_acento` |
 | TC-03.4b | CA-03.4 | Quebra de linha do navegador | Paula entrou | Publicar 250 + "\r\n" + 249 | 303, a quebra conta um | Integração | `test_quebra_de_linha_do_navegador_conta_um` |
-| TC-03.4c | CA-03.4 | Emoji composto | Nenhum | Preparar texto com um emoji de família | Conta os pontos de código, como o glossário define | Unidade | #129 |
+| TC-03.4c | CA-03.4 | Emoji composto | Nenhum | Preparar texto com um emoji de família | Conta os pontos de código, como o glossário define | Unidade | `test_tc_03_4c_emoji_composto_conta_pontos_de_codigo` |
 | TC-03.5 | CA-03.5 | O aviso continua | Paula publicou | Outra conta abre o mural | Aviso lá, com o mesmo autor | Integração | `test_ca_03_5_o_aviso_continua` |
 
 ### HU-04 Ver o mural

@@ -9,7 +9,7 @@ from django.utils import timezone as tz
 
 from contas.models import Conta
 
-from .models import LIMITE_DO_TEXTO, Aviso
+from .models import LIMITE_DO_TEXTO, Aviso, preparar_texto
 
 
 def instante(hora, minuto=0):
@@ -231,3 +231,34 @@ class CarregarDemonstracaoTest(TestCase):
     def test_senha_vem_do_argumento(self):
         self.carregar()
         self.assertTrue(Conta.objects.get(nome_usuario="aluno.demo").check_password("senha-de-teste-1"))
+
+
+class RegraDoTextoTest(SimpleTestCase):
+    """Casos de unidade da regra do texto (TESTES.md), sem banco nem servidor."""
+
+    def test_tc_03_2_vazio_e_so_espacos(self):
+        for texto in ("", "   ", " \r\n \n "):
+            with self.subTest(texto=texto):
+                self.assertEqual(preparar_texto(texto)[1], "O aviso precisa de texto. Nada foi publicado.")
+
+    def test_tc_03_3b_500_com_espacos_nas_pontas(self):
+        texto, erro = preparar_texto("  " + "a" * 500 + "  ")
+        self.assertIsNone(erro)
+        self.assertEqual(len(texto), 500)
+
+    def test_tc_03_3_limite_501(self):
+        self.assertEqual(
+            preparar_texto("a" * 501)[1],
+            "O aviso tem 501 caracteres, e o limite é 500. Corte 1 caractere e publique de novo.",
+        )
+
+    def test_tc_03_4b_quebra_de_linha_conta_um(self):
+        texto, erro = preparar_texto("a" * 250 + "\r\n" + "b" * 249)
+        self.assertIsNone(erro)
+        self.assertEqual(len(texto), 500)
+
+    def test_tc_03_4c_emoji_composto_conta_pontos_de_codigo(self):
+        familia = "\U0001F468‍\U0001F469‍\U0001F467"  # aparece como um símbolo
+        self.assertEqual(len(familia), 5)
+        self.assertIsNone(preparar_texto(familia + "a" * 495)[1])
+        self.assertIsNotNone(preparar_texto(familia + "a" * 496)[1])
