@@ -33,23 +33,24 @@ histórico.
 
 ## Backlog ordenado
 
-| Ordem | Item | Origem | MoSCoW | Risco técnico | Depende de |
-|---:|---|---|---|---|---|
-| 1 | HU-01 Criar conta | N1, N4, N7 | Obrigatório | Alto: contas de usuário em Django, que ninguém na equipe conhece (R3) | Nenhuma |
-| 2 | HU-02 Entrar e sair | N7 | Obrigatório | Alto: sessão e senha, pela mesma razão | HU-01 |
-| 3 | HU-03 Publicar aviso curto | N1, N7 | Obrigatório | Alto: a primeira gravação no banco (R3) | HU-02 |
-| 4 | HU-04 Ver o mural | N2, N7 | Obrigatório | Médio: legibilidade no celular | HU-03 |
-| 5 | HU-05 Marcar o aviso como aberto ou interno | N4 | Importante | Médio: a regra de acesso é conferida em toda leitura | HU-03 |
-| 6 | HU-06 Ler aviso aberto sem conta | N3 | Importante | Baixo | HU-05 |
-| 7 | HU-07 Arquivar o próprio aviso | N5, N6 | Importante | Médio: a regra de quem arquiva é conferida no servidor | HU-03 |
-| 8 | HU-13 Informar até quando o aviso vale | N13 | Desejável | Baixo | HU-03 |
-| 9 | HU-08 Arquivar o aviso vencido de outra pessoa | N12 | Fora desta versão | Baixo | HU-07 |
-| 10 | HU-09 Anexar arquivo ao aviso | N9 | Fora desta versão | Alto: armazenamento de arquivo | HU-03 |
-| 11 | HU-10 E-mail quando sair aviso novo | N8 | Fora desta versão | Médio: servidor de e-mail | HU-03 |
-| 12 | HU-11 Aviso para uma turma | N10 | Fora desta versão | Médio: cadastro de turmas | HU-05 |
-| 13 | HU-12 Entrar com a conta institucional | N11 | Fora desta versão | Alto: integração com sistema externo | Nenhuma |
-| 14 | HU-14 Saber quem viu o aviso | N14 | Fora desta versão | Médio: registro de leitura por conta | HU-04 |
-| 15 | HU-15 Corrigir o próprio aviso depois de publicado | N15 | Fora desta versão | Baixo | HU-03 |
+| Ordem | Item | Origem | MoSCoW | Risco técnico | Depende de | Pontos |
+|---:|---|---|---|---|---|---:|
+| 1 | HU-01 Criar conta | N1, N4, N7 | Obrigatório | Alto: contas de usuário em Django, que ninguém na equipe conhece (R3) | Nenhuma | 3 |
+| 2 | HU-02 Entrar e sair | N7 | Obrigatório | Alto: sessão e senha, pela mesma razão | HU-01 | 2 |
+| 3 | HU-03.1 Publicar aviso curto | N1, N7 | Obrigatório | Alto: a primeira gravação no banco (R3) | HU-02 | 5 |
+| 4 | HU-04 Ver o mural | N2, N7 | Obrigatório | Médio: legibilidade no celular | HU-03.1 | 3 |
+| 5 | HU-05 Marcar o aviso como aberto ou interno | N4 | Importante | Médio: a regra de acesso é conferida em toda leitura | HU-03.1 | 3 |
+| 6 | HU-06 Ler aviso aberto sem conta | N3 | Importante | Baixo | HU-05 | 2 |
+| 7 | HU-07 Arquivar o próprio aviso | N5, N6 | Importante | Médio: a regra de quem arquiva é conferida no servidor | HU-03.1 | 3 |
+| 8 | HU-03.2 Recusar a publicação quando o banco não responde | N1 (UC-01, 4e) | Importante | Médio: tratar a falha do banco sem perder o texto | HU-03.1 | 2 |
+| 9 | HU-13 Informar até quando o aviso vale | N13 | Desejável | Baixo | HU-03.1 | 2 |
+| 10 | HU-08 Arquivar o aviso vencido de outra pessoa | N12 | Fora desta versão | Baixo | HU-07 | Não estimado |
+| 11 | HU-09 Anexar arquivo ao aviso | N9 | Fora desta versão | Alto: armazenamento de arquivo | HU-03.1 | Não estimado |
+| 12 | HU-10 E-mail quando sair aviso novo | N8 | Fora desta versão | Médio: servidor de e-mail | HU-03.1 | Não estimado |
+| 13 | HU-11 Aviso para uma turma | N10 | Fora desta versão | Médio: cadastro de turmas | HU-05 | Não estimado |
+| 14 | HU-12 Entrar com a conta institucional | N11 | Fora desta versão | Alto: integração com sistema externo | Nenhuma | Não estimado |
+| 15 | HU-14 Saber quem viu o aviso | N14 | Fora desta versão | Médio: registro de leitura por conta | HU-04 | Não estimado |
+| 16 | HU-15 Corrigir o próprio aviso depois de publicado | N15 | Fora desta versão | Baixo | HU-03.1 | Não estimado |
 
 Ana ordenou o backlog, como diz o `PROCESSO.md`, com os três passos do capítulo
 5: classificação em MoSCoW, ordem por risco técnico dentro de cada grupo e
@@ -63,6 +64,10 @@ ajuste por dependência.
   final (N3 a N6). HU-05 vem antes de HU-06 por dependência, porque sem o tipo
   aberto não há aviso para o visitante ler. As duas resolvem C1 juntas. HU-07
   não depende delas e pode trocar de lugar com o par; a review parcial decide.
+- **HU-03.2:** saiu de HU-03 na estimativa da iteração 3 (`ITERACOES.md`),
+  quando a rodada mostrou que a alternativa 4e era trabalho à parte. Fica entre
+  os importantes porque ainda não tem critério e a demonstração não precisa
+  dela.
 - **Desejável:** HU-13 entrou pela validação V1. Fica depois dos importantes
   porque mostrar a data não tira o aviso vencido do mural; ela só ajuda o aluno
   a reconhecê-lo.
@@ -79,6 +84,10 @@ ajuste por dependência.
     arquiva o aviso e publica outro.
 
 ### Esforço até a review parcial
+
+Os pontos da coluna do backlog vieram da estimativa do capítulo 8, registrada
+no `ITERACOES.md`, e substituem as horas abaixo no planejamento. As horas
+ficam como registro do primeiro marco.
 
 A estimativa é grossa, em horas, e será refinada no `ITERACOES.md` do capítulo
 8. A equipe combinou 5 horas por semana por pessoa fora da aula. Antes da review
@@ -162,6 +171,9 @@ para que só eu publique com o meu nome.
   entre de novo, e nada é publicado.
 
 ### HU-03 Publicar aviso curto
+
+Fatiada na iteração 3 (#83): HU-03.1 cobre CA-03.1 a CA-03.5, e HU-03.2 cobre a
+alternativa 4e do UC-01, ainda sem critério.
 
 Como servidora da secretaria (persona Paula),
 quero publicar um aviso curto direto no mural,
@@ -465,7 +477,7 @@ e 12; até lá, cada critério é o caso de teste escrito em português.
 
 | Fonte | Necessidade | História | Critérios | Teste |
 |---|---|---|---|---|
-| E1, E2, E3 | N1 | HU-01, HU-03, RN-01 | CA-01.1 a CA-01.6, CA-03.1 a CA-03.5 | A escrever |
+| E1, E2, E3 | N1 | HU-01, HU-03.1, HU-03.2, RN-01 | CA-01.1 a CA-01.6, CA-03.1 a CA-03.5; HU-03.2 sem critério ainda | A escrever |
 | E4, E5, O1 | N2 | HU-04 | CA-04.1 a CA-04.3 | A escrever |
 | E3, E4 | N3 | HU-06 | No planejamento da iteração | A escrever |
 | E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.6; HU-05 no planejamento | A escrever |
@@ -559,3 +571,7 @@ porque o protótipo de papel não mede o sistema real.
   correção do texto, estava em E2 sem ter virado necessidade. Impacto: CA-07.1 a
   CA-07.5 acrescentados, glossário "aviso arquivado" alterado, N15 e HU-15
   registradas, fora desta versão; estimativas dos obrigatórios mantidas.
+- 2026-10-24: HU-03 fatiada em HU-03.1 e HU-03.2, e pontos no backlog (#83).
+  Motivo: a rodada de estimativa da iteração 3 divergiu de 3 a 8 por causa da
+  alternativa 4e. Impacto: linha de N1 na rastreabilidade, agora com HU-03.1 e
+  HU-03.2; os obrigatórios ficam em 13 de 25 pontos, 52%.
