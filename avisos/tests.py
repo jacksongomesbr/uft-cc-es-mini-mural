@@ -505,10 +505,47 @@ class ArquivarTest(TestCase):
     def test_botao_so_para_o_autor(self):
         self.client.force_login(self.paula)
         conteudo = self.client.get("/").content.decode()
-        self.assertIn(f'action="/avisos/{self.da_paula.pk}/arquivar/"', conteudo)
-        self.assertNotIn(f'action="/avisos/{self.do_prof.pk}/arquivar/"', conteudo)
+        # Desde HU-18, o botão é uma ligação para a confirmação.
+        self.assertIn(f'href="/avisos/{self.da_paula.pk}/arquivar/"', conteudo)
+        self.assertNotIn(f'href="/avisos/{self.do_prof.pk}/arquivar/"', conteudo)
 
     def test_sem_conta_vai_para_entrar(self):
         resposta = self.client.post(f"/avisos/{self.da_paula.pk}/arquivar/")
         self.assertEqual(resposta.status_code, 302)
         self.assertTrue(resposta["Location"].startswith("/entrar/"))
+
+
+class ConfirmarAntesDeArquivarTest(TestCase):
+    """HU-18: TC-18.1 a TC-18.4 do TESTES.md, escritos antes do código."""
+
+    def setUp(self):
+        self.paula = Conta.objects.create_user(
+            "paula.sec", "Secretaria do curso", "senha-de-teste-1"
+        )
+        self.aviso = Aviso.objects.create(autor=self.paula, texto="Troca de sala de amanhã")
+        self.client.force_login(self.paula)
+
+    def test_tc_18_1_pede_confirmacao(self):
+        resposta = self.client.get(f"/avisos/{self.aviso.pk}/arquivar/")
+        self.assertContains(resposta, "Arquivar este aviso?")
+        self.assertContains(resposta, "Troca de sala de amanhã")
+        self.aviso.refresh_from_db()
+        self.assertEqual(self.aviso.situacao, Aviso.PUBLICADO)
+
+    def test_tc_18_2_confirmar_arquiva(self):
+        pagina = self.client.get(f"/avisos/{self.aviso.pk}/arquivar/")
+        self.assertContains(pagina, f'action="/avisos/{self.aviso.pk}/arquivar/"')
+        resposta = self.client.post(f"/avisos/{self.aviso.pk}/arquivar/")
+        self.assertEqual(resposta.status_code, 303)
+        self.aviso.refresh_from_db()
+        self.assertEqual(self.aviso.situacao, Aviso.ARQUIVADO)
+
+    def test_tc_18_3_desistir_volta_ao_mural(self):
+        pagina = self.client.get(f"/avisos/{self.aviso.pk}/arquivar/")
+        self.assertContains(pagina, '<a href="/">Desistir</a>', html=True)
+        self.assertContains(self.client.get("/"), "Troca de sala de amanhã")
+
+    def test_tc_18_4_mural_leva_a_confirmacao(self):
+        conteudo = self.client.get("/").content.decode()
+        self.assertIn(f'href="/avisos/{self.aviso.pk}/arquivar/"', conteudo)
+        self.assertNotIn(f'action="/avisos/{self.aviso.pk}/arquivar/"', conteudo)

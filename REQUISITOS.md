@@ -385,7 +385,18 @@ se desfaz (CA-07.3).
 
 [Origem: N5; teste de utilidade da iteração 4 (`TESTES.md`)]
 
-Os critérios das duas são escritos no planejamento da iteração em que entrarem.
+**Critérios de aceitação (acrescentados no #148)**
+
+- **CA-18.1 Pedir confirmação.** Dado que Paula tem um aviso publicado, quando
+  ela toca em "Arquivar", então o sistema mostra uma página que pergunta se ela
+  confirma, com o texto do aviso, e o aviso continua no mural.
+- **CA-18.2 Confirmar.** Dado que Paula está na página de confirmação, quando ela
+  confirma, então o aviso é arquivado, como diz o CA-07.1.
+- **CA-18.3 Desistir.** Dado que Paula está na página de confirmação, quando ela
+  desiste, então volta ao mural, e o aviso continua lá.
+
+Os critérios de HU-17 são escritos no planejamento da iteração em que ela
+entrar.
 
 ### Fora desta versão
 
@@ -575,7 +586,7 @@ A cadeia vai da fonte ao teste. A coluna de teste aponta os casos do
 | E4, E5, O1 | N2 | HU-04 | CA-04.1 a CA-04.3 | TC-04.1a a TC-04.3, TC-RNF-01 (`TESTES.md`) |
 | E3, E4 | N3 | HU-06 | CA-06.1 a CA-06.4 | TC-06.1 a TC-06.5 (`TESTES.md`) |
 | E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.6, CA-05.1 a CA-05.4 | TC-01.x, TC-05.1 a TC-05.4 (`TESTES.md`) |
-| E1, E2, E4, O1, teste de utilidade | N5 | HU-07, HU-17, HU-18 | CA-07.1, CA-07.3 a CA-07.5 | TC-07.1, TC-07.3 a TC-07.7 (`TESTES.md`) |
+| E1, E2, E4, O1, teste de utilidade | N5 | HU-07, HU-17, HU-18 | CA-07.1, CA-07.3 a CA-07.5, CA-18.1 a CA-18.3 | TC-07.1, TC-07.3 a TC-07.7, TC-18.1 a TC-18.3 (`TESTES.md`) |
 | E2, D2 | N6 | HU-07, RN-02 | CA-07.2 | TC-07.2a, TC-07.2b (`TESTES.md`) |
 | E2, E5, O1 | N7 | HU-01, HU-02, HU-03, HU-04 | CA-01.6, CA-02.1 a CA-02.4, CA-03.1, CA-04.1 | TC-02.1 a TC-02.4, TC-03.1, TC-04.1a (`TESTES.md`) |
 | E4 | N8 | HU-10 | Fora desta versão | Não se aplica |
@@ -681,3 +692,5 @@ porque o protótipo de papel não mede o sistema real.
   com acento fica em aberto, com a coordenação.
 - 2026-10-25: HU-17 e HU-18 criadas pelo teste de utilidade da iteração 4
   (#133), sem estimativa até o planejamento.
+- 2026-10-25: CA-18.1 a CA-18.3 (#148), escritos antes do código, pelo ciclo do
+  desenvolvimento guiado por testes. Impacto: linha de N5 na rastreabilidade.

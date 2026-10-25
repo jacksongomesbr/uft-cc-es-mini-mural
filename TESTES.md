@@ -142,6 +142,18 @@ O TC-07.6 saiu da partição, sem critério escrito que o pedisse: o CA-07.4 fal
 "outra pessoa com conta", e o visitante é outra pessoa sem conta. O contrato
 responde 404 para quem não é o autor, e o caso segue o contrato.
 
+### HU-18 Confirmar antes de arquivar
+
+Escritos antes do código, e os testes também: o primeiro commit da #148 tem
+só os testes, e a verificação falha nele pelo motivo esperado.
+
+| ID | Critério | Classe ou limite | Preparo | Passos | Esperado | Nível | Teste |
+|---|---|---|---|---|---|---|---|
+| TC-18.1 | CA-18.1 | Autor, aviso publicado | Aviso de "paula.sec" | Ela abre `/avisos/{id}/arquivar/` | 200, pergunta com o texto do aviso; o aviso continua publicado | Integração | `test_tc_18_1_pede_confirmacao` |
+| TC-18.2 | CA-18.2 | Confirmação | A página de confirmação | Ela confirma | 303, aviso arquivado | Integração | `test_tc_18_2_confirmar_arquiva` |
+| TC-18.3 | CA-18.3 | Desistência | A página de confirmação | Ela desiste | Volta ao mural com o aviso lá | Integração | `test_tc_18_3_desistir_volta_ao_mural` |
+| TC-18.4 | CA-18.1 | O mural leva à confirmação | Aviso de "paula.sec" | Ela abre o mural | O "Arquivar" é uma ligação para a confirmação, e não um envio direto | Integração | `test_tc_18_4_mural_leva_a_confirmacao` |
+
 ### Requisitos não funcionais
 
 | ID | Requisito | Esperado | Nível | Como |

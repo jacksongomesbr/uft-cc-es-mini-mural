@@ -163,5 +163,8 @@ Rotas de HU-05 a HU-07, completadas na inspeção da iteração 4 (#127).
 - **Falhas:** 403, "Só quem publicou o aviso pode arquivá-lo.", quando o aviso
   de outra pessoa ainda está publicado (CA-07.2); 404 quando o aviso não existe
   ou é arquivado de outra pessoa (CA-07.4).
-- **GET:** 303 para `/avisos/{id}/`. É o endereço que fica na barra depois de
-  uma recusa, e abri-lo de novo leva ao aviso.
+- **GET:** para o autor de um aviso publicado, 200, a página que pede a
+  confirmação, com o texto do aviso, o botão de confirmar e a ligação de
+  desistir, que leva ao mural (HU-18, CA-18.1 a CA-18.3). Para os demais, 303
+  para `/avisos/{id}/`, que é o endereço que fica na barra depois de uma
+  recusa.

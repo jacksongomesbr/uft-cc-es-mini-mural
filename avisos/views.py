@@ -44,9 +44,20 @@ def detalhe(request, id):
 
 @require_http_methods(["GET", "POST"])
 def arquivar(request, id):
-    """HU-07: o autor arquiva o próprio aviso (CA-07.1 a CA-07.4, RN-02)."""
+    """HU-07: o autor arquiva o próprio aviso (CA-07.1 a CA-07.4, RN-02).
+
+    No GET, HU-18: o autor de um aviso publicado confirma antes (CA-18.1).
+    """
     if request.method == "GET":
-        # O endereço fica na barra depois de uma recusa; abri-lo leva ao aviso.
+        aviso = Aviso.objects.filter(pk=id).first()
+        if (
+            aviso is not None
+            and aviso.situacao == Aviso.PUBLICADO
+            and aviso.pode_ser_arquivado_por(request.user)
+        ):
+            return render(request, "avisos/confirmar_arquivar.html", {"aviso": aviso})
+        # Para os demais, o endereço que fica na barra depois de uma recusa
+        # leva ao aviso.
         return redirecionar(reverse("detalhe", args=[id]))
     if not request.user.is_authenticated:
         return redirect_to_login(reverse("detalhe", args=[id]))
