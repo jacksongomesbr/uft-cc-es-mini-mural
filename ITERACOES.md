@@ -109,12 +109,13 @@ integrado ao `main` e verificado por quem não escreveu o código.
 | CA-03.1 a CA-03.5 | Atendido | #94, com a lista de Eva; passos 4 e 5 |
 | CA-04.1 a CA-04.3 | Atendido | #93, com a lista de Carla; passos 4 e 7 |
 | RNF-01 | Atendido | Medido na #95: 350 ms, no notebook; repetir com a hospedagem |
-| RNF-02 | Atendido, como indício | Uma pessoa, na review: 1 min 35 s, sem ajuda |
+| RNF-02 | Atendido | Cronometrado na review, como o requisito pede: 1 min 35 s, sem ajuda. Uma pessoa só, e por isso a medição se repete na review final |
 | RNF-03 | Atendido | Teste na #94; passo 6 |
 | RNF-04 | Atendido | Teste da senha guardada como valor derivado, desde a #80 |
 | RNF-05 | Atendido | Teste na #93 |
 | RNF-06 | Não iniciado | Depende de HU-05 |
-| RNF-07 | Não iniciado, em parte | RN-01 está só em `pode_publicar`; as regras de ler e arquivar ainda não existem |
+| RNF-07, quem publica | Atendido | RN-01 só em `pode_publicar`, com teste desde a #80 |
+| RNF-07, quem lê e quem arquiva | Não iniciado | As regras chegam com HU-05 e HU-07 |
 | RNF-08 | Atendido | Conferido em 360 por 640 nas quatro páginas |
 | UC-01, 4e | Não iniciado | HU-03.2, sem critério na data da review |
 | HU-05, HU-06, HU-07, HU-13 | Não iniciado | Declarados no bloco de limites |
