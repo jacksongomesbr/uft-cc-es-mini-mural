@@ -24,14 +24,17 @@ O produto mínimo viável funciona: criar conta, entrar e sair, publicar um
 aviso curto e ver o mural, com o nome de quem publicou, a data e a hora. Ele
 foi demonstrado na review parcial do encontro 9, a partir do código da tag
 `v0.7.0`. As observações, a autoavaliação e os itens que a review gerou estão
-no [ITERACOES.md](ITERACOES.md) e no [REQUISITOS.md](REQUISITOS.md). O que cada versão entregou está
+no [ITERACOES.md](ITERACOES.md) e no [REQUISITOS.md](REQUISITOS.md). A
+iteração 4 está em andamento, com a revisão feita pela lista de verificação do
+[CONTRIBUTING.md](CONTRIBUTING.md) e a dívida técnica registrada nas issues
+com a etiqueta `tipo:divida`. O que cada versão entregou está
 no [CHANGELOG.md](CHANGELOG.md).
 
 Para ver o projeto como estava no fim de um capítulo, abra a tag da versão,
 por exemplo:
 
 ```bash
-git switch --detach v0.8.0
+git switch --detach v0.9.0
 ```
 
 O [ROTEIRO.md](ROTEIRO.md) liga cada capítulo do livro ao artefato que ele
@@ -109,7 +112,8 @@ desenvolvimento (A-10):
 | Documento | O que contém |
 |---|---|
 | [PROBLEMA.md](PROBLEMA.md) | Problema, usuário pretendido e verificação do tema (capítulo 1) |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Convenções de ramos, commits, pull requests e revisão (capítulo 2) |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Convenções de ramos, commits, pull requests e revisão (capítulo 2), lista de verificação e tipos de comentário (capítulo 10) |
+| [.github/pull_request_template.md](.github/pull_request_template.md) | Modelo de descrição de pull request (capítulo 10) |
 | [PROCESSO.md](PROCESSO.md) | Processo escolhido, iterações, papéis e definição de pronto (capítulo 3) |
 | [DESCOBERTA.md](DESCOBERTA.md) | Partes interessadas, personas, necessidades, escopo, MVP e riscos (capítulo 4) |
 | [descoberta/](descoberta/) | Roteiro de entrevista e atas da elicitação, sem identificação (capítulos 4 e 5) |

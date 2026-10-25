@@ -69,7 +69,7 @@ defeito que escapou, e a pergunta que ninguém verifica sai.
 | Legibilidade | Os nomes usam o glossário, e cada função se entende na primeira leitura? | Glossário do `REQUISITOS.md` |
 | Multiplicidade | O código trata zero, um e muitos avisos onde o modelo admite? | Modelo de domínio do `PROJETO.md` |
 | Endereço depois do envio | O endereço que fica na barra depois de um envio, aceito ou recusado, abre alguma página? | Defeito de HU-16, que passou pela revisão da #94 |
-| Testes | Existe teste do comportamento novo, com a expectativa tirada do critério, e não do código? | Definição de pronto |
+| Testes | Existe teste do comportamento novo, com a expectativa tirada do critério, sem copiar o que o código faz? | Definição de pronto |
 | Rastreabilidade | O commit e o pull request citam a issue, e a issue cita a história? | Capítulo 2 |
 | Segurança e dados | Nenhum segredo no repositório e nenhum dado de pessoa real em teste, exemplo ou registro? | RE-02; capítulo 13 |
 

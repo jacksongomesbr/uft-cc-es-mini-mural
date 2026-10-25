@@ -31,6 +31,6 @@ tipo: bloqueia, sugere, pergunta ou elogia.
 - [ ] Legibilidade: nomes do glossário, e cada função se entende na primeira leitura
 - [ ] Multiplicidade: zero, um e muitos avisos, onde o modelo admite
 - [ ] Endereço depois do envio: o endereço que fica na barra abre alguma página
-- [ ] Testes: a expectativa vem do critério, e não do código
+- [ ] Testes: a expectativa vem do critério, sem copiar o que o código faz
 - [ ] Rastreabilidade: o commit e o pull request citam a issue
 - [ ] Segurança e dados: nenhum segredo, nenhum dado de pessoa real

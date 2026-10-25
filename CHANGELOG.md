@@ -4,6 +4,37 @@ Todas as mudanças relevantes do projeto ficam registradas aqui. O formato
 segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/), e as
 versões seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
+## [0.9.0] - 2026-10-25
+
+Fim do capítulo 10: qualidade de processo e produto.
+
+### Adicionado
+
+- Lista de verificação de revisão, com a pergunta tirada do defeito que
+  escapou, e os tipos de comentário (`CONTRIBUTING.md`, #112).
+- Modelo de descrição de pull request (`.github/pull_request_template.md`,
+  #112).
+- Plano da iteração 4, com a reserva técnica escolhida pelas mudanças
+  esperadas (`ITERACOES.md`, #113).
+- HU-16: `GET /avisos/` leva à página de publicar (#114).
+- Testes de abrir de novo o endereço das rotas que recebem formulário (#115).
+- Qualidade da revisão: aderência, eficácia, objetivo, perguntas e métricas
+  (`PROCESSO.md`, #117); DP-11 e a leitura do módulo de avisos pela
+  manutenibilidade (`PROJETO.md`, #117).
+- Quatro dívidas técnicas registradas com custo de carregar, custo de pagar e
+  gatilho (#109, #110, #111 e #116).
+
+### Alterado
+
+- A publicação usa o formulário do framework, sem mudar o comportamento:
+  dívida paga na reserva da iteração 4 (#116).
+
+### Corrigido
+
+- `GET /avisos/` dava página vazia depois de uma recusa (#114).
+- `GET /sair/` dava página vazia depois de um envio recusado pela proteção do
+  formulário; continua 405, agora com página (#115).
+
 ## [0.8.0] - 2026-10-24
 
 Fim do capítulo 9: review parcial, com a demonstração do código da `v0.7.0`.
@@ -180,6 +211,7 @@ Fim dos capítulos 1 e 2: problema proposto e repositório configurado.
 - Proteção do `main`: envio direto e reescrita de histórico bloqueados, com
   pull request obrigatório.
 
+[0.9.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/jacksongomesbr/uft-cc-es-mini-mural/compare/v0.5.0...v0.6.0
