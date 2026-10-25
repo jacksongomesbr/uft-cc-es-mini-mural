@@ -185,6 +185,17 @@ class EntrarESairTest(TestCase):
         self.assertEqual(resposta["Location"], "/entrar/")
         self.assertEqual(self.client.get("/avisos/novo/").status_code, 302)
 
+    def test_quem_ja_entrou_e_abre_entrar_vai_para_o_mural(self):
+        # Contrato, GET /entrar/: quem já entrou recebe 303 para o mural.
+        self.entrar()
+        resposta = self.client.get("/entrar/")
+        self.assertEqual((resposta.status_code, resposta["Location"]), (303, "/"))
+
+    def test_formulario_de_entrar_vazio(self):
+        # Contrato, POST /entrar/: campos vazios recebem a mesma recusa da senha errada.
+        resposta = self.client.post("/entrar/", {"nome_usuario": "", "senha": ""})
+        self.assertContains(resposta, "Nome de usuário ou senha não conferem.", status_code=422)
+
     def test_sair_por_get_responde_405(self):
         self.entrar()
         self.assertEqual(self.client.get("/sair/").status_code, 405)
