@@ -58,5 +58,5 @@ def criar(request):
 
     # A-08: o autor vem da sessão; o formulário não tem campo de autor, e um
     # campo forjado é ignorado. O instante vem do banco (DP-10).
-    Aviso.objects.create(autor=conta, texto=form.cleaned_data["texto"])
+    Aviso.objects.create(autor=conta, texto=form.cleaned_data["texto"], tipo=form.cleaned_data["tipo"])
     return redirecionar(reverse("mural"))

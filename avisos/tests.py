@@ -262,3 +262,36 @@ class RegraDoTextoTest(SimpleTestCase):
         self.assertEqual(len(familia), 5)
         self.assertIsNone(preparar_texto(familia + "a" * 495)[1])
         self.assertIsNotNone(preparar_texto(familia + "a" * 496)[1])
+
+
+class TipoDoAvisoTest(TestCase):
+    """HU-05: TC-05.1 a TC-05.4 do TESTES.md."""
+
+    def setUp(self):
+        self.paula = Conta.objects.create_user("paula.sec", "Secretaria do curso", "senha-de-teste-1")
+        self.client.force_login(self.paula)
+
+    def test_tc_05_1_sem_tipo_e_interno(self):
+        self.assertEqual(self.client.post("/avisos/", {"texto": "Sem tipo"}).status_code, 303)
+        self.assertEqual(Aviso.objects.get().tipo, Aviso.INTERNO)
+
+    def test_tc_05_2_aberto(self):
+        self.client.post("/avisos/", {"texto": "Evento aberto", "tipo": "aberto"})
+        self.assertEqual(Aviso.objects.get().tipo, Aviso.ABERTO)
+
+    def test_tc_05_3_tipo_fora_da_lista(self):
+        resposta = self.client.post("/avisos/", {"texto": "Tipo estranho", "tipo": "publico"})
+        self.assertContains(resposta, "Escolha se o aviso é aberto ou interno.", status_code=422)
+        self.assertContains(resposta, "Tipo estranho", status_code=422)
+        self.assertFalse(Aviso.objects.exists())
+
+    def test_tc_05_4_tipo_no_mural(self):
+        Aviso.objects.create(autor=self.paula, texto="Aviso aberto", tipo=Aviso.ABERTO)
+        Aviso.objects.create(autor=self.paula, texto="Aviso interno", tipo=Aviso.INTERNO)
+        conteudo = self.client.get("/").content.decode()
+        self.assertIn('<span class="tipo">Aberto</span>', conteudo)
+        self.assertIn('<span class="tipo">Interno</span>', conteudo)
+
+    def test_pagina_de_publicar_marca_interno(self):
+        conteudo = self.client.get("/avisos/novo/").content.decode()
+        self.assertRegex(conteudo, r'value="interno"[^>]*checked')
