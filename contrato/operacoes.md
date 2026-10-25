@@ -85,8 +85,9 @@ arquivo. Os nomes de campo são do glossário, e nenhum é nome de coluna.
 ### GET /
 
 - **Origem:** HU-04, CA-04.1 a CA-04.3, CA-02.3
-- **Sem conta:** 302 para `/entrar/?next=/` (CA-02.3). Quando HU-06 entrar,
-  quem não entrou passa a ver os avisos abertos.
+- **Sem conta (a partir de HU-06):** 200, só os avisos abertos publicados
+  (CA-06.1), com o caminho para entrar. Sem nenhum aberto, a página diz "Ainda
+  não há avisos abertos." (CA-06.2).
 - **Com conta:** 200, o mural. Os avisos publicados, do mais recente para o mais
   antigo, com desempate pelo identificador (DP-06). Cada aviso mostra o texto,
   o nome para exibição e o nome de usuário do autor, a data e a hora no horário
@@ -110,7 +111,8 @@ arquivo. Os nomes de campo são do glossário, e nenhum é nome de coluna.
 ### POST /avisos/
 
 - **Origem:** HU-03, CA-03.1 a CA-03.5, UC-01, RN-01
-- **Entrada:** `texto`. O autor não é campo: vem da sessão (A-08).
+- **Entrada:** `texto` e `tipo`, `aberto` ou `interno`; sem `tipo`, o aviso é
+  interno (CA-05.1). O autor não é campo: vem da sessão (A-08).
 - **Regras no servidor:**
   - sessão válida e RN-01 (quem pode publicar);
   - quebras de linha enviadas pelo navegador contam um caractere cada;
@@ -129,28 +131,37 @@ arquivo. Os nomes de campo são do glossário, e nenhum é nome de coluna.
     e o limite é 500. Corte X caracteres e publique de novo.", e o texto
     mantido (UC-01, 4b; CA-03.3). Quando X é 1, a mensagem diz "Corte 1
     caractere".
+  - **Tipo inválido:** 422, página de publicar com "Escolha se o aviso é aberto
+    ou interno.", e o texto mantido (CA-05.3).
   - **Banco sem resposta (ainda não implementado, HU-03.2):** 503, página de
     publicar com "O aviso não foi publicado, porque o sistema não conseguiu
     gravar. O texto continua no campo; tente de novo em instantes.", e o
     texto mantido (UC-01, 4e). A mensagem é proposta da equipe, e a
     alternativa ainda não tem critério.
 
-## Depois da review parcial
+## Aviso aberto, interno e arquivado
 
-Rotas das histórias importantes, em esboço. Elas se completam no planejamento
-da iteração em que HU-05 a HU-07 entrarem.
+Rotas de HU-05 a HU-07, completadas na inspeção da iteração 4 (#127).
 
 ### GET /avisos/{id}/
 
-- **Origem:** HU-06, CA-07.4, CA-07.5, RNF-06
-- **Sucesso:** 200, o aviso. Aviso interno pedido sem conta: 302 para
-  `/entrar/`. Aviso arquivado pedido por quem não é o autor: 404, a mesma
-  resposta de aviso inexistente (CA-07.4).
+- **Origem:** HU-06, HU-07, CA-06.3, CA-06.4, CA-07.4, CA-07.5, RNF-06
+- **Sucesso:** 200, o aviso, com o texto, os dois nomes do autor, a data, a hora
+  e o tipo. Arquivado, mostra também a data e a hora do arquivamento, e só para
+  o autor. O autor vê o botão de arquivar enquanto o aviso está publicado.
+- **Aviso interno pedido sem conta:** 302 para `/entrar/?next=/avisos/{id}/`,
+  sem o texto do aviso na resposta (CA-06.3).
+- **Aviso arquivado pedido por quem não é o autor, ou aviso que não existe:**
+  404, com a mesma página nos dois casos (CA-07.4).
 
 ### POST /avisos/{id}/arquivar/
 
-- **Origem:** HU-07, CA-07.1 a CA-07.3, RN-02
-- **Sucesso:** 303 para `/`. Arquivar de novo também responde 303, e nada muda
-  (CA-07.3).
-- **Falhas:** 403, "Só quem publicou o aviso pode arquivá-lo." (CA-07.2);
-  404 para aviso que não existe ou arquivado de outra pessoa.
+- **Origem:** HU-07, CA-07.1 a CA-07.4, RN-02
+- **Sem conta:** 302 para `/entrar/`.
+- **Sucesso:** 303 para `/`, sem o aviso no mural (CA-07.1). Arquivar de novo
+  também responde 303, e a data do primeiro arquivamento fica (CA-07.3).
+- **Falhas:** 403, "Só quem publicou o aviso pode arquivá-lo.", quando o aviso
+  de outra pessoa ainda está publicado (CA-07.2); 404 quando o aviso não existe
+  ou é arquivado de outra pessoa (CA-07.4).
+- **GET:** 303 para `/avisos/{id}/`. É o endereço que fica na barra depois de
+  uma recusa, e abri-lo de novo leva ao aviso.

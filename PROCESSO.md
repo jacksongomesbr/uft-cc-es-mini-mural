@@ -176,3 +176,6 @@ revisão; avaliar quem revisa fica fora do uso deles.
   perguntas e métricas, e a regra de que toda issue de defeito cita o pull
   request de origem. A lista de verificação e os tipos de comentário estão no
   `CONTRIBUTING.md` desde a #119.
+- 2026-10-25: todo pull request que acrescenta critério de aceitação roda de
+  novo a parte do conjunto da lista de verificação dos requisitos (#126,
+  melhoria do processo da inspeção).
