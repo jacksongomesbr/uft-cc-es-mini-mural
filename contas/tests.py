@@ -163,19 +163,20 @@ class EntrarESairTest(TestCase):
         self.assertContains(resposta, 'value="paula.sec"', status_code=422)
         self.assertNotIn("_auth_user_id", self.client.session)
 
-    def test_ca_02_3_mural_sem_conta_vai_para_entrar_e_volta(self):
-        resposta = self.client.get("/")
+    def test_ca_02_3_pagina_de_publicar_sem_conta_vai_para_entrar_e_volta(self):
+        # CA-02.3 alterado no #127: o mural deixou de exigir conta com HU-06.
+        resposta = self.client.get("/avisos/novo/")
         self.assertEqual(resposta.status_code, 302)
-        self.assertEqual(resposta["Location"], "/entrar/?next=/")
-        resposta = self.entrar(next="/")
-        self.assertEqual(resposta["Location"], "/")
+        self.assertEqual(resposta["Location"], "/entrar/?next=/avisos/novo/")
+        resposta = self.entrar(next="/avisos/novo/")
+        self.assertEqual(resposta["Location"], "/avisos/novo/")
 
     def test_ca_02_4_depois_de_sair_a_sessao_acabou(self):
         self.entrar()
         resposta = self.client.post("/sair/")
         self.assertEqual(resposta.status_code, 303)
         self.assertEqual(resposta["Location"], "/entrar/")
-        self.assertEqual(self.client.get("/").status_code, 302)
+        self.assertEqual(self.client.get("/avisos/novo/").status_code, 302)
 
     def test_sair_por_get_responde_405(self):
         self.entrar()

@@ -40,6 +40,17 @@ class AvisoQuerySet(models.QuerySet):
         """
         return self.filter(situacao=Aviso.PUBLICADO).select_related("autor")
 
+    def do_mural(self, conta):
+        """Os avisos que o mural mostra a quem pede (HU-04, HU-06).
+
+        É a regra de pode_ser_visto_por escrita como consulta, para o mural
+        não buscar aviso por aviso. Um teste confere que as duas concordam.
+        """
+        avisos = self.publicados()
+        if not conta.is_authenticated:
+            avisos = avisos.filter(tipo=Aviso.ABERTO)
+        return avisos
+
 
 class Aviso(models.Model):
     ABERTO = "aberto"
@@ -85,3 +96,15 @@ class Aviso(models.Model):
 
     def __str__(self):
         return self.texto[:40]
+
+    def pode_ser_visto_por(self, conta):
+        """Quem vê o aviso (RNF-06, RNF-07; CA-06.1 a CA-06.4, CA-07.4, CA-07.5).
+
+        O arquivado, só o autor. O interno publicado, quem entrou com uma conta.
+        O aberto publicado, qualquer pessoa.
+        """
+        if self.situacao == self.ARQUIVADO:
+            return conta.is_authenticated and conta.pk == self.autor_id
+        if self.tipo == self.INTERNO:
+            return conta.is_authenticated
+        return True

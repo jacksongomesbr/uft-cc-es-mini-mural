@@ -20,6 +20,8 @@
         <button type="submit">Sair</button>
       </form>
     </span>
+    {% else %}
+    <a href="{% url 'entrar' %}">Entrar</a>
     {% endif %}
   </header>
   <main>
