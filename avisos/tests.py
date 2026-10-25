@@ -115,3 +115,86 @@ class FusoTest(SimpleTestCase):
         # RNF-08: o modelo base tem a meta de viewport.
         with open(settings.BASE_DIR / "templates" / "base.html") as arquivo:
             self.assertIn('name="viewport"', arquivo.read())
+
+
+class PublicarTest(TestCase):
+    """HU-03.1: um teste por critério, mais CA-02.4, RNF-03 e A-08."""
+
+    def setUp(self):
+        self.paula = Conta.objects.create_user("paula.sec", "Secretaria do curso", "senha-de-teste-1")
+        self.livia = Conta.objects.create_user("livia.m", "Lívia Martins", "senha-de-teste-2")
+        self.client.force_login(self.paula)
+
+    def publicar(self, texto, **extra):
+        return self.client.post("/avisos/", {"texto": texto, **extra})
+
+    def test_pagina_de_publicar(self):
+        self.assertContains(self.client.get("/avisos/novo/"), "Até 500 caracteres.")
+
+    def test_ca_03_1_publicar(self):
+        texto = "A aula de Engenharia de Software de amanhã muda para a sala 12 do bloco B."
+        resposta = self.publicar(texto)
+        self.assertEqual(resposta.status_code, 303)
+        self.assertEqual(resposta["Location"], "/")
+        aviso = Aviso.objects.get()
+        self.assertEqual((aviso.autor, aviso.texto), (self.paula, texto))
+        mural = self.client.get("/").content.decode()
+        self.assertLess(mural.index(texto), mural.index("Secretaria do curso (paula.sec)"))
+
+    def test_ca_03_2_texto_vazio_ou_so_com_espacos(self):
+        for texto in ("", "  \r\n  "):
+            with self.subTest(texto=texto):
+                resposta = self.publicar(texto)
+                self.assertContains(resposta, "O aviso precisa de texto. Nada foi publicado.", status_code=422)
+        self.assertFalse(Aviso.objects.exists())
+
+    def test_ca_03_3_acima_do_limite(self):
+        texto = "a" * 501
+        resposta = self.publicar(texto)
+        self.assertContains(
+            resposta,
+            "O aviso tem 501 caracteres, e o limite é 500. Corte 1 caractere e publique de novo.",
+            status_code=422,
+        )
+        self.assertContains(resposta, texto, status_code=422)
+        self.assertFalse(Aviso.objects.exists())
+
+    def test_ca_03_4_no_limite_com_acento(self):
+        self.assertEqual(self.publicar("á" * 500).status_code, 303)
+        self.assertEqual(len(Aviso.objects.get().texto), 500)
+
+    def test_quebra_de_linha_do_navegador_conta_um(self):
+        texto = "a" * 250 + "\r\n" + "b" * 249
+        self.assertEqual(self.publicar(texto).status_code, 303)
+        self.assertEqual(Aviso.objects.get().texto, "a" * 250 + "\n" + "b" * 249)
+
+    def test_ca_03_5_o_aviso_continua(self):
+        self.publicar("Aviso que fica")
+        self.client.force_login(self.livia)
+        resposta = self.client.get("/")
+        self.assertContains(resposta, "Aviso que fica")
+        self.assertContains(resposta, "Secretaria do curso (paula.sec)")
+
+    def test_ca_02_4_depois_de_sair_nada_e_publicado(self):
+        self.client.post("/sair/")
+        resposta = self.publicar("Aviso depois de sair")
+        self.assertEqual(resposta.status_code, 302)
+        self.assertEqual(
+            resposta["Location"], "/entrar/?next=%2Favisos%2Fnovo%2F&motivo=aviso-nao-publicado"
+        )
+        self.assertFalse(Aviso.objects.exists())
+
+    def test_rnf_03_recarregar_nao_publica_de_novo(self):
+        resposta = self.publicar("Aviso único")
+        for _ in range(3):
+            self.client.get(resposta["Location"])
+        self.assertEqual(Aviso.objects.count(), 1)
+
+    def test_a_08_autor_vem_da_sessao(self):
+        self.publicar("Aviso com autor forjado", autor=self.livia.pk, autor_id=self.livia.pk)
+        self.assertEqual(Aviso.objects.get().autor, self.paula)
+
+    def test_pagina_de_publicar_sem_conta(self):
+        self.client.logout()
+        resposta = self.client.get("/avisos/novo/")
+        self.assertEqual(resposta["Location"], "/entrar/?next=/avisos/novo/")

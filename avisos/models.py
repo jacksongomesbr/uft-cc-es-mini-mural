@@ -7,6 +7,30 @@ from django.db.models.functions import Now
 LIMITE_DO_TEXTO = 500
 
 
+
+def caracteres(quantidade):
+    """"1 caractere", "12 caracteres"."""
+    return "1 caractere" if quantidade == 1 else f"{quantidade} caracteres"
+
+
+def preparar_texto(texto):
+    """Normaliza o texto do aviso e confere o limite (CA-03.2 a CA-03.4).
+
+    Devolve o texto normalizado e a mensagem de recusa, ou None quando o texto
+    é aceito. O navegador envia cada quebra de linha como dois caracteres, e
+    ela conta um, como no banco. Os espaços das pontas não contam.
+    """
+    texto = texto.replace("\r\n", "\n").replace("\r", "\n").strip()
+    if not texto:
+        return texto, "O aviso precisa de texto. Nada foi publicado."
+    if len(texto) > LIMITE_DO_TEXTO:
+        excesso = len(texto) - LIMITE_DO_TEXTO
+        return texto, (
+            f"O aviso tem {caracteres(len(texto))}, e o limite é {LIMITE_DO_TEXTO}. "
+            f"Corte {caracteres(excesso)} e publique de novo."
+        )
+    return texto, None
+
 class AvisoQuerySet(models.QuerySet):
     def publicados(self):
         """Os avisos do mural: publicados, com o autor na mesma consulta.

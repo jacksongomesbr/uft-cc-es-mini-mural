@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Publicar aviso | Mini Mural{% endblock %}
+
+{% block conteudo %}
+<h1>Publicar aviso</h1>
+{% if erro %}<p class="recusa">{{ erro }}</p>{% endif %}
+<form method="post" action="{% url 'criar' %}">
+  {% csrf_token %}
+  <div class="campo{% if erro %} campo-com-erro{% endif %}">
+    <label for="texto">Texto do aviso</label>
+    {# Sem limite no campo: quem passa do limite recebe a recusa com a contagem (CA-03.3). #}
+    <textarea id="texto" name="texto" rows="6" required
+              data-limite="{{ limite }}" data-contador="contador">{{ texto }}</textarea>
+    <p class="dica" id="contador" aria-live="polite">Até {{ limite }} caracteres.</p>
+  </div>
+  <button type="submit">Publicar</button>
+  <a href="{% url 'mural' %}">Voltar ao mural</a>
+</form>
+<script src="{% static 'js/contador.js' %}"></script>
+{% endblock %}
