@@ -51,8 +51,13 @@ source .venv/bin/activate
 ```
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 ```
+
+O `requirements.txt` tem as dependências da aplicação, com a versão fixa; o
+`requirements-dev.txt` acrescenta as ferramentas de verificação. As duas listas
+fixam a versão com `==`, para a máquina de cada integrante e a da integração
+contínua instalarem o mesmo.
 
 ```bash
 createdb mini_mural_es
