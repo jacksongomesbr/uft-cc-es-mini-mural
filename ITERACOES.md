@@ -4,6 +4,76 @@ Este documento diz o que a equipe planejou em cada iteração, o que concluiu e 
 que aprendeu. O `PROCESSO.md` diz como a equipe trabalha; aqui ficam os números
 de cada ciclo e de onde cada um saiu. A iteração mais recente vem primeiro.
 
+## Review parcial (encontro 9)
+
+### Preparação
+
+**Código demonstrado:** o da tag `v0.7.0`. Depois dela entraram só documentos
+e o script de restauração; `git diff v0.7.0 -- '*.py' templates static` não
+devolve nada. Nenhum código entrou nas vinte e quatro horas antes da
+apresentação.
+
+**Ambiente:** o notebook de Bruno, com o banco `mini_mural_demo`, separado do
+banco de desenvolvimento. `scripts/restaurar_demonstracao.sh SENHA` devolve o
+banco ao passo 1 e recusa qualquer banco cujo nome não termine em `_demo`. O
+notebook de Davi fica no mesmo commit, com o mesmo script.
+
+**Papéis**, pela rotação do `PROCESSO.md`: Bruno demonstra, Carla narra, Davi
+anota as observações nos três campos, Ana responde pelo backlog e Eva conduz a
+tarefa com a servidora da secretaria.
+
+**Declarado antes do passo 1:**
+
+| Elemento | O que é | Como declarar |
+|---|---|---|
+| Contas | Do próprio Mini Mural, e não a conta institucional (RE-01, HU-12) | Antes do passo 1, em uma frase |
+| Dados | Três contas e dois avisos fictícios; a conta da secretaria é criada na hora, com o nome para exibição "Secretaria do curso", sem nome de pessoa | Na abertura do passo 1 |
+| Ambiente | Local, no notebook, sem hospedagem (A-11, R4) | No bloco de limites |
+| Fora desta demonstração | Aviso aberto e interno (HU-05, HU-06), arquivar (HU-07), banco sem resposta (HU-03.2) e data de validade (HU-13), no backlog | No bloco de limites, com o item |
+| Defeito conhecido | Depois de uma recusa, abrir de novo o endereço `/avisos/` mostra página vazia (#97, achado 5) | No bloco de limites |
+
+**Roteiro.** As tarefas da secretaria são situadas, como na V1, sem explicar a
+tela.
+
+| Passo | Ação | O que o público vê | Critério |
+|---:|---|---|---|
+| 1 | Abrir o mural sem conta | A página de entrar, com o caminho de volta | CA-02.3 |
+| 2 | A servidora cria a conta e escolhe "prof. de cálculo" como nome para exibição | A recusa, porque o nome já existe | CA-01.6 |
+| 3 | Ela troca para "Secretaria do curso" | O mural, já com o nome dela no topo | CA-01.1, CA-02.1 |
+| 4 | "Avise a turma de que a aula de amanhã mudou para a sala 12" | O aviso no topo, com os dois nomes, a data e a hora | CA-03.1, CA-04.1, CA-04.3 |
+| 5 | Colar o texto preparado de 567 caracteres (`scripts/texto-longo-da-demonstracao.txt`) | A recusa com a contagem, e o texto mantido | CA-03.3 |
+| 6 | Recarregar o mural | O mesmo número de avisos | RNF-03 |
+| 7 | Sair; um integrante entra como `aluno.demo` pelo celular | O aviso da secretaria no mural do aluno | CA-02.4, CA-03.5 |
+
+**Ordem e tempo**, para os 15 minutos combinados com o professor: problema e
+usuário, 1 min 30 s (Lívia e Paula, `DESCOBERTA.md`); especificação, 2 min
+(backlog e MVP); modelagem e arquitetura, 2 min (modelo de domínio e A-01);
+demonstração, 7 min; limites e próximos passos, 2 min 30 s. Se o tempo
+apertar, o corte começa pelo problema e pela especificação; os limites nunca
+saem.
+
+**Decisões a defender**, com a linha de cada uma:
+
+- **A-01**, uma aplicação só no lugar do frontend separado com API que o livro
+  recomenda. "E se vier um aplicativo?": a API é escrita depois, sobre o mesmo
+  domínio, e é a consequência aceita na linha.
+- **A-04**, conta própria só com os campos do `PROJETO.md`. "E se a
+  coordenação quiser desativar uma conta?": pelo terminal, com
+  `desativar()`, como diz a linha.
+- **DP-04**, arquivar é o apagamento do aviso.
+- **R9**, nome que imita outra pessoa: CA-01.6 e o nome de usuário no mural, e
+  o risco que sobra vai à revisão de C2.
+
+**Plano da falha:** reiniciar o servidor e restaurar o banco com o script;
+se falhar de novo, o notebook de Davi; por último, a gravação do ensaio,
+declarada como gravação, se o professor a aceitar como evidência.
+
+**Ensaio.** O roteiro foi percorrido no banco da demonstração, do passo 1 ao 7,
+e o banco foi restaurado pelo script depois. O ensaio achou um problema do
+roteiro: o texto longo, escrito na hora, tinha menos de 500 caracteres e foi
+publicado em vez de recusado. O passo 5 passou a usar um texto preparado, com
+a contagem conferida, guardado em `scripts/`.
+
 ## Iteração 3 (encontros 7 a 9)
 
 A primeira iteração de código, e a que chega à review parcial.
