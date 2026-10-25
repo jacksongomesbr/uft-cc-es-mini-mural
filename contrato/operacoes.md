@@ -119,7 +119,8 @@ arquivo. Os nomes de campo são do glossário, e nenhum é nome de coluna.
     precisa de texto. Nada foi publicado." (UC-01, 4a; CA-03.2).
   - **Acima do limite:** 422, página de publicar com "O aviso tem N caracteres,
     e o limite é 500. Corte X caracteres e publique de novo.", e o texto
-    mantido (UC-01, 4b; CA-03.3).
+    mantido (UC-01, 4b; CA-03.3). Quando X é 1, a mensagem diz "Corte 1
+    caractere".
   - **Banco sem resposta:** 503, página de publicar com "O aviso não foi
     publicado, porque o sistema não conseguiu gravar. O texto continua no
     campo; tente de novo em instantes.", e o texto mantido (UC-01, 4e). A

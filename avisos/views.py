@@ -1,8 +1,15 @@
 """Páginas de avisos. O contrato de cada rota está em contrato/operacoes.md."""
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from urllib.parse import urlencode
 
-from .models import Aviso
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse
+from django.views.decorators.http import require_POST
+
+from config.respostas import redirecionar
+
+from .models import LIMITE_DO_TEXTO, Aviso, preparar_texto
 
 
 # CA-02.3: sem conta, o framework leva à página de entrar com o caminho de volta.
@@ -11,3 +18,35 @@ from .models import Aviso
 def mural(request):
     """HU-04: os avisos publicados, do mais recente para o mais antigo."""
     return render(request, "avisos/mural.html", {"avisos": Aviso.objects.publicados()})
+
+
+def pagina_de_publicar(request, texto="", erro=None, status=200):
+    contexto = {"texto": texto, "erro": erro, "limite": LIMITE_DO_TEXTO}
+    return render(request, "avisos/publicar.html", contexto, status=status)
+
+
+@login_required
+def novo(request):
+    """UC-01, passos 1 e 2: a página de publicar."""
+    return pagina_de_publicar(request)
+
+
+@require_POST
+def criar(request):
+    """HU-03.1: registra o aviso (UC-01, passos 3 e 4)."""
+    conta = request.user
+    if not conta.is_authenticated or not conta.pode_publicar():
+        # UC-01, 4c: a sessão acabou, por exemplo porque a pessoa saiu em outra
+        # aba. Nada é gravado, e a página de entrar explica o que houve.
+        parametros = urlencode({"next": reverse("novo"), "motivo": "aviso-nao-publicado"})
+        return HttpResponseRedirect(f"{reverse('entrar')}?{parametros}")
+
+    texto, erro = preparar_texto(request.POST.get("texto", ""))
+    if erro:
+        # A-07: 422, com o texto mantido para a pessoa corrigir.
+        return pagina_de_publicar(request, texto, erro, status=422)
+
+    # A-08: o autor vem da sessão; qualquer campo de autor no formulário é
+    # ignorado. O instante vem do banco (DP-10).
+    Aviso.objects.create(autor=conta, texto=texto)
+    return redirecionar(reverse("mural"))

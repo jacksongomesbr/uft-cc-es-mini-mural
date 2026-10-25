@@ -2,6 +2,7 @@
 
 {% block conteudo %}
 <h1>Mural</h1>
+<p><a href="{% url 'novo' %}" class="botao">Publicar aviso</a></p>
 {% for aviso in avisos %}
 <article class="aviso">
   {# O escape automático vale também aqui: linebreaksbr escapa antes de quebrar (RNF-05). #}
