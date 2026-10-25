@@ -1,5 +1,6 @@
 """Páginas de contas. O contrato de cada rota está em contrato/operacoes.md."""
 from django.contrib.auth import login
+from django.db import IntegrityError
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
@@ -19,8 +20,16 @@ def cadastro(request):
     status = 200
     if request.method == "POST":
         if form.is_valid():
-            login(request, form.save())
-            return redirecionar(reverse("inicio"))
+            try:
+                conta = form.save()
+            except IntegrityError:
+                # Outra conta com o mesmo nome foi gravada entre a conferência e
+                # a gravação. Conferir de novo põe a mensagem no campo certo.
+                form = CadastroForm(request.POST)
+                form.is_valid()
+            else:
+                login(request, conta)
+                return redirecionar(reverse("inicio"))
         # A-07: a recusa responde 422, com a página e o que foi preenchido.
         status = 422
     return render(request, "contas/cadastro.html", {"form": form}, status=status)

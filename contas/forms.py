@@ -2,6 +2,7 @@
 from django import forms
 from django.contrib.auth import password_validation
 from django.core.exceptions import ValidationError
+from django.db import transaction
 
 from .models import Conta, normalizar_nome
 
@@ -44,8 +45,11 @@ class CadastroForm(forms.Form):
         return senha
 
     def save(self):
-        return Conta.objects.create_user(
-            self.cleaned_data["nome_usuario"],
-            self.cleaned_data["nome_exibicao"],
-            self.cleaned_data["senha"],
-        )
+        # Um ponto de salvamento próprio: se o banco recusar, só esta gravação
+        # é desfeita.
+        with transaction.atomic():
+            return Conta.objects.create_user(
+                self.cleaned_data["nome_usuario"],
+                self.cleaned_data["nome_exibicao"],
+                self.cleaned_data["senha"],
+            )

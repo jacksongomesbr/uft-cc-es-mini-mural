@@ -1,8 +1,11 @@
 """Testes do esqueleto da conta: os campos que existem e as restrições do banco."""
+from unittest import mock
+
 from django.contrib.auth import get_user_model
 from django.db import IntegrityError, transaction
 from django.test import SimpleTestCase, TestCase
 
+from .forms import CadastroForm
 from .models import Conta, normalizar_nome
 
 
@@ -124,3 +127,16 @@ class CadastroTest(TestCase):
         self.cadastrar()
         resposta = self.client.get("/cadastro/")
         self.assertEqual(resposta.status_code, 303)
+
+    def test_nome_gravado_por_outra_pessoa_entre_conferir_e_gravar(self):
+        # A restrição do banco recusa, e a página mostra a mensagem do CA-01.2.
+        salvar = CadastroForm.save
+
+        def salvar_depois_de_outra_pessoa(form):
+            Conta.objects.create_user("livia.m", "Outra pessoa", "senha-de-teste-9")
+            return salvar(form)
+
+        with mock.patch.object(CadastroForm, "save", salvar_depois_de_outra_pessoa):
+            resposta = self.cadastrar()
+        self.assertContains(resposta, "Esse nome de usuário já está em uso.", status_code=422)
+        self.assertEqual(Conta.objects.filter(nome_usuario__iexact="livia.m").count(), 1)
