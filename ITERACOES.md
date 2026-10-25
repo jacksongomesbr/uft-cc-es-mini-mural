@@ -4,6 +4,58 @@ Este documento diz o que a equipe planejou em cada iteração, o que concluiu e 
 que aprendeu. O `PROCESSO.md` diz como a equipe trabalha; aqui ficam os números
 de cada ciclo e de onde cada um saiu. A iteração mais recente vem primeiro.
 
+## Iteração 4 (encontros 9 a 11)
+
+**Meta:** no encontro 11, um visitante lê pelo celular, sem conta, um aviso
+aberto publicado pelo centro acadêmico, e um professor arquiva o próprio aviso,
+que sai do mural.
+
+### Capacidade
+
+A iteração 3 concluiu 14 pontos, a única velocidade observada. A previsão da
+iteração 4 é de 14 pontos, com as cinco pessoas em tempo integral de novo; a
+suposição é que equipe e condições se repetem, e ela vale pelo que vale uma
+observação. O plano fica abaixo dela, com 12 pontos, para deixar folga ao que a
+equipe ainda não fez: a primeira regra de acesso (RNF-06) e o primeiro estado
+novo do aviso.
+
+### Plano
+
+| Ordem | Item | Pontos | Responsável |
+|---:|---|---:|---|
+| 1 | HU-16 Abrir de novo o endereço de publicar depois de uma recusa (#114) | 1 | Bruno |
+| 2 | Testes do GET das rotas que recebem formulário (#115) | 1 | Carla |
+| 3 | Dívida: publicação com o formulário do framework (#116) | 2 | Eva |
+| 4 | HU-05 Marcar o aviso como aberto ou interno | 3 | Davi |
+| 5 | HU-06 Ler aviso aberto sem conta | 2 | Ana |
+| 6 | HU-07 Arquivar o próprio aviso | 3 | Carla e Bruno |
+| | Total | 12 | |
+
+HU-16 vem primeiro porque é a obrigatória que sobrou da review. HU-03.2 serve a
+meta de nenhum jeito e fica no backlog; HU-05 e HU-06 vêm antes de HU-07 pela
+ordem que a review parcial reforçou.
+
+### Reserva técnica
+
+A reserva é de 2 pontos por iteração a partir desta, como previsto na
+iteração 3. A regra para escolher é a do capítulo 10: entre as dívidas que
+cabem, vem a que mais evita custo de carregar com as mudanças esperadas na
+iteração.
+
+| Dívida | Custo de carregar nesta iteração | Custo de pagar | Cabe |
+|---|---|---:|---|
+| Publicação sem o formulário do framework (#116) | 1 ponto: HU-05 acrescenta o tipo ao formulário de publicar | 2 | Sim |
+| Chave secreta de desenvolvimento no código (#109) | Nenhum: não há hospedagem nesta iteração | 1 | Sim |
+| Dependências sem versão fixa (#110) | Nenhum: a integração contínua vem no capítulo 12 | 1 | Sim |
+| Mural carrega todos os avisos (#111) | Nenhum: o mural tem menos de 200 avisos | 2 | Sim |
+
+A escolhida é a #116, a única com custo de carregar nesta iteração, e ela paga
+antes de HU-05, que é o gatilho. As outras três esperam o gatilho registrado em
+cada issue.
+
+O teste do GET das rotas (#115) é a decisão da retrospectiva da iteração 3 e
+entra como item próprio, com 1 ponto, fora da reserva.
+
 ## Review parcial (encontro 9)
 
 ### Preparação
