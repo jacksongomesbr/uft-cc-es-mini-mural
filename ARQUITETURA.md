@@ -95,7 +95,7 @@ acontecer, venha de onde vier a gravação.
 | Verificação | No navegador | No servidor | No banco |
 |---|---|---|---|
 | Texto vazio | Campo obrigatório, como ajuda | Decide, depois de tirar os espaços das pontas; 422 (CA-03.2) | Não participa |
-| Limite de 500 caracteres | Contador e limite do campo, como ajuda; a contagem do navegador pode diferir na quebra de linha | Decide: conta caracteres depois de juntar as quebras de linha; 422 (CA-03.3, CA-03.4) | Restrição de tamanho em caracteres, a segunda barreira (DP-09) |
+| Limite de 500 caracteres | Contador, como ajuda. O campo não limita a digitação, para a recusa do CA-03.3 aparecer com a contagem | Decide: conta caracteres depois de juntar as quebras de linha; 422 (CA-03.3, CA-03.4) | Restrição de tamanho em caracteres, a segunda barreira (DP-09) |
 | Nome de usuário em uso | Não participa | Decide, sem diferenciar maiúsculas; 422 (CA-01.2) | Unicidade por expressão (DP-03) |
 | Nome para exibição em uso | Não participa | Normaliza os espaços e decide, sem diferenciar maiúsculas; 422 (CA-01.6) | Unicidade por expressão sobre o nome já normalizado |
 | Senha fraca | Não participa | Validadores de senha do framework; 422 (CA-01.3) | Não participa |
@@ -168,3 +168,4 @@ pede o `PROCESSO.md`, foi tomada em par, por Davi e Bruno.
 - 2026-10-24: contrato das rotas e A-12 (#71).
 - 2026-10-24: verificações, qualidades e custos (#72).
 - 2026-10-24: conferência do contrato em duplas trocadas (#74).
+- 2026-10-24: verificações conferidas contra o código antes da review parcial (#97).
