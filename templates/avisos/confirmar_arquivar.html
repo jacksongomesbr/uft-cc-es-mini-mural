@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Arquivar aviso | Mini Mural{% endblock %}
+
+{% block conteudo %}
+{# HU-18: o arquivamento não se desfaz (CA-07.3), e por isso pede confirmação. #}
+<h1>Arquivar este aviso?</h1>
+<article class="aviso">
+  <p class="texto">{{ aviso.texto|linebreaksbr }}</p>
+</article>
+<p>O aviso sai do mural e não volta. Ele continua guardado, e só você o vê.</p>
+<form method="post" action="{% url 'arquivar' aviso.pk %}">
+  {% csrf_token %}
+  <button type="submit">Confirmar</button>
+  <a href="{% url 'mural' %}">Desistir</a>
+</form>
+{% endblock %}

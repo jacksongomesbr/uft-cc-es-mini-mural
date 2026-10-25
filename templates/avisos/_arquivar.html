@@ -1,7 +1,5 @@
 {% load avisos %}
 {% if aviso.situacao == "publicado" and aviso|pode_ser_arquivado_por:user %}
-<form method="post" action="{% url 'arquivar' aviso.pk %}" class="arquivar">
-  {% csrf_token %}
-  <button type="submit">Arquivar</button>
-</form>
+{# HU-18: a ligação leva à página que pede confirmação. #}
+<p class="arquivar"><a href="{% url 'arquivar' aviso.pk %}">Arquivar</a></p>
 {% endif %}

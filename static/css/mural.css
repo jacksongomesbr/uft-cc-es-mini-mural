@@ -58,5 +58,5 @@ button { font: inherit; padding: 8px 16px; }
 
 /* Arquivar: o botão abaixo do aviso, e o aviso arquivado marcado. */
 .arquivar { margin: 6px 0 0; }
-.arquivar button { padding: 4px 10px; }
+
 .arquivado { color: #555; font-style: italic; }

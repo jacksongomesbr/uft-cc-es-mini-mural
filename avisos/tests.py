@@ -505,8 +505,9 @@ class ArquivarTest(TestCase):
     def test_botao_so_para_o_autor(self):
         self.client.force_login(self.paula)
         conteudo = self.client.get("/").content.decode()
-        self.assertIn(f'action="/avisos/{self.da_paula.pk}/arquivar/"', conteudo)
-        self.assertNotIn(f'action="/avisos/{self.do_prof.pk}/arquivar/"', conteudo)
+        # Desde HU-18, o botão é uma ligação para a confirmação.
+        self.assertIn(f'href="/avisos/{self.da_paula.pk}/arquivar/"', conteudo)
+        self.assertNotIn(f'href="/avisos/{self.do_prof.pk}/arquivar/"', conteudo)
 
     def test_sem_conta_vai_para_entrar(self):
         resposta = self.client.post(f"/avisos/{self.da_paula.pk}/arquivar/")
