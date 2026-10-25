@@ -42,3 +42,8 @@ button { font: inherit; padding: 8px 16px; }
 .quem { display: flex; align-items: center; gap: 8px; }
 .sair { margin: 0; }
 .sair button { padding: 4px 10px; }
+
+/* Mural: um aviso abaixo do outro, com o autor e a hora em letra menor. */
+.aviso { border-top: 1px solid #ddd; padding: 12px 0; }
+.aviso .texto { margin: 0 0 4px; overflow-wrap: anywhere; }
+.aviso .autor { margin: 0; color: #555; font-size: .9rem; }

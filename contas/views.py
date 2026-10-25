@@ -20,7 +20,7 @@ MOTIVOS = {
 def cadastro(request):
     """HU-01: cria a conta e já entra com ela (CA-01.1)."""
     if request.user.is_authenticated:
-        return redirecionar(reverse("inicio"))
+        return redirecionar(reverse("mural"))
 
     form = CadastroForm(request.POST or None)
     status = 200
@@ -35,7 +35,7 @@ def cadastro(request):
                 form.is_valid()
             else:
                 login(request, conta)
-                return redirecionar(reverse("inicio"))
+                return redirecionar(reverse("mural"))
         # A-07: a recusa responde 422, com a página e o que foi preenchido.
         status = 422
     return render(request, "contas/cadastro.html", {"form": form}, status=status)
@@ -47,7 +47,7 @@ def destino_seguro(request, endereco):
         endereco, allowed_hosts={request.get_host()}, require_https=request.is_secure()
     ):
         return endereco
-    return reverse("inicio")
+    return reverse("mural")
 
 
 @require_http_methods(["GET", "POST"])
@@ -55,7 +55,7 @@ def entrar(request):
     """HU-02: CA-02.1 e CA-02.2; a volta ao endereço pedido é o CA-02.3."""
     destino = destino_seguro(request, request.POST.get("next") or request.GET.get("next"))
     if request.method == "GET" and request.user.is_authenticated:
-        return redirecionar(reverse("inicio"))
+        return redirecionar(reverse("mural"))
 
     form = EntrarForm(request.POST or None)
     erro = None
