@@ -1,0 +1,51 @@
+# Verificação automática do Mini Mural (capítulo 12): formatador, verificador de
+# estilo, conferências do framework e a suíte, a cada pull request e a cada
+# envio ao main. A proteção do main exige que o job "testes" passe.
+name: verificacao
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+
+    # Um PostgreSQL novo a cada execução, só para a suíte. O usuário e a senha
+    # valem apenas dentro desta máquina temporária, e não são segredo de nada.
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: mural
+          POSTGRES_PASSWORD: mural-ci
+          POSTGRES_DB: mini_mural_es
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U mural"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      MURAL_DB_NAME: mini_mural_es
+      MURAL_DB_USER: mural
+      MURAL_DB_PASSWORD: mural-ci
+      MURAL_DB_HOST: localhost
+      MURAL_DB_PORT: "5432"
+
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - run: ruff format --check .
+      - run: ruff check .
+      - run: python manage.py check
+      # A-09: toda mudança de modelo vem com a migração no mesmo pull request.
+      - run: python manage.py makemigrations --check --dry-run
+      - run: python manage.py test
