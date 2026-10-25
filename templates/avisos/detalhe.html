@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Aviso | Mini Mural{% endblock %}
+
+{% block conteudo %}
+<article class="aviso">
+  <p class="texto">{{ aviso.texto|linebreaksbr }}</p>
+  {% include 'avisos/_autor.html' %}
+</article>
+<p><a href="{% url 'mural' %}">Voltar ao mural</a></p>
+{% endblock %}

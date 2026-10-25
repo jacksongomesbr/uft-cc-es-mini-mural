@@ -2,6 +2,7 @@
 from urllib.parse import urlencode
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import redirect_to_login
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -13,12 +14,31 @@ from .forms import AvisoForm
 from .models import LIMITE_DO_TEXTO, Aviso
 
 
-# CA-02.3: sem conta, o framework leva à página de entrar com o caminho de volta.
-# Quando HU-06 entrar, quem não entrou passa a ver os avisos abertos.
-@login_required
 def mural(request):
-    """HU-04: os avisos publicados, do mais recente para o mais antigo."""
-    return render(request, "avisos/mural.html", {"avisos": Aviso.objects.publicados()})
+    """HU-04 e HU-06: os avisos que quem pede pode ver, do mais recente para o
+    mais antigo. Sem conta, só os abertos."""
+    return render(request, "avisos/mural.html", {"avisos": Aviso.objects.do_mural(request.user)})
+
+
+def nao_encontrado(request):
+    """A mesma resposta para aviso que não existe e para o que a pessoa não pode
+    ver, para não revelar que ele existe (CA-07.4)."""
+    return render(request, "avisos/nao_encontrado.html", status=404)
+
+
+def detalhe(request, id):
+    """O aviso pelo endereço (CA-06.3, CA-06.4, CA-07.4, CA-07.5)."""
+    aviso = Aviso.objects.select_related("autor").filter(pk=id).first()
+    if aviso is None:
+        return nao_encontrado(request)
+    if not aviso.pode_ser_visto_por(request.user):
+        # Interno publicado e pedido sem conta: a página de entrar, com o caminho
+        # de volta, e sem o texto (CA-06.3). Os outros casos são arquivado de
+        # outra pessoa, e a resposta é a de aviso inexistente.
+        if aviso.situacao == Aviso.PUBLICADO and not request.user.is_authenticated:
+            return redirect_to_login(request.get_full_path())
+        return nao_encontrado(request)
+    return render(request, "avisos/detalhe.html", {"aviso": aviso})
 
 
 def pagina_de_publicar(request, form=None, status=200):

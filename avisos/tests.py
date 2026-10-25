@@ -295,3 +295,94 @@ class TipoDoAvisoTest(TestCase):
     def test_pagina_de_publicar_marca_interno(self):
         conteudo = self.client.get("/avisos/novo/").content.decode()
         self.assertRegex(conteudo, r'value="interno"[^>]*checked')
+
+
+class AvisoAbertoSemContaTest(TestCase):
+    """HU-06: TC-06.1 a TC-06.4 do TESTES.md."""
+
+    def setUp(self):
+        self.ca = Conta.objects.create_user("ca.computacao", "Centro acadêmico", "senha-de-teste-1")
+        self.aberto = Aviso.objects.create(autor=self.ca, texto="Palestra aberta na quinta", tipo=Aviso.ABERTO)
+        self.interno = Aviso.objects.create(autor=self.ca, texto="Troca de sala interna", tipo=Aviso.INTERNO)
+
+    def test_tc_06_1_visitante_ve_so_os_abertos(self):
+        resposta = self.client.get("/")
+        self.assertEqual(resposta.status_code, 200)
+        self.assertContains(resposta, "Palestra aberta na quinta")
+        self.assertContains(resposta, "Centro acadêmico (ca.computacao)")
+        self.assertNotContains(resposta, "Troca de sala interna")
+
+    def test_tc_06_2_nenhum_aberto(self):
+        self.aberto.delete()
+        resposta = self.client.get("/")
+        self.assertContains(resposta, "Ainda não há avisos abertos.")
+        self.assertContains(resposta, 'href="/entrar/"')
+
+    def test_tc_06_3_interno_pelo_endereco(self):
+        resposta = self.client.get(f"/avisos/{self.interno.pk}/")
+        self.assertEqual(resposta.status_code, 302)
+        self.assertEqual(resposta["Location"], f"/entrar/?next=/avisos/{self.interno.pk}/")
+        self.assertNotIn(b"Troca de sala interna", resposta.content)
+
+    def test_tc_06_4_aberto_pelo_endereco(self):
+        self.assertContains(self.client.get(f"/avisos/{self.aberto.pk}/"), "Palestra aberta na quinta")
+
+    def test_aviso_que_nao_existe(self):
+        self.assertContains(self.client.get("/avisos/999999/"), "Aviso não encontrado", status_code=404)
+
+    def test_com_conta_ve_aberto_e_interno(self):
+        self.client.force_login(Conta.objects.create_user("livia.m", "Lívia Martins", "senha-de-teste-2"))
+        resposta = self.client.get("/")
+        self.assertContains(resposta, "Palestra aberta na quinta")
+        self.assertContains(resposta, "Troca de sala interna")
+
+
+class QuemVeTest(SimpleTestCase):
+    """TC-06.5: a regra de quem vê, sem banco."""
+
+    def setUp(self):
+        from django.contrib.auth.models import AnonymousUser
+
+        self.autor = Conta(pk=1, nome_usuario="paula.sec", nome_exibicao="Secretaria do curso")
+        self.outra = Conta(pk=2, nome_usuario="livia.m", nome_exibicao="Lívia Martins")
+        self.visitante = AnonymousUser()
+
+    def aviso(self, tipo, situacao):
+        return Aviso(autor=self.autor, texto="Aviso", tipo=tipo, situacao=situacao)
+
+    def test_tc_06_5_tabela_de_quem_ve(self):
+        esperado = {
+            # (tipo, situação): (visitante, outra conta, autor)
+            (Aviso.ABERTO, Aviso.PUBLICADO): (True, True, True),
+            (Aviso.INTERNO, Aviso.PUBLICADO): (False, True, True),
+            (Aviso.ABERTO, Aviso.ARQUIVADO): (False, False, True),
+            (Aviso.INTERNO, Aviso.ARQUIVADO): (False, False, True),
+        }
+        for (tipo, situacao), (visitante, outra, autor) in esperado.items():
+            aviso = self.aviso(tipo, situacao)
+            with self.subTest(tipo=tipo, situacao=situacao):
+                self.assertEqual(aviso.pode_ser_visto_por(self.visitante), visitante)
+                self.assertEqual(aviso.pode_ser_visto_por(self.outra), outra)
+                self.assertEqual(aviso.pode_ser_visto_por(self.autor), autor)
+
+
+class MuralConcordaComQuemVeTest(TestCase):
+    """O mural é a regra de pode_ser_visto_por escrita como consulta; as duas concordam."""
+
+    def test_lista_e_regra_concordam(self):
+        from django.contrib.auth.models import AnonymousUser
+
+        autor = Conta.objects.create_user("paula.sec", "Secretaria do curso", "senha-de-teste-1")
+        outra = Conta.objects.create_user("livia.m", "Lívia Martins", "senha-de-teste-2")
+        for tipo in (Aviso.ABERTO, Aviso.INTERNO):
+            Aviso.objects.create(autor=autor, texto=f"{tipo} publicado", tipo=tipo)
+            Aviso.objects.create(
+                autor=autor, texto=f"{tipo} arquivado", tipo=tipo, situacao=Aviso.ARQUIVADO, arquivado_em=tz.now()
+            )
+        for conta in (AnonymousUser(), outra, autor):
+            no_mural = set(Aviso.objects.do_mural(conta))
+            visiveis_e_publicados = {
+                aviso for aviso in Aviso.objects.all() if aviso.pode_ser_visto_por(conta) and aviso.situacao == Aviso.PUBLICADO
+            }
+            with self.subTest(conta=str(conta)):
+                self.assertEqual(no_mural, visiveis_e_publicados)

@@ -67,7 +67,7 @@ caso representa.
 |---|---|---|---|---|---|---|---|
 | TC-02.1 | CA-02.1 | Nome e senha certos | Conta "paula.sec" | Entrar | 303 para o mural, nome no topo | Integração | `test_ca_02_1_entrar_leva_ao_mural_e_mostra_quem_entrou` |
 | TC-02.2 | CA-02.2 | Senha errada | Conta "paula.sec" | Entrar com senha errada | 422, mensagem sem dizer qual errou | Integração | `test_ca_02_2_senha_errada` |
-| TC-02.3 | CA-02.3 | Página que exige conta | Sem sessão | Abrir `/avisos/novo/`, entrar | Vai a entrar e volta à página de publicar | Integração | Ida: `test_pagina_de_publicar_sem_conta`; volta: a escrever com HU-06 (#131), que também tira o teste antigo do mural |
+| TC-02.3 | CA-02.3 | Página que exige conta | Sem sessão | Abrir `/avisos/novo/`, entrar | Vai a entrar e volta à página de publicar | Integração | `test_ca_02_3_pagina_de_publicar_sem_conta_vai_para_entrar_e_volta` |
 | TC-02.4 | CA-02.4 | Depois de sair | Entrou e saiu | Publicar pela mesma aba | 302 para entrar, nada publicado | Integração | `test_ca_02_4_depois_de_sair_nada_e_publicado` |
 
 ### HU-03.1 Publicar aviso curto
@@ -112,16 +112,16 @@ Escritos antes do código; testes na #130.
 
 ### HU-06 Ler aviso aberto sem conta
 
-Escritos antes do código (#131). A partição é quem pede, visitante ou pessoa
+Escritos antes do código; testes na #131. A partição é quem pede, visitante ou pessoa
 com conta, contra o tipo e a situação do aviso.
 
 | ID | Critério | Classe ou limite | Preparo | Passos | Esperado | Nível | Teste |
 |---|---|---|---|---|---|---|---|
-| TC-06.1 | CA-06.1 | Visitante, aberto e interno | Um aberto e um interno | Visitante abre o mural | Só o aberto, com autor, data e hora | Integração | A escrever |
-| TC-06.2 | CA-06.2 | Visitante, nenhum aberto | Só internos | Visitante abre o mural | "Ainda não há avisos abertos." e o caminho para entrar | Integração | A escrever |
-| TC-06.3 | CA-06.3, RNF-06 | Visitante, interno pelo endereço | Um interno | Visitante pede `/avisos/{id}/` | 302 para entrar, sem o texto | Integração | A escrever |
-| TC-06.4 | CA-06.4 | Visitante, aberto pelo endereço | Um aberto | Visitante pede `/avisos/{id}/` | 200, o aviso | Integração | A escrever |
-| TC-06.5 | Regra de quem vê | Domínio, sem banco | Avisos aberto, interno e arquivado não gravados | Perguntar se cada um pode ser visto por visitante, pelo autor e por outra conta | Visitante vê só o aberto publicado; outra conta vê os publicados, abertos e internos; o autor vê também o próprio arquivado | Unidade | A escrever |
+| TC-06.1 | CA-06.1 | Visitante, aberto e interno | Um aberto e um interno | Visitante abre o mural | Só o aberto, com autor, data e hora | Integração | `test_tc_06_1_visitante_ve_so_os_abertos` |
+| TC-06.2 | CA-06.2 | Visitante, nenhum aberto | Só internos | Visitante abre o mural | "Ainda não há avisos abertos." e o caminho para entrar | Integração | `test_tc_06_2_nenhum_aberto` |
+| TC-06.3 | CA-06.3, RNF-06 | Visitante, interno pelo endereço | Um interno | Visitante pede `/avisos/{id}/` | 302 para entrar, sem o texto | Integração | `test_tc_06_3_interno_pelo_endereco` |
+| TC-06.4 | CA-06.4 | Visitante, aberto pelo endereço | Um aberto | Visitante pede `/avisos/{id}/` | 200, o aviso | Integração | `test_tc_06_4_aberto_pelo_endereco` |
+| TC-06.5 | Regra de quem vê | Domínio, sem banco | Avisos aberto, interno e arquivado não gravados | Perguntar se cada um pode ser visto por visitante, pelo autor e por outra conta | Visitante vê só o aberto publicado; outra conta vê os publicados, abertos e internos; o autor vê também o próprio arquivado | Unidade | `test_tc_06_5_tabela_de_quem_ve` |
 
 ### HU-07 Arquivar o próprio aviso
 

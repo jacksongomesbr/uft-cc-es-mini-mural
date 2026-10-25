@@ -1,0 +1,7 @@
+<p class="autor">
+  {# CA-05.4: o tipo aparece em cada aviso. #}
+  <span class="tipo">{{ aviso.get_tipo_display }}</span> ·
+  {{ aviso.autor.nome_exibicao }} ({{ aviso.autor.nome_usuario }}),
+  {# O instante está guardado com fuso e aparece no horário de Palmas (CA-04.3). #}
+  <a href="{% url 'detalhe' aviso.pk %}"><time datetime="{{ aviso.publicado_em|date:'c' }}">{{ aviso.publicado_em|date:'d/m/Y, H\hi' }}</time></a>
+</p>
