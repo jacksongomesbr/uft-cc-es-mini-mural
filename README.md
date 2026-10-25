@@ -21,16 +21,17 @@ funciona nos commits, nas issues e na revisão.
 ## Estado atual
 
 O produto mínimo viável funciona: criar conta, entrar e sair, publicar um
-aviso curto e ver o mural, com o nome de quem publicou, a data e a hora. É o
-resultado da iteração 3, registrada no [ITERACOES.md](ITERACOES.md), e é o que
-a review parcial do encontro 9 demonstra. O que cada versão entregou está
+aviso curto e ver o mural, com o nome de quem publicou, a data e a hora. Ele
+foi demonstrado na review parcial do encontro 9, a partir do código da tag
+`v0.7.0`. As observações, a autoavaliação e os itens que a review gerou estão
+no [ITERACOES.md](ITERACOES.md) e no [REQUISITOS.md](REQUISITOS.md). O que cada versão entregou está
 no [CHANGELOG.md](CHANGELOG.md).
 
 Para ver o projeto como estava no fim de um capítulo, abra a tag da versão,
 por exemplo:
 
 ```bash
-git switch --detach v0.7.0
+git switch --detach v0.8.0
 ```
 
 O [ROTEIRO.md](ROTEIRO.md) liga cada capítulo do livro ao artefato que ele
@@ -78,6 +79,14 @@ python manage.py carregar_demonstracao --senha UMA-SENHA-DE-TESTE
 
 Com `--avisos 200`, o mural fica com 200 avisos, a condição do RNF-01.
 
+Para a demonstração, use um banco separado. O script abaixo apaga e recria o
+banco `mini_mural_demo` e o deixa no passo 1 do roteiro da review; ele recusa
+qualquer banco cujo nome não termine em `_demo`:
+
+```bash
+scripts/restaurar_demonstracao.sh UMA-SENHA-DE-TESTE
+```
+
 O comando `runserver` sobe o servidor de desenvolvimento do framework em
 <http://127.0.0.1:8000/>. Ele serve para trabalhar e para a demonstração do
 encontro 9. A hospedagem e o servidor de produção são decididos no capítulo 14
@@ -111,7 +120,8 @@ desenvolvimento (A-10):
 | [prototipo/](prototipo/) | Protótipo navegável do fluxo principal, com as recusas (capítulo 6) |
 | [ARQUITETURA.md](ARQUITETURA.md) | Responsabilidades, onde cada parte roda, verificações, qualidades e decisões de arquitetura (capítulo 7) |
 | [contrato/](contrato/) | Contrato das rotas: método, caminho, campos, códigos de status e mensagens (capítulo 7) |
-| [ITERACOES.md](ITERACOES.md) | Plano de cada iteração, estimativa, quadro, retrospectiva e preparação da demonstração (capítulo 8) |
+| [ITERACOES.md](ITERACOES.md) | Plano de cada iteração, estimativa, quadro, retrospectiva, preparação da demonstração (capítulo 8) e registro da review parcial (capítulo 9) |
+| [scripts/](scripts/) | Restauração do banco da demonstração e o texto preparado do roteiro (capítulo 9) |
 | [CHANGELOG.md](CHANGELOG.md) | O que mudou em cada versão |
 | [ROTEIRO.md](ROTEIRO.md) | Capítulos, artefatos e tags do semestre |
 
