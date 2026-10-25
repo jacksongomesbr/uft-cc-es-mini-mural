@@ -20,17 +20,19 @@ funciona nos commits, nas issues e na revisão.
 
 ## Estado atual
 
-O Mini Mural tem as histórias obrigatórias e as importantes da iteração 4:
+O Mini Mural tem as histórias obrigatórias e as importantes até a iteração 5:
 criar conta, entrar e sair, publicar aviso aberto ou interno, ver o mural,
-ler aviso aberto sem conta e arquivar o próprio aviso. A estratégia de teste e
-os casos estão no [TESTES.md](TESTES.md), e o plano e as retrospectivas, no
+ler aviso aberto sem conta e arquivar o próprio aviso, com confirmação antes.
+Cada pull request passa pela verificação automática no GitHub Actions, e o
+`main` só recebe o que passou. A estratégia de teste, os casos e a execução
+estão no [TESTES.md](TESTES.md), e o plano e as retrospectivas, no
 [ITERACOES.md](ITERACOES.md).
 
 Para ver o projeto como estava no fim de um capítulo, abra a tag da versão,
 por exemplo:
 
 ```bash
-git switch --detach v0.10.0
+git switch --detach v0.11.0
 ```
 
 O [ROTEIRO.md](ROTEIRO.md) liga cada capítulo do livro ao artefato que ele
@@ -73,6 +75,22 @@ python manage.py test
 
 ```bash
 python manage.py runserver
+```
+
+Antes de pedir revisão, rode o que a verificação automática roda, na mesma
+ordem; a lista completa e o motivo de cada comando estão no
+[TESTES.md](TESTES.md), na seção "Execução":
+
+```bash
+ruff format --check .
+```
+
+```bash
+ruff check .
+```
+
+```bash
+python manage.py test
 ```
 
 Para ter contas e avisos de demonstração, sem dado de pessoa real:
@@ -125,7 +143,9 @@ desenvolvimento (A-10):
 | [prototipo/](prototipo/) | Protótipo navegável do fluxo principal, com as recusas (capítulo 6) |
 | [ARQUITETURA.md](ARQUITETURA.md) | Responsabilidades, onde cada parte roda, verificações, qualidades e decisões de arquitetura (capítulo 7) |
 | [contrato/](contrato/) | Contrato das rotas: método, caminho, campos, códigos de status e mensagens (capítulo 7) |
-| [TESTES.md](TESTES.md) | Estratégia de teste, omissões deliberadas, casos derivados dos critérios, relatório e teste de utilidade (capítulo 11) |
+| [TESTES.md](TESTES.md) | Estratégia de teste, omissões deliberadas, casos derivados dos critérios, relatório e teste de utilidade (capítulo 11); execução automatizada e o que fica fora dela (capítulo 12) |
+| [pyproject.toml](pyproject.toml) | Regras do formatador, do verificador de estilo e da cobertura (capítulo 12) |
+| [.github/workflows/verificacao.yml](.github/workflows/verificacao.yml) | Verificação automática de cada pull request e de cada envio ao `main` (capítulo 12) |
 | [ITERACOES.md](ITERACOES.md) | Plano de cada iteração, estimativa, quadro, retrospectiva, preparação da demonstração (capítulo 8) e registro da review parcial (capítulo 9) |
 | [scripts/](scripts/) | Restauração do banco da demonstração e o texto preparado do roteiro (capítulo 9) |
 | [CHANGELOG.md](CHANGELOG.md) | O que mudou em cada versão |
