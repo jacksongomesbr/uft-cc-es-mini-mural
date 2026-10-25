@@ -1,4 +1,5 @@
 """Páginas de contas. O contrato de cada rota está em contrato/operacoes.md."""
+
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.shortcuts import render
@@ -12,7 +13,9 @@ from .forms import CadastroForm, EntrarForm
 
 # Mensagens que a página de entrar mostra conforme o motivo do redirecionamento.
 MOTIVOS = {
-    "aviso-nao-publicado": "Você saiu da conta em outra aba. Entre de novo; o aviso não foi publicado.",
+    "aviso-nao-publicado": (
+        "Você saiu da conta em outra aba. Entre de novo; o aviso não foi publicado."
+    ),
 }
 
 

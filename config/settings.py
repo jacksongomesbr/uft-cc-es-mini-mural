@@ -5,6 +5,7 @@ variável falta, vale o valor de desenvolvimento. A chave secreta de
 desenvolvimento não pode ir para a hospedagem; o tratamento de segredos é do
 capítulo 13.
 """
+
 import os
 from pathlib import Path
 

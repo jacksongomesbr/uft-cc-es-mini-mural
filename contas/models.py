@@ -4,6 +4,7 @@ A conta tem só os campos do PROJETO.md: nome de usuário, nome para exibição 
 valor derivado da senha. O modelo de usuário padrão do framework traria e-mail,
 nome, sobrenome e último acesso, que RE-02 manda não pedir.
 """
+
 import re
 
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager

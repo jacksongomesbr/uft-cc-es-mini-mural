@@ -1,4 +1,5 @@
 """O aviso (PROJETO.md: modelo de dados e estados do aviso)."""
+
 from django.conf import settings
 from django.db import models
 from django.db.models.functions import Now
@@ -7,9 +8,8 @@ from django.db.models.functions import Now
 LIMITE_DO_TEXTO = 500
 
 
-
 def caracteres(quantidade):
-    """"1 caractere", "12 caracteres"."""
+    """ "1 caractere", "12 caracteres"."""
     return "1 caractere" if quantidade == 1 else f"{quantidade} caracteres"
 
 
@@ -30,6 +30,7 @@ def preparar_texto(texto):
             f"Corte {caracteres(excesso)} e publique de novo."
         )
     return texto, None
+
 
 class AvisoQuerySet(models.QuerySet):
     def publicados(self):
@@ -62,7 +63,9 @@ class Aviso(models.Model):
     SITUACOES = [(PUBLICADO, "Publicado"), (ARQUIVADO, "Arquivado")]
 
     # DP-05: conta com avisos não é apagada, para não levar a autoria junto.
-    autor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="avisos")
+    autor = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="avisos"
+    )
     texto = models.CharField(max_length=LIMITE_DO_TEXTO)
     # DP-01: tipo e arquivamento entram no modelo antes do código que os usa.
     tipo = models.CharField(max_length=10, choices=TIPOS, default=INTERNO)
@@ -79,9 +82,12 @@ class Aviso(models.Model):
         ordering = ["-publicado_em", "-id"]
         constraints = [
             models.CheckConstraint(condition=~models.Q(texto=""), name="aviso_texto_obrigatorio"),
-            models.CheckConstraint(condition=models.Q(tipo__in=["aberto", "interno"]), name="aviso_tipo_valido"),
             models.CheckConstraint(
-                condition=models.Q(situacao__in=["publicado", "arquivado"]), name="aviso_situacao_valida"
+                condition=models.Q(tipo__in=["aberto", "interno"]), name="aviso_tipo_valido"
+            ),
+            models.CheckConstraint(
+                condition=models.Q(situacao__in=["publicado", "arquivado"]),
+                name="aviso_situacao_valida",
             ),
             # Estados do aviso: a data do arquivamento existe se, e só se, o
             # aviso está arquivado.

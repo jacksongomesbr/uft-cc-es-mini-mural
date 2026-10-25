@@ -1,4 +1,5 @@
 """Formulários de contas. As mensagens são as do contrato/operacoes.md."""
+
 from django import forms
 from django.contrib.auth import password_validation
 from django.core.exceptions import ValidationError
@@ -28,7 +29,9 @@ class CadastroForm(forms.Form):
         nome = normalizar_nome(self.cleaned_data["nome_exibicao"])
         # CA-01.5
         if not nome:
-            raise ValidationError("Escolha um nome para exibição; ele aparece como autor dos avisos.")
+            raise ValidationError(
+                "Escolha um nome para exibição; ele aparece como autor dos avisos."
+            )
         # CA-01.6: a comparação usa o nome já normalizado, como o banco.
         if Conta.objects.filter(nome_exibicao__iexact=nome).exists():
             raise ValidationError("Esse nome para exibição já está em uso. Escolha outro.")
@@ -40,8 +43,12 @@ class CadastroForm(forms.Form):
         # mensagem do contrato junta as duas.
         try:
             password_validation.validate_password(senha)
-        except ValidationError:
-            raise ValidationError("A senha precisa de pelo menos 8 caracteres, com algo além de números.")
+        except ValidationError as recusa:
+            # A recusa original fica ligada à nova, e o registro de um erro
+            # mostra as duas.
+            raise ValidationError(
+                "A senha precisa de pelo menos 8 caracteres, com algo além de números."
+            ) from recusa
         return senha
 
     def save(self):

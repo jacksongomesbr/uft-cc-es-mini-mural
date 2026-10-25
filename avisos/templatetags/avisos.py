@@ -1,4 +1,5 @@
 """Filtros que levam as regras do aviso aos modelos de página, sem repeti-las."""
+
 from django import template
 
 register = template.Library()
