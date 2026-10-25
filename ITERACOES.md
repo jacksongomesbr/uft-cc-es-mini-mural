@@ -74,6 +74,52 @@ roteiro: o texto longo, escrito na hora, tinha menos de 500 caracteres e foi
 publicado em vez de recusado. O passo 5 passou a usar um texto preparado, com
 a contagem conferida, guardado em `scripts/`.
 
+### O que aconteceu
+
+> Registro simulado. Este repositório é o projeto exemplo do livro, com equipe e
+> usuários simulados (ver `ROTEIRO.md`). A review abaixo ilustra o que uma
+> apresentação real produziria; em um projeto da disciplina, cada linha teria
+> uma pessoa de verdade por trás.
+
+A demonstração seguiu o roteiro do passo 1 ao 7, sem falha, em 14 minutos. A
+servidora da secretaria fez os passos 2 a 5. Davi anotou as observações nos
+três campos, e cada uma ganhou tipo e destino depois da aula.
+
+### Observações
+
+| Quem | O que foi dito | Evidência vista | Tipo | Destino |
+|---|---|---|---|---|
+| Professor | "Por que não um frontend separado, com API, como o capítulo 7 recomenda?" E depois: "E se vier um aplicativo?" | Visão geral e A-01 | Dúvida sobre decisão | Respondida pela linha A-01, com a consequência aceita; sem item |
+| Servidora da secretaria | Depois de publicar, perguntou como corrigir um erro de digitação no aviso | Passo 4 | Necessidade já registrada, com segunda fonte | N15 e HU-15 revistas (#100) |
+| Equipe colega | "O aluno precisa criar conta para ver qualquer aviso? Muitos não vão criar." | Passos 1 e 7 | Necessidade já registrada (N3, HU-06) | Ordem do backlog revista (#100) |
+| Professor | "O que acontece se o banco cair no meio da publicação?" A equipe respondeu: hoje, a página de erro do framework; HU-03.2 está no backlog, sem critério | Bloco de limites | Dúvida com resposta incompleta | Critério para HU-03.2 (#100) |
+| Davi, ao cronometrar | A servidora publicou no passo 4 em 1 minuto e 35 segundos, sem pedir ajuda | Passo 4 | Medição do RNF-02 | Autoavaliação |
+| Equipe, no bloco de limites | Abrir de novo `/avisos/` depois de uma recusa mostra página vazia | Declarado; achado 5 da #97 | Defeito | Item novo (#100) |
+
+### Autoavaliação
+
+Status na data da review, com a regra do capítulo 9: atendido quer dizer
+integrado ao `main` e verificado por quem não escreveu o código.
+
+| Critério ou requisito | Status | Evidência |
+|---|---|---|
+| CA-01.1 a CA-01.6 | Atendido | #91, com a lista de critérios de Bruno; passos 2 e 3 |
+| CA-02.1 a CA-02.3 | Atendido | #92, com a lista de Ana; passos 1 e 3 |
+| CA-02.4 | Atendido | #92 e #94; passo 7 |
+| CA-03.1 a CA-03.5 | Atendido | #94, com a lista de Eva; passos 4 e 5 |
+| CA-04.1 a CA-04.3 | Atendido | #93, com a lista de Carla; passos 4 e 7 |
+| RNF-01 | Atendido | Medido na #95: 350 ms, no notebook; repetir com a hospedagem |
+| RNF-02 | Atendido | Cronometrado na review, como o requisito pede: 1 min 35 s, sem ajuda. Uma pessoa só, e por isso a medição se repete na review final |
+| RNF-03 | Atendido | Teste na #94; passo 6 |
+| RNF-04 | Atendido | Teste da senha guardada como valor derivado, desde a #80 |
+| RNF-05 | Atendido | Teste na #93 |
+| RNF-06 | Não iniciado | Depende de HU-05 |
+| RNF-07, quem publica | Atendido | RN-01 só em `pode_publicar`, com teste desde a #80 |
+| RNF-07, quem lê e quem arquiva | Não iniciado | As regras chegam com HU-05 e HU-07 |
+| RNF-08 | Atendido | Conferido em 360 por 640 nas quatro páginas |
+| UC-01, 4e | Não iniciado | HU-03.2, sem critério na data da review |
+| HU-05, HU-06, HU-07, HU-13 | Não iniciado | Declarados no bloco de limites |
+
 ## Iteração 3 (encontros 7 a 9)
 
 A primeira iteração de código, e a que chega à review parcial.
