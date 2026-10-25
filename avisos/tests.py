@@ -386,3 +386,79 @@ class MuralConcordaComQuemVeTest(TestCase):
             }
             with self.subTest(conta=str(conta)):
                 self.assertEqual(no_mural, visiveis_e_publicados)
+
+
+class ArquivarTest(TestCase):
+    """HU-07: TC-07.1 a TC-07.7 do TESTES.md."""
+
+    def setUp(self):
+        self.paula = Conta.objects.create_user("paula.sec", "Secretaria do curso", "senha-de-teste-1")
+        self.prof = Conta.objects.create_user("prof.calculo", "Prof. de Cálculo", "senha-de-teste-2")
+        self.do_prof = Aviso.objects.create(autor=self.prof, texto="Prova adiada", tipo=Aviso.ABERTO)
+        self.da_paula = Aviso.objects.create(autor=self.paula, texto="Troca de sala", tipo=Aviso.ABERTO)
+
+    def arquivado_as(self, aviso, hora):
+        Aviso.objects.filter(pk=aviso.pk).update(situacao=Aviso.ARQUIVADO, arquivado_em=instante(hora))
+        aviso.refresh_from_db()
+        return aviso
+
+    def test_tc_07_1_autor_arquiva(self):
+        self.client.force_login(self.prof)
+        resposta = self.client.post(f"/avisos/{self.do_prof.pk}/arquivar/")
+        self.assertEqual((resposta.status_code, resposta["Location"]), (303, "/"))
+        self.do_prof.refresh_from_db()
+        self.assertEqual(self.do_prof.situacao, Aviso.ARQUIVADO)
+        self.assertIsNotNone(self.do_prof.arquivado_em)
+        self.assertNotContains(self.client.get("/"), "Prova adiada")
+
+    def test_tc_07_2a_outra_conta_aviso_publicado(self):
+        self.client.force_login(self.prof)
+        resposta = self.client.post(f"/avisos/{self.da_paula.pk}/arquivar/")
+        self.assertContains(resposta, "Só quem publicou o aviso pode arquivá-lo.", status_code=403)
+        self.da_paula.refresh_from_db()
+        self.assertEqual(self.da_paula.situacao, Aviso.PUBLICADO)
+
+    def test_tc_07_2b_outra_conta_aviso_ja_arquivado(self):
+        self.arquivado_as(self.da_paula, 10)
+        self.client.force_login(self.prof)
+        resposta = self.client.post(f"/avisos/{self.da_paula.pk}/arquivar/")
+        self.assertContains(resposta, "Aviso não encontrado", status_code=404)
+
+    def test_tc_07_3_arquivar_de_novo(self):
+        self.arquivado_as(self.da_paula, 10)
+        self.client.force_login(self.paula)
+        self.assertEqual(self.client.post(f"/avisos/{self.da_paula.pk}/arquivar/").status_code, 303)
+        self.da_paula.refresh_from_db()
+        self.assertEqual(self.da_paula.arquivado_em, instante(10))
+
+    def test_tc_07_4_outra_conta_pede_o_arquivado(self):
+        self.arquivado_as(self.da_paula, 10)
+        self.client.force_login(self.prof)
+        self.assertContains(self.client.get(f"/avisos/{self.da_paula.pk}/"), "Aviso não encontrado", status_code=404)
+
+    def test_tc_07_5_autor_pede_o_arquivado(self):
+        self.arquivado_as(self.da_paula, 10)
+        self.client.force_login(self.paula)
+        resposta = self.client.get(f"/avisos/{self.da_paula.pk}/")
+        self.assertContains(resposta, "Troca de sala")
+        self.assertContains(resposta, "Arquivado em 24/10/2026, 10h00")
+
+    def test_tc_07_6_visitante_pede_o_arquivado(self):
+        self.arquivado_as(self.da_paula, 10)
+        resposta = self.client.get(f"/avisos/{self.da_paula.pk}/")
+        self.assertContains(resposta, "Aviso não encontrado", status_code=404)
+
+    def test_tc_07_7_endereco_depois_da_recusa(self):
+        resposta = self.client.get(f"/avisos/{self.da_paula.pk}/arquivar/")
+        self.assertEqual((resposta.status_code, resposta["Location"]), (303, f"/avisos/{self.da_paula.pk}/"))
+
+    def test_botao_so_para_o_autor(self):
+        self.client.force_login(self.paula)
+        conteudo = self.client.get("/").content.decode()
+        self.assertIn(f'action="/avisos/{self.da_paula.pk}/arquivar/"', conteudo)
+        self.assertNotIn(f'action="/avisos/{self.do_prof.pk}/arquivar/"', conteudo)
+
+    def test_sem_conta_vai_para_entrar(self):
+        resposta = self.client.post(f"/avisos/{self.da_paula.pk}/arquivar/")
+        self.assertEqual(resposta.status_code, 302)
+        self.assertTrue(resposta["Location"].startswith("/entrar/"))

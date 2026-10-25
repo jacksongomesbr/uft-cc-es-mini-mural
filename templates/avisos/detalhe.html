@@ -6,6 +6,11 @@
 <article class="aviso">
   <p class="texto">{{ aviso.texto|linebreaksbr }}</p>
   {% include 'avisos/_autor.html' %}
+  {% if aviso.situacao == "arquivado" %}
+  {# CA-07.5: só o autor chega aqui, e vê quando arquivou. #}
+  <p class="arquivado">Arquivado em {{ aviso.arquivado_em|date:'d/m/Y, H\hi' }}. Este aviso não aparece mais no mural.</p>
+  {% endif %}
+  {% include 'avisos/_arquivar.html' %}
 </article>
 <p><a href="{% url 'mural' %}">Voltar ao mural</a></p>
 {% endblock %}

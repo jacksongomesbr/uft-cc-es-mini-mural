@@ -108,3 +108,19 @@ class Aviso(models.Model):
         if self.tipo == self.INTERNO:
             return conta.is_authenticated
         return True
+
+    def pode_ser_arquivado_por(self, conta):
+        """RN-02: só o autor arquiva o próprio aviso (CA-07.1, CA-07.2)."""
+        return conta.is_authenticated and conta.pk == self.autor_id
+
+    def arquivar(self):
+        """Tira o aviso do mural e registra o instante (CA-07.1).
+
+        Só muda o aviso que ainda está publicado: arquivar de novo não muda
+        nada, e a data do primeiro arquivamento fica (CA-07.3). O instante vem
+        do banco, como o da publicação (DP-10).
+        """
+        Aviso.objects.filter(pk=self.pk, situacao=self.PUBLICADO).update(
+            situacao=self.ARQUIVADO, arquivado_em=Now()
+        )
+        self.refresh_from_db()

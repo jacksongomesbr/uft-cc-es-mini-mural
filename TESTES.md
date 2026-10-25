@@ -125,18 +125,18 @@ com conta, contra o tipo e a situação do aviso.
 
 ### HU-07 Arquivar o próprio aviso
 
-Escritos antes do código (#132).
+Escritos antes do código; testes na #132.
 
 | ID | Critério | Classe ou limite | Preparo | Passos | Esperado | Nível | Teste |
 |---|---|---|---|---|---|---|---|
-| TC-07.1 | CA-07.1 | Autor, aviso publicado | Aviso de "prof.calculo" | Ele arquiva | 303, aviso fora do mural, data registrada | Integração | A escrever |
-| TC-07.2a | CA-07.2 | Outra conta, aviso publicado | Aviso de "paula.sec" | "prof.calculo" arquiva | 403, mensagem do contrato, aviso no mural | Integração | A escrever |
-| TC-07.2b | CA-07.2, CA-07.4 | Outra conta, aviso já arquivado | Aviso arquivado de "paula.sec" | "prof.calculo" arquiva | 404, como aviso inexistente | Integração | A escrever |
-| TC-07.3 | CA-07.3 | Arquivar de novo | Arquivado às 10h | O autor arquiva às 11h | 303, a data continua 10h | Integração | A escrever |
-| TC-07.4 | CA-07.4 | Outra conta pede o arquivado | Aviso arquivado de "paula.sec" | Outra conta pede o endereço | 404 | Integração | A escrever |
-| TC-07.5 | CA-07.5 | Autor pede o arquivado | Aviso arquivado de "paula.sec" | Ela pede o endereço | 200, com a data e a hora do arquivamento | Integração | A escrever |
-| TC-07.6 | CA-07.4 | Visitante pede o arquivado | Aviso arquivado e aberto | Visitante pede o endereço | 404, e não a página de entrar | Integração | A escrever |
-| TC-07.7 | Lista de verificação | Endereço depois da recusa | Recusa do TC-07.2a | Abrir `/avisos/{id}/arquivar/` com GET | 303 para o aviso | Integração | A escrever |
+| TC-07.1 | CA-07.1 | Autor, aviso publicado | Aviso de "prof.calculo" | Ele arquiva | 303, aviso fora do mural, data registrada | Integração | `test_tc_07_1_autor_arquiva` |
+| TC-07.2a | CA-07.2 | Outra conta, aviso publicado | Aviso de "paula.sec" | "prof.calculo" arquiva | 403, mensagem do contrato, aviso no mural | Integração | `test_tc_07_2a_outra_conta_aviso_publicado` |
+| TC-07.2b | CA-07.2, CA-07.4 | Outra conta, aviso já arquivado | Aviso arquivado de "paula.sec" | "prof.calculo" arquiva | 404, como aviso inexistente | Integração | `test_tc_07_2b_outra_conta_aviso_ja_arquivado` |
+| TC-07.3 | CA-07.3 | Arquivar de novo | Arquivado às 10h | O autor arquiva às 11h | 303, a data continua 10h | Integração | `test_tc_07_3_arquivar_de_novo` |
+| TC-07.4 | CA-07.4 | Outra conta pede o arquivado | Aviso arquivado de "paula.sec" | Outra conta pede o endereço | 404 | Integração | `test_tc_07_4_outra_conta_pede_o_arquivado` |
+| TC-07.5 | CA-07.5 | Autor pede o arquivado | Aviso arquivado de "paula.sec" | Ela pede o endereço | 200, com a data e a hora do arquivamento | Integração | `test_tc_07_5_autor_pede_o_arquivado` |
+| TC-07.6 | CA-07.4 | Visitante pede o arquivado | Aviso arquivado e aberto | Visitante pede o endereço | 404, e não a página de entrar | Integração | `test_tc_07_6_visitante_pede_o_arquivado` |
+| TC-07.7 | Lista de verificação | Endereço depois da recusa | Recusa do TC-07.2a | Abrir `/avisos/{id}/arquivar/` com GET | 303 para o aviso | Integração | `test_tc_07_7_endereco_depois_da_recusa` |
 
 O TC-07.6 saiu da partição, e não de um critério escrito: o CA-07.4 fala de
 "outra pessoa com conta", e o visitante é outra pessoa sem conta. O contrato
