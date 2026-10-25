@@ -39,18 +39,19 @@ histórico.
 | 2 | HU-02 Entrar e sair | N7 | Obrigatório | Alto: sessão e senha, pela mesma razão | HU-01 | 2 |
 | 3 | HU-03.1 Publicar aviso curto | N1, N7 | Obrigatório | Alto: a primeira gravação no banco (R3) | HU-02 | 5 |
 | 4 | HU-04 Ver o mural | N2, N7 | Obrigatório | Médio: legibilidade no celular | HU-03.1 | 3 |
-| 5 | HU-05 Marcar o aviso como aberto ou interno | N4 | Importante | Médio: a regra de acesso é conferida em toda leitura | HU-03.1 | 3 |
-| 6 | HU-06 Ler aviso aberto sem conta | N3 | Importante | Baixo | HU-05 | 2 |
-| 7 | HU-07 Arquivar o próprio aviso | N5, N6 | Importante | Médio: a regra de quem arquiva é conferida no servidor | HU-03.1 | 3 |
-| 8 | HU-03.2 Recusar a publicação quando o banco não responde | N1 (UC-01, 4e) | Importante | Médio: tratar a falha do banco sem perder o texto | HU-03.1 | 2 |
-| 9 | HU-13 Informar até quando o aviso vale | N13 | Desejável | Baixo | HU-03.1 | 2 |
-| 10 | HU-08 Arquivar o aviso vencido de outra pessoa | N12 | Fora desta versão | Baixo | HU-07 | Não estimado |
-| 11 | HU-09 Anexar arquivo ao aviso | N9 | Fora desta versão | Alto: armazenamento de arquivo | HU-03.1 | Não estimado |
-| 12 | HU-10 E-mail quando sair aviso novo | N8 | Fora desta versão | Médio: servidor de e-mail | HU-03.1 | Não estimado |
-| 13 | HU-11 Aviso para uma turma | N10 | Fora desta versão | Médio: cadastro de turmas | HU-05 | Não estimado |
-| 14 | HU-12 Entrar com a conta institucional | N11 | Fora desta versão | Alto: integração com sistema externo | Nenhuma | Não estimado |
-| 15 | HU-14 Saber quem viu o aviso | N14 | Fora desta versão | Médio: registro de leitura por conta | HU-04 | Não estimado |
-| 16 | HU-15 Corrigir o próprio aviso depois de publicado | N15 | Fora desta versão | Baixo | HU-03.1 | Não estimado |
+| 5 | HU-16 Abrir de novo o endereço de publicar depois de uma recusa | N1 (review parcial) | Obrigatório | Baixo | HU-03.1 | 1 |
+| 6 | HU-05 Marcar o aviso como aberto ou interno | N4 | Importante | Médio: a regra de acesso é conferida em toda leitura | HU-03.1 | 3 |
+| 7 | HU-06 Ler aviso aberto sem conta | N3 | Importante | Baixo | HU-05 | 2 |
+| 8 | HU-07 Arquivar o próprio aviso | N5, N6 | Importante | Médio: a regra de quem arquiva é conferida no servidor | HU-03.1 | 3 |
+| 9 | HU-03.2 Recusar a publicação quando o banco não responde | N1 (UC-01, 4e) | Importante | Médio: tratar a falha do banco sem perder o texto | HU-03.1 | 2 |
+| 10 | HU-13 Informar até quando o aviso vale | N13 | Desejável | Baixo | HU-03.1 | 2 |
+| 11 | HU-15 Corrigir o próprio aviso depois de publicado | N15 | Desejável | Médio: muda o estado publicado e pede histórico da correção | HU-03.1 | 3 |
+| 12 | HU-08 Arquivar o aviso vencido de outra pessoa | N12 | Fora desta versão | Baixo | HU-07 | Não estimado |
+| 13 | HU-09 Anexar arquivo ao aviso | N9 | Fora desta versão | Alto: armazenamento de arquivo | HU-03.1 | Não estimado |
+| 14 | HU-10 E-mail quando sair aviso novo | N8 | Fora desta versão | Médio: servidor de e-mail | HU-03.1 | Não estimado |
+| 15 | HU-11 Aviso para uma turma | N10 | Fora desta versão | Médio: cadastro de turmas | HU-05 | Não estimado |
+| 16 | HU-12 Entrar com a conta institucional | N11 | Fora desta versão | Alto: integração com sistema externo | Nenhuma | Não estimado |
+| 17 | HU-14 Saber quem viu o aviso | N14 | Fora desta versão | Médio: registro de leitura por conta | HU-04 | Não estimado |
 
 Ana ordenou o backlog, como diz o `PROCESSO.md`, com os três passos do capítulo
 5: classificação em MoSCoW, ordem por risco técnico dentro de cada grupo e
@@ -68,6 +69,11 @@ ajuste por dependência.
   quando a rodada mostrou que a alternativa 4e era trabalho à parte. Fica entre
   os importantes porque ainda não tem critério e a demonstração não precisa
   dela.
+- **Review parcial:** HU-16 entrou como obrigatória, porque é defeito no fluxo
+  do MVP (#97, achado 5), e vem antes dos importantes. HU-05 e HU-06 ficam no
+  topo dos importantes: a equipe colega perguntou se o aluno precisa de conta
+  para ver qualquer aviso, e a resposta é o par que entrega o aviso aberto.
+  HU-15 saiu de fora desta versão para desejável, com a segunda fonte (#100).
 - **Desejável:** HU-13 entrou pela validação V1. Fica depois dos importantes
   porque mostrar a data não tira o aviso vencido do mural; ela só ajuda o aluno
   a reconhecê-lo.
@@ -80,8 +86,6 @@ ajuste por dependência.
   - HU-14: exige registrar o que cada conta leu, o que muda o modelo de dados e
     trata um dado pessoal que RE-02 manda evitar sem necessidade. Volta na
     review parcial, com a coordenação.
-  - HU-15: uma fonte só (E2); enquanto não houver correção, quem errou
-    arquiva o aviso e publica outro.
 
 ### Esforço até a review parcial
 
@@ -203,6 +207,13 @@ pelo representante.
   quando outra pessoa com conta abre o mural no dia seguinte, então o aviso
   continua lá, com o mesmo texto, autor, data e hora.
 
+**Critério de HU-03.2 (acrescentado no #100)**
+
+- **CA-03.6 Banco sem resposta.** Dado que Paula escreveu um aviso e o banco
+  não responde, quando ela publica, então o sistema informa que o aviso não foi
+  publicado, mantém o texto no campo e nada fica gravado. [Origem: review
+  parcial; UC-01, 4e]
+
 ### HU-04 Ver o mural
 
 Como aluna (persona Lívia),
@@ -292,6 +303,31 @@ quero informar, ao publicar, a data até a qual o aviso vale,
 para que o aluno reconheça o aviso vencido sem perguntar no balcão.
 
 [Origem: N13, O1, V1]
+
+### HU-15 Corrigir o próprio aviso depois de publicado
+
+Como servidora da secretaria (persona Paula),
+quero corrigir um erro de digitação no aviso que publiquei,
+para não precisar arquivar o aviso e publicar outro.
+
+[Origem: N15, E2 e review parcial]
+
+Os critérios são escritos no planejamento da iteração em que ela entrar; a
+pergunta que eles precisam responder é se o aluno vê que o aviso foi corrigido.
+
+### HU-16 Abrir de novo o endereço de publicar depois de uma recusa
+
+Como servidora da secretaria,
+quero que o endereço que aparece depois de uma recusa abra a página de publicar,
+para não cair em uma página vazia ao recarregar ou voltar a ele.
+
+[Origem: review parcial; #97, achado 5]
+
+**Critério de aceitação**
+
+- **CA-16.1 Endereço depois da recusa.** Dado que Paula recebeu a recusa por
+  limite e a barra de endereço mostra `/avisos/`, quando ela abre esse endereço
+  de novo, então vê a página de publicar.
 
 ### Fora desta versão
 
@@ -477,7 +513,7 @@ e 12; até lá, cada critério é o caso de teste escrito em português.
 
 | Fonte | Necessidade | História | Critérios | Teste |
 |---|---|---|---|---|
-| E1, E2, E3 | N1 | HU-01, HU-03.1, HU-03.2, RN-01 | CA-01.1 a CA-01.6, CA-03.1 a CA-03.5; HU-03.2 sem critério ainda | A escrever |
+| E1, E2, E3, RP | N1 | HU-01, HU-03.1, HU-03.2, HU-16, RN-01 | CA-01.1 a CA-01.6, CA-03.1 a CA-03.6, CA-16.1 | A escrever |
 | E4, E5, O1 | N2 | HU-04 | CA-04.1 a CA-04.3 | A escrever |
 | E3, E4 | N3 | HU-06 | No planejamento da iteração | A escrever |
 | E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.6; HU-05 no planejamento | A escrever |
@@ -491,7 +527,7 @@ e 12; até lá, cada critério é o caso de teste escrito em português.
 | E1, O1 | N12 | HU-08 | Fora desta versão | Não se aplica |
 | O1, V1 | N13 | HU-13 | No planejamento da iteração | A escrever |
 | E1, E2, V1 | N14 | HU-14 | Fora desta versão | Não se aplica |
-| E2 | N15 | HU-15 | Fora desta versão | Não se aplica |
+| E2, RP | N15 | HU-15 | No planejamento da iteração | A escrever |
 
 Para avaliar o impacto de uma mudança, leia a tabela a partir da linha da
 necessidade que mudou: as histórias e os critérios da mesma linha são o que
@@ -575,3 +611,8 @@ porque o protótipo de papel não mede o sistema real.
   Motivo: a rodada de estimativa da iteração 3 divergiu de 3 a 8 por causa da
   alternativa 4e. Impacto: linha de N1 na rastreabilidade, agora com HU-03.1 e
   HU-03.2; os obrigatórios ficam em 13 de 25 pontos, 52%.
+- 2026-10-24: itens da review parcial (#100). Motivo: as observações registradas
+  no `ITERACOES.md`. Impacto: HU-16 criada, obrigatória, com CA-16.1; CA-03.6
+  dá critério a HU-03.2; HU-15 passa de fora desta versão a desejável, com 3
+  pontos; HU-05 e HU-06 no topo dos importantes. Obrigatórios: 14 de 29
+  pontos, 48%.

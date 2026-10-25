@@ -99,6 +99,13 @@ arquivo. Os nomes de campo são do glossário, e nenhum é nome de coluna.
 - **Com conta:** 200, página de publicar, com o campo do texto e o limite de 500
   caracteres.
 
+### GET /avisos/
+
+- **Origem:** HU-16, CA-16.1 (ainda não implementado)
+- **Sucesso:** 303 para `/avisos/novo/`. É o endereço que fica na barra depois
+  de uma recusa de `POST /avisos/`, e abri-lo de novo leva à página de
+  publicar.
+
 ### POST /avisos/
 
 - **Origem:** HU-03, CA-03.1 a CA-03.5, UC-01, RN-01

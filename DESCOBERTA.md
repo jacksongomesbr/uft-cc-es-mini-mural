@@ -81,6 +81,8 @@ Os nomes são fictícios, e cada persona reúne mais de uma fonte.
   2026-10-23
 - D2: resposta da secretaria, com a posição da coordenação sobre C2 e C3,
   2026-10-24, registrou Eva ([registro](descoberta/D2-resposta-da-secretaria.md))
+- RP: review parcial do encontro 9, com uma servidora da secretaria, o
+  professor e uma equipe colega (registro no `ITERACOES.md`)
 - V1: sessão de validação com protótipo, servidora da secretaria, 2026-10-24,
   35 min, conduziu Eva ([registro](validacao/V1-secretaria.md))
 
@@ -105,7 +107,7 @@ linhas possam ser comparadas na priorização do capítulo 5.
 | N12 | Retirar do mural o aviso vencido sem depender de quem publicou | Secretaria | E1, O1 | A verificar |
 | N13 | Informar até quando o aviso vale | Secretaria, alunos | O1, V1 | Confirmada |
 | N14 | Saber se o aviso chegou a quem precisava | Secretaria, professores | E1, E2, V1 | Confirmada: estava nas entrevistas e só virou necessidade na V1 |
-| N15 | Corrigir o próprio aviso depois de publicado | Professores | E2 | A verificar: uma fonte só; apareceu no diagrama de estados do `PROJETO.md` |
+| N15 | Corrigir o próprio aviso depois de publicado | Professores, secretaria | E2, RP | Confirmada: a servidora pediu a mesma coisa na review parcial |
 
 N5 junta dois usos da mesma informação: a secretaria quer o mural sem papel
 vencido, e o professor quer retirar o próprio aviso quando ele deixa de valer.
@@ -260,3 +262,4 @@ está em R7.
 - 2026-10-24: N13 e N14 incluídas pela validação V1 (#40). N14 estava em E1 e E2 como informação difícil de obter, e a descoberta não a tinha registrado.
 - 2026-10-24: R9 e o escopo de N13 e N14 (#53), na primeira mudança depois da linha de base `v0.4.0`. R9 veio da análise de impacto do nome para exibição; as seções de escopo e do MVP passam a citar N13 e N14, que já estavam nas necessidades e no backlog.
 - 2026-10-24: N15 incluída (#57). E2 pediu que só o autor pudesse "apagar ou alterar" o que publicou; apagar virou arquivar, e alterar não tinha virado necessidade até o diagrama de estados perguntar se o aviso publicado muda.
+- 2026-10-24: RP nas fontes e N15 confirmada (#100), pela pergunta da servidora na review parcial.
