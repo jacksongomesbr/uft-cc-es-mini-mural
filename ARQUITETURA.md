@@ -153,6 +153,7 @@ pede o `PROCESSO.md`, foi tomada em par, por Davi e Bruno.
 | A-09 | Migrações do framework desde o esqueleto. Descartado: esquema escrito à mão, fora do framework | O modelo de conta precisa de migração antes de tudo (A-04), e cada mudança de esquema fica no Git, com o código que a pede | Toda mudança de modelo vem com a migração no mesmo pull request. O `ROTEIRO.md` punha migrações no capítulo 14; lá fica a aplicação delas na implantação | Aceita |
 | A-10 | Configuração lida de variáveis de ambiente, com valores de desenvolvimento quando a variável falta | A mesma aplicação roda no notebook de cada integrante e, depois, na hospedagem | A chave secreta de desenvolvimento fica no código e não pode ir para a hospedagem; o tratamento de segredos é do capítulo 13 | Aceita para desenvolvimento |
 | A-12 | Contrato das rotas em `contrato/operacoes.md`; no lugar dos exemplos JSON, cada resposta diz a página, a mensagem exata e os campos mantidos. Descartados: exemplos JSON, porque não há API (A-01), e combinar rotas só no código | Quem faz a página e quem faz a regra precisam combinar campos, códigos e mensagens antes de escrever, e os testes do capítulo 12 precisam de onde tirar o esperado | Mudar rota, campo ou mensagem passa por pull request que altera o contrato | Aceita |
+| A-13 | Os testes funcionais não são prova de resistência a ataques. Descartado: tratar a suíte como evidência de segurança | Teste funcional confere o comportamento descrito, e o espaço de comportamentos indevidos é outro; a equipe não tem o conhecimento para um teste de intrusão | As defesas que existem (marca de proteção do formulário, escape, autor vindo da sessão, senha derivada) são testadas como comportamento, e nada além disso é afirmado; o capítulo 13 revê segredos e dependências | Aceita |
 | A-11 | Hospedagem e servidor de produção | Dependem das opções que R4 levanta | O servidor de desenvolvimento do framework só serve para trabalhar e para a demonstração do encontro 9 | Proposta, a decidir no capítulo 14 |
 
 ## Pontos em aberto
@@ -169,3 +170,4 @@ pede o `PROCESSO.md`, foi tomada em par, por Davi e Bruno.
 - 2026-10-24: verificações, qualidades e custos (#72).
 - 2026-10-24: conferência do contrato em duplas trocadas (#74).
 - 2026-10-24: verificações conferidas contra o código antes da review parcial (#97).
+- 2026-10-25: A-13, o que os testes funcionais não provam (#128).
