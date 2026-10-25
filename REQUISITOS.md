@@ -376,6 +376,9 @@ para consultar o que já avisei sem guardar o endereço de cada aviso.
 
 [Origem: N5; teste de utilidade da iteração 4 (`TESTES.md`) e revisão da #140]
 
+Se HU-17 entrar, a frase da página de confirmação de HU-18, "só você o vê",
+muda junto, porque ela descreve o CA-07.5 (revisão da #157).
+
 ### HU-18 Confirmar antes de arquivar
 
 Como servidora da secretaria,
@@ -586,7 +589,7 @@ A cadeia vai da fonte ao teste. A coluna de teste aponta os casos do
 | E4, E5, O1 | N2 | HU-04 | CA-04.1 a CA-04.3 | TC-04.1a a TC-04.3, TC-RNF-01 (`TESTES.md`) |
 | E3, E4 | N3 | HU-06 | CA-06.1 a CA-06.4 | TC-06.1 a TC-06.5 (`TESTES.md`) |
 | E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.6, CA-05.1 a CA-05.4 | TC-01.x, TC-05.1 a TC-05.4 (`TESTES.md`) |
-| E1, E2, E4, O1, teste de utilidade | N5 | HU-07, HU-17, HU-18 | CA-07.1, CA-07.3 a CA-07.5, CA-18.1 a CA-18.3 | TC-07.1, TC-07.3 a TC-07.7, TC-18.1 a TC-18.3 (`TESTES.md`) |
+| E1, E2, E4, O1, teste de utilidade | N5 | HU-07, HU-17, HU-18 | CA-07.1, CA-07.3 a CA-07.5, CA-18.1 a CA-18.3 | TC-07.1, TC-07.3 a TC-07.7, TC-18.1 a TC-18.4 (`TESTES.md`) |
 | E2, D2 | N6 | HU-07, RN-02 | CA-07.2 | TC-07.2a, TC-07.2b (`TESTES.md`) |
 | E2, E5, O1 | N7 | HU-01, HU-02, HU-03, HU-04 | CA-01.6, CA-02.1 a CA-02.4, CA-03.1, CA-04.1 | TC-02.1 a TC-02.4, TC-03.1, TC-04.1a (`TESTES.md`) |
 | E4 | N8 | HU-10 | Fora desta versão | Não se aplica |

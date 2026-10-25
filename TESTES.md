@@ -10,13 +10,14 @@ revista a cada iteração.
 
 | Nível | O que se testa | Como | Quem escreve | Quando |
 |---|---|---|---|---|
-| Unidade | Regras do domínio sem banco nem servidor: o texto do aviso, o nome para exibição, as regras de senha, quem vê e quem arquiva | Testes do framework que não abrem banco | Quem implementou | Junto com o código |
-| Integração | Cada rota com formulário e banco, contra o contrato: código de status, destino e mensagem | Testes com o cliente do framework e o banco de teste | Quem implementou; quem revisa confere contra o contrato | No pull request |
+| Unidade | Regras do domínio sem banco nem servidor: o texto do aviso, o nome para exibição, as regras de senha, quem vê e quem arquiva | Testes do framework que não abrem banco | Quem implementou | Junto com o código; a verificação automática roda todos em cada pull request |
+| Integração | Cada rota com formulário e banco, contra o contrato: código de status, destino e mensagem | Testes com o cliente do framework e o banco de teste | Quem implementou; quem revisa confere contra o contrato | Junto com o código; a verificação automática roda todos em cada pull request |
 | Sistema | O fluxo principal no navegador, em 360 por 640, na build identificada | Roteiro manual, como o da review parcial | Quem não implementou o fluxo | Antes de cada demonstração |
 | Aceitação | Os critérios do fluxo com quem usa | Sessão com a servidora da secretaria | A equipe e a secretaria | Na review final, encontro 16 |
 
-**Ambiente.** PostgreSQL local; o framework cria um banco de teste a cada
-execução e o apaga no fim. Os critérios que dependem de hora (CA-04.1, CA-04.3,
+**Ambiente.** PostgreSQL local, e na verificação automática um PostgreSQL 18
+novo a cada execução; nos dois, o framework cria um banco de teste e o apaga no
+fim. Os critérios que dependem de hora (CA-04.1, CA-04.3,
 CA-07.3) fixam o instante no próprio caso, e nenhum resultado depende da data de
 hoje. A exceção é o caso do instante vindo do banco, que compara com o relógio,
 com tolerância de um minuto.
@@ -25,11 +26,57 @@ com tolerância de um minuto.
 executado. Resultado sem build não se liga a uma entrega.
 
 **Critério de saída.** Todo caso do fluxo principal executado e com resultado,
-nenhum defeito major aberto, e cada caso bloqueado listado com a pergunta que o
+a verificação automática verde no commit do `main` que recebe a tag, nenhum
+defeito major aberto, e cada caso bloqueado listado com a pergunta que o
 desbloqueia.
 
 **Resultado de um caso.** Aprovado, falhou, bloqueado ou não executado. Caso
 bloqueado é falta de evidência, e nunca conta como aprovado.
+
+## Execução
+
+Os testes de unidade e de integração rodam pelos mesmos comandos na máquina de
+quem desenvolve e na verificação automática do GitHub Actions
+(`.github/workflows/verificacao.yml`):
+
+```bash
+ruff format --check .
+ruff check .
+python manage.py check
+python manage.py makemigrations --check --dry-run
+python manage.py test
+```
+
+A verificação roda em cada pull request e em cada envio ao `main`, e para no
+primeiro comando que falha. A proteção do `main` exige o resultado `testes`
+verde e o ramo atualizado com o `main`; sem os dois, o GitHub recusa a
+integração (#155, recusa vista na #156).
+
+**Cobertura.** `coverage run manage.py test` e depois `coverage report` dizem
+que linhas e que desvios os testes executaram, com a configuração do
+`pyproject.toml`. Na build `1c57be3`, a cobertura é de 99%, e só o `__str__` do
+aviso fica de fora, porque não tem regra. O número serve para achar o que falta
+testar. Ele não vira meta: a #156 achou duas regras do contrato sem teste com a
+cobertura já em 99%.
+
+**Desenvolvimento guiado por testes.** Quando uma história segue o ciclo, o
+primeiro commit do pull request tem só os testes, e a verificação dele falha
+pelo motivo esperado; o segundo traz o código, e a verificação passa. O
+histórico de verificações do pull request é a evidência, como na #157.
+
+## Fora da automação
+
+Os casos desta tabela rodam na preparação de cada demonstração e sempre que um
+pull request muda a página que eles conferem.
+
+| Caso ou atividade | Por que continua manual | O que a automação cobre |
+|---|---|---|
+| TC-RNF-01, tempo do mural | O tempo depende da rede e do aparelho, e a máquina da verificação mede outra coisa | `test_rnf_01_uma_consulta_para_os_avisos_e_autores` fixa as idas ao banco, a causa mais provável de o tempo crescer |
+| TC-RNF-06, pedido sem sessão | O pedido com `curl` confere a resposta como ela sai do servidor, fora do cliente de teste do framework | O TC-06.3, com o mesmo resultado esperado |
+| TC-RNF-08, largura de 360 pixels | Depende de como o navegador desenha a página, e a verificação não abre navegador | Nada |
+| TC-01.6c | Bloqueado: o caso ainda não tem resultado esperado | Nada |
+| Roteiro de sistema e teste de utilidade | Pedem uma pessoa usando a página | Nada |
+| Aceitação | Acontece com a secretaria, na review final | Nada |
 
 ## O que não se testa
 
@@ -42,9 +89,10 @@ bloqueado é falta de evidência, e nunca conta como aprovado.
 
 ## Casos
 
-A coluna "Teste" aponta para o teste automatizado que executa o caso. A
-coluna "Classe ou limite" diz a partição de equivalência ou o valor limite que o
-caso representa.
+A coluna "Teste" aponta para o teste automatizado que executa o caso; o caso
+sem teste automatizado está em "Fora da automação", com o motivo. A coluna
+"Classe ou limite" diz a partição de equivalência ou o valor limite que o caso
+representa.
 
 ### HU-01 Criar conta
 
@@ -144,8 +192,9 @@ responde 404 para quem não é o autor, e o caso segue o contrato.
 
 ### HU-18 Confirmar antes de arquivar
 
-Escritos antes do código, e os testes também: o primeiro commit da #148 tem
-só os testes, e a verificação falha nele pelo motivo esperado.
+Escritos antes do código, e os testes também. Na #157, a verificação falhou no
+primeiro commit (`45b1a1c`), que tem só os testes, com os quatro casos abaixo, e
+passou no segundo (`e716f89`), que traz o código.
 
 | ID | Critério | Classe ou limite | Preparo | Passos | Esperado | Nível | Teste |
 |---|---|---|---|---|---|---|---|
@@ -172,6 +221,31 @@ só os testes, e a verificação falha nele pelo motivo esperado.
 | TC-01.6c | Nomes que diferem só por acento contam como o mesmo? (`REQUISITOS.md`, abaixo do CA-01.6) | A coordenação, na revisão de C2 e R9 |
 
 ## Relatório
+
+### Execução de 2026-10-25, build `1c57be3` (merge da #157)
+
+| Planejados | Executados | Aprovados | Falharam | Bloqueados | Não executados |
+|---:|---:|---:|---:|---:|---:|
+| 55 | 54 | 54 | 0 | 1 | 0 |
+
+- **Integração e unidade:** `python manage.py test`, `Ran 93 tests ... OK`, na
+  máquina local e na verificação automática do envio ao `main` em `1c57be3`.
+  Cobertura de 99%, só o `__str__` do aviso de fora.
+- **Sistema:** RNF-08 conferido em 360 por 640 no mural, na página do aviso e na
+  página nova de confirmação; RNF-06 com `curl` sem sessão, sem o texto do
+  interno; RNF-01 medido de novo, porque o "Arquivar" do mural passou de botão
+  a ligação: 240, 352 e 350 ms com 202 avisos e a rede limitada a "Fast 4G".
+  Vale o maior, 352 ms. A página caiu de 83 kB para 72 kB, porque cada
+  formulário levava a própria marca de proteção, e a ligação não leva.
+- **Observação:** na página de confirmação, a ligação "Desistir" fica colada ao
+  botão "Confirmar", e o toque no celular pode acertar o vizinho. Nenhum
+  critério cobre a distância; a pergunta vai para a preparação da review final.
+- **Bloqueado:** TC-01.6c, pela pergunta do nome com acento.
+- **Defeitos abertos:** nenhum.
+
+**Recomendação:** a build cumpre o critério de saída da iteração 5, com a
+verificação verde no `main`. O caso bloqueado fica listado, e a falta de
+evidência dele é declarada.
 
 ### Execução de 2026-10-25, build `18ea9f7` (merge da #140)
 
@@ -220,3 +294,5 @@ ausência de outros problemas.
 - 2026-10-25: primeira versão, com a estratégia, as omissões e os casos do
   fluxo principal e de HU-05 a HU-07 (#128).
 - 2026-10-25: relatório da build `18ea9f7` e teste de utilidade (#133).
+- 2026-10-25: execução automatizada, o que fica fora dela, critério de saída
+  com a verificação verde e relatório da build `1c57be3` (#149).
