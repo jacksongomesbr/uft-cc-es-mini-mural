@@ -29,7 +29,7 @@ Para ver o projeto como estava no fim de um capítulo, abra a tag da versão,
 por exemplo:
 
 ```bash
-git switch --detach v0.5.0
+git switch --detach v0.6.0
 ```
 
 O [ROTEIRO.md](ROTEIRO.md) liga cada capítulo do livro ao artefato que ele
@@ -71,8 +71,8 @@ python manage.py runserver
 
 O último comando sobe o servidor de desenvolvimento do framework em
 <http://127.0.0.1:8000/>. Ele serve para trabalhar e para a demonstração do
-encontro 9, e não é servidor de produção: a hospedagem e o servidor de produção
-são decididos no capítulo 14 (A-11).
+encontro 9. A hospedagem e o servidor de produção são decididos no capítulo 14
+(A-11).
 
 A configuração vem de variáveis de ambiente, e cada uma tem um valor de
 desenvolvimento (A-10):
@@ -100,6 +100,8 @@ desenvolvimento (A-10):
 | [PROJETO.md](PROJETO.md) | Modelo de domínio, modelo de dados, estados, responsabilidades, decisões de projeto e conferência cruzada (capítulo 6) |
 | [diagrams/](diagrams/) | Fontes Mermaid dos diagramas do `PROJETO.md`, desenhadas pelo GitHub na página de cada arquivo (capítulo 6) |
 | [prototipo/](prototipo/) | Protótipo navegável do fluxo principal, com as recusas (capítulo 6) |
+| [ARQUITETURA.md](ARQUITETURA.md) | Responsabilidades, onde cada parte roda, verificações, qualidades e decisões de arquitetura (capítulo 7) |
+| [contrato/](contrato/) | Contrato das rotas: método, caminho, campos, códigos de status e mensagens (capítulo 7) |
 | [CHANGELOG.md](CHANGELOG.md) | O que mudou em cada versão |
 | [ROTEIRO.md](ROTEIRO.md) | Capítulos, artefatos e tags do semestre |
 

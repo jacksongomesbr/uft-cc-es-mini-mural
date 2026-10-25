@@ -29,8 +29,8 @@ Todo o trabalho, porém, sai de uma única conta do GitHub. Por isso:
 
 - **Arquitetura:** monólito Django, com HTML montado no servidor e PostgreSQL. O
   livro apresenta frontend e backend separados; a escolha do monólito é uma
-  decisão da equipe e será registrada, com a alternativa descartada e a
-  consequência, no `ARQUITETURA.md` do capítulo 7. Outras arquiteturas ficam
+  decisão da equipe, registrada com a alternativa descartada e a consequência
+  na decisão A-01 do `ARQUITETURA.md`. Outras arquiteturas ficam
   para um ramo ou um fork posterior.
 - **Versões:** o capítulo 2 cria a `v0.1.0`, e cada capítulo seguinte termina
   com uma versão nova, em que o número do meio acompanha o capítulo
@@ -59,7 +59,7 @@ Todo o trabalho, porém, sai de uma única conta do GitHub. Por isso:
 | 11 | Verificação e validação | `TESTES.md` com estratégia e casos | `v0.10.0` |
 | 12 | Testes e integração contínua | Suíte automatizada, verificação de estilo e workflow no GitHub | `v0.11.0` |
 | 13 | Segurança, ética e privacidade | Segredos em variáveis de ambiente, dependências auditadas, política de acesso | `v0.12.0` |
-| 14 | Implantação e operação | `OPERACAO.md`, migrações, verificação de saúde e registro de eventos | `v0.13.0` |
+| 14 | Implantação e operação | `OPERACAO.md`, aplicação das migrações na implantação, verificação de saúde e registro de eventos | `v0.13.0` |
 | 15 | Manutenção e evolução | Evolução planejada, com análise de impacto | `v0.14.0` |
 | 16 | Review final | Demonstração final e retrospectiva | `v1.0.0` |
 
