@@ -53,3 +53,8 @@ class CadastroForm(forms.Form):
                 self.cleaned_data["nome_exibicao"],
                 self.cleaned_data["senha"],
             )
+
+
+class EntrarForm(forms.Form):
+    nome_usuario = forms.CharField(label="Nome de usuário", max_length=150)
+    senha = forms.CharField(label="Senha", widget=forms.PasswordInput)

@@ -1,9 +1,15 @@
 """Testes do esqueleto: a página inicial responde e se ajusta ao celular."""
 from django.conf import settings
-from django.test import SimpleTestCase
+from django.test import SimpleTestCase, TestCase
+
+from contas.models import Conta
 
 
-class InicioTest(SimpleTestCase):
+class InicioTest(TestCase):
+    def setUp(self):
+        conta = Conta.objects.create_user("livia.m", "Lívia Martins", "senha-de-teste-1")
+        self.client.force_login(conta)
+
     def test_pagina_inicial_responde(self):
         resposta = self.client.get("/")
         self.assertEqual(resposta.status_code, 200)
