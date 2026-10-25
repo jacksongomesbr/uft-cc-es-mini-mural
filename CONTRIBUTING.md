@@ -54,6 +54,41 @@ ajuste é respondido com commit novo, e a integração só acontece depois do
 comentário que diz "Aprovado para integrar". A proteção do `main` exige pull
 request, mas não exige aprovação formal, que uma conta só não consegue dar.
 
+### Lista de verificação
+
+Quem revisa confere estas perguntas, e quem é autor confere as mesmas antes de
+pedir a revisão. O modelo de descrição em `.github/pull_request_template.md` as
+traz marcáveis. A lista é curta de propósito: cada pergunta nova sai de um
+defeito que escapou, e a pergunta que ninguém verifica sai.
+
+| Lente | Pergunta | De onde vem |
+|---|---|---|
+| Item | O pull request cumpre os critérios de aceitação do item, e só eles, em um item de backlog? | `REQUISITOS.md`; capítulo 2 |
+| Projeto | A regra fica no domínio, na conta ou no aviso, e a borda só chama? | DP-08, A-03 |
+| Contrato | Código de status, destino e mensagem batem com o contrato, ou o contrato mudou no mesmo pull request? | A-12 |
+| Legibilidade | Os nomes usam o glossário, e cada função se entende na primeira leitura? | Glossário do `REQUISITOS.md` |
+| Multiplicidade | O código trata zero, um e muitos avisos onde o modelo admite? | Modelo de domínio do `PROJETO.md` |
+| Endereço depois do envio | O endereço que fica na barra depois de um envio, aceito ou recusado, abre alguma página? | Defeito de HU-16, que passou pela revisão da #94 |
+| Testes | Existe teste do comportamento novo, com a expectativa tirada do critério, e não do código? | Definição de pronto |
+| Rastreabilidade | O commit e o pull request citam a issue, e a issue cita a história? | Capítulo 2 |
+| Segurança e dados | Nenhum segredo no repositório e nenhum dado de pessoa real em teste, exemplo ou registro? | RE-02; capítulo 13 |
+
+Ficaram fora da lista do capítulo 10 a pergunta de tamanho, que a de item já
+cobre, e a revisão do contrato pelas duas partes, porque o sistema não tem
+frontend separado (A-01).
+
+### Tipos de comentário
+
+Cada comentário de revisão diz a lente e um destes tipos:
+
+- **Bloqueia:** o pull request não é integrado antes de resolver.
+- **Sugere:** o autor decide.
+- **Pergunta:** quem revisa precisa entender antes de decidir.
+- **Elogia:** algo bem feito, que vale preservar.
+
+Na equipe simulada, o comentário de revisão traz uma tabela com o trecho, o
+comentário, a lente e o tipo.
+
 ## Divergência técnica
 
 - A discussão fica registrada no pull request. Decisão tomada no grupo de
