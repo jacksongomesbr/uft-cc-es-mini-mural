@@ -156,9 +156,45 @@ pede o `PROCESSO.md`, foi tomada em par, por Davi e Bruno.
 | A-13 | Os testes funcionais não são prova de resistência a ataques. Descartado: tratar a suíte como evidência de segurança | Teste funcional confere o comportamento descrito, e o espaço de comportamentos indevidos é outro; a equipe não tem o conhecimento para um teste de intrusão | As defesas que existem (marca de proteção do formulário, escape, autor vindo da sessão, senha derivada) são testadas como comportamento, e nada além disso é afirmado; o capítulo 13 revê segredos e dependências | Aceita |
 | A-11 | Hospedagem e servidor de produção | Dependem das opções que R4 levanta | O servidor de desenvolvimento do framework só serve para trabalhar e para a demonstração do encontro 9 | Proposta, a decidir no capítulo 14 |
 
+## Opções de hospedagem (R4)
+
+Levantadas por Carla em 2026-10-25 para a decisão A-11, que é do capítulo 14.
+Os planos gratuitos mudam com frequência, e as fontes consultadas, a maior parte
+de terceiros, discordam em alguns números. Cada número abaixo vale na data da
+consulta e precisa ser conferido na página oficial do serviço antes da decisão.
+
+| Critério | Por quê |
+|---|---|
+| Custo zero até o encontro 16 | R4: a equipe não tem orçamento |
+| PostgreSQL disponível | A-02 e as restrições do banco do `PROJETO.md` |
+| Duração até a review final | O sistema precisa estar no ar no encontro 16 (RE-03) |
+| Tempo da primeira página depois de ocioso | RNF-01 pede até 3 segundos |
+| Cópia de segurança | Os avisos publicados não podem se perder |
+| Exigência de cartão de crédito | Ninguém na equipe quer pôr um cartão em conta de projeto |
+
+| Opção | Aplicação | Banco | Pontos de atenção |
+|---|---|---|---|
+| Render, aplicação e banco | Serviço gratuito que dorme depois de 15 minutos sem acesso e leva cerca de um minuto para acordar | PostgreSQL gratuito de 1 GB, que expira 30 dias depois de criado, com 14 dias de carência, sem cópia de segurança | O prazo do banco cobre o intervalo até o encontro 16 por pouco; a primeira página depois de ocioso fica muito acima do RNF-01 |
+| Render, com o banco no Neon | A mesma da linha acima | PostgreSQL gratuito do Neon, com 0,5 GB por projeto, que suspende depois de 5 minutos sem consulta | Sem a expiração de 30 dias; a primeira consulta depois de ocioso também demora |
+| PythonAnywhere | Uma aplicação gratuita, com renovação mensal | Sem PostgreSQL na conta gratuita nova, e com acesso à internet restrito na conta gratuita, o que pode impedir um banco externo | Descartada por ora: o banco de A-02 não está disponível |
+| Servidor do câmpus, pela equipe de TI | A combinar | A combinar | Sem custo e sem dormir, mas depende de terceiro e de prazo que a equipe não controla, como R2 |
+
+**O que o levantamento mostra.** As duas opções viáveis sem custo dormem quando
+ninguém acessa, e a primeira página depois disso leva perto de um minuto. O
+RNF-01 foi escrito para o mural carregado, e não para o primeiro acesso depois
+de ocioso. O capítulo 14 precisa decidir se o RNF-01 vale também para esse
+caso, ou se a demonstração e a review aceitam a espera declarada.
+
+Fontes consultadas em 2026-10-25: [Render, "Platforms with a real free tier for
+developers in 2026"](https://render.com/articles/platforms-with-a-real-free-tier-for-developers-in-2026.md);
+[temps.sh, "Render pricing 2026"](https://temps.sh/blog/render-pricing-2026);
+[PythonAnywhere, "Free accounts features"](https://help.pythonanywhere.com/pages/FreeAccountsFeatures/);
+[PythonAnywhere, "Changes on PythonAnywhere free accounts"](https://blog.pythonanywhere.com/221/);
+[Jetadmin, "Neon pricing in 2026"](https://www.jetadmin.io/blog/neon-pricing/).
+
 ## Pontos em aberto
 
-- Hospedagem e servidor de produção: capítulo 14, com as opções de R4 (A-11).
+- Hospedagem e servidor de produção: capítulo 14, com as opções levantadas na seção "Opções de hospedagem" (A-11), e a pergunta sobre o RNF-01 no primeiro acesso depois de ocioso.
 - Segredos fora do código, a começar pela chave secreta: capítulo 13 (A-10).
 - Respostas de falta de identificação e de permissão, além das já descritas: capítulo 13.
 
@@ -171,3 +207,4 @@ pede o `PROCESSO.md`, foi tomada em par, por Davi e Bruno.
 - 2026-10-24: conferência do contrato em duplas trocadas (#74).
 - 2026-10-24: verificações conferidas contra o código antes da review parcial (#97).
 - 2026-10-25: A-13, o que os testes funcionais não provam (#128).
+- 2026-10-25: opções de hospedagem para R4 e A-11 (#144).
