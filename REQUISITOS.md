@@ -566,18 +566,18 @@ definiu pode mudá-las.
 
 ## Rastreabilidade
 
-A cadeia vai da fonte ao teste. A coluna de teste é preenchida nos capítulos 11
-e 12; até lá, cada critério é o caso de teste escrito em português.
+A cadeia vai da fonte ao teste. A coluna de teste aponta os casos do
+`TESTES.md`, e cada caso aponta o teste automatizado que o executa.
 
 | Fonte | Necessidade | História | Critérios | Teste |
 |---|---|---|---|---|
-| E1, E2, E3, RP | N1 | HU-01, HU-03.1, HU-03.2, HU-16, RN-01 | CA-01.1 a CA-01.6, CA-03.1 a CA-03.6, CA-16.1 | A escrever |
-| E4, E5, O1 | N2 | HU-04 | CA-04.1 a CA-04.3 | A escrever |
-| E3, E4 | N3 | HU-06 | CA-06.1 a CA-06.4 | A escrever |
-| E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.6, CA-05.1 a CA-05.4 | A escrever |
-| E1, E2, E4, O1, teste de utilidade | N5 | HU-07, HU-17, HU-18 | CA-07.1, CA-07.3 a CA-07.5 | A escrever |
-| E2, D2 | N6 | HU-07, RN-02 | CA-07.2 | A escrever |
-| E2, E5, O1 | N7 | HU-01, HU-02, HU-03, HU-04 | CA-01.6, CA-02.1 a CA-02.4, CA-03.1, CA-04.1 | A escrever |
+| E1, E2, E3, RP | N1 | HU-01, HU-03.1, HU-03.2, HU-16, RN-01 | CA-01.1 a CA-01.6, CA-03.1 a CA-03.6, CA-16.1 | TC-01.1 a TC-01.6c, TC-03.1 a TC-03.5, TC-16.1 (`TESTES.md`) |
+| E4, E5, O1 | N2 | HU-04 | CA-04.1 a CA-04.3 | TC-04.1a a TC-04.3, TC-RNF-01 (`TESTES.md`) |
+| E3, E4 | N3 | HU-06 | CA-06.1 a CA-06.4 | TC-06.1 a TC-06.5 (`TESTES.md`) |
+| E1, E2 | N4 | HU-01, HU-05 | CA-01.1 a CA-01.6, CA-05.1 a CA-05.4 | TC-01.x, TC-05.1 a TC-05.4 (`TESTES.md`) |
+| E1, E2, E4, O1, teste de utilidade | N5 | HU-07, HU-17, HU-18 | CA-07.1, CA-07.3 a CA-07.5 | TC-07.1, TC-07.3 a TC-07.7 (`TESTES.md`) |
+| E2, D2 | N6 | HU-07, RN-02 | CA-07.2 | TC-07.2a, TC-07.2b (`TESTES.md`) |
+| E2, E5, O1 | N7 | HU-01, HU-02, HU-03, HU-04 | CA-01.6, CA-02.1 a CA-02.4, CA-03.1, CA-04.1 | TC-02.1 a TC-02.4, TC-03.1, TC-04.1a (`TESTES.md`) |
 | E4 | N8 | HU-10 | Fora desta versão | Não se aplica |
 | E1 | N9 | HU-09 | Fora desta versão | Não se aplica |
 | E2 | N10 | HU-11 | Fora desta versão | Não se aplica |
