@@ -17,7 +17,7 @@ Closes #
 ## Antes de pedir a revisão (autor)
 
 - [ ] Um item de backlog neste pull request, e só os critérios dele
-- [ ] Critérios de aceitação conferidos e, quando há código, `python manage.py test` passando
+- [ ] Critérios de aceitação conferidos e, quando há código, `ruff format --check .`, `ruff check .` e `python manage.py test` passando
 - [ ] Contrato das rotas e documentos atualizados no mesmo pull request, se a mudança os toca
 - [ ] Nenhum segredo e nenhum dado de pessoa real
 

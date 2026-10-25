@@ -43,10 +43,12 @@ class CadastroForm(forms.Form):
         # mensagem do contrato junta as duas.
         try:
             password_validation.validate_password(senha)
-        except ValidationError:
+        except ValidationError as recusa:
+            # A recusa original fica ligada à nova, e o registro de um erro
+            # mostra as duas.
             raise ValidationError(
                 "A senha precisa de pelo menos 8 caracteres, com algo além de números."
-            )
+            ) from recusa
         return senha
 
     def save(self):

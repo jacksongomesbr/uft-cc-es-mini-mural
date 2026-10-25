@@ -59,6 +59,5 @@ class Command(BaseCommand):
             for i in range(max(faltam, 0))
         )
 
-        self.stdout.write(
-            f"Contas de demonstração: {len(contas)}. Avisos no mural: {Aviso.objects.publicados().count()}."
-        )
+        no_mural = Aviso.objects.publicados().count()
+        self.stdout.write(f"Contas de demonstração: {len(contas)}. Avisos no mural: {no_mural}.")

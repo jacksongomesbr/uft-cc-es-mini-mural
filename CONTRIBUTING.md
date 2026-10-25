@@ -77,6 +77,17 @@ Ficaram fora da lista do capítulo 10 a pergunta de tamanho, que a de item já
 cobre, e a revisão do contrato pelas duas partes, porque o sistema não tem
 frontend separado (A-01).
 
+### O que a ferramenta decide
+
+O formatador e o verificador de estilo, o Ruff, rodam antes da revisão, com as
+regras do `pyproject.toml`. Quem revisa não comenta recuo, aspas, quebra de
+linha nem importação sem uso: a ferramenta já decidiu.
+
+```bash
+ruff format .
+ruff check .
+```
+
 ### Tipos de comentário
 
 Cada comentário de revisão diz a lente e um destes tipos:
