@@ -194,6 +194,14 @@ class PublicarTest(TestCase):
         self.publicar("Aviso com autor forjado", autor=self.livia.pk, autor_id=self.livia.pk)
         self.assertEqual(Aviso.objects.get().autor, self.paula)
 
+    def test_ca_16_1_endereco_depois_da_recusa(self):
+        resposta = self.publicar("a" * 501)
+        self.assertEqual(resposta.status_code, 422)
+        resposta = self.client.get("/avisos/")
+        self.assertEqual(resposta.status_code, 303)
+        self.assertEqual(resposta["Location"], "/avisos/novo/")
+        self.assertContains(self.client.get(resposta["Location"]), "Até 500 caracteres.")
+
     def test_pagina_de_publicar_sem_conta(self):
         self.client.logout()
         resposta = self.client.get("/avisos/novo/")
